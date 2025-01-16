@@ -1,8 +1,9 @@
 {
   "editor.minimap.enabled": false,
   // "editor.fontFamily": "'Cascadia Code', 'monospace', monospace",
-  "editor.fontFamily": "'Fira Mono', 'monospace', monospace",
+  // "editor.fontFamily": "'Fira Mono', 'monospace', monospace",
   // "editor.fontFamily": "'Ubuntu Mono', 'monospace', monospace",
+  "editor.fontFamily": "'Geist Mono Light', 'monospace', monospace",
   "editor.fontSize": 15,
   "terminal.integrated.fontFamily": "'Cascadia Code', 'monospace', monospace",
   //"terminal.integrated.fontFamily": "'Ubuntu Mono', 'monospace', monospace",
