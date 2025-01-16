@@ -1,3 +1,21 @@
 {
-  "extends": "next/core-web-vitals"
+  "plugins": ["tsdoc", "tailwindcss"],
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "prettier",
+    "plugin:tailwindcss/recommended"
+  ],
+  "rules": {
+    "tsdoc/syntax": "warn",
+    "jest/expect-expect": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.js", "*.mjs"],
+      "rules": {
+        "tsdoc/syntax": "off"
+      }
+    }
+  ]
 }
