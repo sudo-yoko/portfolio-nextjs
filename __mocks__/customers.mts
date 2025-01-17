@@ -29,18 +29,30 @@ app.use(express.json());
 app.use(cors());
 
 // GETエンドポイント
-app.get(path, (req: Request<PathParams, ResBody>, res: Response<ResBody>) => {
-  const { params } = req;
-  console.log(`PathParams: ${JSON.stringify(params)}`);
+app.get(
+  path,
+  async (req: Request<PathParams, ResBody>, res: Response<ResBody>) => {
+    const { url, method, headers, params } = req;
+    console.log(method, url);
+    console.log(`Headers: ${JSON.stringify(headers, null, 2)}`); // 2はインデント
+    console.log(`PathParams: ${JSON.stringify(params, null, 2)}`);
 
-  const status = 200;
-  const resBody: ResBody = {
-    customerId: '12345',
-    customerName: 'sudo yoko',
-  };
+    // 1秒待機して、処理待ち時間をシミュレートする
+    await new Promise<void>((resolve) =>
+      setTimeout(() => {
+        console.log('Simulated delay is done!');
+        resolve();
+      }, 1000),
+    );
 
-  res.status(status).json(resBody);
-});
+    const status = 200;
+    const resBody: ResBody = {
+      customerId: '12345',
+      customerName: 'sudo yoko',
+    };
+    res.status(status).json(resBody);
+  },
+);
 
 app.listen(port, () => {
   console.log(`Mock service running on http://localhost:${port}`);
