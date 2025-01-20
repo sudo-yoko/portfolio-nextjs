@@ -11,14 +11,14 @@ interface DebugLogger {
  * 開発用のロガー実装
  */
 const development: DebugLogger = {
-  log: (...args) => console.debug(...args),
+  log: (...args) => console.debug(...args), // コンソールに出力
 };
 
 /**
  * 本番用のロガー実装
  */
 const production: DebugLogger = {
-  log: () => {}, // 空実装
+  log: () => {}, // 空実装。本番はデバッグログを出力しない
 };
 
 /**
