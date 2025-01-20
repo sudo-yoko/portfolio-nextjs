@@ -1,31 +1,36 @@
-interface IDebugLogger {
-  log: (message: string) => void;
+// デバッグログ出力用ロガー
+
+/**
+ * ロガーの構造定義
+ */
+interface Debug {
+  log: typeof console.debug; // log関数にconsole.debugのシグネチャを適用
 }
 
 /**
- * 開発用のデバッグログ実装
+ * 開発用のロガー実装
  */
-const development: IDebugLogger = {
-  log: (message) => {
-    console.debug(message);
-  },
+const development: Debug = {
+  log: (...args) => console.debug(...args),
 };
 
 /**
- * 本番用のデバッグログ実装
+ * 本番用のロガー実装
  */
-const production: IDebugLogger = {
-  log: (message) => {
-    void message;
-  },
+const production: Debug = {
+  log: () => {}, // 空実装
 };
 
-const loggerFactory = (): IDebugLogger => {
-  if (process.env.NODE_ENV === 'development') {
-    return development;
-  }
-  return production;
+/**
+ * ロガーを生成するファクトリ
+ */
+const loggerFactory = (): Debug => {
+  return process.env.NODE_ENV === 'development' ? development : production;
 };
+
+/**
+ * デバッグログ出力用ロガー
+ */
 const debug = loggerFactory();
 
 export default debug;
