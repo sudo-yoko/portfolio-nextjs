@@ -5,6 +5,7 @@
     "dbaeumer.vscode-eslint",
     "bradlc.vscode-tailwindcss",
     "streetsidesoftware.code-spell-checker",
-    "humao.rest-client"
+    "humao.rest-client",
+    "shd101wyy.markdown-preview-enhanced"
   ]
 }

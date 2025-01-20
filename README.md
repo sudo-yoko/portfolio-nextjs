@@ -1,3 +1,38 @@
+## ポートフォリオ
+
+ Next.js アプリケーションの実装集（自主制作）
+
+ ### debug-logger.ts
+ 
+ ###### デバッグログ出力用ロガー
+ 
+ このライブラリは、`console.debug()` を使用してデバッグログを出力するロガーです。
+ サーバーサイドとクライアントサイドの両方で利用可能です。
+ - サーバーサイドで利用した場合、サーバー側コンソールに出力されます。
+ - クライアントサイドで利用した場合、ブラウザコンソールに出力されます。
+ 
+
+ このライブラリでは、ファクトリを用いてロガーの実装を決定しています。
+* importによって最初にロードされた際に環境変数 `process.env.NODE_ENV` を参照し、ログ出力の実装を決定します。
+* 開発モード `development` の場合は、 `console.debug()` でログ出力します。
+* 本番モード `production` の場合は、空実装を適用することでログ出力を無効化します。
+
+これにより、開発中はデバッグログを出力しつつ、本番環境では不要なログ出力を防ぎます。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
