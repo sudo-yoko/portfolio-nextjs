@@ -22,7 +22,7 @@ const production: DebugLogger = {
 };
 
 /**
- * ロガーを生成するファクトリ
+ * ロガーを生成するファクトリ関数
  */
 const loggerFactory = (): DebugLogger => {
   return process.env.NODE_ENV === 'development' ? development : production;
