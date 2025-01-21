@@ -4,14 +4,14 @@
  * ロガーの構造定義
  */
 interface DebugLogger {
-  log: typeof console.debug; // log関数にconsole.debugのシグネチャを適用
+  log: typeof console.log; // log関数にconsole.logのシグネチャを適用
 }
 
 /**
  * 開発用のロガー実装
  */
 const development: DebugLogger = {
-  log: (...args) => console.debug(...args), // コンソールに出力
+  log: (...args) => console.log(...args), // コンソールに出力
 };
 
 /**
