@@ -6,7 +6,7 @@ import 'server-only';
 import debug from '@/modules/debug-logger';
 
 export function Server() {
-  debug.log('server Done!');
+  debug('server Done!');
 
   return <Client></Client>;
 }

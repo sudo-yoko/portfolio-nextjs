@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 export function Client() {
   useEffect(() => {
-    debug.log('client Done!');
+    debug('client Done!');
   });
   return <div></div>;
 }

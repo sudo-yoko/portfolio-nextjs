@@ -1,25 +1,19 @@
 // デバッグログ出力用ロガー
 
 /**
- * ロガーの構造定義
+ * ロガーの関数型を定義
  */
-interface DebugLogger {
-  log: typeof console.log; // log関数にconsole.logのシグネチャを適用
-}
+type DebugLogger = typeof console.log;  // console.logのシグネチャを適用
 
 /**
  * 開発用のロガー実装
  */
-const development: DebugLogger = {
-  log: (...args) => console.log(...args), // コンソールに出力
-};
+const development: DebugLogger = (...args) => console.log(...args); // コンソールを出力
 
 /**
  * 本番用のロガー実装
  */
-const production: DebugLogger = {
-  log: () => {}, // 空実装。本番はデバッグログを出力しない
-};
+const production: DebugLogger = () => { };  // 空実装。本番はログを出力しない
 
 /**
  * ロガーを生成するファクトリ関数
