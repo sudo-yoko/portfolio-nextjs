@@ -13,7 +13,7 @@ const development: DebugLogger = (...args) => console.log(...args); // コンソ
 /**
  * 本番用のロガー実装
  */
-const production: DebugLogger = () => { };  // 空実装。本番はログを出力しない
+const production: DebugLogger = () => { };  // 空実装。本番はログ出力しない
 
 /**
  * ロガーを生成するファクトリ関数
