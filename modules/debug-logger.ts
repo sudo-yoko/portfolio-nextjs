@@ -8,7 +8,7 @@ type DebugLogger = typeof console.log;  // console.logのシグネチャを適�
 /**
  * 開発用のロガー実装
  */
-const development: DebugLogger = (...args) => console.log(...args); // コンソールを出力
+const development: DebugLogger = (...args) => console.log(...args); // コンソールログを出力
 
 /**
  * 本番用のロガー実装
