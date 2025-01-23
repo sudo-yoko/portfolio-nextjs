@@ -1,5 +1,7 @@
 import path from 'path';
 import fs from 'fs';
+import { format, createLogger } from 'winston';
+import dailyRotateFile from 'winston-daily-rotate-file';
 
 // アプリケーション名
 const appName = 'portfolio-application';
@@ -16,3 +18,17 @@ if (!fs.existsSync(logDir)) {
 }
 
 // ログフォーマットの指定
+const myFormat = format.printf(({ level, message, timestamp }) => {
+  return `[${timestamp}] [${level}] [${appName}] [[${message}]]`;
+});
+
+// ロガーの作成
+export const logger = createLogger({
+  format: format.combine(
+    format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
+    myFormat,
+  ),
+});
+
+// ログローテーションの設定
+const oprions:
