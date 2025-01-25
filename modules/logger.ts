@@ -1,7 +1,9 @@
-import path from 'path';
 import fs from 'fs';
-import { format, createLogger } from 'winston';
-import dailyRotateFile from 'winston-daily-rotate-file';
+import path from 'path';
+import 'server-only';
+import winston, { createLogger, format, transports } from 'winston';
+import 'winston-daily-rotate-file';
+import DailyRotateFile from 'winston-daily-rotate-file';
 
 // アプリケーション名
 const appName = 'portfolio-application';
@@ -23,7 +25,7 @@ const myFormat = format.printf(({ level, message, timestamp }) => {
 });
 
 // ロガーの作成
-export const logger = createLogger({
+const logger = createLogger({
   format: format.combine(
     format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
     myFormat,
@@ -31,4 +33,25 @@ export const logger = createLogger({
 });
 
 // ログローテーションの設定
-const oprions:
+const options: DailyRotateFile.DailyRotateFileTransportOptions = {
+  filename: logName,
+  dirname: logDir,
+  datePattern: 'YYYY-MM-DD',
+};
+options.maxSize = '10k'; // ローテーションの最大ファイルサイズ：10KB
+options.maxFiles = '1d'; // ログの保管期間：1日
+const transport = new winston.transports.DailyRotateFile(options);
+
+// ログをファイルに出力
+logger.add(transport);
+// 開発時はコンソールにも出力
+if (process.env.NODE_ENV === 'development') {
+  logger.add(new transports.Console());
+}
+
+// ロガーの設定完了メッセージ
+console.log(
+  `Logger setup complete. Log directory=${logDir}, Rotation max size=${options.maxSize}, Rotation max files=${options.maxFiles}`,
+);
+
+export default logger;
