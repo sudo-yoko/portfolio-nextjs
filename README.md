@@ -20,7 +20,7 @@ Next.js アプリケーションの実装集
 以降はキャッシュされたロガーを再利用するため効率的です。
 
 :open_file_folder: コード：[debug-logger.ts](modules/debug-logger.ts)  
-:open_file_folder: 使用例：[search-param/page.tsx](app/sample/search-param/page.tsx)
+:open_file_folder: 使用例：[logging-debug/](app/sample/logging-debug)
 
 ## logger.ts
 #### サーバーログ出力モジュール
