@@ -30,7 +30,7 @@ Next.js アプリケーションの実装集
 以降はキャッシュされたロガーが再利用されます。
 
 :open_file_folder: コード：[logger.ts](modules/loggers/logger.ts)  
-:open_file_folder: 使用例：[search-param/page.tsx](app/sample/search-param/page.tsx)
+:open_file_folder: 使用例：[logging/page.tsx](app/sample/logging/page.tsx)
 
 ## server-error-handler.ts
 #### サーバーサイドエラーハンドリング
