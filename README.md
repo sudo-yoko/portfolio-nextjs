@@ -19,7 +19,7 @@ Next.js アプリケーションの実装集
 このモジュールが最初にインポートされたタイミングでファクトリ関数が実行され、ロガーの実装が決定します。  
 以降はキャッシュされたロガーを再利用するため効率的です。
 
-:open_file_folder: コード：[debug-logger.ts](modules/debug-logger.ts)  
+:open_file_folder: コード：[debug-logger.ts](modules/loggers/debug-logger.ts)  
 :open_file_folder: 使用例：[logging-debug/](app/sample/logging-debug)
 
 ## logger.ts
@@ -29,7 +29,7 @@ Next.js アプリケーションの実装集
 このモジュールが最初にインポートされたタイミングで、アプリケーション内で一意のロガーインスタンスが作成されます。  
 以降はキャッシュされたロガーが再利用されます。
 
-:open_file_folder: コード：[debug-logger.ts](modules/debug-logger.ts)  
+:open_file_folder: コード：[logger.ts](modules/loggers/logger.ts)  
 :open_file_folder: 使用例：[search-param/page.tsx](app/sample/search-param/page.tsx)
 
 ## server-error-handler.ts
