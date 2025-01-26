@@ -1,10 +1,14 @@
 /**
- * ページコンポーネント
+ * debug-logger.tsをサーバーサイドで使用する例
  */
-import { Server } from '@/app/sample/logging-debug/server';
+import Server from '@/app/sample/logging-debug/server';
 import debug from '@/modules/debug-logger';
 
+/**
+ * ページコンポーネント
+ */
 export default function page() {
+  // デバッグログを出力（サーバー側コンソールに出力されます）
   debug('page Done!');
   return <Server></Server>;
 }

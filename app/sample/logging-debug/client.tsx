@@ -1,13 +1,17 @@
 /**
- * クライアントコンポーネント
+ * debug-logger.tsをクライアントサイドで使用する例
  */
 'use client';
 
 import debug from '@/modules/debug-logger';
 import { useEffect } from 'react';
 
-export function Client() {
+/**
+ * クライアントコンポーネント
+ */
+export default function Client() {
   useEffect(() => {
+    // デバッグログを出力（ブラウザコンソールに出力されます）
     debug('client Done!');
   });
   return <div></div>;
