@@ -16,7 +16,5 @@
   },
   "explorer.compactFolders": false,
   "workbench.tree.indent": 20,
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
