@@ -1,15 +1,12 @@
 /**
  * サーバーコンポーネント
  */
-import { Client } from '@/app/sample/client';
-import 'server-only';
+import { Client } from '@/app/sample/logging-debug/client';
 import debug from '@/modules/debug-logger';
-import logger from '@/modules/logger';
+import 'server-only';
 
 export function Server() {
-  logger.info('test');
   debug('server Done!');
-
   return <Client></Client>;
 }
 
