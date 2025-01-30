@@ -39,7 +39,7 @@ Next.js アプリケーションの実装集
 javascriptの関数を引数にとれる性質と、クロージャを活用しています。
 
 :open_file_folder: コード：[server-error-handler.ts](modules/error-handlers/server-error-handler.ts)  
-:open_file_folder: 使用例：[server-error-handling/page.tsx](app/sample/server-error-handling/page.tsx)
+:open_file_folder: 使用例：[server-error-handling/page.tsx](app/sample/server-error-handling/page.tsx) , [server-error-handling-async/page.tsx](app/sample/server-error-handling-async/page.tsx)
 
 ## search-params.ts
 #### クエリパラメーターの型定義
