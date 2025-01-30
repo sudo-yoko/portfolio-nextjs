@@ -38,6 +38,9 @@ Next.js アプリケーションの実装集
 このモジュールは、サーバーサイドエラーハンドリングの実装を統一し、一貫性を持たせます。  
 javascriptの関数を引数にとれる性質と、クロージャを活用しています。
 
+エラーハンドリングとして、エラーログを出力しキャッチした例外を再スローします。
+Next.jsはこれを未処理の例外としてキャッチし、エラーページ(error.tsx)をレンダリングします。
+
 :open_file_folder: コード：[server-error-handler.ts](modules/error-handlers/server-error-handler.ts)  
 :open_file_folder: 使用例：[server-error-handling/page.tsx](app/sample/server-error-handling/page.tsx) , [server-error-handling-async/page.tsx](app/sample/server-error-handling-async/page.tsx)
 
