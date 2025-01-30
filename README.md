@@ -38,8 +38,8 @@ Next.js アプリケーションの実装集
 このモジュールは、サーバーサイドエラーハンドリングの実装を統一し、一貫性を持たせます。  
 javascriptの関数を引数にとれる性質と、クロージャを活用しています。
 
-:open_file_folder: コード：[debug-logger.ts](modules/debug-logger.ts)  
-:open_file_folder: 使用例：[search-param/page.tsx](app/sample/search-param/page.tsx)
+:open_file_folder: コード：[server-error-handler.ts](modules/error-handlers/server-error-handler.ts)  
+:open_file_folder: 使用例：[server-error-handling/page.tsx](app/sample/server-error-handling/page.tsx)
 
 ## search-params.ts
 #### クエリパラメーターの型定義
