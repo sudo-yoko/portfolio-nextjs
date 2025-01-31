@@ -45,9 +45,9 @@ Next.jsはこれを未処理の例外としてキャッチし、エラーペー�
 :open_file_folder: 使用例：[server-error-handling/page.tsx](app/sample/server-error-handling/page.tsx) , [server-error-handling-async/page.tsx](app/sample/server-error-handling-async/page.tsx)
 
 ## search-params.ts
-#### クエリパラメーターの型定義
+#### クエリパラメーターの型エイリアス
 
-このように型定義を用意しておくことで、アプリケーション内でクエリパラメーターを扱いやすくなります。
+このように型エイリアスを用意しておくことで、アプリケーション内でクエリパラメーターを扱いやすくなります。
 
 Next.js15から、クエリパラメーターは非同期で取得されるようになりました。`Promise` にラップされるため、 `await` を用いてその値を取得する必要があります。
 
