@@ -8,12 +8,14 @@
   "terminal.integrated.fontFamily": "'Cascadia Code', 'monospace', monospace",
   //"terminal.integrated.fontFamily": "'Ubuntu Mono', 'monospace', monospace",
   //"terminal.integrated.fontSize": 15,
+  "workbench.colorTheme": "Userscape (rainglow)",
+  /*
   "workbench.colorTheme": "Absent (rainglow)",
   "editor.tokenColorCustomizations": {
     "comments": {
       "foreground": "#616E76"
     }
-  },
+  },*/
   "explorer.compactFolders": false,
   "workbench.tree.indent": 20,
   "editor.defaultFormatter": "esbenp.prettier-vscode"
