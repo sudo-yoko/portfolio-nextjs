@@ -1,0 +1,17 @@
+import { Level } from '@/modules/loggers/ILogger';
+import { remoteLogger } from '@/modules/loggers/remote-logger';
+import { useEffect } from 'react';
+
+export default function NotFound() {
+  useEffect(() => {
+    remoteLogger(level, logPrefix, message)
+      .then(() => {
+        console.info('Successfully sent log to the server.');
+      })
+      .catch(() => {
+        console.error('Failed to send log to the server.');
+      });
+  });
+
+  return <div>ページが見つかりません。</div>;
+}

@@ -8,16 +8,8 @@ export async function remoteLogger(
   logPrefix: string,
   message: string,
 ) {
-  switch (level) {
-    case Level.Info:
-      info(logPrefix, message);
-      break;
-    case Level.Error:
-      error(logPrefix, message);
-      break;
-    case Level.Warn:
-      break;
-  }
+  if (level === Level.Info) info(logPrefix, message);
+  else if (level === Level.Error) error(logPrefix, message);
 }
 
 async function info(logPrefix: string, message: string) {
