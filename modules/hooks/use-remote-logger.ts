@@ -1,20 +1,15 @@
-import { Level } from '@/modules/loggers/ILogger';
-import { remoteLogger } from '@/modules/loggers/remote-logger';
+import { error } from '@/modules/loggers/remote-logger';
 import 'client-only';
 import { useEffect } from 'react';
 
-export const useRemoteLogger = (
-  level: Level,
-  logPrefix: string,
-  message: string,
-) => {
+export const useRemoteLogger = (message: string) => {
   useEffect(() => {
-    remoteLogger(level, logPrefix, message)
+    error(message)
       .then(() => {
-        console.info('Successfully sent log to the server.');
+        console.info('Successfully sent error log to the server.');
       })
       .catch(() => {
-        console.error('Failed to send log to the server.');
+        console.error('Failed to send error log to the server.');
       });
   });
 };

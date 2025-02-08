@@ -1,3 +1,4 @@
+import { Logger } from '@/modules/loggers/logging-interface';
 import fs from 'fs';
 import path from 'path';
 import 'server-only';
@@ -20,8 +21,10 @@ if (!fs.existsSync(logDir)) {
 }
 
 // ログフォーマットの指定
+const loggerName = 'winston';
+const logFormatVersion = '1.0.0';
 const myFormat = format.printf(({ level, message, timestamp, ...meta }) => {
-  return `[${timestamp}] [${level}] [${appName}] [${meta["modulename"]}] [] [] [] [[${message}]]`;
+  return `[${timestamp}] [${level}] [${appName}] [${loggerName}] [${logFormatVersion}] [] [] [] [] [] [] [[${message}]]`;
 });
 
 // ロガーの作成
@@ -55,3 +58,27 @@ console.log(
 );
 
 export default logger;
+
+/**
+ * ロギングファサードの統一インターフェースにマップする
+ */
+export const loggerImpl: Logger = {
+  log: (level, message) => {
+    logger.log(level, message);
+  },
+  info: (message) => {
+    logger.info(message);
+  },
+  warn: (message) => {
+    logger.warn(message);
+  },
+  error: (message) => {
+    if (typeof message === 'string') {
+      logger.error(message);
+    } else if (typeof message === 'object' && message !== null) {
+      logger.error(message);
+    } else {
+      logger.error(message);
+    }
+  },
+};
