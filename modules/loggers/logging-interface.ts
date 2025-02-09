@@ -21,5 +21,5 @@ export interface Logger {
   warn(message: string): void;
   error(message: string): void;
   error(message: object): void;
-  //error(message: unknown): void;
+  error(message: unknown): void;
 }

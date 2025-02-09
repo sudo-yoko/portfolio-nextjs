@@ -72,7 +72,7 @@ export const loggerImpl: Logger = {
   warn: (message) => {
     logger.warn(message);
   },
-  error: (message) => {
+  error: (message: string | object | unknown) => {
     if (typeof message === 'string') {
       logger.error(message);
     } else if (typeof message === 'object' && message !== null) {
