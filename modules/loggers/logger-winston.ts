@@ -1,4 +1,3 @@
-import { Logger } from '@/modules/loggers/logging-interface';
 import fs from 'fs';
 import path from 'path';
 import 'server-only';
@@ -58,27 +57,3 @@ console.log(
 );
 
 export default logger;
-
-/**
- * ロギングファサードの統一インターフェースにマップする
- */
-export const loggerImpl: Logger = {
-  log: (level, message) => {
-    logger.log(level, message);
-  },
-  info: (message) => {
-    logger.info(message);
-  },
-  warn: (message) => {
-    logger.warn(message);
-  },
-  error: (message: string | object | unknown) => {
-    if (typeof message === 'string') {
-      logger.error(message);
-    } else if (typeof message === 'object' && message !== null) {
-      logger.error(message);
-    } else {
-      logger.error(message);
-    }
-  },
-};
