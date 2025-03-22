@@ -3,7 +3,7 @@
  */
 'use client';
 
-import debug from '@/modules/loggers/debug-logger';
+import debug from '@/modules/loggers/logger-debug';
 import { useEffect } from 'react';
 
 /**

@@ -2,7 +2,7 @@
  * debug-logger.tsをサーバーサイドで使用する例
  */
 import Server from '@/app/sample/logging-debug/server';
-import debug from '@/modules/loggers/debug-logger';
+import debug from '@/modules/loggers/logger-debug';
 
 /**
  * ページコンポーネント
