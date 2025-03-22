@@ -27,7 +27,7 @@ const loggerFactory = (): DebugLogger => {
 };
 
 /**
- * デバッグロガー
+ * デバッグログ出力関数
  */
 const debug = loggerFactory();
 
