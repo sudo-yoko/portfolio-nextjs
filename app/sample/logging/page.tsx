@@ -8,7 +8,7 @@ export default function Page() {
   // サーバーログを出力
   winston.info('aaa', { aaa: 'aaa' });
   logger.info('Page Done!');
-  logger.info('Page Done!', { opt1: 'page.tsx' });
+  logger.info('Page Done!', { ext1: 'page.tsx' });
   return <div></div>;
 }
 

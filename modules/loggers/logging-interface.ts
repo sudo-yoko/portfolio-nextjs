@@ -16,9 +16,10 @@ export enum Level {
  */
 export const LogExtrasKey = {
   traceId: 'traceId',
-  opt1: 'opt1',
-  opt2: 'opt2',
-  opt3: 'opt3',
+  requestId: 'requestId',
+  ext1: 'ext1',
+  ext2: 'ext2',
+  ext3: 'ext3',
 } as const;
 
 /**
@@ -26,9 +27,10 @@ export const LogExtrasKey = {
  */
 export type LogExtras = {
   [LogExtrasKey.traceId]?: string;
-  [LogExtrasKey.opt1]?: string;
-  [LogExtrasKey.opt2]?: string;
-  [LogExtrasKey.opt3]?: string;
+  [LogExtrasKey.requestId]?: string;
+  [LogExtrasKey.ext1]?: string;
+  [LogExtrasKey.ext2]?: string;
+  [LogExtrasKey.ext3]?: string;
 };
 
 /**
