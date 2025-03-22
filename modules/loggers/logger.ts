@@ -6,15 +6,15 @@ import type { ILogger } from '@/modules/loggers/logging-interface';
 import 'server-only';
 
 /**
- * ロガーの実装を返す
+ * ロガーの実装を読み込む
  */
-const provide = async (): Promise<ILogger> => {
+const load = async (): Promise<ILogger> => {
   return (await import('@/modules/loggers/logger-impl-winston')).loggerImpl;
 };
 
 /**
  * ロガー実装
  */
-const logger: ILogger = await provide();
+const logger: ILogger = await load();
 
 export default logger;
