@@ -1,12 +1,12 @@
 import winston from '@/modules/loggers/logger-winston';
-import { ILogger } from '@/modules/loggers/logging-interface';
+import { ILogger, LogExtras, Keys } from '@/modules/loggers/logging-interface';
 
 /**
  * winstonロガーを、ロギングファサードの統一インターフェースにマップする
  */
 export const loggerImpl: ILogger = {
   log: (level, message, option) => {
-    winston.log(level, message);
+    winston.log(level, message, { [Keys.traceId]: option?.traceId });
   },
   info: (message, option) => {
     winston.info(message);

@@ -20,10 +20,8 @@ if (!fs.existsSync(logDir)) {
 }
 
 // ログフォーマットの指定
-const loggerName = 'winston';
-const logFormatVersion = '1.0.0';
 const myFormat = format.printf(({ level, message, timestamp, ...meta }) => {
-  return `[${timestamp}] [${level}] [${appName}] [${loggerName}] [${logFormatVersion}] [] [] [] [] [] [] [[${message}]]`;
+  return `[${timestamp}] [${level}] [${appName}] [] [] [] [] [] [] [] [${meta['traceId']}] [[${message}]]`;
 });
 
 // ロガーの作成
