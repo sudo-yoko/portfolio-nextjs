@@ -1,12 +1,14 @@
-import logger from '@/modules/loggers/logger-winston';
+import logger from '@/modules/loggers/logging-facade';
+import winston from '@/modules/loggers/logger-winston';
 
 /**
  * ページコンポーネント
  */
 export default function Page() {
   // サーバーログを出力
+  winston.info('aaa', { aaa: 'aaa' });
   logger.info('Page Done!');
-  //logger.info('Page Done!', { moduleName: 'page.tsx' });
+  logger.info('Page Done!', { opt1: 'page.tsx' });
   return <div></div>;
 }
 

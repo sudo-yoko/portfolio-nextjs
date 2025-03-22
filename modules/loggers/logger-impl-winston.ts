@@ -5,16 +5,16 @@ import { ILogger } from '@/modules/loggers/logging-interface';
  * winstonロガーを、ロギングファサードの統一インターフェースにマップする
  */
 export const loggerImpl: ILogger = {
-  log: (level, message) => {
+  log: (level, message, option) => {
     winston.log(level, message);
   },
-  info: (message) => {
+  info: (message, option) => {
     winston.info(message);
   },
-  warn: (message) => {
+  warn: (message, option) => {
     winston.warn(message);
   },
-  error: (message: string | unknown) => {
+  error: (message: string | unknown, option) => {
     winston.error(message);
     if (typeof message === 'string') {
       console.log('message type is string');
