@@ -11,7 +11,10 @@ export enum Level {
   Error = 'error',
 }
 
-export const Keys = {
+/**
+ * 追加のログ情報のキー
+ */
+export const LogExtrasKey = {
   traceId: 'traceId',
   opt1: 'opt1',
   opt2: 'opt2',
@@ -19,13 +22,13 @@ export const Keys = {
 } as const;
 
 /**
- * 追加のログ情報
+ * 追加のログ情報の型
  */
 export type LogExtras = {
-  [Keys.traceId]?: string;
-  [Keys.opt1]?: string;
-  [Keys.opt2]?: string;
-  [Keys.opt3]?: string;
+  [LogExtrasKey.traceId]?: string;
+  [LogExtrasKey.opt1]?: string;
+  [LogExtrasKey.opt2]?: string;
+  [LogExtrasKey.opt3]?: string;
 };
 
 /**
