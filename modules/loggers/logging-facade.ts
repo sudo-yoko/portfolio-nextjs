@@ -3,7 +3,7 @@
 // ロギングインターフェースを実装したロガーをエクスポートする。
 
 import { loggerImpl } from '@/modules/loggers/logger-impl-winston';
-import { ILogger } from '@/modules/loggers/logging-interface';
+import type { ILogger } from '@/modules/loggers/logging-interface';
 import 'server-only';
 
 const logger: ILogger = loggerImpl;
