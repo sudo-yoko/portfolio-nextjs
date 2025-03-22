@@ -1,30 +1,30 @@
-import logger from '@/modules/loggers/logger-winston';
-import { Logger } from '@/modules/loggers/logging-interface';
+import winston from '@/modules/loggers/logger-winston';
+import { ILogger } from '@/modules/loggers/logging-interface';
 
 /**
- * ロギングファサードの統一インターフェースにマップする
+ * winstonロガーを、ロギングファサードの統一インターフェースにマップする
  */
-export const loggerImpl: Logger = {
+export const loggerImpl: ILogger = {
   log: (level, message) => {
-    logger.log(level, message);
+    winston.log(level, message);
   },
   info: (message) => {
-    logger.info(message);
+    winston.info(message);
   },
   warn: (message) => {
-    logger.warn(message);
+    winston.warn(message);
   },
   error: (message: string | unknown) => {
-    logger.error(message);
+    winston.error(message);
     if (typeof message === 'string') {
       console.log('message type is string');
-      logger.error(message);
+      winston.error(message);
     } else if (typeof message === 'object' && message !== null) {
       console.log('message type is object');
-      logger.error(message);
+      winston.error(message);
     } else {
       console.log('message type is other');
-      logger.error(message);
+      winston.error(message);
     }
   },
 };

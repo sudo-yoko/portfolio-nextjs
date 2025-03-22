@@ -1,6 +1,5 @@
-//
-// ロギングのための統一的なインターフェース
-//
+// ロギングのための統一的なインターフェースを定義するモジュール
+
 import 'server-only';
 
 /**
@@ -13,9 +12,9 @@ export enum Level {
 }
 
 /**
- * ログ出力関数
+ * ログ出力インターフェース
  */
-export interface Logger {
+export interface ILogger {
   log(level: Level, message: string): void;
   info(message: string): void;
   warn(message: string): void;

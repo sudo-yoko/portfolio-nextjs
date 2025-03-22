@@ -1,12 +1,11 @@
-//
 // アプリケーションとロギングライブラリの直接的な依存をなくし、
 // 統一的なロギングインターフェースを提供するロギングファサード。
-// インターフェースを実装したロガーをエクスポートする。
-//
+// ロギングインターフェースを実装したロガーをエクスポートする。
+
 import { loggerImpl } from '@/modules/loggers/logger-impl-winston';
-import { Logger } from '@/modules/loggers/logging-interface';
+import { ILogger } from '@/modules/loggers/logging-interface';
 import 'server-only';
 
-const logger: Logger = loggerImpl;
+const logger: ILogger = loggerImpl;
 
 export default logger;
