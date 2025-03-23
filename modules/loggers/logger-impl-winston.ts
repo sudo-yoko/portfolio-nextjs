@@ -1,13 +1,19 @@
 import winston from '@/modules/loggers/logger-winston';
 import type { ILogger } from '@/modules/loggers/logging-interface';
-import { LogExtrasKey } from '@/modules/loggers/logging-interface';
+import { Level, LogExtrasKey } from '@/modules/loggers/logging-interface';
 
 /**
  * winstonロガーを、ロギングファサードの統一インターフェースにマップする
  */
 export const loggerImpl: ILogger = {
   log: (level, message, ext) => {
-    winston.log(level, message, { [LogExtrasKey.traceId]: ext?.traceId });
+    let winstonLevel: string = '';
+    if (level === Level.Info) {
+      winstonLevel = 'info';
+    }
+    winston.log(winstonLevel, message, {
+      [LogExtrasKey.traceId]: ext?.traceId,
+    });
   },
   info: (message, ext) => {
     winston.info(message, { [LogExtrasKey.traceId]: ext?.traceId });
