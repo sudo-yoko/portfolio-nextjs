@@ -9,7 +9,7 @@ export function withErrorHandling<T>(func: () => T): T {
     return func();
   } catch (error) {
     // エラーログを出力
-    logger.error(error);
+    logger.error(serialize(error));
     // 再スローすることで、Next.jsが未処理の例外としてキャッチしerror.tsxをレンダリングする。
     throw error;
   }
@@ -25,7 +25,27 @@ export async function withErrorHandlingAsync<T>(
     // 引数に渡された関数を実行
     return await func();
   } catch (error) {
-    logger.error(error);
+    logger.error(serialize(error));
     throw error;
+  }
+}
+
+/**
+ * Errorオブジェクトの文字列表現
+ */
+export function serialize(error: unknown): string {
+  if (typeof error === 'string') {
+    return error;
+  } else if (error instanceof Error) {
+    const segments: string[] = [];
+    if (error.message) {
+      segments.push(error.message);
+    }
+    if (error.name) {
+      segments.push(error.name);
+    }
+    return segments.join('');
+  } else {
+    return 'unknown type error.';
   }
 }

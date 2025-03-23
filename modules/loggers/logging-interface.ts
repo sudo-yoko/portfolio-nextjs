@@ -40,5 +40,5 @@ export interface ILogger {
   log(level: Level, message: string, ext?: LogExtras): void;
   info(message: string, ext?: LogExtras): void;
   warn(message: string, ext?: LogExtras): void;
-  error(message: unknown, ext?: LogExtras): void;
+  error(message: string, ext?: LogExtras): void;
 }

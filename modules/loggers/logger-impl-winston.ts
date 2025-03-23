@@ -15,10 +15,7 @@ export const loggerImpl: ILogger = {
   warn: (message, ext) => {
     winston.warn(message, { [LogExtrasKey.traceId]: ext?.traceId });
   },
-  error: (message: unknown, ext) => {
-    if (typeof message === 'string') {
-      winston.error(message, { [LogExtrasKey.traceId]: ext?.traceId });
-    } else if (message instanceof Error) {
-    }
+  error: (message: string, ext) => {
+    winston.error(message, { [LogExtrasKey.traceId]: ext?.traceId });
   },
 };
