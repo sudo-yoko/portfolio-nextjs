@@ -15,17 +15,10 @@ export const loggerImpl: ILogger = {
   warn: (message, ext) => {
     winston.warn(message, { [LogExtrasKey.traceId]: ext?.traceId });
   },
-  error: (message: string | unknown, ext) => {
-    winston.error(message);
+  error: (message: unknown, ext) => {
     if (typeof message === 'string') {
-      console.log('message type is string');
       winston.error(message, { [LogExtrasKey.traceId]: ext?.traceId });
-    } else if (typeof message === 'object' && message !== null) {
-      console.log('message type is object');
-      //winston.error(message, { [LogExtrasKey.traceId]: ext?.traceId });
-    } else {
-      console.log('message type is other');
-      //winston.error(message, { [LogExtrasKey.traceId]: ext?.traceId });
+    } else if (message instanceof Error) {
     }
   },
 };
