@@ -1,19 +1,19 @@
 // アプリケーションとロギングライブラリの直接的な依存を無くすためのロギングファサード。
-// 統一的なロギングインターフェースを実装したロガーをエクスポートする。
+// 統一されたロギングインターフェースを実装したロガーをエクスポートする。
 
 import type { ILogger } from '@/modules/loggers/logging-interface';
 import 'server-only';
 
 /**
- * ロガー実装を決定するファクトリ関数
+ * ロガーの実装を決定する
  */
-const loggerFactory = async (): Promise<ILogger> => {
+const resolve = async (): Promise<ILogger> => {
   return (await import('@/modules/loggers/logger-impl-winston')).loggerImpl;
 };
 
 /**
  * ログ出力ロガー
  */
-const logger: ILogger = await loggerFactory();
+const logger: ILogger = await resolve();
 
 export default logger;

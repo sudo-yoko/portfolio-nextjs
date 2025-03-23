@@ -21,15 +21,15 @@ const development: DebugLogger = (...args) => console.log('[DEBUG] ', ...args); 
 const production: DebugLogger = () => {}; // 空実装を適用する
 
 /**
- * ロガー実装を決定するファクトリ関数
+ * ロガーの実装を決定する
  */
-function loggerFactory(): DebugLogger {
+function resolve(): DebugLogger {
   return process.env.NODE_ENV === 'development' ? development : production;
 }
 
 /**
  * デバッグログ出力ロガー
  */
-const debug: DebugLogger = loggerFactory();
+const debug: DebugLogger = resolve();
 
 export default debug;
