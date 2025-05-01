@@ -1,0 +1,4 @@
+POST http://localhost:3001/servlet/setvlet.WebToCase?encoding=UTF-8
+content-type: application/x-www-form-urlencoded
+
+name=111&email=eeee

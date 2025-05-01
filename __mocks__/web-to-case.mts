@@ -17,8 +17,19 @@ interface FormData {
 }
 
 const app = express();
-
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+app.post(
+  path,
+  (req: Request<undefined, undefined, FormData>, res: Response<void>) => {
+    const body = req.body;
+    console.log(
+      `web-to-case-mock: Inbound Request -> formData=${JSON.stringify(body)}`,
+    );
+    res.sendStatus(200);
+  },
+);
 
-app.post(path, (req: Request<undefined, undefined, FormData>, res: Response<void>) => {});
+app.listen(port, () => {
+  console.log(`Mock service running on http://localhost:${port}`);
+});

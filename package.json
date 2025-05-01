@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "mock": "node --no-warnings --loader ts-node/esm __mocks__/customers.mts"
+    "mock1": "node --no-warnings --loader ts-node/esm __mocks__/customers.mts",
+    "mock2": "node --no-warnings --loader ts-node/esm __mocks__/web-to-case.mts"
   },
   "dependencies": {
     "autoprefixer": "^10.4.15",
