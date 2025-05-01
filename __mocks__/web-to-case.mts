@@ -12,7 +12,6 @@ const path = '/servlet/setvlet.WebToCase';
 interface FormData {
   name: string;
   email: string;
-  subject: string;
   body: string;
 }
 
