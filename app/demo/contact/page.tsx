@@ -1,10 +1,10 @@
-import Form from '@/app/demo/contact/form';
+import Main from '@/app/demo/contact/main';
 
 export default function Page() {
   return (
     <>
       <div>
-        <Form />
+        <Main />
       </div>
     </>
   );

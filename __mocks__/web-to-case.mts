@@ -20,11 +20,19 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.post(
   path,
-  (req: Request<undefined, undefined, FormData>, res: Response<void>) => {
+  async (req: Request<undefined, undefined, FormData>, res: Response<void>) => {
     const body = req.body;
     console.log(
       `web-to-case-mock: Inbound Request -> formData=${JSON.stringify(body)}`,
     );
+
+    // 1秒待機
+    await new Promise<void>((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    });
+
     res.sendStatus(200);
   },
 );
