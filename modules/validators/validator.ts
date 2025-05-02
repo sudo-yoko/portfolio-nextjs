@@ -6,6 +6,10 @@ export interface ValidationErrors {
   [key: string]: string[];
 }
 
+export function hasError(errors: ValidationErrors): boolean {
+  return !Object.values(errors).every((err) => err.length === 0);
+}
+
 /**
  * 必須チェック
  */

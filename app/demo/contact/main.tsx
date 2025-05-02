@@ -1,40 +1,34 @@
 'use client';
 
-import React, { useState } from 'react';
-import { info } from '@/modules/loggers/remote-logger';
-import { required } from '@/modules/validators/validator';
-import { ValidationErrors } from '@/modules/validators/validator';
-
-// フォームデータ
-interface FormData {
-  name: string;
-  email: string;
-  body: string;
-}
+import { FormData, validate } from '@/app/demo/contact/model';
+import { sendAction } from '@/app/demo/contact/send-action';
+import { ValidationErrors, hasError } from '@/modules/validators/validator';
+import React, { useEffect, useState } from 'react';
 
 export default function Main() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'complete'>('idle');
+  const [errors, setErrors] = useState<ValidationErrors>({});
 
-  async function send(formData: FormData) {
-    info(
-      `name=${formData.name}, email=${formData.email}, body=${formData.body}`,
-    );
-
+  async function submit(formData: FormData) {
     setStatus('sending');
-
-    // 2秒待機
-    await new Promise<void>((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, 2000);
-    });
+    // 送信
+    const serverErrors = await sendAction(formData);
+    // エラーあり
+    if (hasError(serverErrors)) {
+      setErrors(serverErrors);
+      setStatus('idle');
+      return;
+    }
+    // エラーなし
+    setErrors({});
     setStatus('complete');
+    return;
   }
 
   return (
     <>
       <div className="flex h-screen w-screen flex-col items-center py-10">
-        {status === 'idle' && <Form callback={send} />}
+        {status === 'idle' && <Form submit={submit} serverErrors={errors} />}
         {status === 'sending' && <Sending />}
         {status === 'complete' && <Completion />}
       </div>
@@ -42,27 +36,34 @@ export default function Main() {
   );
 }
 
-function Form({ callback }: { callback: (formData: FormData) => void }) {
+function Form({
+  submit,
+  serverErrors,
+}: {
+  submit: (formData: FormData) => void;
+  serverErrors?: ValidationErrors;
+}) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [body, setBody] = useState('');
   const [errors, setErrors] = useState<ValidationErrors>({});
 
+  useEffect(() => {
+    if (serverErrors && hasError(serverErrors)) {
+      setErrors(serverErrors);
+    }
+  }, [serverErrors]);
+
   function handleSubmit(e: React.FormEvent, formData: FormData) {
     e.preventDefault();
-    if (validate(formData)) {
-      callback(formData);
-    }
-    return;
-  }
 
-  function validate(formData: FormData): boolean {
-    const errors: ValidationErrors = {};
-    errors['name'] = required('お名前', formData.name);
-    errors['email'] = required('メールアドレス', formData.email);
-    errors['body'] = required('お問い合わせ内容', formData.body);
-    setErrors(errors);
-    return Object.values(errors).every((arr) => arr.length === 0);
+    // バリデーション
+    const clientErrors = validate(formData);
+    if (hasError(clientErrors)) {
+      setErrors(clientErrors);
+      return;
+    }
+    submit(formData);
   }
 
   return (
