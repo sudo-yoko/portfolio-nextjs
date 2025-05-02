@@ -9,7 +9,7 @@ import DailyRotateFile from 'winston-daily-rotate-file';
 const appName = 'portfolio-application';
 
 // ログ出力先フォルダ
-const logDir = path.join('log');
+const logDir = path.join('_log');
 
 // ログファイル名
 const logName = 'app-%DATE%.log';
