@@ -1,4 +1,4 @@
-import Main from '@/app/demo/contact/main';
+import Main from '@/app/contact/main';
 
 export default function Page() {
   return (
