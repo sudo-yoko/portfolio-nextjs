@@ -3,18 +3,45 @@ Next.js アプリケーションの実装集
 
 ## お問い合わせフォーム
 
-入力されたお問い合わせを、SalesforceのWeb-to-Caseに送信します。
+入力されたお問い合わせを、SalesforceのWeb-to-Caseに送信します。  
 
 :open_file_folder: コンポーネント：[app/contact/](app/contact)  
 :open_file_folder: モジュール：[modules/contact/](modules/contact)  
 :open_file_folder: 画面サンプル：[_docs/contact.md](_docs/contact.md)  
 
+Web-to-Caseのエンドポイントは開発時はモックを提供します。これにより  
+モックは `Express` で作成しており、`npm run dev` などの起動コマンドでアプリケーションを起動する際にモックも一緒に起動できるように設計しています。  
+アプリケーションとモックを一緒に起動するコマンドは `npm run dev:mock` として、`package.json` にスクリプトを定義しています。  
 
-## validator.ts
-バリデーターインターフェースを定義し、アプリケーションがバリデーションの実装に強く依存しない設計としています。バリデーションの実装にはZodなどのライブラリや、独自の実装を使用できます。
+:open_file_folder: Web-to-Case エンドポイントのモック：[__mocks__/web-to-case.mts](__mocks__/web-to-case.mts)  
+:open_file_folder: モック起動スクリプト：[package.json#L12](package.json#L12)  
+
+
+## validator.ts  
+#### バリデーター
+バリデーターインターフェースを提供することで、アプリケーションがバリデーションの実装に強く依存しない設計としています。バリデーションの実装にはZodなどのライブラリや、独自の実装を使用できます。
 
 :open_file_folder: コード：[modules/validators/validator.ts](modules/validators/validator.ts)  
 :open_file_folder: 使用例：[modules/contact/model.ts#validate](modules/contact/model.ts#L29)
+
+
+## logger-winston.ts
+`winston` を用いたログ出力の例です。ログローテーションも行います。  
+
+:open_file_folder: コード：[logger.ts](modules/loggers/logger.ts)  
+:open_file_folder: 使用例：[logging/page.tsx](app/sample/logging/page.tsx)
+
+## logger.ts  
+#### ロギングファサード  
+
+`Java` の `SLF4j` 風のロギングファサードです。統一されたロギングインターフェースを提供することで、アプリケーションがロギングライブラリに直接的に依存しないように設計しています。
+`winston` をロギング実装として読み込みしています。
+
+:open_file_folder: コード：[logger.ts](modules/loggers/logger.ts)  
+:open_file_folder: 使用例：[logging/page.tsx](app/sample/logging/page.tsx)
+
+このモジュールが最初にインポートされたタイミングで、アプリケーション内で一意のロガーインスタンスが作成されます。  
+以降はキャッシュされたロガーが再利用されます。
 
 ## debug-logger.ts
 #### デバッグログ出力モジュール
@@ -37,15 +64,7 @@ Next.js アプリケーションの実装集
 :open_file_folder: コード：[debug-logger.ts](modules/loggers/debug-logger.ts)  
 :open_file_folder: 使用例：[logging-debug/](app/sample/logging-debug)
 
-## logger.ts
-#### サーバーログ出力モジュール
 
-`winston` を用いたログ出力の例です。ログローテーションも行います。  
-このモジュールが最初にインポートされたタイミングで、アプリケーション内で一意のロガーインスタンスが作成されます。  
-以降はキャッシュされたロガーが再利用されます。
-
-:open_file_folder: コード：[logger.ts](modules/loggers/logger.ts)  
-:open_file_folder: 使用例：[logging/page.tsx](app/sample/logging/page.tsx)
 
 ## server-error-handler.ts
 #### サーバーサイドエラーハンドリング
