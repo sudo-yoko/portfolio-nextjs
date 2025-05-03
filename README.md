@@ -5,7 +5,7 @@ Next.js アプリケーションの実装集
 
 入力されたお問い合わせを、SalesforceのWeb-to-Caseに送信します。
 
-:open_file_folder: コード：[app/demo/contact](app/demo/contact)  
+:open_file_folder: コンポーネント：[app/contact](app/contact)  
 :open_file_folder: モジュール：[modules/contact](modules/contact)  
 :open_file_folder: 画面サンプル：
 
