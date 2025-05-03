@@ -36,8 +36,8 @@ app.post(
       }, 1000);
     });
 
-    res.sendStatus(200);
-    //res.sendStatus(500);
+    //res.sendStatus(200);
+    res.sendStatus(500);
   },
 );
 
