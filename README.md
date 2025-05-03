@@ -9,7 +9,7 @@ Next.js アプリケーションの実装集
 :open_file_folder: モジュール：[modules/contact/](modules/contact)  
 :open_file_folder: 画面サンプル：[_docs/contact.md](_docs/contact.md)  
 
-Web-to-Caseのエンドポイントは開発時はモックを提供します。これにより  
+Web-to-Caseのエンドポイントは、開発時はモックを提供します。これにより、Salesforce側に依存することなく開発を進めることができます。  
 モックは `Express` で作成しており、`npm run dev` などの起動コマンドでアプリケーションを起動する際にモックも一緒に起動できるように設計しています。  
 アプリケーションとモックを一緒に起動するコマンドは `npm run dev:mock` として、`package.json` にスクリプトを定義しています。  
 
