@@ -28,7 +28,7 @@ Web-to-Caseのエンドポイントは開発時はモックを提供します。
 ## logger-winston.ts
 `winston` を用いたログ出力の例です。ログローテーションも行います。  
 
-:open_file_folder: コード：[logger.ts](modules/loggers/logger.ts)  
+:open_file_folder: コード：[modules/loggers/logger-winston.ts](modules/loggers/logger-winston.ts)  
 :open_file_folder: 使用例：[logging/page.tsx](app/sample/logging/page.tsx)
 
 ## logger.ts  
@@ -37,7 +37,7 @@ Web-to-Caseのエンドポイントは開発時はモックを提供します。
 `Java` の `SLF4j` 風のロギングファサードです。統一されたロギングインターフェースを提供することで、アプリケーションがロギングライブラリに直接的に依存しないように設計しています。
 `winston` をロギング実装として読み込みしています。
 
-:open_file_folder: コード：[logger.ts](modules/loggers/logger.ts)  
+:open_file_folder: コード：[modules/logging-facade/](modules/logging-facade/)  
 :open_file_folder: 使用例：[logging/page.tsx](app/sample/logging/page.tsx)
 
 このモジュールが最初にインポートされたタイミングで、アプリケーション内で一意のロガーインスタンスが作成されます。  
