@@ -11,8 +11,7 @@ Next.js アプリケーションの実装集
 
 
 ## validator.ts
-バリデーターインターフェースを定義し、アプリケーションがバリデーションの実装に強く依存しない設計としています。  
-バリデーションの実装にはZodなどのライブラリや、独自の実装を使用できます。
+バリデーターインターフェースを定義し、アプリケーションがバリデーションの実装に強く依存しない設計としています。バリデーションの実装にはZodなどのライブラリや、独自の実装を使用できます。
 
 :open_file_folder: コード：[modules/validators/validator.ts](modules/validators/validator.ts)  
 :open_file_folder: 使用例：[modules/contact/model.ts#validate](modules/contact/model.ts#L29)
