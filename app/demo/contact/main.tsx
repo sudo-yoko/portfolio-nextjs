@@ -1,13 +1,18 @@
 'use client';
 
-import { FormData, validate } from '@/app/demo/contact/model';
+import {
+  FormData,
+  FormKey,
+  FormStatus,
+  validate,
+} from '@/app/demo/contact/model';
 import { sendAction } from '@/app/demo/contact/send-action';
 import { ValidationErrors, hasError } from '@/modules/validators/validator';
 import React, { useEffect, useState } from 'react';
 
 export default function Main() {
-  const [status, setStatus] = useState<'idle' | 'sending' | 'complete'>('idle');
-  const [errors, setErrors] = useState<ValidationErrors>({});
+  const [status, setStatus] = useState<FormStatus>('idle');
+  const [errors, setErrors] = useState<ValidationErrors<FormKey>>({});
 
   async function submit(formData: FormData) {
     setStatus('sending');
@@ -41,12 +46,12 @@ function Form({
   serverErrors,
 }: {
   submit: (formData: FormData) => void;
-  serverErrors?: ValidationErrors;
+  serverErrors?: ValidationErrors<FormKey>;
 }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [body, setBody] = useState('');
-  const [errors, setErrors] = useState<ValidationErrors>({});
+  const [errors, setErrors] = useState<ValidationErrors<FormKey>>({});
 
   useEffect(() => {
     if (serverErrors && hasError(serverErrors)) {
