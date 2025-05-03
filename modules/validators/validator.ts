@@ -8,10 +8,17 @@ export interface Validator {
   (...args: string[]): string[];
 }
 
+/**
+ * 入力フィールドのキーに対応するエラーメッセージを配列で保持するオブジェクトの型。
+ * 入力フィールドのキーは型パラメータで渡す。
+ */
 export type ValidationErrors<T extends string> = {
   [key in T]?: string[];
 };
 
+/**
+ * エラーの有無を調べる。
+ */
 export function hasError<T extends string>(
   errors: ValidationErrors<T>,
 ): boolean {
@@ -19,7 +26,7 @@ export function hasError<T extends string>(
 }
 
 /**
- * 必須入力
+ * バリデーション：必須入力
  */
 export const required: Validator = (name: string, value: string) => {
   const errors: string[] = [];
@@ -30,7 +37,7 @@ export const required: Validator = (name: string, value: string) => {
 };
 
 /**
- * 必須のメールアドレス
+ * バリデーション：必須のメールアドレス
  */
 export const requiredEmail: Validator = (name, value) => {
   let errors: string[] = [];

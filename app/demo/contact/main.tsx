@@ -14,11 +14,13 @@ export default function Main() {
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errors, setErrors] = useState<ValidationErrors<FormKey>>({});
 
-  async function submit(formData: FormData) {
+  /**
+   * お問い合わせを送信する
+   */
+  async function send(formData: FormData) {
     setStatus('sending');
-    // 送信
     const serverErrors = await sendAction(formData);
-    // エラーあり
+    // バリデーションエラーあり
     if (hasError(serverErrors)) {
       setErrors(serverErrors);
       setStatus('idle');
@@ -33,7 +35,9 @@ export default function Main() {
   return (
     <>
       <div className="flex h-screen w-screen flex-col items-center py-10">
-        {status === 'idle' && <Form submit={submit} serverErrors={errors} />}
+        {status === 'idle' && (
+          <Form callback={send} validationErrors={errors} />
+        )}
         {status === 'sending' && <Sending />}
         {status === 'complete' && <Completion />}
       </div>
@@ -41,12 +45,15 @@ export default function Main() {
   );
 }
 
+/**
+ * 入力フォーム
+ */
 function Form({
-  submit,
-  serverErrors,
+  callback,
+  validationErrors,
 }: {
-  submit: (formData: FormData) => void;
-  serverErrors?: ValidationErrors<FormKey>;
+  callback: (formData: FormData) => void;
+  validationErrors?: ValidationErrors<FormKey>;
 }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -54,21 +61,26 @@ function Form({
   const [errors, setErrors] = useState<ValidationErrors<FormKey>>({});
 
   useEffect(() => {
-    if (serverErrors && hasError(serverErrors)) {
-      setErrors(serverErrors);
+    if (validationErrors && hasError(validationErrors)) {
+      setErrors(validationErrors);
     }
-  }, [serverErrors]);
+  }, [validationErrors]);
 
+  /**
+   * Submitイベントを処理する関数
+   */
   function handleSubmit(e: React.FormEvent, formData: FormData) {
     e.preventDefault();
 
     // バリデーション
     const clientErrors = validate(formData);
+    // エラーあり
     if (hasError(clientErrors)) {
       setErrors(clientErrors);
       return;
     }
-    submit(formData);
+    // エラーなし
+    callback(formData);
   }
 
   return (
@@ -139,6 +151,9 @@ function Form({
   );
 }
 
+/**
+ * 送信中表示コンポーネント
+ */
 function Sending() {
   return (
     <div>
@@ -152,6 +167,9 @@ function Sending() {
   );
 }
 
+/**
+ * 送信完了表示コンポーネント
+ */
 function Completion() {
   return (
     <>

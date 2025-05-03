@@ -2,23 +2,33 @@
 
 import { FormData, FormKey, validate } from '@/app/demo/contact/model';
 import logger from '@/modules/loggers/logger';
-import { ValidationErrors } from '@/modules/validators/validator';
+import { ValidationErrors, hasError } from '@/modules/validators/validator';
 
 const logPrefix = 'send-action.ts: ';
 
 export async function sendAction(
   formData: FormData,
 ): Promise<ValidationErrors<FormKey>> {
-  logger.info(logPrefix + `formData=${JSON.stringify(formData)}`);
-
+  // バリデーション
   const errors = validate(formData);
+  if (hasError(errors)) {
+    return errors;
+  }
 
-  // 2秒待機
-  await new Promise<void>((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, 2000);
+  const body = new URLSearchParams(formData);
+  logger.info(logPrefix + `Outbound request -> formData=${body.toString()}`);
+
+  // SalesforceのWeb-to-CaseにPOST
+  const res = await fetch('http://localhost:3001/servlet/servlet.WebToCase', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body.toString(),
   });
 
-  return errors;
+  // レスポンス
+  logger.info(logPrefix + `Inbound response -> status=${res.status}`);
+  if (res.status === 200) {
+    return {};
+  }
+  throw new Error(`response status=${res.status}`);
 }

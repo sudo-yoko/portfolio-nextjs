@@ -6,7 +6,9 @@ import type { Request, Response } from 'express';
 import express from 'express';
 
 const port = 3001;
-const path = '/servlet/setvlet.WebToCase';
+const path = '/servlet/servlet.WebToCase';
+
+const logPrefix = '>>> ';
 
 // フォームデータ
 interface FormData {
@@ -23,7 +25,8 @@ app.post(
   async (req: Request<undefined, undefined, FormData>, res: Response<void>) => {
     const body = req.body;
     console.log(
-      `web-to-case-mock: Inbound Request -> formData=${JSON.stringify(body)}`,
+      logPrefix +
+        `web-to-case-mock: Inbound Request -> formData=${JSON.stringify(body)}`,
     );
 
     // 1秒待機
@@ -34,9 +37,10 @@ app.post(
     });
 
     res.sendStatus(200);
+    //res.sendStatus(500);
   },
 );
 
 app.listen(port, () => {
-  console.log(`Mock service running on http://localhost:${port}`);
+  console.log(logPrefix + `Mock service running on http://localhost:${port}`);
 });
