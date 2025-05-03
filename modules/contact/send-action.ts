@@ -1,7 +1,7 @@
 'use server';
 
 import { FormData, FormKey, validate } from '@/modules/contact/model';
-import logger from '@/modules/loggers/logger';
+import logger from '@/modules/logging-facade/logger';
 import { ValidationErrors, hasError } from '@/modules/validators/validator';
 
 const logPrefix = 'send-action.ts: ';

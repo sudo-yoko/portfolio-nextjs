@@ -1,6 +1,6 @@
 'use server';
 
-import logger from '@/modules/loggers/logger';
+import logger from '@/modules/logging-facade/logger';
 
 export async function info(message: string) {
   logger.info(message);

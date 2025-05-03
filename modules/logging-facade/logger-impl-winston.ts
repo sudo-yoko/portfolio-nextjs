@@ -1,6 +1,6 @@
 import winston from '@/modules/loggers/logger-winston';
-import type { ILogger } from '@/modules/loggers/logging-interface';
-import { LogExtrasKey } from '@/modules/loggers/logging-interface';
+import type { ILogger } from '@/modules/logging-facade/logging-interface';
+import { LogExtrasKey } from '@/modules/logging-facade/logging-interface';
 
 /**
  * winstonロガーを、ロギングファサードの統一インターフェースにマップする

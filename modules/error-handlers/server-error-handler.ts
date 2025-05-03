@@ -1,4 +1,4 @@
-import logger from '@/modules/loggers/logger';
+import logger from '@/modules/logging-facade/logger';
 
 /**
  * サーバーサイドエラーハンドリング

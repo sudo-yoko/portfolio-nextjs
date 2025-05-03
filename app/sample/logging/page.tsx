@@ -1,5 +1,5 @@
-import logger from '@/modules/loggers/logger';
 import winston from '@/modules/loggers/logger-winston';
+import logger from '@/modules/logging-facade/logger';
 
 /**
  * ページコンポーネント
