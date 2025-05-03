@@ -1,6 +1,6 @@
 'use server';
 
-import { FormData, FormKey, validate } from '@/app/demo/contact/model';
+import { FormData, FormKey, validate } from '@/modules/contact/model';
 import logger from '@/modules/loggers/logger';
 import { ValidationErrors, hasError } from '@/modules/validators/validator';
 

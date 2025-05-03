@@ -1,4 +1,8 @@
-import { required, requiredEmail, ValidationErrors } from '@/modules/validators/validator';
+import {
+  required,
+  requiredEmail,
+  ValidationErrors,
+} from '@/modules/validators/validator';
 
 /**
  * 入力フォームの送信状態。

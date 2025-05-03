@@ -5,8 +5,8 @@ import {
   FormKey,
   FormStatus,
   validate,
-} from '@/app/demo/contact/model';
-import { sendAction } from '@/app/demo/contact/send-action';
+} from '@/modules/contact/model';
+import { sendAction } from '@/modules/contact/send-action';
 import { ValidationErrors, hasError } from '@/modules/validators/validator';
 import React, { useEffect, useState } from 'react';
 
