@@ -1,7 +1,11 @@
 import { z } from 'zod';
 
+/**
+ * バリデーターのインターフェース定義。
+ * 引数は問わず、戻り値はエラーメッセージの配列とする。
+ */
 export interface Validator {
-  (name: string, value: string): string[];
+  (...args: string[]): string[];
 }
 
 export type ValidationErrors<T extends string> = {
@@ -15,9 +19,9 @@ export function hasError<T extends string>(
 }
 
 /**
- * 必須チェック
+ * 必須入力
  */
-export const required: Validator = (name, value) => {
+export const required: Validator = (name: string, value: string) => {
   const errors: string[] = [];
   if (value.trim() === '') {
     errors.push(`${name}を入力してください。`);
@@ -26,19 +30,19 @@ export const required: Validator = (name, value) => {
 };
 
 /**
- *
+ * 必須のメールアドレス
  */
 export const requiredEmail: Validator = (name, value) => {
-  const errors: string[] = [];
-  const result = z
-    .string()
-    .min(1, `${name}を入力してください。`)
-    .email(`${name}の形式が不正です。`)
-    .safeParse(value);
-  if (result.success) {
+  let errors: string[] = [];
+  // 必須チェック
+  errors = required(name, value);
+  if (errors.length > 0) {
     return errors;
   }
-  const error = result.error;
-
+  // 形式チェック
+  const result = z.string().email(`${name}の形式が不正です。`).safeParse(value);
+  if (result.error) {
+    return result.error.errors.map((issue) => issue.message);
+  }
   return errors;
 };

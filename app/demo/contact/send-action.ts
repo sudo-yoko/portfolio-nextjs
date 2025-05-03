@@ -1,6 +1,6 @@
 'use server';
 
-import { FormData, validate } from '@/app/demo/contact/model';
+import { FormData, FormKey, validate } from '@/app/demo/contact/model';
 import logger from '@/modules/loggers/logger';
 import { ValidationErrors } from '@/modules/validators/validator';
 
@@ -8,7 +8,7 @@ const logPrefix = 'send-action.ts: ';
 
 export async function sendAction(
   formData: FormData,
-): Promise<ValidationErrors> {
+): Promise<ValidationErrors<FormKey>> {
   logger.info(logPrefix + `formData=${JSON.stringify(formData)}`);
 
   const errors = validate(formData);
