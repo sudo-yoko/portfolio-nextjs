@@ -49,7 +49,8 @@ export const requiredEmail: Validator = (name, value) => {
   // 形式チェック
   const result = z.string().email(`${name}の形式が不正です。`).safeParse(value);
   if (result.error) {
-    return result.error.errors.map((issue) => issue.message);
+    errors = result.error.errors.map((issue) => issue.message);
+    return errors;
   }
   return errors;
 };
