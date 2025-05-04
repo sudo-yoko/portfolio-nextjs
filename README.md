@@ -10,7 +10,8 @@ Next.js アプリケーションの実装集
 :open_file_folder: 画面サンプル：[_docs/contact.md](_docs/contact.md)  
 
 Web-to-Caseのエンドポイントは、開発時はモックを提供します。モックは `Express` で作成しています。  
-`npm run dev:mock` のコマンドで、アプリケーションとモックが一緒に起動されるようにしています。 
+`npm run dev:mock` のコマンドで、アプリケーションとモックが一緒に起動できるようにしています。  
+Salesforce側に依存することなく開発を進めることができます。
 
 :open_file_folder: Web-to-Case エンドポイントのモック：[__mocks__/web-to-case.mts](__mocks__/web-to-case.mts)  
 
@@ -72,7 +73,9 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 :open_file_folder: 使用例：
 
 #### サーバーアクションエラーハンドリング
-例外をキャッチして、戻り値にステータスコード500(INTERNAL_SERVER_ERROR)を返します。呼び元は戻り値のステータスコードを確認し、呼び元がエラーハンドリングを行う必要があります。
+例外をキャッチして、戻り値にステータスコード500(INTERNAL_SERVER_ERROR)を返します。呼び元は戻り値のステータスコードを確認し、呼び元がエラーハンドリングを行う必要があります。  
+
+サーバーアクションはHTTPエンドポイントとして実行されるため、サーバーアクション内で例外をスローしても、呼び元にそのまま伝播しません。シリアライズ可能なオブジェクトの形式で、戻り値として返却する必要があります。
 
 :open_file_folder: コード：[modules/error-handlers/action-error-handler.ts](modules/error-handlers/action-error-handler.ts)  
 :open_file_folder: 使用例：[modules/contact/send-action.ts#L17](modules/contact/send-action.ts#L17)  
