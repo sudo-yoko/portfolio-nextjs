@@ -22,14 +22,13 @@ Web-to-Caseのエンドポイントは、開発時はモックを提供します
 バリデーターインターフェースを提供することで、アプリケーションがバリデーションの実装に強く依存しない設計としています。バリデーションの実装にはZodなどのライブラリや、独自の実装を使用できます。
 
 :open_file_folder: コード：[modules/validators/validator.ts](modules/validators/validator.ts)  
-:open_file_folder: 使用例：[modules/contact/model.ts#validate](modules/contact/model.ts#L29)
+:open_file_folder: 使用例：[modules/contact/model.ts#L33](modules/contact/model.ts#L33)
 
 
 ## logger-winston.ts
-`winston` を用いたログ出力の例です。ログローテーションも行います。  
+`winston` を用いたログ出力の設定例です。ログローテーションも行います。  
 
 :open_file_folder: コード：[modules/loggers/logger-winston.ts](modules/loggers/logger-winston.ts)  
-:open_file_folder: 使用例：[logging/page.tsx](app/sample/logging/page.tsx)
 
 ## logger.ts  
 #### ロギングファサード  
@@ -38,25 +37,26 @@ Web-to-Caseのエンドポイントは、開発時はモックを提供します
 `winston` をロギング実装として読み込みしています。
 
 :open_file_folder: コード：[modules/logging-facade/](modules/logging-facade/)  
-:open_file_folder: 使用例：[logging/page.tsx](app/sample/logging/page.tsx)
-
-このモジュールが最初にインポートされたタイミングで、アプリケーション内で一意のロガーインスタンスが作成されます。  
-以降はキャッシュされたロガーが再利用されます。
+:spiral_notepad: 使用例
+```ts
+import logger from '@/modules/logging-facade/logger';
+...
+logger.info('ログメッセージ');
+```
 
 ## debug-logger.ts
 #### デバッグログ出力モジュール
 
-このモジュールは、`console.log()` を使用したデバッグログ出力機能を提供します。  
-サーバーサイドとクライアントサイドの両方で利用可能です。
+`console.log()` を使用したデバッグログ出力機能を提供します。サーバーサイドとクライアントサイドの両方で利用可能です。  
 - サーバーサイドで利用した場合、サーバー側コンソールにログ出力されます。
 - クライアントサイドで利用した場合、ブラウザコンソールにログ出力されます。
 
-ロガーの実装はファクトリ関数を用いて決定します。  
+ロガーの実装をファクトリ関数を用いて決定します。  
 環境変数 `process.env.NODE_ENV` を基に、
 - 開発モード `development` の場合は、 `console.log()` でログ出力します。
 - 本番モード `production` の場合は、ロガーに空実装を適用することでログ出力を無効化します。
 
-これにより、開発中はデバッグログを出力し、本番環境では不要なログ出力を防ぎます。
+これにより、開発中はデバッグログを出力し、本番環境ではログ出力を防ぎます。
 
 このモジュールが最初にインポートされたタイミングでファクトリ関数が実行され、ロガーの実装が決定します。  
 以降はキャッシュされたロガーを再利用するため効率的です。
