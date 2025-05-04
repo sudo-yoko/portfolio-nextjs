@@ -30,10 +30,9 @@ Web-to-Caseのエンドポイントは、開発時はモックを提供します
 
 :open_file_folder: コード：[modules/loggers/logger-winston.ts](modules/loggers/logger-winston.ts)  
 
-## logger.ts  
-#### ロギングファサード  
+## ロギングファサード
 
-`Java` の `SLF4j` 風のロギングファサードです。統一されたロギングインターフェースを提供することで、アプリケーションがロギングライブラリに直接的に依存しないように設計しています。
+`Java` の `SLF4j` 風のロギングファサードです。統一されたロギングインターフェースを提供し、アプリケーションがロギングライブラリに直接的に依存しないように設計しています。
 `winston` をロギング実装として読み込みしています。
 
 :open_file_folder: コード：[modules/logging-facade/](modules/logging-facade/)  
@@ -74,11 +73,16 @@ debug('ログメッセージ');
 javascriptの関数を引数にとれる性質と、クロージャを活用した実装となっています。
 
 #### サーバーサイドエラーハンドリング
-エラーハンドリングとして、エラーログを出力しキャッチした例外を再スローします。
-Next.jsはこれを未処理の例外としてキャッチし、エラーページ(error.tsx)をレンダリングします。
+例外をキャッチして再スローします。Next.jsはこれを未処理の例外として処理し、標準のエラーページ(error.tsx)をレンダリングします。
+
+:open_file_folder: コード：[modules/error-handlers/server-error-handler.ts](modules/error-handlers/server-error-handler.ts)  
+:open_file_folder: 使用例：
 
 #### サーバーアクションエラーハンドリング
-xxxxxx  
+例外をキャッチして、戻り値にステータスコード500(INTERNAL_SERVER_ERROR)を返します。呼び元は戻り値のステータスコードを確認し、呼び元がエラーハンドリングを行う必要があります。
+
+:open_file_folder: コード：[modules/error-handlers/action-error-handler.ts](modules/error-handlers/action-error-handler.ts)  
+:open_file_folder: 使用例：[modules/contact/send-action.ts#L17](modules/contact/send-action.ts#L17)  
 
 #### クライアントサイドエラーハントリング
 xxxxxx  
