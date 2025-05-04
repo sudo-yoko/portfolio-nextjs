@@ -10,19 +10,32 @@ const logPrefix = 'send-action.ts: ';
 
 export async function sendAction(
   formData: FormData,
-): Promise<ActionResult<ValidationErrors<FormKey>> | ActionResult<void>> {
-  return await withErrorHandlingAsync(() => actionProcess());
+): Promise<ActionResult<ValidationErrors<FormKey> | void>> {
+  return await withErrorHandlingAsync(() => process());
 
-  async function actionProcess() {
+  async function process() {
+    logger.info(
+      logPrefix + `request(Inbound) -> formData=${JSON.stringify(formData)}`,
+    );
+
     // バリデーション
     const errors = validate(formData);
     if (hasError(errors)) {
-      return { status: 400, body: errors };
+      const result: ActionResult<ValidationErrors<FormKey>> = {
+        status: 400,
+        body: errors,
+      };
+      logger.info(
+        logPrefix +
+          `response(Outbound) -> validation error. status=${result.status}, body=${JSON.stringify(errors)}`,
+      );
+
+      return result;
     }
 
     // フォームデータ
     const body = new URLSearchParams(formData);
-    logger.info(logPrefix + `Outbound request -> formData=${body.toString()}`);
+    logger.info(logPrefix + `request(Outbound) -> formData=${body.toString()}`);
 
     // SalesforceのWeb-to-CaseにPOST
     const res = await fetch('http://localhost:3001/servlet/servlet.WebToCase', {
@@ -33,12 +46,12 @@ export async function sendAction(
 
     // 正常
     if (res.status === 200) {
-      logger.info(logPrefix + `Inbound response -> status=${res.status}`);
+      logger.info(logPrefix + `response(Inbound) -> status=${res.status}`);
       return { status: res.status };
     }
 
     // エラー
-    logger.error(logPrefix + `Inbound response -> status=${res.status}`);
+    logger.error(logPrefix + `response(Inbound) -> status=${res.status}`);
     return { status: res.status };
   }
 }

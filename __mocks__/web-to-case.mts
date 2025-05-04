@@ -26,7 +26,7 @@ app.post(
     const body = req.body;
     console.log(
       logPrefix +
-        `web-to-case-mock: Inbound Request -> formData=${JSON.stringify(body)}`,
+        `web-to-case-mock: Request(Inbound) -> formData=${JSON.stringify(body)}`,
     );
 
     // 1秒待機

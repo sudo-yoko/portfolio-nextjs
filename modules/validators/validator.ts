@@ -17,7 +17,7 @@ export type ValidationErrors<T extends string> = {
 };
 
 /**
- * エラーの有無を調べる。
+ *
  */
 export function hasError<T extends string>(
   errors: ValidationErrors<T>,

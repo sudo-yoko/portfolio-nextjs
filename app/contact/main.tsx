@@ -1,5 +1,6 @@
 'use client';
 
+import { ErrorHandler } from '@/app/(system)/error-handler';
 import {
   FormData,
   FormKey,
@@ -13,6 +14,7 @@ import React, { useEffect, useState } from 'react';
 export default function Main() {
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errors, setErrors] = useState<ValidationErrors<FormKey>>({});
+  const [systemError, setSystemError] = useState(false);
 
   /**
    * お問い合わせを送信する
@@ -33,20 +35,22 @@ export default function Main() {
     if (actionResult.status === 400) {
       // バリデーションエラー
       if (actionResult.body) {
-        const validationErrors = actionResult.body;
-        if (hasError(validationErrors)) {
-          setErrors(validationErrors);
+        const result = actionResult.body;
+        if (hasError(result)) {
+          setErrors(result);
           setStatus('idle');
           return;
         }
       }
     }
     // 上記以外は予期しないエラー
+    setSystemError(true);
   }
 
   return (
     <>
       <div className="flex h-screen w-screen flex-col items-center py-10">
+        {systemError && <ErrorHandler />}
         {status === 'idle' && (
           <Form callback={send} validationErrors={errors} />
         )}
@@ -85,10 +89,10 @@ function Form({
     e.preventDefault();
 
     // バリデーション
-    const clientErrors = validate(formData);
+    const result = validate(formData);
     // エラーあり
-    if (hasError(clientErrors)) {
-      setErrors(clientErrors);
+    if (hasError(result)) {
+      setErrors(result);
       return;
     }
     // エラーなし
@@ -112,7 +116,7 @@ function Form({
                 className="w-80 border-2 border-black"
               />
             </div>
-            {errors['name']?.map((err, index) => (
+            {errors.name?.map((err, index) => (
               <div key={index}>
                 <p className="text-red-500">{err}</p>
               </div>
@@ -128,7 +132,7 @@ function Form({
                 className="w-80 border-2 border-black"
               />
             </div>
-            {errors['email']?.map((err, index) => (
+            {errors.email?.map((err, index) => (
               <div key={index}>
                 <p className="text-red-500">{err}</p>
               </div>
@@ -143,7 +147,7 @@ function Form({
                 className="w-80 border-2 border-black"
               />
             </div>
-            {errors['body']?.map((err, index) => (
+            {errors.body?.map((err, index) => (
               <div key={index}>
                 <p className="text-red-500">{err}</p>
               </div>

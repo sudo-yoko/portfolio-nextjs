@@ -12,7 +12,7 @@ export function serialize(error: unknown): string {
     if (error.name) {
       segments.push(error.name);
     }
-    return segments.join('');
+    return segments.join(': ');
   } else {
     return 'unknown type error.';
   }

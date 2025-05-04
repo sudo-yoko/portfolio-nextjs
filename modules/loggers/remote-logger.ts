@@ -2,10 +2,10 @@
 
 import logger from '@/modules/logging-facade/logger';
 
-export async function info(message: string) {
+export async function logInfo(message: string) {
   logger.info(message);
 }
 
-export async function error(message: string) {
+export async function logError(message: string) {
   logger.error(message);
 }
