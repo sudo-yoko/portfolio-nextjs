@@ -9,12 +9,10 @@ Next.js アプリケーションの実装集
 :open_file_folder: モジュール：[modules/contact/](modules/contact)  
 :open_file_folder: 画面サンプル：[_docs/contact.md](_docs/contact.md)  
 
-Web-to-Caseのエンドポイントは、開発時はモックを提供します。これにより、Salesforce側に依存することなく開発を進めることができます。  
-モックは `Express` で作成しており、`npm run dev` などの起動コマンドでアプリケーションを起動する際にモックも一緒に起動できるように設計しています。  
-アプリケーションとモックを一緒に起動するコマンドは `npm run dev:mock` として、`package.json` にスクリプトを定義しています。  
+Web-to-Caseのエンドポイントは、開発時はモックを提供します。モックは `Express` で作成しています。  
+`npm run dev:mock` のコマンドで、アプリケーションとモックが一緒に起動されるようにしています。 
 
 :open_file_folder: Web-to-Case エンドポイントのモック：[__mocks__/web-to-case.mts](__mocks__/web-to-case.mts)  
-:open_file_folder: モック起動スクリプト：[package.json#L12](package.json#L12)  
 
 
 ## validator.ts  
@@ -46,13 +44,8 @@ logger.info('ログメッセージ');
 ## debug-logger.ts
 #### デバッグログ出力モジュール
 
-`console.log()` を使用したデバッグログ出力機能を提供します。サーバーサイドとクライアントサイドの両方で利用可能です。  
-- サーバーサイドで利用した場合、サーバー側コンソールにログ出力されます。
-- クライアントサイドで利用した場合、ブラウザコンソールにログ出力されます。
-
-ロガーの実装をファクトリ関数を用いて決定します。  
-環境変数 `process.env.NODE_ENV` を基に、
-- 開発モード `development` の場合は、 `console.log()` でログ出力します。
+`console.log()` を使用したデバッグログ出力機能を提供します。
+- 開発モード `development` の場合に、 `console.log()` でログ出力します。
 - 本番モード `production` の場合は、ロガーに空実装を適用することでログ出力を無効化します。
 
 これにより、開発中はデバッグログを出力し、本番環境ではログ出力を防ぎます。
