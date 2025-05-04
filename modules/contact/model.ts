@@ -1,3 +1,5 @@
+// お問い合わせフォームのモデル定義
+
 import {
   required,
   requiredEmail,

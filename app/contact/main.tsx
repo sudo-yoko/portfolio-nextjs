@@ -11,6 +11,9 @@ import { sendAction } from '@/modules/contact/send-action';
 import { ValidationErrors, hasError } from '@/modules/validators/validator';
 import React, { useEffect, useState } from 'react';
 
+/**
+ * お問い合わせフォーム クライアントコンポーネント
+ */
 export default function Main() {
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errors, setErrors] = useState<ValidationErrors<FormKey>>({});

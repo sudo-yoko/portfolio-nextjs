@@ -8,6 +8,9 @@ import { ValidationErrors, hasError } from '@/modules/validators/validator';
 
 const logPrefix = 'send-action.ts: ';
 
+/**
+ * お問い合わせの送信 サーバーアクション
+ */
 export async function sendAction(
   formData: FormData,
 ): Promise<ActionResult<ValidationErrors<FormKey> | void>> {
@@ -29,7 +32,6 @@ export async function sendAction(
         logPrefix +
           `response(Outbound) -> validation error. status=${result.status}, body=${JSON.stringify(errors)}`,
       );
-
       return result;
     }
 
