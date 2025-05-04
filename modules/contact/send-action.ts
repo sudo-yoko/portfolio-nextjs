@@ -10,13 +10,14 @@ const logPrefix = 'send-action.ts: ';
 
 export async function sendAction(
   formData: FormData,
-): Promise<ValidationErrors<FormKey> | ActionResult> {
+): Promise<ActionResult<ValidationErrors<FormKey>> | ActionResult<void>> {
   return await withErrorHandlingAsync(() => actionProcess());
+
   async function actionProcess() {
     // バリデーション
     const errors = validate(formData);
     if (hasError(errors)) {
-      return errors;
+      return { status: 400, body: errors };
     }
 
     // フォームデータ
@@ -33,11 +34,11 @@ export async function sendAction(
     // 正常
     if (res.status === 200) {
       logger.info(logPrefix + `Inbound response -> status=${res.status}`);
-      return { status: res.status } as ActionResult;
+      return { status: res.status };
     }
 
     // エラー
     logger.error(logPrefix + `Inbound response -> status=${res.status}`);
-    return { status: res.status } as ActionResult;
+    return { status: res.status };
   }
 }

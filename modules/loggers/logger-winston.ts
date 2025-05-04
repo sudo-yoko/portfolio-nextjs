@@ -20,8 +20,8 @@ if (!fs.existsSync(logDir)) {
 }
 
 // ログフォーマットの指定
-const myFormat = format.printf(({ level, message, timestamp, ...meta }) => {
-  return `[${timestamp}] [${level}] [${appName}] [${meta['requestId']}] [] [] [] [${meta['traceId']}] [[${message}]]`;
+const myFormat = format.printf(({ level, message, timestamp }) => {
+  return `[${timestamp}] [${level}] [${appName}] [] [] [] [] [] [[${message}]]`;
 });
 
 // ロガーの作成

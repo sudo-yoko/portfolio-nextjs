@@ -7,7 +7,7 @@ import { ActionResult } from '@/modules/types/action-result';
  */
 export async function withErrorHandlingAsync<T>(
   func: () => Promise<T>,
-): Promise<T | ActionResult> {
+): Promise<T | ActionResult<void>> {
   try {
     // 引数に渡された関数を実行
     return await func();

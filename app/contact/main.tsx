@@ -19,17 +19,29 @@ export default function Main() {
    */
   async function send(formData: FormData) {
     setStatus('sending');
-    const serverErrors = await sendAction(formData);
-    // バリデーションエラーあり
-    if (hasError(serverErrors)) {
-      setErrors(serverErrors);
-      setStatus('idle');
+
+    // サーバーアクション呼び出し
+    const actionResult = await sendAction(formData);
+
+    // 正常
+    if (actionResult.status === 200) {
+      setErrors({});
+      setStatus('complete');
       return;
     }
-    // エラーなし
-    setErrors({});
-    setStatus('complete');
-    return;
+
+    if (actionResult.status === 400) {
+      // バリデーションエラー
+      if (actionResult.body) {
+        const validationErrors = actionResult.body;
+        if (hasError(validationErrors)) {
+          setErrors(validationErrors);
+          setStatus('idle');
+          return;
+        }
+      }
+    }
+    // 上記以外は予期しないエラー
   }
 
   return (
