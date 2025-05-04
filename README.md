@@ -62,18 +62,26 @@ logger.info('ログメッセージ');
 以降はキャッシュされたロガーを再利用するため効率的です。
 
 :open_file_folder: コード：[debug-logger.ts](modules/loggers/debug-logger.ts)  
-:open_file_folder: 使用例：[logging-debug/](app/sample/logging-debug)
+:spiral_notepad: 使用例
+```ts
+import debug from '@/modules/loggers/logger-debug';
+...
+debug('ログメッセージ');
+```
 
+## エラーハンドリング
+エラーハンドリングの実装を統一し、一貫性を持たせます。  
+javascriptの関数を引数にとれる性質と、クロージャを活用した実装となっています。
 
-
-## server-error-handler.ts
 #### サーバーサイドエラーハンドリング
-
-このモジュールは、サーバーサイドエラーハンドリングの実装を統一し、一貫性を持たせます。  
-javascriptの関数を引数にとれる性質と、クロージャを活用しています。
-
 エラーハンドリングとして、エラーログを出力しキャッチした例外を再スローします。
 Next.jsはこれを未処理の例外としてキャッチし、エラーページ(error.tsx)をレンダリングします。
+
+#### サーバーアクションエラーハンドリング
+xxxxxx  
+
+#### クライアントサイドエラーハントリング
+xxxxxx  
 
 :open_file_folder: コード：[server-error-handler.ts](modules/error-handlers/server-error-handler.ts)  
 :open_file_folder: 使用例：[server-error-handling/page.tsx](app/sample/server-error-handling/page.tsx) , [server-error-handling-async/page.tsx](app/sample/server-error-handling-async/page.tsx)
