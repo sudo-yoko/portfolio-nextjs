@@ -71,7 +71,7 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 例外をキャッチして再スローします。Next.jsはこれを未処理の例外として処理し、標準のエラーページ(error.tsx)をレンダリングします。
 
 :open_file_folder: コード：[modules/error-handlers/server-error-handler.ts](modules/error-handlers/server-error-handler.ts)  
-:open_file_folder: 使用例：
+:open_file_folder: 使用例：[app/contact/page.tsx#L13](app/contact/page.tsx#L13)  
 
 #### サーバーアクションエラーハンドリング
 例外をキャッチして、戻り値にステータスコード500(INTERNAL_SERVER_ERROR)を返します。呼び元は戻り値のステータスコードを確認し、呼び元がエラーハンドリングを行う必要があります。  
@@ -88,7 +88,7 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 クライアントサイドで例外がスローされても、Next.jsがそれをキャッチして処理しないケースがあるため、このような独自の実装を考えました。
 
 :open_file_folder: コード：[modules/error-handlers/client-error-handler.ts](modules/error-handlers/client-error-handler.ts)  
-:open_file_folder: 使用例：[modules/error-handlers/client-error-handler.ts](modules/error-handlers/client-error-handler.ts)  
+:open_file_folder: 使用例：[app/contact/main.tsx#L28](app/contact/main.tsx#L28)  
 
 ## search-params.ts
 #### クエリパラメーターの型エイリアス
