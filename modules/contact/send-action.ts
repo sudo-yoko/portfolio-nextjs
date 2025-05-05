@@ -14,6 +14,7 @@ const logPrefix = 'send-action.ts: ';
 export async function sendAction(
   formData: FormData,
 ): Promise<ActionResult<ValidationErrors<FormKey> | void>> {
+  // エラーハンドリングを追加して処理を実行する。
   return await withErrorHandlingAsync(() => process());
 
   async function process() {
