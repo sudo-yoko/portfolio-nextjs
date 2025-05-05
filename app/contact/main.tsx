@@ -10,6 +10,7 @@ import {
 import { sendAction } from '@/modules/contact/send-action';
 import { ValidationErrors, hasError } from '@/modules/validators/validator';
 import React, { useEffect, useState } from 'react';
+import { withErrorHandling } from '@/modules/error-handlers/client-error-handler';
 
 /**
  * お問い合わせフォーム クライアントコンポーネント
@@ -23,31 +24,35 @@ export default function Main() {
    * お問い合わせを送信する
    */
   async function send(formData: FormData) {
-    setStatus('sending');
+    return await withErrorHandling(() => process(), setSystemError);
 
-    // サーバーアクション呼び出し
-    const actionResult = await sendAction(formData);
+    async function process() {
+      setStatus('sending');
 
-    // 正常
-    if (actionResult.status === 200) {
-      setErrors({});
-      setStatus('complete');
-      return;
-    }
+      // サーバーアクション呼び出し
+      const actionResult = await sendAction(formData);
 
-    if (actionResult.status === 400) {
-      // バリデーションエラー
-      if (actionResult.body) {
-        const result = actionResult.body;
-        if (hasError(result)) {
-          setErrors(result);
-          setStatus('idle');
-          return;
+      // 正常
+      if (actionResult.status === 200) {
+        setErrors({});
+        setStatus('complete');
+        return;
+      }
+
+      if (actionResult.status === 400) {
+        // バリデーションエラー
+        if (actionResult.body) {
+          const result = actionResult.body;
+          if (hasError(result)) {
+            setErrors(result);
+            setStatus('idle');
+            return;
+          }
         }
       }
+      // 上記以外は予期しないエラー
+      throw new Error('予期しないエラーが発生しました。');
     }
-    // 上記以外は予期しないエラー
-    setSystemError(true);
   }
 
   return (
