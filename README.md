@@ -85,7 +85,7 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 例外をキャッチしたら、Reactのフックを使ってクライアントサイドでエラーページに遷移させています。
 
 ※クライアントサイドの例外ハンドリングは、少し工夫が必要です。
-クライアントサイドで例外がスローされても、Next.jsがそれをキャッチして処理しないケースがあるため、このような独自の実装を考えました。
+クライアントサイドで例外がスローされても、Next.jsがそれをキャッチして標準のエラーページ(error.tsx)をレンダリングしないケースがあるため、このように自力でエラーページに遷移させる方法を考えました。
 
 :open_file_folder: コード：[modules/error-handlers/client-error-handler.ts](modules/error-handlers/client-error-handler.ts)  
 :open_file_folder: 使用例：[app/contact/main.tsx#L28](app/contact/main.tsx#L28)  
