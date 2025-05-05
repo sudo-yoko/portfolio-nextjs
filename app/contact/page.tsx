@@ -1,7 +1,7 @@
 import Main from '@/app/contact/main';
 import { withErrorHandlingAsync } from '@/modules/error-handlers/server-error-handler';
 import logger from '@/modules/logging-facade/logger';
-import { SearchParams } from '@/modules/types/search-params';
+import { SearchParam, SearchParams } from '@/modules/types/search-params';
 
 const logPrefix = 'app/contact/page.tsx: ';
 
@@ -13,8 +13,12 @@ export default async function Page(props: { searchParams?: SearchParams }) {
   return await withErrorHandlingAsync(() => process());
 
   async function process() {
-    const searchParams = await props.searchParams;
-    logger.info(logPrefix + `searchParams=${JSON.stringify(searchParams)}`);
+    const params = await props.searchParams;
+    logger.info(logPrefix + `searchParams=${JSON.stringify(params)}`);
+
+    const para1: SearchParam = params?.['para1'];
+    const para2: SearchParam = params?.['para2'];
+    logger.info(logPrefix + `para1=${para1}, para2=${para2}`);
 
     return (
       <>
