@@ -8,7 +8,7 @@ import {
   validate,
 } from '@/modules/contact/model';
 import { sendAction } from '@/modules/contact/send-action';
-import { withErrorHandling } from '@/modules/error-handlers/client-error-handler';
+import { withErrorHandlingAsync } from '@/modules/error-handlers/client-error-handler';
 import { ValidationErrors, hasError } from '@/modules/validators/validator';
 import React, { useEffect, useState } from 'react';
 
@@ -25,7 +25,7 @@ export default function Main() {
    */
   async function send(formData: FormData) {
     // エラーハンドリングを追加して処理を実行する。
-    return await withErrorHandling(() => process(), setSystemError);
+    return await withErrorHandlingAsync(() => process(), setSystemError);
 
     async function process() {
       setStatus('sending');
