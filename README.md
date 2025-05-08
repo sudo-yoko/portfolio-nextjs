@@ -76,7 +76,7 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 #### サーバーアクションエラーハンドリング
 例外をキャッチして、戻り値にステータスコード500(INTERNAL_SERVER_ERROR)を返します。呼び元は戻り値のステータスコードを確認し、呼び元がエラーハンドリングを行う必要があります。  
 
-※サーバーアクションはHTTPエンドポイントとして実行されるため、サーバーアクション内で例外をスローしても、呼び元にそのまま伝播しません。シリアライズ可能なオブジェクトの形式で、戻り値として返却する必要があります。
+サーバーアクションはHTTPエンドポイントとして実行されるため、サーバーアクション内で例外をスローしても、呼び元にそのまま伝播しません。シリアライズ可能なオブジェクトの形式で、戻り値として返却する必要があると考えています。
 
 :open_file_folder: コード：[modules/error-handlers/action-error-handler.ts](modules/error-handlers/action-error-handler.ts)  
 :open_file_folder: 使用例：[modules/contact/send-action.ts#L17](modules/contact/send-action.ts#L17)  
@@ -84,7 +84,7 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 #### クライアントサイドエラーハントリング
 例外をキャッチしたら、Reactのフックを使ってクライアントサイドでエラーページに遷移させています。
 
-※クライアントサイドの例外ハンドリングは、少し工夫が必要です。
+クライアントサイドの例外ハンドリングは、少し工夫が必要でした。
 クライアントサイドで例外がスローされても、Next.jsがそれをキャッチして標準のエラーページ(error.tsx)をレンダリングしないケースがあるため、このように自力でエラーページに遷移させる方法を考えました。
 
 :open_file_folder: コード：[modules/error-handlers/client-error-handler.ts](modules/error-handlers/client-error-handler.ts)  
