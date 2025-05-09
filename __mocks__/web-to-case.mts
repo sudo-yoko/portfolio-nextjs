@@ -8,7 +8,8 @@ import express from 'express';
 const port = 3001;
 const path = '/servlet/servlet.WebToCase';
 
-const logPrefix = '>>> ';
+const consolePrefix = '>>> ';
+const logPrefix = '>>> web-to-case-mock: ';
 
 // フォームデータ
 interface FormData {
@@ -25,8 +26,7 @@ app.post(
   async (req: Request<undefined, undefined, FormData>, res: Response<void>) => {
     const body = req.body;
     console.log(
-      logPrefix +
-        `web-to-case-mock: Request(Inbound) -> formData=${JSON.stringify(body)}`,
+      logPrefix + `Request(Inbound) -> formData=${JSON.stringify(body)}`,
     );
 
     // 1秒待機
@@ -36,11 +36,15 @@ app.post(
       }, 1000);
     });
 
-    //res.sendStatus(200);
-    res.sendStatus(500);
+    const status = 200;
+    console.log(logPrefix + `Request(Outbound) -> status=${status}`);
+    res.sendStatus(status);
   },
 );
 
 app.listen(port, () => {
-  console.log(logPrefix + `Mock service running on http://localhost:${port}`);
+  console.log(
+    consolePrefix +
+      `Mock service running on http://localhost:${port} (web-to-case-mock)`,
+  );
 });
