@@ -55,7 +55,7 @@ logger.info('ログメッセージ');
 このモジュールが最初にインポートされたときにファクトリ関数が実行され、ロガーの実装が決定します。  
 以降はキャッシュされたロガーを再利用するため効率的です。
 
-:open_file_folder: コード：[debug-logger.ts](modules/loggers/debug-logger.ts)  
+:open_file_folder: コード：[logger-debug.ts](modules/loggers/logger-debug.ts)  
 :spiral_notepad: 使用例
 ```ts
 import debug from '@/modules/loggers/logger-debug';
@@ -98,6 +98,6 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 Next.js15から、クエリパラメーターは非同期で取得されるようになりました。`Promise` にラップされるため、 `await` を用いてその値を取得する必要があります。
 
 :open_file_folder: コード：[search-params.ts](modules/types/search-params.ts)  
-:open_file_folder: 使用例：[search-param/page.tsx](app/sample/search-param/page.tsx)
+:open_file_folder: 使用例：[app/contact/page.tsx#L16](app/contact/page.tsx#L16)
 
 
