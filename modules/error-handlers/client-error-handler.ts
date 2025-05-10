@@ -3,6 +3,8 @@ import { logError } from '@/modules/loggers/remote-logger';
 import React from 'react';
 import 'client-only';
 
+const logPrefix = 'client-error-handler.ts: ';
+
 /**
  * クライアントサイドエラーハンドリング
  */
@@ -14,7 +16,7 @@ export function withErrorHandling<T>(
     // 引数に渡された関数を実行
     return func();
   } catch (error) {
-    logError(serialize(error));
+    logError(logPrefix + serialize(error));
     setHasError(true);
   }
 }
@@ -30,7 +32,7 @@ export async function withErrorHandlingAsync<T>(
     // 引数に渡された関数を実行
     return await func();
   } catch (error) {
-    logError(serialize(error));
+    logError(logPrefix + serialize(error));
     setHasError(true);
   }
 }

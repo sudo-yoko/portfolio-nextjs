@@ -1,5 +1,6 @@
 'use server';
 
+import { send } from '@/modules/clients/web-to-case-client';
 import { FormData, FormKey, validate } from '@/modules/contact/model';
 import { withErrorHandlingAsync } from '@/modules/error-handlers/action-error-handler';
 import logger from '@/modules/logging-facade/logger';
@@ -18,9 +19,7 @@ export async function sendAction(
   return await withErrorHandlingAsync(() => process());
 
   async function process() {
-    logger.info(
-      logPrefix + `request(Inbound) -> formData=${JSON.stringify(formData)}`,
-    );
+    logger.info(logPrefix + `formData=${JSON.stringify(formData)}`);
 
     // バリデーション
     const errors = validate(formData);
@@ -31,30 +30,14 @@ export async function sendAction(
       };
       logger.info(
         logPrefix +
-          `response(Outbound) -> validation error. status=${result.status}, body=${JSON.stringify(errors)}`,
+          `validation error. status=${result.status}, body=${JSON.stringify(result.body)}`,
       );
       return result;
     }
 
-    // フォームデータ
-    const body = new URLSearchParams(formData);
-    logger.info(logPrefix + `request(Outbound) -> formData=${body.toString()}`);
-
-    // SalesforceのWeb-to-CaseにPOST
-    const res = await fetch('http://localhost:3001/servlet/servlet.WebToCase', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: body.toString(),
-    });
-
+    // 送信
+    await send(formData);
     // 正常
-    if (res.status === 200) {
-      logger.info(logPrefix + `response(Inbound) -> status=${res.status}`);
-      return { status: res.status };
-    }
-
-    // エラー
-    logger.error(logPrefix + `response(Inbound) -> status=${res.status}`);
-    return { status: res.status };
+    return { status: 200 };
   }
 }

@@ -20,16 +20,27 @@ if (!fs.existsSync(logDir)) {
 }
 
 // ログフォーマットの指定
-const myFormat = format.printf(({ level, message, timestamp }) => {
+const logFormat = format.printf(({ level, message, timestamp }) => {
   return `[${timestamp}] [${level}] [${appName}] [] [] [] [] [] [[${message}]]`;
+});
+
+// タイムスタンプの形式。日本時間 YYYY/MM/DD hh:mm:ss 形式
+const timeStampFormat = format.timestamp({
+  format: () =>
+    new Intl.DateTimeFormat('ja-JP', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      timeZone: 'Asia/Tokyo',
+    }).format(new Date()),
 });
 
 // ロガーの作成
 const logger = createLogger({
-  format: format.combine(
-    format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
-    myFormat,
-  ),
+  format: format.combine(timeStampFormat, logFormat),
 });
 
 // ログローテーションの設定

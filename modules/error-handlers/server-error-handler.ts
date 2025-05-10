@@ -1,6 +1,8 @@
 import { serialize } from '@/modules/error-handlers/error-handling-utils';
 import logger from '@/modules/logging-facade/logger';
 
+const logPrefix = 'server-error-handler.ts: ';
+
 /**
  * サーバーサイドエラーハンドリング
  */
@@ -10,7 +12,7 @@ export function withErrorHandling<T>(func: () => T): T {
     return func();
   } catch (error) {
     // エラーログを出力
-    logger.error(serialize(error));
+    logger.error(logPrefix + serialize(error));
     // 再スローすることで、Next.jsが未処理の例外としてキャッチしerror.tsxをレンダリングする。
     throw error;
   }
@@ -26,7 +28,7 @@ export async function withErrorHandlingAsync<T>(
     // 引数に渡された関数を実行
     return await func();
   } catch (error) {
-    logger.error(serialize(error));
+    logger.error(logPrefix + serialize(error));
     throw error;
   }
 }

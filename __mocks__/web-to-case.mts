@@ -37,7 +37,7 @@ app.post(
     });
 
     const status = 200;
-    console.log(logPrefix + `Request(Outbound) -> status=${status}`);
+    console.log(logPrefix + `Response(Outbound) -> status=${status}`);
     res.sendStatus(status);
   },
 );
