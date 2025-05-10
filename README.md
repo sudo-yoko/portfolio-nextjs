@@ -43,7 +43,7 @@ import logger from '@/modules/logging-facade/logger';
 logger.info('ログメッセージ');
 ```
 
-## debug-logger.ts
+## logger-debug.ts
 #### デバッグログ出力モジュール
 
 `console.log()` を使用したデバッグログ出力機能を提供します。
@@ -79,7 +79,7 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 サーバーアクションはHTTPエンドポイントとして実行されるため、サーバーアクション内で例外をスローしても、呼び元にそのまま伝播しません。シリアライズ可能なオブジェクトの形式で、戻り値として返却する必要があると考えています。
 
 :open_file_folder: コード：[modules/error-handlers/action-error-handler.ts](modules/error-handlers/action-error-handler.ts)  
-:open_file_folder: 使用例：[modules/contact/send-action.ts#L17](modules/contact/send-action.ts#L17)  
+:open_file_folder: 使用例：[modules/contact/send-action.ts#L19](modules/contact/send-action.ts#L19)  
 
 #### クライアントサイドエラーハントリング
 例外をキャッチしたら、Reactのフックを使ってクライアントサイドでエラーページに遷移させています。
