@@ -21,7 +21,7 @@ Salesforce側に依存することなく開発を進めることができます�
 バリデーターインターフェースを提供することで、アプリケーションがバリデーションの実装に強く依存しない設計にしています。バリデーションの実装にはZodなどのライブラリや、独自の実装を使用できます。
 
 :open_file_folder: コード：[modules/validators/validator.ts](modules/validators/validator.ts)  
-:open_file_folder: 使用例：[modules/contact/model.ts#L33](modules/contact/model.ts#L33)
+:open_file_folder: 使用例：[modules/contact/model.ts#L29](modules/contact/model.ts#L29)
 
 
 ## logger-winston.ts
@@ -88,7 +88,7 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 クライアントサイドで例外がスローされても、Next.jsがそれをキャッチして標準のエラーページ(error.tsx)をレンダリングしないケースがあるため、このように自力でエラーページに遷移させる方法を考えました。
 
 :open_file_folder: コード：[modules/error-handlers/client-error-handler.ts](modules/error-handlers/client-error-handler.ts)  
-:open_file_folder: 使用例：[app/contact/main.tsx#L28](app/contact/main.tsx#L28)  
+:open_file_folder: 使用例：[app/contact/sending.tsx#L22](app/contact/sending.tsx#L22)  
 
 ## search-params.ts
 #### クエリパラメーターの型エイリアス
