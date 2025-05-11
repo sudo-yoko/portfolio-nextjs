@@ -7,7 +7,7 @@ Next.js の実装集
 
 :open_file_folder: コンポーネント：[app/contact/](app/contact)  
 :open_file_folder: モジュール：[modules/contact/](modules/contact)  
-:open_file_folder: 画面サンプル：[_docs/contact.md](_docs/contact.md)  
+:open_file_folder: 画面サンプル：[_docs/contact/contact.md](_docs/contact/contact.md)  
 
 Web-to-Caseのエンドポイントは、開発時はモックを提供します。モックは `Express` で作成しています。  
 `npm run dev:mock` のコマンドで、アプリケーションとモックが一緒に起動できるようにしています。  
