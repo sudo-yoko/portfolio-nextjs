@@ -3,16 +3,12 @@
 import {
   required,
   requiredEmail,
-  ValidationErrors,
+  Violations,
   Validator,
 } from '@/modules/validators/validator';
 import { z } from 'zod';
 
-/**
- * 入力フォームの送信状態。
- * 入力待ち、送信中、送信完了
- */
-export type FormStatus = 'idle' | 'sending' | 'complete';
+export type Step = 'input' | 'confirm' | 'sending' | 'complete';
 
 /**
  * 入力フォームのキー。
@@ -30,8 +26,8 @@ export type FormData = {
 /**
  * フォームのバリデーション
  */
-export function validate(formData: FormData): ValidationErrors<FormKey> {
-  const errors: ValidationErrors<FormKey> = {};
+export function validate(formData: FormData): Violations<FormKey> {
+  const errors: Violations<FormKey> = {};
   errors['name'] = required('お名前', formData.name);
   errors['email'] = requiredEmail('メールアドレス', formData.email);
   errors['body'] = requiredMax10('お問い合わせ内容', formData.body);

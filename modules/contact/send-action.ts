@@ -5,7 +5,7 @@ import { FormData, FormKey, validate } from '@/modules/contact/model';
 import { withErrorHandlingAsync } from '@/modules/error-handlers/action-error-handler';
 import logger from '@/modules/logging-facade/logger';
 import { ActionResult } from '@/modules/types/action-result';
-import { ValidationErrors, hasError } from '@/modules/validators/validator';
+import { Violations, hasError } from '@/modules/validators/validator';
 
 const logPrefix = 'send-action.ts: ';
 
@@ -14,7 +14,7 @@ const logPrefix = 'send-action.ts: ';
  */
 export async function sendAction(
   formData: FormData,
-): Promise<ActionResult<ValidationErrors<FormKey> | void>> {
+): Promise<ActionResult<Violations<FormKey> | void>> {
   // エラーハンドリングを追加して処理を実行する。
   return await withErrorHandlingAsync(() => process());
 
@@ -24,7 +24,7 @@ export async function sendAction(
     // バリデーション
     const errors = validate(formData);
     if (hasError(errors)) {
-      const result: ActionResult<ValidationErrors<FormKey>> = {
+      const result: ActionResult<Violations<FormKey>> = {
         status: 400,
         body: errors,
       };

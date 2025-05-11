@@ -1,4 +1,4 @@
-import Main from '@/app/contact/main';
+import Contact from '@/app/contact/contact';
 import { withErrorHandlingAsync } from '@/modules/error-handlers/server-error-handler';
 import logger from '@/modules/logging-facade/logger';
 import { SearchParam, SearchParams } from '@/modules/types/search-params';
@@ -23,7 +23,7 @@ export default async function Page(props: { searchParams?: SearchParams }) {
     return (
       <>
         <div>
-          <Main />
+          <Contact />
         </div>
       </>
     );
