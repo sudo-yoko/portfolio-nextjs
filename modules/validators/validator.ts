@@ -12,7 +12,7 @@ export interface Validator {
  * 入力フィールドのキーに対応するエラーメッセージを配列で保持するオブジェクトの型。
  * 入力フィールドのキーは型パラメータで渡す。
  */
-export type ValidationErrors<T extends string> = {
+export type Violations<T extends string> = {
   [key in T]?: string[];
 };
 
@@ -20,7 +20,7 @@ export type ValidationErrors<T extends string> = {
  * バリデーションエラーの有無を調べる
  */
 export function hasError<T extends string>(
-  errors: ValidationErrors<T>,
+  errors: Violations<T>,
 ): boolean {
   return Object.values(errors).some((err) => (err as string[]).length > 0);
 }
