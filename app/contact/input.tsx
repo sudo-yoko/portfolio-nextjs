@@ -1,6 +1,7 @@
 'use client';
 
 import { FormData, FormKey, validate } from '@/modules/contact/model';
+import { resizeTextarea } from '@/modules/utils/domUtils';
 import { hasError, Violations } from '@/modules/validators/validator';
 import { useEffect, useState } from 'react';
 
@@ -79,6 +80,7 @@ export default function Input({
             <textarea
               value={formData.body}
               onChange={(e) => onChange({ ...formData, body: e.target.value })}
+              onInput={(e) => resizeTextarea(e.currentTarget)}
               className="w-80 border-2 border-black"
             />
           </div>
