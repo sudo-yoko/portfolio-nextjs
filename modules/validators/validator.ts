@@ -19,16 +19,14 @@ export type Violations<T extends string> = {
 /**
  * バリデーションエラーの有無を調べる
  */
-export function hasError<T extends string>(
-  errors: Violations<T>,
-): boolean {
+export function hasError<T extends string>(errors: Violations<T>): boolean {
   return Object.values(errors).some((err) => (err as string[]).length > 0);
 }
 
 /**
  * バリデーション：必須入力
  */
-export const required: Validator = (name: string, value: string) => {
+export const required: Validator = (name, value) => {
   const errors: string[] = [];
   if (value.trim() === '') {
     errors.push(`${name}を入力してください。`);

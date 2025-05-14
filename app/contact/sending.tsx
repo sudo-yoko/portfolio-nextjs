@@ -7,38 +7,36 @@ import React, { useEffect } from 'react';
 export default function Sending({
   formData,
   setViolations,
-  setStepInput,
-  setStepComplete,
-  setSystemError,
+  onBack,
+  onNext,
+  setError,
 }: {
   formData: FormData;
   setViolations: React.Dispatch<React.SetStateAction<Violations<FormKey>>>;
-  setStepInput: () => void;
-  setStepComplete: () => void;
-  setSystemError: React.Dispatch<React.SetStateAction<boolean>>;
+  onBack: () => void;
+  onNext: () => void;
+  setError: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   useEffect(() => {
     // エラーハンドリングを追加して処理を実行する。
-    withErrorHandlingAsync(() => process(), setSystemError);
+    withErrorHandlingAsync(() => process(), setError);
 
     async function process() {
       // サーバーアクション呼び出し
       const actionResult = await sendAction(formData);
-
       // 正常
       if (actionResult.status === 200) {
         setViolations({});
-        setStepComplete();
+        onNext();
         return;
       }
-
+      // バリデーションエラー
       if (actionResult.status === 400) {
-        // バリデーションエラー
         if (actionResult.body) {
           const result = actionResult.body;
           if (hasError(result)) {
             setViolations(result);
-            setStepInput();
+            onBack();
             return;
           }
         }

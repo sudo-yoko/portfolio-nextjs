@@ -9,31 +9,30 @@ export default function Input({
   formData,
   violations,
   onChange,
-  setStepConfirm,
+  onNext,
 }: {
   formData: FormData;
   violations?: Violations<FormKey>;
   onChange: (formData: FormData) => void;
-  setStepConfirm: () => void;
+  onNext: () => void;
 }) {
-  const [errors, setErrors] = useState<Violations<FormKey>>({});
+  const [fieldErrors, setFieldErrors] = useState<Violations<FormKey>>({});
 
   useEffect(() => {
     if (violations && hasError(violations)) {
-      setErrors(violations);
+      setFieldErrors(violations);
     }
   }, [violations]);
 
   function handleNext() {
     // バリデーション
-    const result = validate(formData);
-    // エラーあり
-    if (hasError(result)) {
-      setErrors(result);
-      return;
-    }
-    // エラーなし
-    setStepConfirm();
+    ((violations: Violations<FormKey>) => {
+      if (hasError(violations)) {
+        setFieldErrors(violations);
+        return;
+      }
+      onNext();
+    })(validate(formData));
   }
 
   return (
@@ -52,7 +51,7 @@ export default function Input({
               className="w-80 border-2 border-black"
             />
           </div>
-          {errors.name?.map((err, index) => (
+          {fieldErrors.name?.map((err, index) => (
             <div key={index}>
               <p className="text-red-500">{err}</p>
             </div>
@@ -68,7 +67,7 @@ export default function Input({
               className="w-80 border-2 border-black"
             />
           </div>
-          {errors.email?.map((err, index) => (
+          {fieldErrors.email?.map((err, index) => (
             <div key={index}>
               <p className="text-red-500">{err}</p>
             </div>
@@ -84,7 +83,7 @@ export default function Input({
               className="w-80 border-2 border-black"
             />
           </div>
-          {errors.body?.map((err, index) => (
+          {fieldErrors.body?.map((err, index) => (
             <div key={index}>
               <p className="text-red-500">{err}</p>
             </div>

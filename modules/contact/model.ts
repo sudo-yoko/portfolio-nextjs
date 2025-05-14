@@ -30,14 +30,14 @@ export function validate(formData: FormData): Violations<FormKey> {
   const errors: Violations<FormKey> = {};
   errors['name'] = required('お名前', formData.name);
   errors['email'] = requiredEmail('メールアドレス', formData.email);
-  errors['body'] = requiredMax10('お問い合わせ内容', formData.body);
+  errors['body'] = requiredMax50('お問い合わせ内容', formData.body);
   return errors;
 }
 
 /**
- * バリデーション：必須で最大１０桁まで
+ * バリデーション：必須で最大５０桁まで
  */
-const requiredMax10: Validator = (name, value) => {
+const requiredMax50: Validator = (name, value) => {
   let errors: string[] = [];
   // 必須チェック
   errors = required(name, value);
@@ -47,7 +47,7 @@ const requiredMax10: Validator = (name, value) => {
   // 桁数チェック
   const result = z
     .string()
-    .max(10, `${name}は10文字以内にしてください。`)
+    .max(50, `${name}は50文字以内にしてください。`)
     .safeParse(value);
   if (result.error) {
     errors = result.error.errors.map((issue) => issue.message);

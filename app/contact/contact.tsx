@@ -17,33 +17,33 @@ export default function Contact() {
     body: '',
   });
   const [violations, setViolations] = useState<Violations<FormKey>>({});
-  const [exception, setException] = useState(false);
+  const [error, setError] = useState(false);
 
   return (
     <div className="flex h-screen w-screen flex-col items-center py-10">
-      {exception && <ErrorHandler />}
+      {error && <ErrorHandler />}
       {step === 'input' && (
         <Input
           formData={formData}
-          onChange={setFormData}
           violations={violations}
-          setStepConfirm={() => setStep('confirm')}
+          onChange={setFormData}
+          onNext={() => setStep('confirm')}
         />
       )}
       {step === 'confirm' && (
         <Confirm
           formData={formData}
-          setStepInput={() => setStep('input')}
-          setStepSending={() => setStep('sending')}
+          onBack={() => setStep('input')}
+          onNext={() => setStep('sending')}
         />
       )}
       {step === 'sending' && (
         <Sending
           formData={formData}
-          setStepComplete={() => setStep('complete')}
-          setStepInput={() => setStep('input')}
+          onBack={() => setStep('input')}
+          onNext={() => setStep('complete')}
           setViolations={setViolations}
-          setSystemError={setException}
+          setError={setError}
         />
       )}
       {step === 'complete' && <Complete />}
