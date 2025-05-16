@@ -11,9 +11,16 @@ Next.js の実装集
 
 Web-to-Caseのエンドポイントは、開発時はモックを提供します。モックは `Express` で作成しています。  
 `npm run dev:mock` のコマンドで、アプリケーションとモックが一緒に起動できるようにしています。  
-Salesforce側に依存することなく開発を進めることができます。
-
+Salesforce側に依存することなく開発を進めることができます。  
 :open_file_folder: Web-to-Case エンドポイントのモック：[__mocks__/web-to-case.mts](__mocks__/web-to-case.mts)  
+
+上記はuseStateを使用した実装例です。入力フォームに項目が少ない場合は、この実装が簡単です。
+
+以下はuseReducerを使用した実装例です。項目が多い場合はこちらの方が見通しが良くなります。
+また、状態管理ロジックをreducer関数としてモデルに分離できます。UIとモデルの切り分けがより明確になっています。
+
+:open_file_folder: コンポーネント：[app/contact2/](app/contact2)  
+:open_file_folder: モジュール：[modules/contact2/](modules/contact2)  
 
 
 ## validator.ts  
