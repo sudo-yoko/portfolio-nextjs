@@ -21,5 +21,8 @@ const server = http.createServer(
 );
 
 server.listen(PORT, () => {
-  console.log(logPrefix + `Proxy service running on http://localhost:${PORT}`);
+  console.log(
+    logPrefix +
+      `Mock service running on http://localhost:${PORT} (proxy-service-mock)`,
+  );
 });
