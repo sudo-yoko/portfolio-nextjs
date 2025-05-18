@@ -1,7 +1,7 @@
 'use server';
 
-import { send } from '@/modules/clients/web-to-case-client';
 import { FormData, FormKey, validate } from '@/modules/contact/model';
+import { send } from '@/modules/contact/web-to-case-client';
 import { withErrorHandlingAsync } from '@/modules/error-handlers/action-error-handler';
 import logger from '@/modules/logging-facade/logger';
 import { ActionResult } from '@/modules/types/action-result';
