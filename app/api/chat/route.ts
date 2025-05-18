@@ -1,4 +1,4 @@
-import { ChatRequest } from '@/app/api/chat/model';
+import { ChatRequest } from '@/modules/chat/model-api';
 import debug from '@/modules/loggers/logger-debug';
 import logger from '@/modules/logging-facade/logger';
 import { NextRequest } from 'next/server';
@@ -8,7 +8,7 @@ const logPrefix = '/api/chat/route.ts: ';
 /**
  * このAPIルートはBFF層(Backend For Frontend)の位置づけです。
  * バックエンドAPIの呼び出しをサーバーサイドから行い、APIからのストリーム形式のレスポンスを中継してクライアントに転送します。
- * サーバーアクションだとストリーム形式のレスポンスに対応できないため、APIルートを使用しています。
+ * サーバーアクションだとストリーム形式のレスポンスに対応できなかったため、APIルートを使用しています。
  */
 export async function POST(req: NextRequest): Promise<Response> {
   const body: ChatRequest = await req.json();

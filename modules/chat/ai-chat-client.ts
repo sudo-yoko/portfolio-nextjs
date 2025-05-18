@@ -1,4 +1,4 @@
-import { ChatRequest } from '@/app/api/chat/model';
+import { ChatRequest } from '@/modules/chat/model-api';
 import 'client-only';
 
 /**

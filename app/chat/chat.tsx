@@ -1,7 +1,7 @@
 'use client';
 
 import { send } from '@/modules/chat/ai-chat-client';
-import type { Chat } from '@/modules/chat/model';
+import type { Chat } from '@/modules/chat/model-ui';
 import {
   addChatHist,
   appendResponse,
@@ -10,7 +10,7 @@ import {
   reducer,
   setValue,
   startResponse,
-} from '@/modules/chat/model';
+} from '@/modules/chat/model-ui';
 import { useReducer } from 'react';
 
 /**
