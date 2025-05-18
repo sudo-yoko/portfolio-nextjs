@@ -1,6 +1,16 @@
 # ポートフォリオ
 Next.js の実装集
 
+## 対話型AIインターフェース
+
+対話型AIに対して質問を入力すると、回答が一文字ずつリアルタイムに表示されます。  
+対話型AIを呼び出すバックエンドAPIをモック化し、AIの回答を模した文字列を１文字ずつチャンク単位のストリーム形式でレスポンスしています。Next.jsのクライアントサイドでは、受信した文字列を順次差分レンダリングしています。
+
+:open_file_folder: 画面サンプル：[_docs/chat/caht_1.gif](_docs/chat/caht_1.gif)  
+:open_file_folder: コンポーネント：[app/chat/](app/chat)  
+:open_file_folder: モジュール：[modules/chat/](modules/chat),  [app/api/chat/](app/api/chat)  
+:open_file_folder: バックエンドAPIモック：[__mocks__/chat-stream.mts](__mocks__/chat-stream.mts)  
+
 ## お問い合わせフォーム
 
 入力されたお問い合わせを、SalesforceのWeb-to-Caseに送信します。  
