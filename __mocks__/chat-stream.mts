@@ -38,7 +38,7 @@ app.post(
       '九州北部～北海道は雲が広がりやすく、所によりにわか雨がある見込みです。' +
       '沖縄はあすにかけて概ね晴れるでしょう。';
 
-    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
     res.setHeader('Transfer-Encoding', 'chunked');
     for (const chunk of response) {
       console.log(

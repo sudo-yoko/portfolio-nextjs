@@ -1,51 +1,107 @@
 'use client';
 
-import { initialState, reducer, setValue } from '@/modules/chat/model';
+import { send } from '@/modules/chat/ai-chat-client';
+import type { Chat } from '@/modules/chat/model';
+import {
+  addChatHist,
+  appendResponse,
+  completeResponse,
+  initialState,
+  reducer,
+  setValue,
+  startResponse,
+} from '@/modules/chat/model';
 import { useReducer } from 'react';
 
 /**
- * チャットUIコンポーネント
+ * AIチャット クライアントコンポーネント
  */
 export default function Chat() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  function handleSend() {
+  /**
+   * 送信ボタン押下時処理
+   */
+  async function handleSend() {
     if (!state.formData.prompt || state.formData.prompt.trim() === '') {
       return;
     }
-    alert('送信');
+    // チェット履歴に質問を追加
+    addChatHist(dispatch, {
+      role: 'user',
+      message: state.formData.prompt,
+    });
+    // テキストボックスをクリア
+    setValue(dispatch, 'prompt', '');
+    // AIチャットの読み込み開始
+    startResponse(dispatch);
+    const res = await send(state.formData.prompt, state.formData.ai_model);
+    if (!res.body) {
+      return;
+    }
+    // AIチャットの回答を１文字ずつ表示に追加する
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      const chunk = decoder.decode(value);
+      appendResponse(dispatch, chunk);
+    }
+    // AIチャットの読み込み完了
+    completeResponse(dispatch);
   }
 
   return (
     <div className="flex h-screen w-screen flex-col items-center space-y-9 p-20">
-      <div className="flex w-1/2 flex-col items-center space-y-9">
-        <div>AI チャット</div>
+      <div className="flex w-[700px] flex-col space-y-9">
+        <div className="font-bold">AI チャット</div>
         <div className="space-y-4">
-          <div>あなた：今日の天気予報を教えてください。</div>
-          <div>
-            AI：きょう17日は、西～東日本では雨の降る所が多く、雷を伴って激しく降る所もあるでしょう。落雷や突風などに注意してください。東北は雨が降り、北海道も夕方以降は雨が降る見込みです。あす18日は、九州南部では激しい雷雨となる所がありそうです。九州北部～北海道は雲が広がりやすく、所によりにわか雨がある見込みです。沖縄はあすにかけて概ね晴れるでしょう。
-          </div>
+          {state.chatHist?.map((chat, index) => (
+            <div key={index}>
+              {chat.role === 'user' ? 'あなた' : 'AI'}：{chat.message}
+            </div>
+          ))}
+          {state.loadingChat && <LoadingChat chat={state.loadingChat} />}
         </div>
-      </div>
-      <div className="flex w-full flex-col items-center">
-        <div>
-          <div className="flex w-full flex-row items-center space-x-2">
-            <input
-              type="text"
-              onChange={(e) => setValue(dispatch, 'prompt', e.target.value)}
-              placeholder="質問を入力してください。"
-              className="w-[700px] rounded border border-indigo-300 p-2"
-            />
+        <div className="flex w-full flex-row space-x-2">
+          <input
+            type="text"
+            value={state.formData.prompt}
+            onChange={(e) => setValue(dispatch, 'prompt', e.target.value)}
+            placeholder="質問を入力してください。"
+            className="w-[700px] rounded border border-indigo-300 p-2"
+          />
+          {state.step === 'loading' ? (
             <button
               type="button"
-              onClick={handleSend}
-              className="whitespace-nowrap rounded-lg bg-indigo-300 px-4 py-2"
+              disabled
+              className="w-28 whitespace-nowrap rounded-lg bg-gray-300 px-4 py-2 text-white"
             >
               送信
             </button>
-          </div>
+          ) : (
+            <button
+              type="button"
+              onClick={handleSend}
+              className="w-28 whitespace-nowrap rounded-lg bg-indigo-300 px-4 py-2"
+            >
+              送信
+            </button>
+          )}
         </div>
       </div>
     </div>
   );
+
+  /**
+   * 読み込み中のAIチャットを表示するコンポーネント
+   */
+  function LoadingChat({ chat }: { chat: Chat }) {
+    return (
+      <div>
+        {chat.role === 'user' ? 'あなた' : 'AI'}：{chat.message}
+      </div>
+    );
+  }
 }

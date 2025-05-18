@@ -1,0 +1,7 @@
+POST http://localhost:3000/api/chat
+Content-Type: application/json; charset=UTF-8
+
+{
+    "prompt":"今日の天気予報を教えてください。",
+    "aiModel" :"gemini-1.5-flash-001"
+}
