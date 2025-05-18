@@ -38,17 +38,26 @@ export const required: Validator = (name, value) => {
  * バリデーション：必須のメールアドレス
  */
 export const requiredEmail: Validator = (name, value) => {
-  let errors: string[] = [];
+  const errors: string[] = [];
   // 必須チェック
-  errors = required(name, value);
+  errors.push(...required(name, value));
   if (errors.length > 0) {
     return errors;
   }
   // 形式チェック
-  const result = z.string().email(`${name}の形式が不正です。`).safeParse(value);
-  if (result.error) {
-    errors = result.error.errors.map((issue) => issue.message);
+  errors.push(...validateEmail(name, value));
+  if (errors.length > 0) {
     return errors;
   }
   return errors;
+};
+
+/**
+ * メールアドレスの形式チェック
+ */
+export const validateEmail: Validator = (name, value) => {
+  const result = z.string().email(`${name}の形式が不正です。`).safeParse(value);
+  return result.success
+    ? []
+    : result.error.errors.map((issue) => issue.message);
 };

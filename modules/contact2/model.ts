@@ -127,7 +127,7 @@ export const reducer: Reducer<State, Action> = (
     case 'toInput':
       return { ...state, step: 'input' };
     case 'toConfirm':
-      return { ...state, step: 'confirm' };
+      return { ...state, step: 'confirm', violations: {} };
     case 'toSending':
       return { ...state, step: 'sending' };
     case 'toComplete':
