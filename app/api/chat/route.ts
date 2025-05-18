@@ -1,5 +1,5 @@
+import { send } from '@/modules/chat/ai-chat-client-be';
 import { ChatRequest } from '@/modules/chat/model-api';
-import debug from '@/modules/loggers/logger-debug';
 import logger from '@/modules/logging-facade/logger';
 import { NextRequest } from 'next/server';
 
@@ -17,31 +17,36 @@ export async function POST(req: NextRequest): Promise<Response> {
       `Request(inbound) -> prompt=${body.prompt}, aiModel=${body.aiModel}`,
   );
 
-  const encoder = new TextEncoder();
-  const response: string =
-    'きょう17日は、西～東日本では雨の降る所が多く、雷を伴って激しく降る所もあるでしょう。' +
-    '落雷や突風などに注意してください。東北は雨が降り、北海道も夕方以降は雨が降る見込みです。' +
-    'あす18日は、九州南部では激しい雷雨となる所がありそうです。' +
-    '九州北部～北海道は雲が広がりやすく、所によりにわか雨がある見込みです。' +
-    '沖縄はあすにかけて概ね晴れるでしょう。';
+  // バックエンドAPI呼び出し
+  const res = await send(body.prompt, body.aiModel);
 
-  // ストリームの準備
+  // ストリームオブジェクトの作成
   const stream: ReadableStream = new ReadableStream({
     // クライアント側でレスポンスボディの読み取りを行うと開始される処理
     start: async function (controller) {
-      for (const chunk of response) {
-        debug(chunk);
-        controller.enqueue(encoder.encode(chunk));
-        await new Promise((resolve) => setTimeout(resolve, 50));
+      if (!res.body) {
+        return;
       }
+      // レスポンスボディをストリームとして読み取る
+      const reader = res.body.getReader();
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) {
+          break;
+        }
+        // チャンクの単位でクライアントに転送する
+        controller.enqueue(value);
+      }
+      // ストリームの送信を終了する
       controller.close();
     },
   });
 
-  // ストリームをレスポンス
+  // ストリームオブジェクトをレスポンスする
+  // これにより、クライアントはサーバーからのデータをストリームで受け取ることができる
   return new Response(stream, {
     headers: {
-      'Content-Type': 'text/event-stream: charset=utf-8',
+      'Content-Type': 'text/event-stream; charset=utf-8',
       //'Transfer-Encoding': 'chunked',
     },
   });

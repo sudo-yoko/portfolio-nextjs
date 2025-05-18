@@ -1,6 +1,6 @@
 'use client';
 
-import { send } from '@/modules/chat/ai-chat-client';
+import { send } from '@/modules/chat/ai-chat-client-bff';
 import type { Chat } from '@/modules/chat/model-ui';
 import {
   addChatHist,
