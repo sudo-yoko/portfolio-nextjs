@@ -3,7 +3,7 @@
 sequenceDiagram
 participant C as Next.js Client-Side<br>(React)
 participant S as Next.js Server-Side<br>(API route)
-participant A as API Provider<br>(OpenAI, GeminiAI, etc...)
+participant A as AI Provider<br>(OpenAI, GeminiAI, etc...)
 Note over A: mock
 
 C->>S: 1. Request POST
