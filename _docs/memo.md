@@ -19,10 +19,10 @@ A->>AD: 4. Streaming Response
 Note left of A: SSE(Server-Sent Events)
 
 AD->>S: 5. Transform SSE → NDJSON & Return
-Note left of AD: ReadableStream
+Note left of AD: ReadableStream(NDJSON)
 
-S->>C: 6. Streaming Response(NDJSON)
-Note left of S: ReadableStream
+S->>C: 6. Streaming Response
+Note left of S: ReadableStream(NDJSON)
 
  ```
 
