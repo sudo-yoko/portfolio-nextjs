@@ -1,6 +1,7 @@
 'use client';
 
-import { send } from '@/modules/chat/ai-chat-client-bff';
+import { send } from '@/modules/chat/chat-client';
+import { Chunk } from '@/modules/chat/model-api';
 import type { Chat } from '@/modules/chat/model-ui';
 import {
   addChatHist,
@@ -46,7 +47,8 @@ export default function Chat() {
       const { done, value } = await reader.read();
       if (done) break;
       const chunk = decoder.decode(value);
-      appendResponse(dispatch, chunk);
+      const parsed: Chunk = JSON.parse(chunk);
+      appendResponse(dispatch, parsed.value);
     }
     // AIチャットの読み込み完了
     completeResponse(dispatch);

@@ -1,19 +1,35 @@
-//
-// ストリーミングレスポンスを返すAI風モック
-//
+/**
+ * OpenAIのAPIのモック。チャット応答をストリームとして返す。
+ */
 import cors from 'cors';
 import type { Request, Response } from 'express';
 import express from 'express';
 
 const consolePrefix = '>>> ';
-const logPrefix = '>>> chat-stream-mock: ';
+const logPrefix = '>>> openai-mock: ';
 
 const port = 3002;
-const path = '/chat';
+const path = '/openai/chat';
 
-interface RequestBody {
+/**
+ * リクエストボディ
+ */
+interface ReqBody {
   prompt: string;
   model: string;
+}
+/**
+ * Server-Sent Eventsの data: フィールドに設定する値の型定義
+ */
+interface Data {
+  id: string;
+  choices: {
+    index: number;
+    message: {
+      role: string;
+      content: string;
+    };
+  }[];
 }
 
 const app = express();
@@ -22,7 +38,7 @@ app.use(express.json());
 app.post(
   path,
   async (
-    req: Request<undefined, string, RequestBody, undefined>,
+    req: Request<never, unknown, ReqBody, never>,
     res: Response<string>,
   ): Promise<void> => {
     const { body } = req;
@@ -39,21 +55,28 @@ app.post(
       '沖縄はあすにかけて概ね晴れるでしょう。';
 
     res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
-    res.setHeader('Transfer-Encoding', 'chunked');
-    for (const chunk of response) {
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+
+    for (const char of response) {
       console.log(
-        logPrefix + `Response(outbound) -> stream chunk sent: ${chunk}`,
+        logPrefix + `Response(outbound) -> stream chunk sent: ${char}`,
       );
-      res.write(chunk);
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      const data: Data = {
+        id: '0',
+        choices: [{ index: 0, message: { role: 'assistant', content: char } }],
+      };
+      res.write(`data: ${JSON.stringify(data)}\n`);
+      res.write('\n');
+      await new Promise((resolve) => setTimeout(resolve, 100)); // 少し遅延を入れる
     }
+    res.write('data: [DONE]\n\n');
     res.end();
   },
 );
 
 app.listen(port, () => {
   console.log(
-    consolePrefix +
-      `Mock service running on http://localhost:${port} (chat-stream-mock)`,
+    consolePrefix + `Mock service running on http://localhost:${port}${path}`,
   );
 });

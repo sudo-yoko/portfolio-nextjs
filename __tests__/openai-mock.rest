@@ -1,7 +1,7 @@
-POST http://localhost:3002/chat
+POST http://localhost:3003/openai/chat
 Content-Type: application/json; charset=UTF-8
 
 {
     "prompt":"今日の天気予報を教えてください。",
-    "model" :"gemini-1.5-flash-001"
+    "model" :"openai"
 }
