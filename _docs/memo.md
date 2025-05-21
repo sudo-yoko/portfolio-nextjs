@@ -18,7 +18,7 @@ Note Right of AD: fetch
 A->>AD: 4. Streaming Response
 Note left of A: SSE(Server-Sent Events)
 
-AD->>S: 5. Transform SSE → NDJSON & Return
+AD->>S: 5. Transform SSE → NDJSON,<br>＆ Return ReadableStream
 
 S->>C: 6. Streaming Response
 Note left of S: ReadableStream(NDJSON)
