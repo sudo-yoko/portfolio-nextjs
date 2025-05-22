@@ -6,7 +6,7 @@ participant C as Next.js Client-Side<br>(React)
 participant S as Next.js Server-Side<br>(API route)
 participant AD as AI adapter
 participant A as AI Provider<br>(OpenAI, GeminiAI, etc...)
-Note over A: mock
+Note over A: mock<br>(Express)
 
 C->>S: Request POST
 Note right of C: fetch
