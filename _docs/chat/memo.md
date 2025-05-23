@@ -11,11 +11,11 @@ participant A as AI Provider<br>(OpenAI, GeminiAI, etc...)
 Note over A: mock(Express)
 
 U->>C: キャンセルボタン押下
-Note over C: new AbortController.abort()
+Note over C: AbortController.abort()
 
 C->>S: AbortSignal-1
 Note over S: EventListener('abort')
-Note over S: new AbortController.abort()
+Note over S: AbortController.abort()
 
 S->>A: AbortSignal-2
 A-->>AD: AbortSignal-2
