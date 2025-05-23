@@ -1,12 +1,14 @@
  ```mermaid
 
 sequenceDiagram
+autonumber
+
 actor U as User
 participant C as Next.js Client-Side<br>(React)
 participant S as Next.js Server-Side<br>(API route)
 participant AD as AI adapter
 participant A as AI Provider<br>(OpenAI, GeminiAI, etc...)
-Note over A: mock<br>(Express)
+Note over A: mock(Express)
 
 U->>C: キャンセルボタン押下
 Note over C: new AbortController.abort()
