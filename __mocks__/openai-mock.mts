@@ -33,45 +33,60 @@ interface Data {
 }
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
+
 app.post(
   path,
   async (
     req: Request<never, unknown, ReqBody, never>,
     res: Response<string>,
   ): Promise<void> => {
-    const { body } = req;
     console.log(
       logPrefix +
-        `Request(inbound) -> prompt=${body.prompt}, model=${body.model}`,
+        `Request(inbound) -> prompt=${req.body.prompt}, model=${req.body.model}`,
     );
 
-    const response: string =
+    const text: string =
       'きょう17日は、西～東日本では雨の降る所が多く、雷を伴って激しく降る所もあるでしょう。' +
       '落雷や突風などに注意してください。東北は雨が降り、北海道も夕方以降は雨が降る見込みです。' +
       'あす18日は、九州南部では激しい雷雨となる所がありそうです。' +
       '九州北部～北海道は雲が広がりやすく、所によりにわか雨がある見込みです。' +
       '沖縄はあすにかけて概ね晴れるでしょう。';
+    const chars = Array.from(text);
+    let index = 0;
 
     res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Connection', 'keep-alive');
 
-    for (const char of response) {
+    const interval = setInterval(() => {
+      if (index >= chars.length) {
+        res.write('data: [DONE]\n\n');
+        clearInterval(interval);
+        res.end();
+        return;
+      }
+
+      const char = chars[index];
       console.log(
         logPrefix + `Response(outbound) -> stream chunk sent: ${char}`,
       );
+
       const data: Data = {
         id: '0',
         choices: [{ index: 0, message: { role: 'assistant', content: char } }],
       };
-      res.write(`data: ${JSON.stringify(data)}\n`);
-      res.write('\n');
-      await new Promise((resolve) => setTimeout(resolve, 100)); // 少し遅延を入れる
-    }
-    res.write('data: [DONE]\n\n');
-    res.end();
+      res.write(`data: ${JSON.stringify(data)}\n\n`);
+
+      index++;
+    }, 100);
+
+    res.on('close', () => {
+      console.log(logPrefix + `切断されました。`);
+      clearInterval(interval);
+    });
   },
 );
 

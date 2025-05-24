@@ -1,5 +1,8 @@
 import { dataChunk, dataLabel, errChunk } from '@/modules/chat/model-api';
 import { env } from '@/modules/env/env-helper';
+import 'server-only';
+
+const logPrefix = 'openai-adapter.ts: ';
 
 export interface ChatRequest {
   prompt: string;
@@ -17,7 +20,10 @@ export interface Data {
   }[];
 }
 
-export async function send(req: ChatRequest): Promise<ReadableStream> {
+export async function send(
+  req: ChatRequest,
+  signal: AbortSignal,
+): Promise<ReadableStream> {
   const url = env('OPEN_AI_API');
   const res = await fetch(url, {
     method: 'POST',
@@ -25,11 +31,17 @@ export async function send(req: ChatRequest): Promise<ReadableStream> {
       'Content-Type': 'application/json; charset=utf-8',
     },
     body: JSON.stringify(req),
+    signal,
   });
   return new ReadableStream({
     start: async function (controller): Promise<void> {
+      signal.addEventListener('abort', () => {
+        console.log(logPrefix + 'abort検知');
+        controller.close();
+        return;
+      });
       if (!res.body) {
-        controller.enqueue(errChunk('no body'));
+        controller.enqueue(errChunk('no response body.'));
         return;
       }
       const reader = res.body.getReader();
