@@ -1,31 +1,17 @@
-import Index from '@/app/contact2/index';
-import { withErrorHandlingAsync } from '@/modules/error-handlers/server-error-handler';
-import logger from '@/modules/logging-facade/logger';
-import { SearchParam, SearchParams } from '@/modules/types/search-params';
-
-const logPrefix = 'app/contact2/page.tsx: ';
+import Steps from '@/app/contact2/steps';
+import { serverProcess } from '@/modules/contact2/view-models/page';
+import { SearchParams } from '@/modules/types/search-params';
 
 /**
  * お問い合わせフォーム ページコンポーネント
  */
 export default async function Page(props: { searchParams?: SearchParams }) {
-  // エラーハンドリングを追加して処理を実行する。
-  return await withErrorHandlingAsync(() => process());
-
-  async function process() {
-    const params = await props.searchParams;
-    logger.info(logPrefix + `searchParams=${JSON.stringify(params)}`);
-
-    const para1: SearchParam = params?.['para1'];
-    const para2: SearchParam = params?.['para2'];
-    logger.info(logPrefix + `para1=${para1}, para2=${para2}`);
-
-    return (
-      <>
-        <div>
-          <Index />
-        </div>
-      </>
-    );
-  }
+  await serverProcess(props.searchParams);
+  return (
+    <>
+      <div>
+        <Steps />
+      </div>
+    </>
+  );
 }

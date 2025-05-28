@@ -1,4 +1,5 @@
 // お問い合わせフォームのモデル定義
+'use client';
 
 import { Violations } from '@/modules/validators/validator';
 import React, { Reducer } from 'react';

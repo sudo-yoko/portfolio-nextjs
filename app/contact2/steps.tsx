@@ -5,16 +5,15 @@ import Complete from '@/app/contact2/steps/complete';
 import Confirm from '@/app/contact2/steps/confirm';
 import Input from '@/app/contact2/steps/input';
 import Sending from '@/app/contact2/steps/sending';
-import { initialState, reducer } from '@/modules/contact2/model';
+import { initialState, reducer } from '@/modules/contact2/view-models/steps';
 import { useReducer, useState } from 'react';
 
 /**
  * お問い合わせフォーム 親クライアントコンポーネント
  */
-export default function Index() {
+export default function Steps() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [error, setError] = useState(false);
-
   return (
     <div className="flex h-screen w-screen flex-col items-center py-10">
       {error && <ErrorHandler />}

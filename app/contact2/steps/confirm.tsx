@@ -1,6 +1,11 @@
 'use client';
 
-import { Action, State, toInput, toSending } from '@/modules/contact2/model';
+import {
+  Action,
+  State,
+  toInput,
+  toSending,
+} from '@/modules/contact2/view-models/steps';
 
 /**
  * 確認表示コンポーネント

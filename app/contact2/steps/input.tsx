@@ -1,16 +1,11 @@
 'use client';
 
+import { Action, setValue, State } from '@/modules/contact2/view-models/steps';
 import {
-  Action,
-  FormKey,
-  setValue,
-  setViolations,
-  State,
-  toConfirm,
-} from '@/modules/contact2/model';
-import { validate } from '@/modules/contact2/validator';
+  applyEffect,
+  handleNext,
+} from '@/modules/contact2/view-models/steps/input';
 import { resizeTextarea } from '@/modules/utils/domUtils';
-import { hasError, Violations } from '@/modules/validators/validator';
 import { useEffect } from 'react';
 
 /**
@@ -24,21 +19,8 @@ export default function Input({
   dispatch: React.ActionDispatch<[action: Action]>;
 }) {
   useEffect(() => {
-    if (state.violations && hasError(state.violations)) {
-      setViolations(dispatch, state.violations);
-    }
+    applyEffect(state.violations, dispatch);
   }, [dispatch, state.violations]);
-
-  function handleNext() {
-    // バリデーション
-    ((violations: Violations<FormKey>) => {
-      if (hasError(violations)) {
-        setViolations(dispatch, violations);
-        return;
-      }
-      toConfirm(dispatch);
-    })(validate(state.formData));
-  }
 
   return (
     <>
@@ -97,7 +79,7 @@ export default function Input({
         <div>
           <button
             type="button"
-            onClick={handleNext}
+            onClick={() => handleNext(state, dispatch)}
             className="rounded-lg bg-indigo-300 px-4 py-2"
           >
             次へ

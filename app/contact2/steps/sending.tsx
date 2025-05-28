@@ -1,13 +1,7 @@
-import {
-  Action,
-  setViolations,
-  State,
-  toComplete,
-  toInput,
-} from '@/modules/contact2/model';
-import { sendAction } from '@/modules/contact2/send-action';
-import { withErrorHandlingAsync } from '@/modules/error-handlers/client-error-handler';
-import { hasError } from '@/modules/validators/validator';
+'use client';
+
+import { Action, State } from '@/modules/contact2/view-models/steps';
+import { applyEffect } from '@/modules/contact2/view-models/steps/sending';
 import React, { useEffect } from 'react';
 
 /**
@@ -23,32 +17,8 @@ export default function Sending({
   setError: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   useEffect(() => {
-    // エラーハンドリングを追加して処理を実行する。
-    withErrorHandlingAsync(() => process(), setError);
-
-    async function process() {
-      // サーバーアクション呼び出し
-      const actionResult = await sendAction(state.formData);
-      // 正常
-      if (actionResult.status === 200) {
-        toComplete(dispatch);
-        return;
-      }
-      // バリデーションエラー
-      if (actionResult.status === 400) {
-        if (actionResult.body) {
-          const violations = actionResult.body;
-          if (hasError(violations)) {
-            setViolations(dispatch, violations);
-            toInput(dispatch);
-            return;
-          }
-        }
-      }
-      // 上記以外は予期しないエラー
-      throw new Error('予期しないエラーが発生しました。');
-    }
-  }, [dispatch, setError, state.formData]);
+    applyEffect(state, dispatch, setError);
+  }, [dispatch, setError, state, state.formData]);
 
   return (
     <div>
