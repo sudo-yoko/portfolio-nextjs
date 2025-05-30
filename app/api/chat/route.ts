@@ -1,4 +1,4 @@
-import { ChatRequest, send } from '@/modules/chat/openai-adapter';
+import { ChatRequest, send } from '@/modules/chat/models/openai-adapter';
 
 const logPrefix = '/app/api/chat/route.ts: ';
 

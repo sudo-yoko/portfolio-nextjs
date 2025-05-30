@@ -7,7 +7,7 @@ import {
   State,
   toComplete,
   toInput,
-} from '@/modules/contact2/view-models/steps';
+} from '@/modules/contact2/view-models/steps-reducer';
 import { withErrorHandlingAsync } from '@/modules/error-handlers/client-error-handler';
 import { hasError } from '@/modules/validators/validator';
 
@@ -20,9 +20,9 @@ export const applyEffect = (
   setError: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   // エラーハンドリングを追加して処理を実行する。
-  withErrorHandlingAsync(() => process(), setError);
+  withErrorHandlingAsync(() => applyClientProcess(), setError);
 
-  async function process() {
+  async function applyClientProcess() {
     // サーバーアクション呼び出し
     const actionResult = await sendAction(state.formData);
     // 正常

@@ -5,7 +5,10 @@ import Complete from '@/app/contact2/steps/complete';
 import Confirm from '@/app/contact2/steps/confirm';
 import Input from '@/app/contact2/steps/input';
 import Sending from '@/app/contact2/steps/sending';
-import { initialState, reducer } from '@/modules/contact2/view-models/steps';
+import {
+  initialState,
+  reducer,
+} from '@/modules/contact2/view-models/steps-reducer';
 import { useReducer, useState } from 'react';
 
 /**

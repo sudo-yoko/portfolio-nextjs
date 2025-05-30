@@ -1,10 +1,14 @@
 'use client';
 
-import { Action, setValue, State } from '@/modules/contact2/view-models/steps';
+import {
+  Action,
+  setValue,
+  State,
+} from '@/modules/contact2/view-models/steps-reducer';
 import {
   applyEffect,
   handleNext,
-} from '@/modules/contact2/view-models/steps/input';
+} from '@/modules/contact2/view-models/steps/input-handler';
 import { resizeTextarea } from '@/modules/utils/domUtils';
 import { useEffect } from 'react';
 

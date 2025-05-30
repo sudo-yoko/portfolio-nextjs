@@ -1,5 +1,5 @@
 import Steps from '@/app/contact2/steps';
-import { serverProcess } from '@/modules/contact2/view-models/page';
+import { serverProcess } from '@/modules/contact2/view-models/page-handler';
 import { SearchParams } from '@/modules/types/search-params';
 
 /**

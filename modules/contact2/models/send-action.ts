@@ -1,8 +1,11 @@
 'use server';
 
-import { FormData, FormKey } from '@/modules/contact2/view-models/steps';
+import { send } from '@/modules/contact2/clients/web-to-case-client';
 import { validate } from '@/modules/contact2/models/validator';
-import { send } from '@/modules/contact2/models/web-to-case-client';
+import {
+  FormData,
+  FormKey,
+} from '@/modules/contact2/view-models/steps-reducer';
 import { withErrorHandlingAsync } from '@/modules/error-handlers/action-error-handler';
 import logger from '@/modules/logging-facade/logger';
 import { ActionResult } from '@/modules/types/action-result';

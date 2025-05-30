@@ -1,4 +1,11 @@
-import { dataChunk, dataLabel, errChunk } from '@/modules/chat/model-api';
+/**
+ * OpenAI APIのインターフェースを、アプリケーションに合わせて変換する
+ */
+import {
+  dataChunk,
+  dataLabel,
+  errChunk,
+} from '@/modules/chat/models/chat-model';
 import { env } from '@/modules/env/env-helper';
 import 'server-only';
 

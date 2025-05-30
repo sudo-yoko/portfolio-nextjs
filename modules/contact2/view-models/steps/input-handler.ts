@@ -7,7 +7,7 @@ import {
   setViolations,
   State,
   toConfirm,
-} from '@/modules/contact2/view-models/steps';
+} from '@/modules/contact2/view-models/steps-reducer';
 import { hasError, Violations } from '@/modules/validators/validator';
 
 /**

@@ -1,7 +1,7 @@
 'use client';
 
-import { Action, State } from '@/modules/contact2/view-models/steps';
-import { applyEffect } from '@/modules/contact2/view-models/steps/sending';
+import { Action, State } from '@/modules/contact2/view-models/steps-reducer';
+import { applyEffect } from '@/modules/contact2/view-models/steps/sending-handler';
 import React, { useEffect } from 'react';
 
 /**

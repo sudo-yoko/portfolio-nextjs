@@ -1,4 +1,4 @@
-// AIチャット画面のモデル定義
+'use client';
 
 import { Dispatch, Reducer } from 'react';
 

@@ -1,4 +1,7 @@
-import { FormData, FormKey } from '@/modules/contact2/view-models/steps';
+import {
+  FormData,
+  FormKey,
+} from '@/modules/contact2/view-models/steps-reducer';
 import {
   required,
   requiredEmail,
