@@ -16,9 +16,9 @@ Next.js の実装集
 
 入力されたお問い合わせを、SalesforceのWeb-to-Caseに送信します。  
 
+:open_file_folder: 画面サンプル：[_docs/contact/contact.gif](_docs/contact/contact.gif)  
 :open_file_folder: コンポーネント：[app/contact/](app/contact)  
 :open_file_folder: モジュール：[modules/contact/](modules/contact)  
-:open_file_folder: 画面サンプル：[_docs/contact/contact.gif](_docs/contact/contact.gif)  
 
 Web-to-Caseのエンドポイントは、開発時はモックを提供します。モックは `Express` で作成しています。  
 `npm run dev:mock` のコマンドで、アプリケーションとモックが一緒に起動できるようにしています。  
