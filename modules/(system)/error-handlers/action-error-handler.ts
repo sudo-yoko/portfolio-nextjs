@@ -1,6 +1,6 @@
-import { serialize } from '@/modules/error-handlers/error-handling-utils';
-import logger from '@/modules/logging-facade/logger';
-import { ActionResult } from '@/modules/types/action-result';
+import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
+import logger from '@/modules/(system)/logging-facade/logger';
+import { ActionResult } from '@/modules/(system)/types/action-result';
 
 const logPrefix = 'action-error-handler.ts: ';
 

@@ -1,12 +1,12 @@
 /**
  * OpenAI APIのインターフェースを、アプリケーションに合わせて変換する
  */
+import { env } from '@/modules/(system)/env/env-helper';
 import {
   dataChunk,
   dataLabel,
   errChunk,
 } from '@/modules/chat/models/chat-model';
-import { env } from '@/modules/env/env-helper';
 import 'server-only';
 
 const logPrefix = 'openai-adapter.ts: ';
@@ -62,6 +62,7 @@ export async function send(
         }
         const decoder = new TextDecoder();
         const decoded = decoder.decode(value, { stream: true });
+        //console.log(decoded);
         const lines = decoded.split('\n').filter((line) => line.trim() !== '');
 
         for (const line of lines) {

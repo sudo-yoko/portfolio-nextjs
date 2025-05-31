@@ -1,7 +1,7 @@
-import client from '@/modules/clients/proxy-client';
+import client from '@/modules/(system)/clients/proxy-client';
+import { env } from '@/modules/(system)/env/env-helper';
+import logger from '@/modules/(system)/logging-facade/logger';
 import { FormData } from '@/modules/contact/model';
-import { env } from '@/modules/env/env-helper';
-import logger from '@/modules/logging-facade/logger';
 import axios from 'axios';
 import 'server-only';
 

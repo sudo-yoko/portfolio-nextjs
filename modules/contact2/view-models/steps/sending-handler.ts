@@ -1,5 +1,7 @@
 'use client';
 
+import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
+import { hasError } from '@/modules/(system)/validators/validator';
 import { sendAction } from '@/modules/contact2/models/send-action';
 import {
   Action,
@@ -8,8 +10,6 @@ import {
   toComplete,
   toInput,
 } from '@/modules/contact2/view-models/steps-reducer';
-import { withErrorHandlingAsync } from '@/modules/error-handlers/client-error-handler';
-import { hasError } from '@/modules/validators/validator';
 
 /**
  * コンポーネントがレンダリングされた後に実行される処理

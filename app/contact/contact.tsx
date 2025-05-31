@@ -5,8 +5,8 @@ import Complete from '@/app/contact/complete';
 import Confirm from '@/app/contact/confirm';
 import Input from '@/app/contact/input';
 import Sending from '@/app/contact/sending';
+import { Violations } from '@/modules/(system)/validators/validator';
 import { FormData, FormKey, Step } from '@/modules/contact/model';
-import { Violations } from '@/modules/validators/validator';
 import { useState } from 'react';
 
 export default function Contact() {

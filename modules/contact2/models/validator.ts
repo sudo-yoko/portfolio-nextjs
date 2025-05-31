@@ -1,13 +1,13 @@
 import {
-  FormData,
-  FormKey,
-} from '@/modules/contact2/view-models/steps-reducer';
-import {
   required,
   requiredEmail,
   Validator,
   Violations,
-} from '@/modules/validators/validator';
+} from '@/modules/(system)/validators/validator';
+import {
+  FormData,
+  FormKey,
+} from '@/modules/contact2/view-models/steps-reducer';
 import { z } from 'zod';
 
 /**

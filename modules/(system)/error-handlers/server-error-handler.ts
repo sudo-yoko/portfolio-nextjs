@@ -1,5 +1,5 @@
-import { serialize } from '@/modules/error-handlers/error-handling-utils';
-import logger from '@/modules/logging-facade/logger';
+import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
+import logger from '@/modules/(system)/logging-facade/logger';
 
 const logPrefix = 'server-error-handler.ts: ';
 

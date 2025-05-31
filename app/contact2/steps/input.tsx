@@ -1,5 +1,6 @@
 'use client';
 
+import { resizeTextarea } from '@/modules/(system)/utils/domUtils';
 import {
   Action,
   setValue,
@@ -9,7 +10,6 @@ import {
   applyEffect,
   handleNext,
 } from '@/modules/contact2/view-models/steps/input-handler';
-import { resizeTextarea } from '@/modules/utils/domUtils';
 import { useEffect } from 'react';
 
 /**

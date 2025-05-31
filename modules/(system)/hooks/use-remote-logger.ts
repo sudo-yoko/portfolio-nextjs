@@ -1,4 +1,4 @@
-import { logError } from '@/modules/loggers/remote-logger';
+import { logError } from '@/modules/(system)/loggers/remote-logger';
 import 'client-only';
 import { useEffect } from 'react';
 

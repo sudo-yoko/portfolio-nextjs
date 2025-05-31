@@ -1,8 +1,8 @@
 'use client';
 
+import { resizeTextarea } from '@/modules/(system)/utils/domUtils';
+import { hasError, Violations } from '@/modules/(system)/validators/validator';
 import { FormData, FormKey, validate } from '@/modules/contact/model';
-import { resizeTextarea } from '@/modules/utils/domUtils';
-import { hasError, Violations } from '@/modules/validators/validator';
 import { useEffect, useState } from 'react';
 
 export default function Input({

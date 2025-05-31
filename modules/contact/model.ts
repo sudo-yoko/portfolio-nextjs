@@ -3,9 +3,9 @@
 import {
   required,
   requiredEmail,
-  Violations,
   Validator,
-} from '@/modules/validators/validator';
+  Violations,
+} from '@/modules/(system)/validators/validator';
 import { z } from 'zod';
 
 export type Step = 'input' | 'confirm' | 'sending' | 'complete';

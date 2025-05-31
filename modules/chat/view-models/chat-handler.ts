@@ -52,8 +52,13 @@ export async function handleSend(
     const { done, value } = await reader.read();
     if (done) break;
     const chunk = decoder.decode(value);
-    const parsed: Chunk = JSON.parse(chunk);
-    appendResponse(dispatch, parsed.value);
+    // JSONデータが複数件まとめて届く場合があるため改行で分割してパースする
+    chunk.split('\n').forEach((line) => {
+      if (line.trim() !== '') {
+        const parsed: Chunk = JSON.parse(line);
+        appendResponse(dispatch, parsed.value);
+      }
+    });
   }
   // AIチャットの読み込み完了
   completeResponse(dispatch);

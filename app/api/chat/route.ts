@@ -16,3 +16,6 @@ export async function POST(req: Request): Promise<Response> {
     headers: { 'Content-Type': 'text/event-stream; charset=utf-8' },
   });
 }
+
+// ReadableStreamを使用するため、Node.js Runtimeを使用する必要がある
+export const runtime = 'nodejs';

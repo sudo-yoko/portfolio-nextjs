@@ -1,7 +1,7 @@
-import { serialize } from '@/modules/error-handlers/error-handling-utils';
-import { logError } from '@/modules/loggers/remote-logger';
-import React from 'react';
+import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
+import { logError } from '@/modules/(system)/loggers/remote-logger';
 import 'client-only';
+import React from 'react';
 
 const logPrefix = 'client-error-handler.ts: ';
 

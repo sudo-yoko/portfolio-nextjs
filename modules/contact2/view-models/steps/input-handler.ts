@@ -1,5 +1,6 @@
 'use client';
 
+import { hasError, Violations } from '@/modules/(system)/validators/validator';
 import { validate } from '@/modules/contact/model';
 import {
   Action,
@@ -8,7 +9,6 @@ import {
   State,
   toConfirm,
 } from '@/modules/contact2/view-models/steps-reducer';
-import { hasError, Violations } from '@/modules/validators/validator';
 
 /**
  * コンポーネントがレンダリングされた後に実行される処理

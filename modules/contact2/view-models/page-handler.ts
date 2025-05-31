@@ -1,8 +1,11 @@
 import 'server-only';
 
-import { withErrorHandlingAsync } from '@/modules/error-handlers/server-error-handler';
-import logger from '@/modules/logging-facade/logger';
-import { SearchParam, SearchParams } from '@/modules/types/search-params';
+import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/server-error-handler';
+import logger from '@/modules/(system)/logging-facade/logger';
+import {
+  SearchParam,
+  SearchParams,
+} from '@/modules/(system)/types/search-params';
 
 const logPrefix = 'app/contact2/page.ts: ';
 
