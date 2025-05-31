@@ -6,7 +6,7 @@ Next.js の実装集
 対話型AIに対して質問を入力すると、回答が一文字ずつリアルタイムに表示されます。  
 対話型AIのAPIをモック化し、AIの回答を模した文字列を１文字ずつチャンク単位のストリーム形式でレスポンスしています。Next.jsのクライアントサイドでは、受信した文字列を順次差分レンダリングしています。
 
-:open_file_folder: 画面サンプル：[_docs/chat/caht_1.gif](_docs/chat/caht_1.gif)  
+:open_file_folder: 画面サンプル：[_docs/chat/caht.gif](_docs/chat/caht.gif)  
 :open_file_folder: コンポーネント：[app/chat/](app/chat)  
 :open_file_folder: モジュール：[modules/chat/](modules/chat),  [app/api/chat/](app/api/chat)  
 :open_file_folder: AIモック：[__mocks__/openai-mock.mts](__mocks__/openai-mock.mts)  
@@ -18,7 +18,7 @@ Next.js の実装集
 
 :open_file_folder: コンポーネント：[app/contact/](app/contact)  
 :open_file_folder: モジュール：[modules/contact/](modules/contact)  
-:open_file_folder: 画面サンプル：[_docs/contact/contact.md](_docs/contact/contact.md)  
+:open_file_folder: 画面サンプル：[_docs/contact/contact.gif](_docs/contact/contact.gif)  
 
 Web-to-Caseのエンドポイントは、開発時はモックを提供します。モックは `Express` で作成しています。  
 `npm run dev:mock` のコマンドで、アプリケーションとモックが一緒に起動できるようにしています。  
