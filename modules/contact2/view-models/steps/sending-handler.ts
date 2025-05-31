@@ -20,9 +20,9 @@ export const applyEffect = (
   setError: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   // エラーハンドリングを追加して処理を実行する。
-  withErrorHandlingAsync(() => applyClientProcess(), setError);
+  withErrorHandlingAsync(() => effectProcess(), setError);
 
-  async function applyClientProcess() {
+  async function effectProcess() {
     // サーバーアクション呼び出し
     const actionResult = await sendAction(state.formData);
     // 正常

@@ -14,9 +14,9 @@ const logPrefix = 'app/contact2/page.ts: ';
  */
 export const serverProcess = async (searchParams?: SearchParams) => {
   // エラーハンドリングを追加して処理を実行する。
-  await withErrorHandlingAsync(() => applyServerProcess());
+  await withErrorHandlingAsync(() => serverProcess());
 
-  async function applyServerProcess() {
+  async function serverProcess() {
     const params = await searchParams;
     logger.info(logPrefix + `searchParams=${JSON.stringify(params)}`);
 
