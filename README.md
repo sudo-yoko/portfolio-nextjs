@@ -28,7 +28,7 @@ Salesforce側に依存することなく開発を進めることができます�
 上記はuseStateを使用した実装例です。入力フォームに項目が少ない場合は、この実装が簡単です。
 
 以下はuseReducerを使用した実装例です。項目が多い場合はこちらの方が見通しが良くなります。
-また、状態管理ロジックをreducer関数としてモデルに分離できます。UIとモデルの切り分けがより明確になっています。
+また、状態管理ロジックをreducer関数としてモデルに分離できます。UIとモデルの切り分けがより明確になっています。MVVM（Model-View-ViewModel）パターンに基づいてモジュールを構成しています。
 
 :open_file_folder: コンポーネント：[app/contact2/](app/contact2)  
 :open_file_folder: モジュール：[modules/contact2/](modules/contact2)  
@@ -38,14 +38,14 @@ Salesforce側に依存することなく開発を進めることができます�
 #### バリデーター
 バリデーターインターフェースを提供することで、アプリケーションがバリデーションの実装に強く依存しない設計にしています。バリデーションの実装にはZodなどのライブラリや、独自の実装を使用できます。
 
-:open_file_folder: コード：[modules/validators/validator.ts](modules/validators/validator.ts)  
+:open_file_folder: コード：[modules/(system)/validators/validator.ts](modules/(system)/validators/validator.ts)  
 :open_file_folder: 使用例：[modules/contact/model.ts#L29](modules/contact/model.ts#L29)
 
 
 ## logger-winston.ts
 `winston` を用いたログ出力の設定例です。ログローテーションも行います。  
 
-:open_file_folder: コード：[modules/loggers/logger-winston.ts](modules/loggers/logger-winston.ts)  
+:open_file_folder: コード：[modules/(system)/loggers/logger-winston.ts](modules/(system)/loggers/logger-winston.ts)  
 
 ## ロギングファサード
 
@@ -53,10 +53,10 @@ Salesforce側に依存することなく開発を進めることができます�
 `winston` をロギング実装として読み込みしています。  
 後からロギングライブラリを変更したくなった際に、最小限の修正で済みます。
 
-:open_file_folder: コード：[modules/logging-facade/](modules/logging-facade/)  
+:open_file_folder: コード：[modules/(system)/logging-facade/](modules/(system)/logging-facade/)  
 :spiral_notepad: 使用例
 ```ts
-import logger from '@/modules/logging-facade/logger';
+import logger from '@/modules/(system)/logging-facade/logger';
 ...
 logger.info('ログメッセージ');
 ```
@@ -73,10 +73,10 @@ logger.info('ログメッセージ');
 このモジュールが最初にインポートされたときにファクトリ関数が実行され、ロガーの実装が決定します。  
 以降はキャッシュされたロガーを再利用するため効率的です。
 
-:open_file_folder: コード：[logger-debug.ts](modules/loggers/logger-debug.ts)  
+:open_file_folder: コード：[logger-debug.ts](modules/(system)/loggers/logger-debug.ts)  
 :spiral_notepad: 使用例
 ```ts
-import debug from '@/modules/loggers/logger-debug';
+import debug from '@/modules/(system)/loggers/logger-debug';
 ...
 debug('ログメッセージ');
 ```
@@ -88,15 +88,15 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 #### サーバーサイドエラーハンドリング
 例外をキャッチして再スローします。Next.jsはこれを未処理の例外として処理し、標準のエラーページ(error.tsx)をレンダリングします。
 
-:open_file_folder: コード：[modules/error-handlers/server-error-handler.ts](modules/error-handlers/server-error-handler.ts)  
-:open_file_folder: 使用例：[app/contact/page.tsx#L13](app/contact/page.tsx#L13)  
+:open_file_folder: コード：[modules/(system)/error-handlers/server-error-handler.ts](modules/(system)/error-handlers/server-error-handler.ts)  
+:open_file_folder: 使用例：[app/contact/page.tsx#L16](app/contact/page.tsx#L16)  
 
 #### サーバーアクションエラーハンドリング
 例外をキャッチして、戻り値にステータスコード500(INTERNAL_SERVER_ERROR)を返します。呼び元は戻り値のステータスコードを確認し、呼び元がエラーハンドリングを行う必要があります。  
 
 サーバーアクションはHTTPエンドポイントとして実行されるため、サーバーアクション内で例外をスローしても、呼び元にそのまま伝播しません。シリアライズ可能なオブジェクトの形式で、戻り値として返却する必要があると考えています。
 
-:open_file_folder: コード：[modules/error-handlers/action-error-handler.ts](modules/error-handlers/action-error-handler.ts)  
+:open_file_folder: コード：[modules/(system)/error-handlers/action-error-handler.ts](modules/(system)/error-handlers/action-error-handler.ts)  
 :open_file_folder: 使用例：[modules/contact/send-action.ts#L19](modules/contact/send-action.ts#L19)  
 
 #### クライアントサイドエラーハントリング
@@ -105,7 +105,7 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 クライアントサイドの例外ハンドリングは、少し工夫が必要でした。
 クライアントサイドで例外がスローされても、Next.jsがそれをキャッチして標準のエラーページ(error.tsx)をレンダリングしないケースがあるため、このように自力でエラーページに遷移させる方法を考えました。
 
-:open_file_folder: コード：[modules/error-handlers/client-error-handler.ts](modules/error-handlers/client-error-handler.ts)  
+:open_file_folder: コード：[modules/(system)/error-handlers/client-error-handler.ts](modules/(system)/error-handlers/client-error-handler.ts)  
 :open_file_folder: 使用例：[app/contact/sending.tsx#L22](app/contact/sending.tsx#L22)  
 
 ## search-params.ts
@@ -115,7 +115,7 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 
 Next.js15から、クエリパラメーターは非同期で取得されるようになりました。`Promise` にラップされるため、 `await` を用いてその値を取得する必要があります。
 
-:open_file_folder: コード：[search-params.ts](modules/types/search-params.ts)  
-:open_file_folder: 使用例：[app/contact/page.tsx#L16](app/contact/page.tsx#L16)
+:open_file_folder: コード：[search-params.ts](modules/(system)/types/search-params.ts)  
+:open_file_folder: 使用例：[app/contact/page.tsx#L19](app/contact/page.tsx#L19)
 
 
