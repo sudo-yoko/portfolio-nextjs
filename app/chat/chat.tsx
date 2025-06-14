@@ -19,8 +19,8 @@ export default function Chat() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const isCanceled = useRef(false);
   return (
-    <div className="flex h-screen w-screen flex-col items-center space-y-9 p-20">
-      <div className="flex w-[700px] flex-col space-y-9">
+    <div className="flex h-screen w-screen flex-col items-center space-y-9 p-10">
+      <div className="flex w-full flex-col space-y-9 md:w-[700px]">
         <div className="font-bold">AI チャット</div>
         <div className="space-y-4">
           {state.chatHist?.map((chat, index) => (
@@ -30,13 +30,13 @@ export default function Chat() {
           ))}
           {state.loadingChat && <LoadingChat chat={state.loadingChat} />}
         </div>
-        <div className="flex w-full flex-row space-x-2">
+        <div className="flex w-full flex-col items-center gap-2 md:flex-row">
           <input
             type="text"
             value={state.formData.prompt}
             onChange={(e) => setValue(dispatch, 'prompt', e.target.value)}
             placeholder="質問を入力してください。"
-            className="w-[700px] rounded border border-indigo-300 p-2"
+            className="w-full rounded border border-indigo-300 p-2 md:w-[700px]"
           />
           {state.step === 'loading' ? (
             <button
