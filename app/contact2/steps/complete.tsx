@@ -3,10 +3,9 @@
 /**
  * 完了表示コンポーネント
  */
-export default function Complete() {
-  return (
-    <>
-      <div>お問い合わせありがとうございました。</div>
-    </>
-  );
-}
+const Complete = () => (
+  <>
+    <div>お問い合わせありがとうございました。</div>
+  </>
+);
+export default Complete;
