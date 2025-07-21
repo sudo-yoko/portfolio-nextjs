@@ -1,6 +1,6 @@
 import Steps from '@/app/contact2/steps';
 import { SearchParams } from '@/modules/(system)/types/search-params';
-import { serverProcess } from '@/modules/contact2/page-handler';
+import { serverProcess } from '@/modules/contact2/models/page-handler';
 
 /**
  * お問い合わせフォーム ページコンポーネント
