@@ -2,14 +2,14 @@
 
 import { resizeTextarea } from '@/modules/(system)/utils/domUtils';
 import {
+  applyEffect,
+  handleNext,
+} from '@/modules/contact2/view-models/input-handler';
+import {
   Action,
   setValue,
   State,
 } from '@/modules/contact2/view-models/steps-reducer';
-import {
-  applyEffect,
-  handleNext,
-} from '@/modules/contact2/view-models/steps/input-handler';
 import { useEffect } from 'react';
 
 /**

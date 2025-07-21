@@ -2,6 +2,7 @@
 
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
 import { hasError } from '@/modules/(system)/validators/validator';
+import { sendAction } from '@/modules/contact2/view-models/send-action';
 import {
   Action,
   setViolations,
@@ -9,7 +10,6 @@ import {
   toComplete,
   toInput,
 } from '@/modules/contact2/view-models/steps-reducer';
-import { sendAction } from '@/modules/contact2/view-models/steps/send-action';
 
 /**
  * コンポーネントがレンダリングされた後に実行される処理
