@@ -4,7 +4,7 @@ import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/action
 import logger from '@/modules/(system)/logging-facade/logger';
 import { ActionResult } from '@/modules/(system)/types/action-result';
 import { Violations, hasError } from '@/modules/(system)/validators/validator';
-import { ContactModel } from '@/modules/contact2/models/contact-model';
+import { ContactBody } from '@/modules/contact2/models/contact-model';
 import { send } from '@/modules/contact2/models/web-to-case-client';
 import {
   FormData,
@@ -40,7 +40,7 @@ export async function sendAction(
       return result;
     }
     // バリデーション済みの値をモデルに展開
-    const model: ContactModel = { ...formData };
+    const model: ContactBody = { ...formData };
     // 送信
     await send(model);
     // 正常

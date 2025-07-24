@@ -3,9 +3,10 @@ import 'server-only';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/server-error-handler';
 import logger from '@/modules/(system)/logging-facade/logger';
 import {
-  SearchParam,
+  getQueryParam,
   SearchParams,
 } from '@/modules/(system)/types/search-params';
+import { ContactParams } from '@/modules/contact2/models/contact-model';
 
 const logPrefix = 'app/contact2/page.ts: ';
 
@@ -17,11 +18,13 @@ export const serverProcess = async (searchParams?: SearchParams) => {
   await withErrorHandlingAsync(() => serverProcess());
 
   async function serverProcess() {
-    const params = await searchParams;
-    logger.info(logPrefix + `searchParams=${JSON.stringify(params)}`);
-
-    const para1: SearchParam = params?.['para1'];
-    const para2: SearchParam = params?.['para2'];
-    logger.info(logPrefix + `para1=${para1}, para2=${para2}`);
+    // クエリパラメータを取得する
+    const params: ContactParams = await getQueryParam(
+      ['category', 'from'],
+      searchParams,
+    );
+    logger.info(
+      logPrefix + `category=${params.category}, from =${params.from}`,
+    );
   }
 };

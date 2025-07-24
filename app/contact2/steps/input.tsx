@@ -1,6 +1,6 @@
 'use client';
 
-import { resizeTextarea } from '@/modules/(system)/utils/domUtils';
+import { resizeTextarea } from '@/modules/(system)/utils/dom-utils';
 import {
   applyEffect,
   handleNext,
