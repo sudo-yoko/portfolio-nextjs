@@ -22,15 +22,17 @@ end
 
 S->>SH: 
 SH->>SA: withErrorHandlingAsync
-SA-->>CEH:
-CEH-->>SH:
-
 SA->>WCC: withErrorHandlingAsync
-WCC-->>AEH:
-AEH-->>SA:
-SA-->>CEH:
-CEH-->>SH:
-
 WCC->>PC: withAxiosErrorHandlingAsync
+
+Note over SA: 例外発生
+SA-->>CEH: throw
+CEH-->>SH: result error code
+
+Note over WCC: 例外発生
+WCC-->>AEH: throw
+AEH-->>SA: rethrow
+SA-->>CEH: rethrow
+CEH-->>SH: resutl error code
 
 ```
