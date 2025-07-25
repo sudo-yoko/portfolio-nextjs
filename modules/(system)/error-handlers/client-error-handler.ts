@@ -12,11 +12,13 @@ export function withErrorHandling<T>(
   func: () => T,
   setHasError: React.Dispatch<React.SetStateAction<boolean>>,
 ): T | void {
+  const fname = 'withErrorHandling: ';
+
   try {
     // 引数に渡された関数を実行
     return func();
   } catch (error) {
-    logError(logPrefix + serialize(error));
+    logError(logPrefix + fname + serialize(error));
     setHasError(true);
   }
 }
@@ -28,11 +30,13 @@ export async function withErrorHandlingAsync<T>(
   func: () => Promise<T>,
   setHasError: React.Dispatch<React.SetStateAction<boolean>>,
 ): Promise<T | void> {
+  const fname = 'withErrorHandlingAsync: ';
+
   try {
     // 引数に渡された関数を実行
     return await func();
   } catch (error) {
-    logError(logPrefix + serialize(error));
+    logError(logPrefix + fname + serialize(error));
     setHasError(true);
   }
 }

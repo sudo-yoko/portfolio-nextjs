@@ -7,7 +7,7 @@ export type ContactParams = {
 };
 
 /**
- * お問い合わせ内容
+ * お問い合わせ入力内容
  */
 export type ContactBody = {
   name: string;
