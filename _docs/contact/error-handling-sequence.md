@@ -1,5 +1,4 @@
 ```mermaid
-
 sequenceDiagram
 autonumber
 
@@ -28,27 +27,24 @@ AEH->>WCC: invoke
 WCC->>SEH: delegate execution<br>(処理の実行を移譲)
 SEH->>PC: invoke
 
-Note right of S: クライアントサイドでエラー発生の場合
+Note over S,CEH: クライアントサイドでエラー発生の場合
 opt
   Note over CEH: エラー発生
   CEH-->>S: change state<br>(React.Despatch)
 end
 
-Note right of S: サーバーアクションでエラー発生の場合
+Note over S,CEH: サーバーアクションでエラー発生の場合
 opt
   Note over AEH: エラー発生
   AEH-->>CEH: resutl error code<br>(not throw)
   CEH-->>S: change state<br>(React.Despatch)
 end
 
-Note right of S: サーバーサイドでエラー発生の場合
+Note over S,CEH: サーバーサイドでエラー発生の場合
 opt
   Note over SEH: エラー発生
   SEH-->>AEH: throw
   AEH-->>CEH: resutl error code<br>(not throw)
   CEH-->>S: change state<br>(React.Despatch)
 end
-
-
-
 ```
