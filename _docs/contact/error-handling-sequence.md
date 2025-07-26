@@ -16,7 +16,6 @@ end
 box server-side
   participant WCC as web-to-case-client.ts<br>('server-only')
   participant SEH as server-error-handler.ts<br>('server-only')
-  participant PC as proxy-client.ts<br>('server-only')
 end
 
 S->>SH: call
@@ -25,7 +24,6 @@ CEH->>SA: invoke
 SA->>AEH: delegate execution<br>(処理の実行を移譲)
 AEH->>WCC: invoke
 WCC->>SEH: delegate execution<br>(処理の実行を移譲)
-SEH->>PC: invoke
 
 Note over S,CEH: クライアントサイドでエラー発生の場合
 opt
@@ -43,7 +41,7 @@ end
 Note over S,CEH: サーバーサイドでエラー発生の場合
 opt
   Note over SEH: エラー発生
-  SEH-->>AEH: throw
+  SEH-->>AEH: rethrow
   AEH-->>CEH: resutl error code<br>(not throw)
   CEH-->>S: change state<br>(React.Despatch)
 end
