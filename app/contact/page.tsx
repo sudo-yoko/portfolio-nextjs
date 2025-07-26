@@ -4,7 +4,7 @@ import logger from '@/modules/(system)/logging-facade/logger';
 import {
   SearchParam,
   SearchParams,
-} from '@/modules/(system)/types/search-params';
+} from '@/modules/(system)/models/search-params';
 
 const logPrefix = 'app/contact/page.tsx: ';
 

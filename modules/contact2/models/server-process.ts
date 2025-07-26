@@ -5,7 +5,7 @@ import logger from '@/modules/(system)/logging-facade/logger';
 import {
   getQueryParam,
   SearchParams,
-} from '@/modules/(system)/types/search-params';
+} from '@/modules/(system)/models/search-params';
 import { ContactParams } from '@/modules/contact2/models/contact-model';
 
 const logPrefix = 'app/contact2/page.ts: ';
@@ -23,8 +23,6 @@ export const serverProcess = async (searchParams?: SearchParams) => {
       ['category', 'from'],
       searchParams,
     );
-    logger.info(
-      logPrefix + `category=${params.category}, from =${params.from}`,
-    );
+    logger.info(logPrefix + `category=${params.category}, from=${params.from}`);
   }
 };
