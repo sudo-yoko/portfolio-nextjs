@@ -109,7 +109,7 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 :open_file_folder: コード：[modules/(system)/error-handlers/client-error-handler.ts](modules/(system)/error-handlers/client-error-handler.ts)  
 :open_file_folder: 使用例：[app/contact/sending.tsx#L22](app/contact/sending.tsx#L22)  
 
-##### :arrow_right: クライアントサイドからサーバーアクションを経由してサーバーサイド処理を呼ぶシーケンスにおける各層のエラーハンドリングの解説
+##### :arrow_right: クライアントサイドからサーバーアクションを経由してサーバーサイド処理を呼ぶ場合の各層のエラーハンドリング概要
 ```mermaid
 sequenceDiagram
 autonumber
