@@ -86,7 +86,8 @@ debug('ログメッセージ');
 javascriptの関数を引数にとれる性質と、クロージャを活用しています。
 
 #### サーバーサイドエラーハンドリング
-例外をキャッチして再スローします。Next.jsはこれを未処理の例外として処理し、標準のエラーページ(error.tsx)をレンダリングします。
+例外をキャッチして再スローします。  
+この例外が処理されなければ、Next.jsは未処理の例外として処理し、標準のエラーページ(error.tsx)をレンダリングします。
 
 :open_file_folder: コード：[modules/(system)/error-handlers/server-error-handler.ts](modules/(system)/error-handlers/server-error-handler.ts)  
 :open_file_folder: 使用例：[app/contact/page.tsx#L16](app/contact/page.tsx#L16)  
@@ -108,7 +109,7 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 :open_file_folder: コード：[modules/(system)/error-handlers/client-error-handler.ts](modules/(system)/error-handlers/client-error-handler.ts)  
 :open_file_folder: 使用例：[app/contact/sending.tsx#L22](app/contact/sending.tsx#L22)  
 
-##### :arrow_right: クライアントサイドからサーバーアクションを経由し、サーバーサイド処理を呼ぶシーケンスにおける各層のエラーハンドリングの解説
+##### :arrow_right: クライアントサイドからサーバーアクションを経由してサーバーサイド処理を呼ぶシーケンスにおける各層のエラーハンドリングの解説
 ```mermaid
 sequenceDiagram
 autonumber
@@ -127,7 +128,6 @@ end
 box server-side
   participant WCC as web-to-case-client.ts<br>('server-only')
   participant SEH as server-error-handler.ts<br>('server-only')
-  participant PC as proxy-client.ts<br>('server-only')
 end
 
 S->>SH: call
@@ -136,7 +136,6 @@ CEH->>SA: invoke
 SA->>AEH: delegate execution<br>(処理の実行を移譲)
 AEH->>WCC: invoke
 WCC->>SEH: delegate execution<br>(処理の実行を移譲)
-SEH->>PC: invoke
 
 Note over S,CEH: クライアントサイドでエラー発生の場合
 opt
@@ -154,7 +153,7 @@ end
 Note over S,CEH: サーバーサイドでエラー発生の場合
 opt
   Note over SEH: エラー発生
-  SEH-->>AEH: throw
+  SEH-->>AEH: rethrow
   AEH-->>CEH: resutl error code<br>(not throw)
   CEH-->>S: change state<br>(React.Despatch)
 end
