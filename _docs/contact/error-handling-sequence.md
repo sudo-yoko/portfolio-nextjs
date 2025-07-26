@@ -20,19 +20,35 @@ box server-side
   participant PC as proxy-client.ts<br>('server-only')
 end
 
-S->>SH: 
-SH->>SA: withErrorHandlingAsync
-SA->>WCC: withErrorHandlingAsync
-WCC->>PC: withAxiosErrorHandlingAsync
+S->>SH: call
+SH->>CEH: delegate execution<br>(処理の実行を移譲)
+CEH->>SA: invoke
+SA->>AEH: delegate execution<br>(処理の実行を移譲)
+AEH->>WCC: invoke
+WCC->>SEH: delegate execution<br>(処理の実行を移譲)
+SEH->>PC: invoke
 
-Note over SA: 例外発生
-SA-->>CEH: throw
-CEH-->>SH: result error code
+Note left of S: クライアントサイドでエラー発生の場合
+opt
+  Note over CEH: エラー発生
+  CEH-->>S: UseState(React.Despatch)
+end
 
-Note over WCC: 例外発生
-WCC-->>AEH: throw
-AEH-->>SA: rethrow
-SA-->>CEH: rethrow
-CEH-->>SH: resutl error code
+Note left of S: サーバーアクションでエラー発生の場合
+opt
+  Note over AEH: エラー発生
+  AEH-->>CEH: resutl error code<br>(not throw)
+  CEH-->>S: UseState(React.Despatch)
+end
+
+Note left of S: サーバーサイドでエラー発生の場合
+opt
+  Note over SEH: エラー発生
+  SEH-->>AEH: throw
+  AEH-->>CEH: resutl error code<br>(not throw)
+  CEH-->>S: UseState(React.Despatch)
+end
+
+
 
 ```
