@@ -28,25 +28,25 @@ AEH->>WCC: invoke
 WCC->>SEH: delegate execution<br>(処理の実行を移譲)
 SEH->>PC: invoke
 
-Note left of S: クライアントサイドでエラー発生の場合
+Note right of S: クライアントサイドでエラー発生の場合
 opt
   Note over CEH: エラー発生
-  CEH-->>S: UseState(React.Despatch)
+  CEH-->>S: change state<br>(React.Despatch)
 end
 
-Note left of S: サーバーアクションでエラー発生の場合
+Note right of S: サーバーアクションでエラー発生の場合
 opt
   Note over AEH: エラー発生
   AEH-->>CEH: resutl error code<br>(not throw)
-  CEH-->>S: UseState(React.Despatch)
+  CEH-->>S: change state<br>(React.Despatch)
 end
 
-Note left of S: サーバーサイドでエラー発生の場合
+Note right of S: サーバーサイドでエラー発生の場合
 opt
   Note over SEH: エラー発生
   SEH-->>AEH: throw
   AEH-->>CEH: resutl error code<br>(not throw)
-  CEH-->>S: UseState(React.Despatch)
+  CEH-->>S: change state<br>(React.Despatch)
 end
 
 
