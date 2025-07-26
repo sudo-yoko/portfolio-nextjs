@@ -34,7 +34,7 @@ end
 Note over S,CEH: サーバーアクションでエラー発生の場合
 opt
   Note over AEH: エラー発生
-  AEH-->>CEH: resutl error code<br>(not throw)
+  AEH-->>CEH: result error code<br>(not throw)
   CEH-->>S: change state<br>(React.Despatch)
 end
 
@@ -42,7 +42,7 @@ Note over S,CEH: サーバーサイドでエラー発生の場合
 opt
   Note over SEH: エラー発生
   SEH-->>AEH: rethrow
-  AEH-->>CEH: resutl error code<br>(not throw)
+  AEH-->>CEH: result error code<br>(not throw)
   CEH-->>S: change state<br>(React.Despatch)
 end
 ```
