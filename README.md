@@ -140,14 +140,14 @@ WCC->>SEH: delegate execution<br>(処理の実行を移譲)
 Note over S,CEH: クライアントサイドでエラー発生の場合
 opt
   Note over CEH: エラー発生
-  CEH-->>S: change state<br>(React.Despatch)
+  CEH-->>S: change state<br>(React.Dispatch)
 end
 
 Note over S,CEH: サーバーアクションでエラー発生の場合
 opt
   Note over AEH: エラー発生
   AEH-->>CEH: result error code<br>(not throw)
-  CEH-->>S: change state<br>(React.Despatch)
+  CEH-->>S: change state<br>(React.Dispatch)
 end
 
 Note over S,CEH: サーバーサイドでエラー発生の場合
@@ -155,7 +155,7 @@ opt
   Note over SEH: エラー発生
   SEH-->>AEH: rethrow
   AEH-->>CEH: result error code<br>(not throw)
-  CEH-->>S: change state<br>(React.Despatch)
+  CEH-->>S: change state<br>(React.Dispatch)
 end
 ```
 
