@@ -1,0 +1,4 @@
+解説
+
+キャンセル通知の仕組み
+ストリーミング形式のレスポンスをキャンセルできるようにするためには、レスポンスをReadableStreamでラップし、かつReadableStreamをAbortSignalに対応させる必要がある
