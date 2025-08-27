@@ -1,7 +1,7 @@
 /**
  * 検索条件
  */
-export type Query = {
+export type UsersQuery = {
   userId?: string;
   userName?: string;
 };
