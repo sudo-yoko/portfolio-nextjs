@@ -8,6 +8,8 @@ const port = 3003;
 const path = '/users';
 
 interface ReqQuery {
+  offset: number;
+  limit: number;
   userId?: string;
   userName?: string;
 }

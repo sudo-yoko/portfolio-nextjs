@@ -11,6 +11,9 @@ type RES = {
   userName: string;
 };
 
+/**
+ * ユーザ一覧の取得。ページネーションあり
+ */
 export async function send(params: UsersQuery): Promise<RES> {
   return withErrorHandlingAsync(() => serverProcess());
 
