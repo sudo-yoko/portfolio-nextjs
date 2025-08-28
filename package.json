@@ -11,7 +11,8 @@
     "mock2": "node --no-warnings --loader ts-node/esm __mocks__/web-to-case.mts",
     "mock3": "node --no-warnings --loader ts-node/esm __mocks__/proxy-server.mts",
     "mock4": "node --no-warnings --loader ts-node/esm __mocks__/openai-mock.mts",
-    "dev:mock": "npm-run-all --parallel dev mock2 mock3 mock4",
+    "mock5": "node --no-warnings --loader ts-node/esm __mocks__/users.mts",
+    "dev:mock": "npm-run-all --parallel dev mock2 mock3 mock4 mock5",
     "start:mock": "npm-run-all --parallel start mock2 mock3"
   },
   "dependencies": {
