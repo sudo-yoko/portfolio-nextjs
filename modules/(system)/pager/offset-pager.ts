@@ -22,50 +22,58 @@ export type PageFetcherResult<TItems> = {
 
 /**
  * ページング制御オブジェクト
+ *
+ * @typeParam T - ページ内アイテム(リスト)の型
  */
-export interface Pager<TItems> {
+export interface Pager<T> {
   /**
    * 現在のページを取得する
    */
-  current(): Promise<PagerResult<TItems>>;
+  current(): Promise<PagerResult<T>>;
   /**
    * 次ページを取得する
    */
-  next(): Promise<PagerResult<TItems>>;
+  next(): Promise<PagerResult<T>>;
   /**
    * 前ページを取得する
    */
-  prev(): Promise<PagerResult<TItems>>;
+  prev(): Promise<PagerResult<T>>;
 }
 
-export type PagerResult<TItems> = {
+/**
+ * Pagerが返す結果
+ * 
+ * @typeParam T - ページ内アイテム(リスト)の型
+ */
+export type PagerResult<T> = {
   total: number;
-  items: TItems;
+  items: T;
   offset: number; // 実効オフセット（補正あり）
   hasNext: boolean;
   hasPrev: boolean;
 };
 
 /**
- *
+ * Pager を作成して返す
+ * 
  * @typeParam L - 結果リストの型
  * @typeParam Q - 検索条件の型
  *
  * @param fetcher - aaa
  * @param param - sss
- * @returns Pagerインターフェースを実装したページャ関数を返す
+ * @returns Pager を作成して返す
  */
-export async function createPager<TItems, TQuery>(
-  fetcher: PageFetcher<TItems, TQuery>,
+export async function createPager<T, TQuery>(
+  fetcher: PageFetcher<T, TQuery>,
   param: { offset: number; limit: number; query: TQuery },
-): Promise<Pager<TItems>> {
+): Promise<Pager<T>> {
   const { query } = param;
   let { offset, limit } = param;
 
   offset = Math.max(OFFSET_START, Math.floor(offset));
   limit = Math.max(1, Math.floor(limit));
 
-  const fetchData = async (): Promise<PagerResult<TItems>> => {
+  const fetchData = async (): Promise<PagerResult<T>> => {
     if (offset < OFFSET_START) {
       // 実効オフセットに補正
       offset = OFFSET_START;
@@ -87,7 +95,7 @@ export async function createPager<TItems, TQuery>(
     return { total, offset, items, hasNext, hasPrev };
   };
 
-  const pager: Pager<TItems> = {
+  const pager: Pager<T> = {
     current() {
       return fetchData();
     },

@@ -8,16 +8,11 @@
  * ターミナルを２つ立ち上げて、一方で npm run mock5、もう一方で npm run node:test を実行する。
  */
 import { client } from '@/modules/(system)/clients/client';
-import {
-  createPager,
-  PageFetcher,
-  PageFetcherResult,
-  Pager,
-} from '@/modules/(system)/pager/offset-pager';
+import { createPager, PageFetcher, Pager } from '@/modules/(system)/pager/offset-pager';
 import type { User, UsersQuery } from '@/modules/users/models/users-model';
 import test from 'node:test';
 
-const consolePrefix = "### test: offset-pager.test.ts >>> "
+const consolePrefix = '### test: offset-pager.test.ts >>> ';
 
 test('test: offset-pager.test.ts', async () => {
   type Res = {
@@ -32,7 +27,7 @@ test('test: offset-pager.test.ts', async () => {
       params: { offset, limit, ...query },
     });
     const { total, users } = res.data;
-    return  { total, items: users };
+    return { total, items: users };
   };
 
   const pager: Pager<User[]> = await createPager<User[], UsersQuery>(fetcher, {

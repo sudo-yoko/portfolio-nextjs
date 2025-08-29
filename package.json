@@ -15,7 +15,7 @@
     "mock5": "node --no-warnings --loader ts-node/esm __mocks__/users.mts",
     "dev:mock": "npm-run-all --parallel dev mock2 mock3 mock4 mock5",
     "start:mock": "npm-run-all --parallel start mock2 mock3",
-    "node:test": "node --test --import tsx '__tests__/node-test/offset-pager.test.ts'"
+    "node:test": "node --test --import tsx --test-name-pattern='test2' '__tests__/node-test/validator.test.ts'"
   },
   "dependencies": {
     "autoprefixer": "^10.4.21",
