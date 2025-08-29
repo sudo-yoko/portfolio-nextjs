@@ -4,12 +4,13 @@
  * Model -- Viewに依存しない処理
  * 依存方向：View → VM → Model
  * total が常に取得できる前提の設計
+ * 連打に非対応（呼び元で制御必要）
  */
 
-const offsetStart = 1;
+const OFFSET_START = 1 as const;
 
 export type PageFetcher<TItems, TQuery> = (
-  offset1: number,
+  offset: number,
   limit: number,
   query: TQuery,
 ) => Promise<PageFetcherResult<TItems>>;
@@ -19,6 +20,9 @@ export type PageFetcherResult<TItems> = {
   items: TItems;
 };
 
+/**
+ * ページング制御オブジェクト
+ */
 export interface Pager<TItems> {
   /**
    * 現在のページを取得する
@@ -37,7 +41,7 @@ export interface Pager<TItems> {
 export type PagerResult<TItems> = {
   total: number;
   items: TItems;
-  offset1: number;
+  offset: number; // 実効オフセット（補正あり）
   hasNext: boolean;
   hasPrev: boolean;
 };
@@ -53,28 +57,49 @@ export type PagerResult<TItems> = {
  */
 export function createPager<TItems, TQuery>(
   fetcher: PageFetcher<TItems, TQuery>,
-  param: { offset1: number; limit: number; query: TQuery },
+  param: { offset: number; limit: number; query: TQuery },
 ): Pager<TItems> {
-  const { limit, query } = param;
-  let { offset1 } = param;
+  const { query } = param;
+  let { offset, limit } = param;
 
-  const fetchData = async (offset1: number): Promise<PagerResult<TItems>> => {
-    if (offset1 < offsetStart) {
-      offset1 = offsetStart;
+  offset = Math.max(OFFSET_START, Math.floor(offset));
+  limit = Math.max(1, Math.floor(limit));
+
+  const fetchData = async (): Promise<PagerResult<TItems>> => {
+    if (offset < OFFSET_START) {
+      // 実効オフセットに補正
+      offset = OFFSET_START;
     }
-    const { total, items } = await fetcher(offset1, limit, query);
-    if (offset1 > total) {
-      offset1 = total;
+
+    let { total, items } = await fetcher(offset, limit, query);
+    if (total === 0) {
+      return { total, offset, items, hasNext: false, hasPrev: false };
     }
-    const hasNext = offset1 + limit < total;
-    const hasPrev = offset1 > offsetStart;
-    return { total, offset1, items, hasNext, hasPrev };
+
+    if (offset > total) {
+      // 実効オフセットに補正して再取得
+      offset = OFFSET_START + Math.floor((total - 1) / limit) * limit; // 最終ページの先頭の1件目
+      ({ total, items } = await fetcher(offset, limit, query));
+    }
+
+    const hasNext = offset + limit - OFFSET_START < total;
+    const hasPrev = offset > OFFSET_START;
+    return { total, offset, items, hasNext, hasPrev };
   };
 
-  // Pagerを返す
-  return {
-    current: () => fetchData(offset1),
-    next: () => fetchData((offset1 += limit)),
-    prev: () => fetchData((offset1 -= limit)),
+  const pager: Pager<TItems> = {
+    current() {
+      return fetchData();
+    },
+    next() {
+      offset += limit;
+      return fetchData();
+    },
+    prev() {
+      offset -= limit;
+      return fetchData();
+    },
   };
+
+  return pager;
 }
