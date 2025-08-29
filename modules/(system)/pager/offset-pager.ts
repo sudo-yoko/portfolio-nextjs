@@ -55,10 +55,10 @@ export type PagerResult<TItems> = {
  * @param param - sss
  * @returns Pagerインターフェースを実装したページャ関数を返す
  */
-export function createPager<TItems, TQuery>(
+export async function createPager<TItems, TQuery>(
   fetcher: PageFetcher<TItems, TQuery>,
   param: { offset: number; limit: number; query: TQuery },
-): Pager<TItems> {
+): Promise<Pager<TItems>> {
   const { query } = param;
   let { offset, limit } = param;
 

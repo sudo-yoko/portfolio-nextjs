@@ -2,8 +2,6 @@
  * 検索条件
  */
 export type UsersQuery = {
-  offset: number;
-  limit: number;
   userId?: string;
   userName?: string;
 };
@@ -17,5 +15,6 @@ export type User = {
 };
 
 export type Users = {
+  total: number;
   users: User[];
 };

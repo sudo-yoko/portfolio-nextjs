@@ -12,8 +12,13 @@
     "mock3": "node --no-warnings --loader ts-node/esm __mocks__/proxy-server.mts",
     "mock4": "node --no-warnings --loader ts-node/esm __mocks__/openai-mock.mts",
     "mock5": "node --no-warnings --loader ts-node/esm __mocks__/users.mts",
+    "mock6": "node --test --import tsx '__mocks__/users.mts'",
     "dev:mock": "npm-run-all --parallel dev mock2 mock3 mock4 mock5",
-    "start:mock": "npm-run-all --parallel start mock2 mock3"
+    "start:mock": "npm-run-all --parallel start mock2 mock3",
+    "node:test1": "node --test --import tsx '__tests__/node-test/offset-pager.test.ts'",
+    "node:test": "node --no-warnings --loader ts-node/esm __tests__/node-test/offset-pager.test.mts",
+    "node:test:mock": "npm-run-all --parallel node:test1 mock5"
+
   },
   "dependencies": {
     "autoprefixer": "^10.4.21",
@@ -48,6 +53,7 @@
     "prettier-plugin-tailwindcss": "^0.6.10",
     "tailwindcss": "^3.4.17",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.5",
     "typescript": "^5.7.3"
   },
   "engines": {

@@ -1,25 +1,23 @@
 import { client } from '@/modules/(system)/clients/client';
 import { env } from '@/modules/(system)/env/env-helper';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/server-error-handler';
-import { UsersQuery } from '@/modules/users/models/users-model';
+import { Users, UsersQuery } from '@/modules/users/models/users-model';
 import 'server-only';
 
-const logPrefix = 'user-client.ts: ';
-
 type RES = {
-  userId: string;
-  userName: string;
+  total: number;
+  users: {
+    userId: string;
+    userName: string;
+  }[];
 };
 
-/**
- * ユーザ一覧の取得。ページネーションあり
- */
-export async function send(params: UsersQuery): Promise<RES> {
+export async function send(offset: number, limit: number, query: UsersQuery): Promise<Users> {
   return withErrorHandlingAsync(() => serverProcess());
 
-  async function serverProcess(): Promise<RES> {
+  async function serverProcess(): Promise<Users> {
     const url = env('USERS_API');
-    const res = await client.get<RES>(url, { params });
-    return res.data;
+    const res = await client.get<RES>(url, { params: { offset, limit, ...query } });
+    return { ...res.data };
   }
 }
