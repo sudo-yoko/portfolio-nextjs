@@ -202,4 +202,14 @@ Next.js15から、クエリパラメーターは非同期で取得されるよ�
 :open_file_folder: コード：[search-params.ts](modules/(system)/types/search-params.ts)  
 :open_file_folder: 使用例：[app/contact/page.tsx#L19](app/contact/page.tsx#L19)
 
+## Node.js 組み込みテストランナー
+
+JestやVitestのような設定ファイルを書かなくても、簡単にテストを実行できます。できないことの制約はありますが、ユーティリティなどの単純な.tsモジュールであれば、とりあえず試してみることができます。
+* `npm i -D tsx` でインストールする。
+* テストコードを作成する。  
+   :open_file_folder: コード例：[validator.test.ts](__tests__/node-test/validator.test.ts)  
+* package.json に script を定義する。実行するテストコードを指定する。  
+  例：`"node:test": "node --test --import tsx '__tests__/node-test/validator.test.ts'"`
+* `npm run node:test` でテストを実行する。
+
 
