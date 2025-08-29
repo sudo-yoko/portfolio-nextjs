@@ -1,6 +1,42 @@
 # ポートフォリオ
 Next.js の実装集
 
+## はじめに：Next.jsアプリケーションにおけるフロントエンドアーキテクチャ考察 :thinking::mag:
+
+これは自分がアプリケーションを実装する際の方針です。  
+フロントエンドはMVVM構成とし、各構成要素であるModel、View、ViewModelを以下のように考える。
+
+* View  
+  .tsxをViewとする。コンポーネントを実装する。
+* ViewModel  
+  Viewに公開するもの(依存関係のあるもの)。Viewの状態や操作を実装する。
+* Model  
+  Viewに依存しない処理。上記以外のものはすべてここに分類する。
+* 依存方向をView ⇒ ViewModel ⇒ Modelとする。
+
+フォルダ構成を以下とする。
+```text
+.
+├── app                        コンポーネント(.tsx)を格納する。
+│   ├── (system)               共通のView
+│   ├── chat                   業務アプリのView
+│   └── contact                業務アプリのView
+│
+├── modules                    モジュール(.ts)を格納する。
+│   ├── (system)               共通のモジュール
+│   │
+│   ├── chat                   業務アプリのモジュール
+│   │   ├── models             業務アプリのモジュール(model)
+│   │   └── view-models        業務アプリのモジュール(viewModel)
+│   │
+│   └── contact                業務アプリのモジュール
+│        ├── models            業務アプリのモジュール(model)
+│        └── view-models       業務アプリのモジュール(viewModel)
+│
+└── public
+```
+
+
 ## 対話型AIインターフェース
 
 対話型AIに対して質問を入力すると、回答が一文字ずつリアルタイムに表示されます。  
