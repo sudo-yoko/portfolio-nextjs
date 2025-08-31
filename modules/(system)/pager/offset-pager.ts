@@ -1,11 +1,7 @@
-/**
- * View -- .tsx
- * ViewModel -- Viewに公開するもの。Viewの状態や操作
- * Model -- Viewに依存しない処理
- * 依存方向：View → VM → Model
- * total が常に取得できる前提の設計
- * 連打に非対応（呼び元で制御必要）
- */
+//
+// totalが常に取得できる前提の設計
+// 連打に非対応（呼び元で制御必要）
+//
 
 const OFFSET_START = 1 as const;
 
@@ -42,7 +38,7 @@ export interface Pager<T> {
 
 /**
  * Pagerが返す結果
- * 
+ *
  * @typeParam T - ページ内アイテム(リスト)の型
  */
 export type PagerResult<T> = {
@@ -55,7 +51,7 @@ export type PagerResult<T> = {
 
 /**
  * Pager を作成して返す
- * 
+ *
  * @typeParam L - 結果リストの型
  * @typeParam Q - 検索条件の型
  *

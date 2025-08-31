@@ -56,7 +56,7 @@ const transport = new winston.transports.DailyRotateFile(options);
 // ログをファイルに出力
 logger.add(transport);
 // 開発時はコンソールにも出力
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV != 'production') {
   logger.add(new transports.Console());
 }
 

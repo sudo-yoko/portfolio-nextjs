@@ -17,7 +17,7 @@ const noop: DebugLogger = () => {}; // 空実装を適用する
  * ロガーの実装を決定する
  */
 function createDebugLogger(): DebugLogger {
-  return process.env.NODE_ENV === 'development' ? debugLogger : noop;
+  return process.env.NODE_ENV === 'production' ? noop: debugLogger;
 }
 
 /**

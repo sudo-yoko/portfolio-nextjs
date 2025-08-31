@@ -1,33 +1,38 @@
 /**
- * Node.js 組み込みのテストランナーによるテスト
+ * Node.js 組み込みテストランナーによるテスト
  *
+ * インストール
  * npm i -D tsx
+ * 
+ * テスト実行
  * package.json: "node:test": "node --test --import tsx '__tests__/node-test/offset-pager.test.ts'"
- *
- * テスト実行方法
- * ターミナルを２つ立ち上げて、一方で npm run mock5、もう一方で npm run node:test を実行する。
+ * npm run node:test
+ * もしくは
+ * npm exec -- node --test --import tsx __tests__/node-test/offset-pager.test.ts
  */
-import { client } from '@/modules/(system)/clients/client';
-import { createPager, PageFetcher, Pager } from '@/modules/(system)/pager/offset-pager';
+import {
+  createPager,
+  PageFetcher,
+  PageFetcherResult,
+  Pager,
+} from '@/modules/(system)/pager/offset-pager';
 import type { User, UsersQuery } from '@/modules/users/models/users-model';
 import test from 'node:test';
 
 const consolePrefix = '### test: offset-pager.test.ts >>> ';
 
 test('test: offset-pager.test.ts', async () => {
-  type Res = {
-    total: number;
-    users: {
-      userId: string;
-      userName: string;
-    }[];
-  };
   const fetcher: PageFetcher<User[], UsersQuery> = async (offset, limit, query) => {
-    const res = await client.get<Res>('http://localhost:3003/users', {
-      params: { offset, limit, ...query },
-    });
-    const { total, users } = res.data;
-    return { total, items: users };
+    console.log(consolePrefix + `parameter -> offset=${offset}`);
+    console.log(consolePrefix + `parameter -> limit=${limit}`);
+    console.log(consolePrefix + `parameter -> query=${JSON.stringify(query)}`);
+
+    const items: User[] = [
+      { userId: '1', userName: '111' },
+      { userId: '2', userName: '222' },
+    ];
+    const result: PageFetcherResult<User[]> = { total: 1, items };
+    return result;
   };
 
   const pager: Pager<User[]> = await createPager<User[], UsersQuery>(fetcher, {
