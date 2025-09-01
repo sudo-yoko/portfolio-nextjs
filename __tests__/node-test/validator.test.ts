@@ -1,16 +1,6 @@
-/**
- * Node.js 組み込みのテストランナーによるテスト
- *
- * npm i -D tsx
- * package.json:
- *      "node:test": "node --test --import tsx '__tests__/node-test/validator.test.ts'"
- *
- *      特定のテストメソッドのみ実行したい場合。--test-name-patternにテスト名を指定
- *      "node:test": "node --test --import tsx --test-name-pattern='test2' '__tests__/node-test/validator.test.ts'"
- *
- * テスト実行方法
- * npm run node:test
- */
+// テスト実行
+// npm exec -- node --test --import tsx __tests__/node-test/validator.test.ts
+
 import { required, requiredEmail } from '@/modules/(system)/validators/validator';
 import test from 'node:test';
 

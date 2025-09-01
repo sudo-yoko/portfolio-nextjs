@@ -1,15 +1,6 @@
-/**
- * Node.js 組み込みテストランナーによるテスト
- *
- * インストール
- * npm i -D tsx
- * 
- * テスト実行
- * package.json: "node:test": "node --test --import tsx '__tests__/node-test/offset-pager.test.ts'"
- * npm run node:test
- * もしくは
- * npm exec -- node --test --import tsx __tests__/node-test/offset-pager.test.ts
- */
+// テスト実行
+// npm exec -- node --test --import tsx __tests__/node-test/offset-pager.test.ts
+
 import {
   createPager,
   PageFetcher,
