@@ -203,13 +203,16 @@ Next.js15から、クエリパラメーターは非同期で取得されるよ�
 :open_file_folder: 使用例：[app/contact/page.tsx#L19](app/contact/page.tsx#L19)
 
 ## テスト
-#### 🧪 node:test
-Node.js 組み込みのテストランナー。モックも利用できる。
+### node:test
+Node.js 組み込みのテストランナー。手軽に利用できるが、Next.js環境外で動作するため `import server-only` などはエラーとなってしまう。
+ただしモックが利用できるので、`server-only`をモックすれば動作できる。
 
 :open_file_folder: コード：[node-test/](__tests__/node-test/)
 
-#### 🧪 Jest
-:open_file_folder: コード：[jest/](__tests__/jest/)
+### next:jest
+Next.js用のJest構成。`import server-only`も動作できる。
+
+:open_file_folder: コード：[next-jest/](__tests__/next-jest/)
 
 
 
