@@ -12,14 +12,14 @@ test('test1', async () => {
     print(`parameter -> limit=${limit}`);
     print(`parameter -> query=${JSON.stringify(query)}`);
 
-    const resp = await send(offset, limit, query);
-    const result: PageFetcherResult<User[]> = { total: resp.total, items: { ...resp.users } };
+    const { total, users } = await send(offset, limit, query);
+    const result: PageFetcherResult<User[]> = { total, items: users };
     return result;
   };
 
   const pager: Pager<User[]> = await createPager<User[], UsersQuery>(fetcher, {
-    offset: 1,
-    limit: 1,
+    offset: 0,
+    limit: 2,
     query: { userName: 'taro' },
   });
   print(`result -> data=${JSON.stringify(await pager.current())}`);

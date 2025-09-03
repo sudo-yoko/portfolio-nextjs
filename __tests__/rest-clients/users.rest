@@ -1,1 +1,1 @@
-GET http://localhost:3003/users?userId=12345
+GET http://localhost:3003/users?offset=3&limit=2
