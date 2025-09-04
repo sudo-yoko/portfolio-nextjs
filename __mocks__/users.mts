@@ -20,8 +20,8 @@ interface ResBody {
 }
 
 interface User {
-  id: string;
-  name: string;
+  userId: string;
+  userName: string;
 }
 
 const app = express();
@@ -42,9 +42,9 @@ app.get(path, async (req: Request<never, ResBody, never, ReqQuery>, res: Respons
   const total = 10;
   const users: User[] = [];
   for (let i = 0; i < total; i++) {
-    const id = String(i).padStart(5, '0');
-    const name = 'テスト 太郎' + i;
-    users.push({ id, name });
+    const userId = String(i).padStart(5, '0');
+    const userName = 'テスト 太郎' + i;
+    users.push({ userId, userName });
   }
 
   //

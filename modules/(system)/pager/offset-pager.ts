@@ -3,51 +3,10 @@
 // 連打に非対応（呼び元で制御必要）
 //
 
+import { PageFetcher, Pager, PagerResult } from './models/pager-model';
+import 'client-only';
+
 const OFFSET_START = 1 as const;
-
-export type PageFetcher<TItems, TQuery> = (
-  offset: number,
-  limit: number,
-  query: TQuery,
-) => Promise<PageFetcherResult<TItems>>;
-
-export type PageFetcherResult<TItems> = {
-  total: number;
-  items: TItems;
-};
-
-/**
- * ページング制御オブジェクト
- *
- * @typeParam T - ページ内アイテム(リスト)の型
- */
-export interface Pager<T> {
-  /**
-   * 現在のページを取得する
-   */
-  current(): Promise<PagerResult<T>>;
-  /**
-   * 次ページを取得する
-   */
-  next(): Promise<PagerResult<T>>;
-  /**
-   * 前ページを取得する
-   */
-  prev(): Promise<PagerResult<T>>;
-}
-
-/**
- * Pagerが返す結果
- *
- * @typeParam T - ページ内アイテム(リスト)の型
- */
-export type PagerResult<T> = {
-  total: number;
-  items: T;
-  offset: number; // 実効オフセット（補正あり）
-  hasNext: boolean;
-  hasPrev: boolean;
-};
 
 /**
  * Pager を作成して返す
@@ -59,10 +18,10 @@ export type PagerResult<T> = {
  * @param param - sss
  * @returns Pager を作成して返す
  */
-export async function createPager<T, TQuery>(
+export function createPager<T, TQuery>(
   fetcher: PageFetcher<T, TQuery>,
   param: { offset: number; limit: number; query: TQuery },
-): Promise<Pager<T>> {
+): Pager<T> {
   const { query } = param;
   let { offset, limit } = param;
 
@@ -104,6 +63,5 @@ export async function createPager<T, TQuery>(
       return fetchData();
     },
   };
-
   return pager;
 }

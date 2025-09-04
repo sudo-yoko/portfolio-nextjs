@@ -1,13 +1,9 @@
 // テスト実行
 // npm exec -- node --test --import tsx __tests__/node-test/offset-pager.test.ts
 
-import {
-  createPager,
-  PageFetcher,
-  PageFetcherResult,
-  Pager,
-} from '@/modules/(system)/pager/offset-pager';
-import type { User, UsersQuery } from '@/modules/users/models/users-model';
+import { PageFetcher, PageFetcherResult, Pager } from '@/modules/(system)/pager/models/pager-model';
+import { createPager } from '@/modules/(system)/pager/offset-pager';
+import type { User, UsersQuery } from '@/modules/users/models/types';
 import test from 'node:test';
 
 const consolePrefix = '### test: offset-pager.test.ts >>> ';
