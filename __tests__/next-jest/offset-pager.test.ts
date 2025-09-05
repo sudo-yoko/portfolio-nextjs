@@ -1,4 +1,4 @@
-import { PageFetcher, PageFetcherResult, Pager } from '@/modules/(system)/pager/models/pager-model';
+import { PagerAction, PagerActionResult, Pager } from '@/modules/(system)/pager/models/pager-model';
 import { createPager } from '@/modules/(system)/pager/offset-pager';
 import { send } from '@/modules/users/models/client';
 import type { User, UsersQuery } from '@/modules/users/models/types';
@@ -9,13 +9,13 @@ const print = printf({ logPrefix: '>>> [offset-pager.test.ts]', stdout: true });
 // npm run mock5
 // npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/offset-pager.test.ts
 test('test1', async () => {
-  const fetcher: PageFetcher<User[], UsersQuery> = async (offset, limit, query) => {
+  const fetcher: PagerAction<User[], UsersQuery> = async (offset, limit, query) => {
     print(`parameter -> offset=${offset}`);
     print(`parameter -> limit=${limit}`);
     print(`parameter -> query=${JSON.stringify(query)}`);
 
     const { total, users } = await send(offset, limit, query);
-    const result: PageFetcherResult<User[]> = { total, items: users };
+    const result: PagerActionResult<User[]> = { total, items: users };
     return result;
   };
 

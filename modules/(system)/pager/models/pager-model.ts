@@ -1,16 +1,24 @@
-export type PageFetcher<TItems, TQuery> = (
+/**
+ * Pager サーバーアクション関数の型
+ */
+export type PagerAction<TItems, TQuery> = (
   offset: number,
   limit: number,
   query: TQuery,
-) => Promise<PageFetcherResult<TItems>>;
+) => Promise<PagerActionResult<TItems>>;
 
-export type PageFetcherResult<TItems> = {
+/**
+ * Pager サーバーアクション関数の戻り値の型
+ */
+export type PagerActionResult<TItems> = {
   total: number;
   items: TItems;
 };
 
 /**
  * ページング制御オブジェクト
+ *
+ * 検索条件や表示件数などはPagerの中にエンクロージングされる
  *
  * @typeParam T - ページ内アイテム(リスト)の型
  */
@@ -35,8 +43,10 @@ export interface Pager<T> {
  * @typeParam T - ページ内アイテム(リスト)の型
  */
 export type PagerResult<T> = {
-  total: number;
   items: T;
+  page: number;
+  total: number;
+  totalPage: number;
   offset: number; // 実効オフセット（補正あり）
   hasNext: boolean;
   hasPrev: boolean;

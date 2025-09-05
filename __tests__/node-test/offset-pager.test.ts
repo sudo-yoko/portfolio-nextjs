@@ -1,7 +1,7 @@
 // テスト実行
 // npm exec -- node --test --import tsx __tests__/node-test/offset-pager.test.ts
 
-import { PageFetcher, PageFetcherResult, Pager } from '@/modules/(system)/pager/models/pager-model';
+import { PagerAction, PagerActionResult, Pager } from '@/modules/(system)/pager/models/pager-model';
 import { createPager } from '@/modules/(system)/pager/offset-pager';
 import type { User, UsersQuery } from '@/modules/users/models/types';
 import test from 'node:test';
@@ -9,7 +9,7 @@ import test from 'node:test';
 const consolePrefix = '### test: offset-pager.test.ts >>> ';
 
 test('test: offset-pager.test.ts', async () => {
-  const fetcher: PageFetcher<User[], UsersQuery> = async (offset, limit, query) => {
+  const fetcher: PagerAction<User[], UsersQuery> = async (offset, limit, query) => {
     console.log(consolePrefix + `parameter -> offset=${offset}`);
     console.log(consolePrefix + `parameter -> limit=${limit}`);
     console.log(consolePrefix + `parameter -> query=${JSON.stringify(query)}`);
@@ -18,7 +18,7 @@ test('test: offset-pager.test.ts', async () => {
       { userId: '1', userName: '111' },
       { userId: '2', userName: '222' },
     ];
-    const result: PageFetcherResult<User[]> = { total: 1, items };
+    const result: PagerActionResult<User[]> = { total: 1, items };
     return result;
   };
 
