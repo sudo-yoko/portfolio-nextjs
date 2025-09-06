@@ -1,6 +1,6 @@
 'use client';
 
-import { InputValues } from '@/modules/(system)/models/input-values';
+import { InputValues } from '@/modules/(system)/types/input-values';
 import { createPager } from '@/modules/(system)/pager/pager';
 import { Pager } from '@/modules/(system)/pager/types';
 import { pagerAction } from '@/modules/users/models/pager-action';

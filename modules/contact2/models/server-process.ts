@@ -5,7 +5,7 @@ import logger from '@/modules/(system)/logging-facade/logger';
 import {
   getQueryParams,
   SearchParams,
-} from '@/modules/(system)/models/search-params';
+} from '@/modules/(system)/types/search-params';
 import { ContactParams } from '@/modules/contact2/models/contact-model';
 
 const logPrefix = 'app/contact2/page.ts: ';

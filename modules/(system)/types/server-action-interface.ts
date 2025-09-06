@@ -17,7 +17,16 @@ export interface ActionResult<T> {
 }
 
 export const ActionResult = {
-  OK<T>(body: T): ActionResult<T> {
+  /**
+   * 成功。ステータスコード200に相当
+   */
+  Ok<T>(body: T): ActionResult<T> {
     return { status: 200, body };
+  },
+  /**
+   * エラー。ステータスコード500に相当
+   */
+  Error(): ActionResult<void> {
+    return { status: 500 };
   },
 } as const;

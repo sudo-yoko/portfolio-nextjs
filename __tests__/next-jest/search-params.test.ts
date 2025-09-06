@@ -1,4 +1,4 @@
-import { getQueryParams, SearchParam, SearchParams } from '@/modules/(system)/models/search-params';
+import { getQueryParams, SearchParam, SearchParams } from '@/modules/(system)/types/search-params';
 import { printf } from './utils/test-logger';
 
 // npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/search-params.test.ts
