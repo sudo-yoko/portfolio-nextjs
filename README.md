@@ -193,7 +193,10 @@ opt
 end
 ```
 
-## クエリパラメーターの型エイリアス
+## ユーティリティ型
+汎用的に利用できる型エイリアス
+
+#### クエリパラメーターの型エイリアス
 
 型エイリアスを用意しておくことで、アプリケーション内でクエリパラメーターを扱いやすくなります。
 
@@ -201,6 +204,12 @@ Next.js15から、クエリパラメーターは非同期で取得されるよ�
 
 :open_file_folder: コード：[search-params.ts](modules/(system)/types/search-params.ts)  
 :open_file_folder: 使用例：[app/contact/page.tsx#L19](app/contact/page.tsx#L19)
+
+#### フォーム入力値を保持する汎用マップ型
+
+:open_file_folder: コード：[input-values.ts](modules/(system)/types/input-values.ts)  
+:open_file_folder: 使用例：
+
 
 ## テスト
 ### node:test
