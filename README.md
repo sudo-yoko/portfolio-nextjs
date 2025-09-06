@@ -37,7 +37,7 @@ Next.js の実装集
 ```
 
 
-## 対話型AIインターフェース
+## 対話型AIインターフェース :robot:
 
 対話型AIに対して質問を入力すると、回答が一文字ずつリアルタイムに表示されます。  
 対話型AIのAPIをモック化し、AIの回答を模した文字列を１文字ずつチャンク単位のストリーム形式でレスポンスしています。Next.jsのクライアントサイドでは、受信した文字列を順次差分レンダリングしています。
@@ -48,7 +48,7 @@ Next.js の実装集
 :open_file_folder: AIモック：[__mocks__/openai-mock.mts](__mocks__/openai-mock.mts)  
 :open_file_folder: シーケンス図：[_docs/chat/sequenceDiagram.md](_docs/chat/sequenceDiagram.md)  
 
-## お問い合わせフォーム
+## お問い合わせフォーム :envelope:
 
 入力されたお問い合わせを、SalesforceのWeb-to-Caseに送信します。  
 
@@ -96,7 +96,7 @@ import logger from '@/modules/(system)/logging-facade/logger';
 logger.info('ログメッセージ');
 ```
 
-## デバッグログ出力
+## デバッグログ出力 :bug:
 
 `console.log()` を使用したデバッグログ出力機能を提供します。
 - 開発モード `development` の場合に、 `console.log()` でログ出力します。
@@ -115,7 +115,7 @@ import debug from '@/modules/(system)/loggers/logger-debug';
 debug('ログメッセージ');
 ```
 
-## エラーハンドリング
+## エラーハンドリング :boom:
 エラーハンドリングの実装を統一し、一貫性を持たせます。  
 javascriptの関数を引数にとれる性質と、クロージャを活用しています。
 
@@ -193,7 +193,7 @@ opt
 end
 ```
 
-## ユーティリティ型
+## ユーティリティ型 :hammer_and_wrench:
 汎用的に利用できる型エイリアス
 
 #### クエリパラメーターの型エイリアス
@@ -211,7 +211,7 @@ Next.js15から、クエリパラメーターは非同期で取得されるよ�
 :open_file_folder: 使用例：
 
 
-## テスト
+## テスト :alembic:
 ### node:test
 Node.js 組み込みのテストランナー。手軽に利用できるが、Next.js環境外で動作するため `import server-only` などはエラーとなってしまう。
 ただしモックが利用できるので、`server-only`をモックすれば動作できる。
