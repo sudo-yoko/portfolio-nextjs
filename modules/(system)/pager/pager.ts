@@ -4,9 +4,8 @@
 //
 
 import { Pager, PagerAction, PagerResult } from '@/modules/(system)/pager/types';
+import { offsetOfLastPage, pageToOffset } from '@/modules/(system)/pager/utils';
 import 'client-only';
-
-const OFFSET_START = 1 as const;
 
 /**
  * Pager を作成して返す
@@ -14,25 +13,25 @@ const OFFSET_START = 1 as const;
  * @typeParam L - 結果リストの型
  * @typeParam Q - 検索条件の型
  *
- * @param action - aaa
- * @param actionArgs - sss
- * @returns Pager を作成して返す
+ * @param action - ページネーションで使用するサーバーアクションを指定する
+ * @param actionArgs -
+ * @returns
  */
 export function createPager<T, Q>(
   action: PagerAction<T, Q>,
-  actionArgs: { offset: number; limit: number; query: Q },
+  actionArgs: { initialPage?: number; perPage: number; query: Q },
 ): Pager<T> {
-  const { query, limit } = actionArgs;
-  let { offset } = actionArgs;
+  const { perPage, query } = actionArgs;
+  const initPage = actionArgs.initialPage ?? 1;
+  let { offset } = pageToOffset(perPage, initPage);
+  const limit = perPage;
 
   //offset = Math.max(OFFSET_START, Math.floor(offset));
   //limit = Math.max(1, Math.floor(limit));
 
   const fetchData = async (): Promise<PagerResult<T>> => {
-    //if (offset < OFFSET_START) {
     // 実効オフセットに補正
-    //offset = OFFSET_START;
-    //}
+    if (offset < 0) offset = 0;
 
     let { body } = await action(offset, limit, query);
     let { total, items } = body!;
@@ -40,15 +39,15 @@ export function createPager<T, Q>(
       return { total, offset, items, hasNext: false, hasPrev: false, page: 0, totalPage: 0 };
     }
 
+    // 実効オフセットに補正して再取得
     if (offset > total) {
-      // 実効オフセットに補正して再取得
-      offset = OFFSET_START + Math.floor((total - 1) / limit) * limit; // 最終ページの先頭の1件目
+      offset = offsetOfLastPage(total, limit); // 最終ページの先頭の1件目
       ({ body } = await action(offset, limit, query));
-      ({total, items} = body!);
+      ({ total, items } = body!);
     }
 
-    const hasNext = offset + limit - OFFSET_START < total;
-    const hasPrev = offset > OFFSET_START;
+    const hasNext = offset + limit < total;
+    const hasPrev = offset > 0;
     return { total, offset, items, hasNext, hasPrev, page: 0, totalPage: 0 };
   };
 

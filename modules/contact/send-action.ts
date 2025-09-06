@@ -2,7 +2,7 @@
 
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/action-error-handler';
 import logger from '@/modules/(system)/logging-facade/logger';
-import { ActionResult } from '@/modules/(system)/models/action-result';
+import { ActionResult } from '@/modules/(system)/models/server-action-interface';
 import { Violations, hasError } from '@/modules/(system)/validators/validator';
 import { FormData, FormKey, validate } from '@/modules/contact/model';
 import { send } from '@/modules/contact/web-to-case-client';

@@ -1,6 +1,6 @@
 import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
 import logger from '@/modules/(system)/logging-facade/logger';
-import { ActionResult } from '@/modules/(system)/models/action-result';
+import { ActionResult } from '@/modules/(system)/models/server-action-interface';
 import 'server-only';
 
 const logPrefix = 'action-error-handler.ts: ';
@@ -8,9 +8,7 @@ const logPrefix = 'action-error-handler.ts: ';
 /**
  * サーバーアクションエラーハンドリング
  */
-export async function withErrorHandlingAsync<T>(
-  func: () => Promise<T>,
-): Promise<T | ActionResult<void>> {
+export async function withErrorHandlingAsync<T>(func: () => Promise<T>): Promise<T | ActionResult<void>> {
   const fname = 'withErrorHandlingAsync: ';
 
   try {

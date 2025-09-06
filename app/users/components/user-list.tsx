@@ -23,11 +23,7 @@ export default function UserList() {
   //}, []);
 
   function handleSearch() {
-    pager.current = createPager(pagerAction, {
-      offset: 1,
-      limit: 4,
-      query: { userName: inputValues.userName },
-    });
+    pager.current = createPager(pagerAction, { perPage: 4, query: { userName: inputValues.userName } });
     pager.current.current().then((p) => setUsers(p.items));
   }
 

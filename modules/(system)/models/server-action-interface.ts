@@ -16,3 +16,8 @@ export interface ActionResult<T> {
   body?: T;
 }
 
+export const ActionResult = {
+  OK<T>(body: T): ActionResult<T> {
+    return { status: 200, body };
+  },
+} as const;
