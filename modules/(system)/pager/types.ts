@@ -1,4 +1,4 @@
-import { ActionResult } from '../models/action-result';
+import { ActionResult } from '../models/server-action-interface';
 
 /**
  * Pager サーバーアクション関数の型
