@@ -1,6 +1,6 @@
 'use server';
 
-import { PagerAction, PagerActionResult } from '@/modules/(system)/pager/models/pager-model';
+import { PagerAction, PagerActionResult } from '@/modules/(system)/pager/types';
 import { fetch } from '@/modules/users/models/fetcher';
 import { User, UsersQuery } from '@/modules/users/models/types';
 

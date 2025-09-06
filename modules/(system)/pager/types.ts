@@ -1,3 +1,5 @@
+import { ActionResult } from '../models/action-result';
+
 /**
  * Pager サーバーアクション関数の型
  */
@@ -5,7 +7,7 @@ export type PagerAction<TItems, TQuery> = (
   offset: number,
   limit: number,
   query: TQuery,
-) => Promise<PagerActionResult<TItems>>;
+) => Promise<ActionResult<PagerActionResult<TItems>>>;
 
 /**
  * Pager サーバーアクション関数の戻り値の型

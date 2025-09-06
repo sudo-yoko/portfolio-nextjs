@@ -1,4 +1,10 @@
 /**
+ * 入力フォームのキー。
+ * 検索条件のユーザー名
+ */
+export type InputName = 'userName';
+
+/**
  * 検索条件
  */
 export type UsersQuery = {
@@ -14,6 +20,9 @@ export type User = {
   userName: string;
 };
 
+/**
+ * ユーザーリスト
+ */
 export type Users = {
   total: number;
   users: User[];

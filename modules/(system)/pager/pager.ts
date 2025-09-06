@@ -3,8 +3,8 @@
 // 連打に非対応（呼び元で制御必要）
 //
 
+import { Pager, PagerAction, PagerResult } from '@/modules/(system)/pager/types';
 import 'client-only';
-import { Pager, PagerAction, PagerResult } from './models/pager-model';
 
 const OFFSET_START = 1 as const;
 
@@ -34,7 +34,8 @@ export function createPager<T, Q>(
     //offset = OFFSET_START;
     //}
 
-    let { total, items } = await action(offset, limit, query);
+    let { body } = await action(offset, limit, query);
+    let { total, items } = body!;
     if (total === 0) {
       return { total, offset, items, hasNext: false, hasPrev: false, page: 0, totalPage: 0 };
     }
@@ -42,7 +43,8 @@ export function createPager<T, Q>(
     if (offset > total) {
       // 実効オフセットに補正して再取得
       offset = OFFSET_START + Math.floor((total - 1) / limit) * limit; // 最終ページの先頭の1件目
-      ({ total, items } = await action(offset, limit, query));
+      ({ body } = await action(offset, limit, query));
+      ({total, items} = body!);
     }
 
     const hasNext = offset + limit - OFFSET_START < total;
