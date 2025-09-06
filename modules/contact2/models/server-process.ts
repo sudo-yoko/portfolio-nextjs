@@ -3,7 +3,7 @@ import 'server-only';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/server-error-handler';
 import logger from '@/modules/(system)/logging-facade/logger';
 import {
-  getQueryParam,
+  getQueryParams,
   SearchParams,
 } from '@/modules/(system)/models/search-params';
 import { ContactParams } from '@/modules/contact2/models/contact-model';
@@ -19,7 +19,7 @@ export const serverProcess = async (searchParams?: SearchParams) => {
 
   async function serverProcess() {
     // クエリパラメータを取得する
-    const params: ContactParams = await getQueryParam(
+    const params: ContactParams = await getQueryParams(
       ['category', 'from'],
       searchParams,
     );

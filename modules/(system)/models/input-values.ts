@@ -1,5 +1,5 @@
 /**
- * 入力値を保持する汎用マップ型。
+ * フォームの入力値を保持する汎用マップ型。
  * 型パラメーターには入力値のキーをユニオンで指定する。
  */
 export type InputValues<T extends string> = Record<T, string>;

@@ -1,9 +1,11 @@
+import { SearchParam } from '@/modules/(system)/models/search-params';
+
 /**
  * クエリパラメータ
  */
 export type ContactParams = {
-  category?: string;
-  from?: string;
+  category?: SearchParam;
+  from?: SearchParam;
 };
 
 /**

@@ -10,17 +10,18 @@ export type SearchParams = Promise<{ [key: string]: SearchParam }>;
 
 /**
  * URLクエリ文字列から、指定したクエリパラメータを取得する
+ *
+ * @param keys - 取得するパラメータ名をstring配列で指定する。
+ * @param searchParams -
  */
-export async function getQueryParam<K extends string>(
-  keys: K[],
+export async function getQueryParams<K extends string>(
+  keys: readonly K[], // readonlyにすることで、呼び元でas constを付けた場合にリテラル型推論が効く。
   searchParams?: SearchParams,
-): Promise<{ [P in K]: string | undefined }> {
+): Promise<{ [P in K]: SearchParam }> {
   const params = await searchParams;
-  const result = {} as { [P in K]: string | undefined };
-
+  const result = {} as { [P in K]: SearchParam };
   for (const key of keys) {
-    const value = params?.[key];
-    result[key] = Array.isArray(value) ? value[0] : value;
+    result[key] = params?.[key];
   }
   return result;
 }
