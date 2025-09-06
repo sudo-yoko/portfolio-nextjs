@@ -70,19 +70,19 @@ Salesforce側に依存することなく開発を進めることができます�
 :open_file_folder: モジュール：[modules/contact2/](modules/contact2)  
 
 
-## バリデーターインターフェース
+## バリデーターインターフェース :heavy_check_mark:
 バリデーターインターフェースを提供することで、アプリケーションがバリデーションの実装に強く依存しない設計にしています。バリデーションの実装にはZodなどのライブラリや、独自の実装を使用できます。
 
 :open_file_folder: コード：[modules/(system)/validators/validator.ts](modules/(system)/validators/validator.ts)  
 :open_file_folder: 使用例：[modules/contact/model.ts#L29](modules/contact/model.ts#L29)
 
 
-## logger-winston.ts
+## logger-winston.ts :tophat:
 `winston` を用いたログ出力の設定例です。ログローテーションも行います。  
 
 :open_file_folder: コード：[modules/(system)/loggers/logger-winston.ts](modules/(system)/loggers/logger-winston.ts)  
 
-## ロギングファサード
+## ロギングファサード :memo:
 
 `Java` の `SLF4j` 風のロギングファサードです。統一されたロギングインターフェースを提供し、アプリケーションがロギングライブラリに直接的に依存しないように設計しています。
 `winston` をロギング実装として読み込みしています。  
@@ -143,7 +143,7 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 :open_file_folder: コード：[modules/(system)/error-handlers/client-error-handler.ts](modules/(system)/error-handlers/client-error-handler.ts)  
 :open_file_folder: 使用例：[app/contact/sending.tsx#L22](app/contact/sending.tsx#L22)  
 
-#### :arrow_right: クライアントサイドからサーバーアクションを経由してサーバーサイド処理を呼ぶ場合の各層のエラーハンドリング概要  
+##### :arrow_right: クライアントサイドからサーバーアクションを経由してサーバーサイド処理を呼ぶ場合の各層のエラーハンドリング概要  
 ```mermaid
 sequenceDiagram
 autonumber
