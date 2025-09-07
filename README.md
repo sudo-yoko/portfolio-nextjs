@@ -227,18 +227,18 @@ Next.js15から、クエリパラメーターは非同期で取得されるよ�
 
 ## :mag: テスト
 
-### node:test
+#### node:test
 Node.js 組み込みのテストランナー。手軽に利用できるが、Next.js環境外で動作するため `import server-only` などはエラーとなってしまう。
 ただしモックが利用できるので、`server-only`をモックすれば動作できる。
 
 :open_file_folder: コード：[node-test/](__tests__/node-test/)
 
-### next:jest
+#### next:jest
 Next.js用のJest構成。`import server-only`も動作できる。
 
 :open_file_folder: コード：[next-jest/](__tests__/next-jest/)
 
-### バックエンドAPIのモック
+#### バックエンドAPIのモック
 ExpressでバックエンドAPIのモックを作成した。package.jsonにscriptを定義し、`npm run dev:mock` のコマンドで、アプリケーションとモックが一緒に起動できるようにしている。
 バックエンドに依存することなく開発を進めることができる。
 
