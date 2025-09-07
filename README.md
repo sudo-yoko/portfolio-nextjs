@@ -1,7 +1,27 @@
 # ポートフォリオ
 Next.js の実装集
- 
-## はじめに：フロントエンドアーキテクチャ考察 :thinking::mag:
+
+## 目次
+
+1. [フロントエンドアーキテクチャ考察](#フロントエンドアーキテクチャ考察)  
+2. 簡単なアプリケーション
+    * 対話型AIインターフェース
+    * お問い合わせフォーム
+4. アプリミドル基盤
+    * バリデーターインターフェース
+    * winstonロガー
+    * ロギングファサード風
+    * デバッグログ出力
+    * エラーハンドリング
+    * ユーティリティ型
+6. テスト
+    * node:test
+    * next:jest
+    * バックエンドAPIのモック
+
+***
+
+## :thinking: フロントエンドアーキテクチャ考察 :mag:
 
 これは自分がNext.jsアプリケーションを実装する際の指針です。  
 フロントエンドはMVVM構成とし、各構成要素であるModel、View、ViewModelを以下のように考える。
@@ -36,8 +56,7 @@ Next.js の実装集
 └── public
 ```
 
-
-## 対話型AIインターフェース :robot:
+## :robot: 対話型AIインターフェース
 
 対話型AIに対して質問を入力すると、回答が一文字ずつリアルタイムに表示されます。  
 対話型AIのAPIをモック化し、AIの回答を模した文字列を１文字ずつチャンク単位のストリーム形式でレスポンスしています。Next.jsのクライアントサイドでは、受信した文字列を順次差分レンダリングしています。
@@ -48,7 +67,7 @@ Next.js の実装集
 :open_file_folder: AIモック：[__mocks__/openai-mock.mts](__mocks__/openai-mock.mts)  
 :open_file_folder: シーケンス図：[_docs/chat/sequenceDiagram.md](_docs/chat/sequenceDiagram.md)  
 
-## お問い合わせフォーム :envelope:
+## :envelope: お問い合わせフォーム
 
 入力されたお問い合わせを、SalesforceのWeb-to-Caseに送信します。  
 
@@ -70,19 +89,19 @@ Salesforce側に依存することなく開発を進めることができます�
 :open_file_folder: モジュール：[modules/contact2/](modules/contact2)  
 
 
-## バリデーターインターフェース :heavy_check_mark:
+## :heavy_check_mark: バリデーターインターフェース
 バリデーターインターフェースを提供することで、アプリケーションがバリデーションの実装に強く依存しない設計にしています。バリデーションの実装にはZodなどのライブラリや、独自の実装を使用できます。
 
 :open_file_folder: コード：[modules/(system)/validators/validator.ts](modules/(system)/validators/validator.ts)  
 :open_file_folder: 使用例：[modules/contact/model.ts#L29](modules/contact/model.ts#L29)
 
 
-## logger-winston.ts :tophat:
+## :tophat: logger-winston.ts
 `winston` を用いたログ出力の設定例です。ログローテーションも行います。  
 
 :open_file_folder: コード：[modules/(system)/loggers/logger-winston.ts](modules/(system)/loggers/logger-winston.ts)  
 
-## ロギングファサード :memo:
+## :memo: ロギングファサード風
 
 `Java` の `SLF4j` 風のロギングファサードです。統一されたロギングインターフェースを提供し、アプリケーションがロギングライブラリに直接的に依存しないように設計しています。
 `winston` をロギング実装として読み込みしています。  
@@ -96,7 +115,7 @@ import logger from '@/modules/(system)/logging-facade/logger';
 logger.info('ログメッセージ');
 ```
 
-## デバッグログ出力 :bug:
+## :bug: デバッグログ出力
 
 `console.log()` を使用したデバッグログ出力機能を提供します。
 - 開発モード `development` の場合に、 `console.log()` でログ出力します。
@@ -115,7 +134,7 @@ import debug from '@/modules/(system)/loggers/logger-debug';
 debug('ログメッセージ');
 ```
 
-## エラーハンドリング :boom:
+## :boom: エラーハンドリング
 エラーハンドリングの実装を統一し、一貫性を持たせます。  
 javascriptの関数を引数にとれる性質と、クロージャを活用しています。
 
@@ -193,7 +212,7 @@ opt
 end
 ```
 
-## ユーティリティ型 :hammer_and_wrench:
+## :hammer_and_wrench: ユーティリティ型
 汎用的に利用できる型エイリアス
 
 #### クエリパラメーターの型エイリアス
@@ -211,7 +230,7 @@ Next.js15から、クエリパラメーターは非同期で取得されるよ�
 :open_file_folder: 使用例：
 
 
-## テスト :alembic:
+## :alembic: テスト
 ### node:test
 Node.js 組み込みのテストランナー。手軽に利用できるが、Next.js環境外で動作するため `import server-only` などはエラーとなってしまう。
 ただしモックが利用できるので、`server-only`をモックすれば動作できる。
