@@ -15,7 +15,7 @@ Next.js の実装集
 6. テスト
     * [node:test](#nodetest)
     * [next:jest](#nextjest)
-    * バックエンドAPIのモック
+    * [バックエンドAPIのモック](#バックエンドAPIのモック)
 
 ***
 
@@ -57,7 +57,7 @@ Next.js の実装集
 ## :robot: 対話型AIインターフェース
 
 対話型AIに対して質問を入力すると、回答が一文字ずつリアルタイムに表示されます。  
-対話型AIのAPIをモック化し、AIの回答を模した文字列を１文字ずつチャンク単位のストリーム形式でレスポンスしています。Next.jsのクライアントサイドでは、受信した文字列を順次差分レンダリングしています。
+対話型AIのAPIはモックを作成し、AIの回答を模した文字列を１文字ずつチャンク単位のストリーム形式でレスポンスしています。Next.jsのクライアントサイドでは、受信した文字列を順次差分レンダリングしています。
 
 :open_file_folder: 画面サンプル：[_docs/chat/caht.gif](_docs/chat/caht.gif)  
 :open_file_folder: コンポーネント：[app/chat/](app/chat)  
@@ -69,19 +69,14 @@ Next.js の実装集
 
 入力されたお問い合わせを、SalesforceのWeb-to-Caseに送信します。  
 
+useStateを使用した実装例。入力フォームに項目が少ない場合は、この実装が簡単です。
+
 :open_file_folder: 画面サンプル：[_docs/contact/contact.gif](_docs/contact/contact.gif)  
 :open_file_folder: コンポーネント：[app/contact/](app/contact)  
 :open_file_folder: モジュール：[modules/contact/](modules/contact)  
 
-Web-to-Caseのエンドポイントは、開発時はモックを提供します。モックは `Express` で作成しています。  
-`npm run dev:mock` のコマンドで、アプリケーションとモックが一緒に起動できるようにしています。  
-Salesforce側に依存することなく開発を進めることができます。  
-:open_file_folder: Web-to-Case エンドポイントのモック：[__mocks__/web-to-case.mts](__mocks__/web-to-case.mts)  
 
-上記はuseStateを使用した実装例です。入力フォームに項目が少ない場合は、この実装が簡単です。
-
-以下はuseReducerを使用した実装例です。項目が多い場合はこちらの方が見通しが良くなります。
-また、状態管理ロジックをreducer関数としてモデルに分離できます。UIとモデルの切り分けがより明確になっています。MVVM（Model-View-ViewModel）パターンに基づいてモジュールを構成しています。
+useReducerを使用した実装例。状態管理ロジックをreducer関数としてモデルに分離しています。UIとモデルの切り分けがより明確になっています。MVVM（Model-View-ViewModel）パターンに基づいた構成です。
 
 :open_file_folder: コンポーネント：[app/contact2/](app/contact2)  
 :open_file_folder: モジュール：[modules/contact2/](modules/contact2)  
@@ -242,6 +237,12 @@ Node.js 組み込みのテストランナー。手軽に利用できるが、Nex
 Next.js用のJest構成。`import server-only`も動作できる。
 
 :open_file_folder: コード：[next-jest/](__tests__/next-jest/)
+
+### バックエンドAPIのモック
+ExpressでバックエンドAPIのモックを作成した。package.jsonにscriptを定義し、`npm run dev:mock` のコマンドで、アプリケーションとモックが一緒に起動できるようにしている。
+バックエンドに依存することなく開発を進めることができる。
+
+:open_file_folder: コード：[__mocks__/](__mocks__)
 
 
 
