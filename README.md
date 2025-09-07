@@ -9,9 +9,7 @@ Next.js の実装集
     * [お問い合わせフォーム](#envelope-お問い合わせフォーム)
 4. アプリミドル基盤
     * [バリデーターインターフェース](#heavy_check_mark-バリデーターインターフェース)
-    * [winstonロガー](#tophat-winstonロガー)
-    * [ロギングファサード風](#memo-ロギングファサード風)
-    * [デバッグログ出力](#bug-デバッグログ出力)
+    * [ロギング](#footprints-ロギング)
     * [エラーハンドリング](#boom-エラーハンドリング)
     * [ユーティリティ型](#hammer_and_wrench-ユーティリティ型)
 6. テスト
@@ -21,7 +19,7 @@ Next.js の実装集
 
 ***
 
-## :thinking: フロントエンドアーキテクチャ考察 :mag:
+## :thinking: フロントエンドアーキテクチャ考察
 
 これは自分がNext.jsアプリケーションを実装する際の指針です。  
 フロントエンドはMVVM構成とし、各構成要素であるModel、View、ViewModelを以下のように考える。
@@ -96,12 +94,13 @@ Salesforce側に依存することなく開発を進めることができます�
 :open_file_folder: 使用例：[modules/contact/model.ts#L29](modules/contact/model.ts#L29)
 
 
-## :tophat: winstonロガー
+## :footprints: ロギング
+#### winstonロガー
 `winston` を用いたログ出力の設定例です。ログローテーションも行います。  
 
 :open_file_folder: コード：[modules/(system)/loggers/logger-winston.ts](modules/(system)/loggers/logger-winston.ts)  
 
-## :memo: ロギングファサード風
+#### ロギングファサード風
 
 `Java` の `SLF4j` 風のロギングファサードです。統一されたロギングインターフェースを提供し、アプリケーションがロギングライブラリに直接的に依存しないように設計しています。
 `winston` をロギング実装として読み込みしています。  
@@ -115,7 +114,7 @@ import logger from '@/modules/(system)/logging-facade/logger';
 logger.info('ログメッセージ');
 ```
 
-## :bug: デバッグログ出力
+#### デバッグログ
 
 `console.log()` を使用したデバッグログ出力機能を提供します。
 - 開発モード `development` の場合に、 `console.log()` でログ出力します。
@@ -231,7 +230,8 @@ Next.js15から、クエリパラメーターは非同期で取得されるよ�
 :open_file_folder: 使用例：
 
 
-## :alembic: テスト
+## :mag: テスト
+
 ### node:test
 Node.js 組み込みのテストランナー。手軽に利用できるが、Next.js環境外で動作するため `import server-only` などはエラーとなってしまう。
 ただしモックが利用できるので、`server-only`をモックすれば動作できる。
