@@ -1,4 +1,14 @@
-バックエンドAPIはサーバーサイドから呼び出しを原則、
+バックエンドAPIはサーバーサイドから呼び出す。、
 バックエンドAPIをサーバーサイドから呼ぶ方法は、サーバーアクションまたはapiルート。
+ServerActionsを使う場合の構成
+action -> fetcher -> client
 
-action -> fetcher -> client の構成
+fetcher -> action -> client
+fetcher -> api Route -> client
+
+ファイルの命名
+
+server-only, client-onlyを明記し、サーバーサイドで使用するコードとクライアントサイドで使用するコードを一つのファイル(.ts)の中に混在させない。
+記載しないものはどちらで動作しても問題の無いコードとする
+
+サンク＝引数なしの関数。呼べば実行する関数

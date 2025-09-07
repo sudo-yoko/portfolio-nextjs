@@ -24,23 +24,25 @@ export default function Sending({
     async function process() {
       // サーバーアクション呼び出し
       const actionResult = await sendAction(formData);
+
       // 正常
-      if (actionResult.status === 200) {
+      //if (actionResult.status === 200) {
+      if (!actionResult.result) {
         setViolations({});
         onNext();
         return;
       }
       // バリデーションエラー
-      if (actionResult.status === 400) {
-        if (actionResult.body) {
-          const result = actionResult.body;
-          if (hasError(result)) {
-            setViolations(result);
-            onBack();
-            return;
-          }
+      //if (actionResult.status === 400) {
+      if (actionResult.result) {
+        const result = actionResult.result;
+        if (hasError(result)) {
+          setViolations(result);
+          onBack();
+          return;
         }
       }
+      //}
       // 上記以外は予期しないエラー
       throw new Error('予期しないエラーが発生しました。');
     }
@@ -50,9 +52,7 @@ export default function Sending({
     <div>
       <div className="inset-0 z-50 flex flex-col items-center justify-center bg-white/50">
         <div className="size-16 animate-spin rounded-full border-t-4 border-solid border-t-gray-300"></div>
-        <p className="mt-4 animate-pulse text-lg text-gray-700">
-          送信中です。しばらくお待ちください・・・
-        </p>
+        <p className="mt-4 animate-pulse text-lg text-gray-700">送信中です。しばらくお待ちください・・・</p>
       </div>
     </div>
   );

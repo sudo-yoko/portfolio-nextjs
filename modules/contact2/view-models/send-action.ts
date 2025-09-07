@@ -6,10 +6,7 @@ import { ActionResult } from '@/modules/(system)/types/server-action-interface';
 import { Violations, hasError } from '@/modules/(system)/validators/validator';
 import { ContactBody } from '@/modules/contact2/models/contact-model';
 import { send } from '@/modules/contact2/models/web-to-case-client';
-import {
-  FormData,
-  FormKey,
-} from '@/modules/contact2/view-models/steps-reducer';
+import { FormData, FormKey } from '@/modules/contact2/view-models/steps-reducer';
 import { validate } from '@/modules/contact2/view-models/validator';
 
 const logPrefix = 'send-action.ts: ';
@@ -17,9 +14,7 @@ const logPrefix = 'send-action.ts: ';
 /**
  * お問い合わせの送信 サーバーアクション
  */
-export async function sendAction(
-  formData: FormData,
-): Promise<ActionResult<Violations<FormKey> | void>> {
+export async function sendAction(formData: FormData): Promise<ActionResult<Violations<FormKey> | void>> {
   // エラーハンドリングを追加して処理を実行する。
   return await withErrorHandlingAsync(() => process());
 
@@ -29,6 +24,7 @@ export async function sendAction(
     // バリデーション
     const errors = validate(formData);
     if (hasError(errors)) {
+      /*
       const result: ActionResult<Violations<FormKey>> = {
         status: 400,
         body: errors,
@@ -37,6 +33,9 @@ export async function sendAction(
         logPrefix +
           `validation error. status=${result.status}, body=${JSON.stringify(result.body)}`,
       );
+      */
+      const result: Violations<FormKey> = errors;
+      logger.info(logPrefix + `validation error. ${JSON.stringify(result)}`);
       return result;
     }
     // バリデーション済みの値をモデルに展開
@@ -44,6 +43,6 @@ export async function sendAction(
     // 送信
     await send(model);
     // 正常
-    return { status: 200 };
+    //return { status: 200 };
   }
 }

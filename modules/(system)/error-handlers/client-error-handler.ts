@@ -9,14 +9,14 @@ const logPrefix = 'client-error-handler.ts: ';
  * クライアントサイドエラーハンドリング
  */
 export function withErrorHandling<T>(
-  func: () => T,
+  thunk: () => T,
   setHasError: React.Dispatch<React.SetStateAction<boolean>>,
 ): T | void {
   const fname = 'withErrorHandling: ';
 
   try {
-    // 引数に渡された関数を実行
-    return func();
+    // 引数に渡されたサンクを実行
+    return thunk();
   } catch (error) {
     logError(logPrefix + fname + serialize(error));
     setHasError(true);
@@ -27,14 +27,14 @@ export function withErrorHandling<T>(
  * クライアントサイドエラーハンドリング（非同期処理用）
  */
 export async function withErrorHandlingAsync<T>(
-  func: () => Promise<T>,
+  thunk: () => Promise<T>,
   setHasError: React.Dispatch<React.SetStateAction<boolean>>,
 ): Promise<T | void> {
   const fname = 'withErrorHandlingAsync: ';
 
   try {
-    // 引数に渡された関数を実行
-    return await func();
+    // 引数に渡されたサンクを実行
+    return await thunk();
   } catch (error) {
     logError(logPrefix + fname + serialize(error));
     setHasError(true);

@@ -1,4 +1,5 @@
-import client from '@/modules/(system)/clients/proxy-client';
+//import client from '@/modules/(system)/clients/proxy-client';
+import {client} from '@/modules/(system)/clients/client';
 import { env } from '@/modules/(system)/env/env-helper';
 import logger from '@/modules/(system)/logging-facade/logger';
 import { FormData } from '@/modules/contact/model';

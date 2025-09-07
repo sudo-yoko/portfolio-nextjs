@@ -2,6 +2,19 @@
 // サーバーアクションのインターフェース定義
 //
 
+export type ActionResult<T> = Aborted | Succeed<T>;
+
+type Aborted = {
+  abort: true;
+  result?: never;
+};
+
+type Succeed<T> = {
+  abort: false;
+  result: T;
+};
+
+/*
 export interface ServerAction<T> {
   (...args: unknown[]): Promise<ServerActionResult<T>>;
 }
@@ -15,18 +28,23 @@ export interface ActionResult<T> {
   status: number;
   body?: T;
 }
-
 export const ActionResult = {
-  /**
-   * 成功。ステータスコード200に相当
-   */
   Ok<T>(body: T): ActionResult<T> {
     return { status: 200, body };
   },
-  /**
-   * エラー。ステータスコード500に相当
-   */
+
+  NoContent(): ActionResult<void> {
+    // voidのほか、neverやundefinedも使える
+    return { status: 204 };
+  },
+
+  BadRequest<T>(body: T): ActionResult<T> {
+    return { status: 400, body };
+  },
+
   Error(): ActionResult<void> {
+    // voidのほか、neverやundefinedも使える
     return { status: 500 };
   },
 } as const;
+*/

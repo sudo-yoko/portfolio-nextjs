@@ -1,9 +1,11 @@
+// 
+// クライアントサイド用にページネーションを提供する
 //
 // totalが常に取得できる前提の設計
 // 連打に非対応（呼び元で制御必要）
 //
 
-import { Pager, PagerAction, PagerResult } from '@/modules/(system)/pager/types';
+import { Pager, FetchPage, PagerResult } from '@/modules/(system)/pager/types';
 import { offsetOfLastPage, pageToOffset } from '@/modules/(system)/pager/utils';
 import 'client-only';
 
@@ -13,16 +15,16 @@ import 'client-only';
  * @typeParam L - 結果リストの型
  * @typeParam Q - 検索条件の型
  *
- * @param action - ページネーションで使用するサーバーアクションを指定する
- * @param actionArgs -
+ * @param fetcher - ページネーションで使用するサーバーアクションを指定する
+ * @param fetchArgs -
  * @returns
  */
 export function createPager<T, Q>(
-  action: PagerAction<T, Q>,
-  actionArgs: { initialPage?: number; perPage: number; query: Q },
+  fetch: FetchPage<T, Q>,
+  fetchArgs: { initialPage?: number; perPage: number; query: Q },
 ): Pager<T> {
-  const { perPage, query } = actionArgs;
-  const initPage = actionArgs.initialPage ?? 1;
+  const { perPage, query } = fetchArgs;
+  const initPage = fetchArgs.initialPage ?? 1;
   let { offset } = pageToOffset(perPage, initPage);
   const limit = perPage;
 
@@ -33,8 +35,7 @@ export function createPager<T, Q>(
     // 実効オフセットに補正
     if (offset < 0) offset = 0;
 
-    let { body } = await action(offset, limit, query);
-    let { total, items } = body!;
+    let { total, items } = await fetch(offset, limit, query);
     if (total === 0) {
       return { total, offset, items, hasNext: false, hasPrev: false, page: 0, totalPage: 0 };
     }
@@ -42,8 +43,7 @@ export function createPager<T, Q>(
     // 実効オフセットに補正して再取得
     if (offset > total) {
       offset = offsetOfLastPage(total, limit); // 最終ページの先頭の1件目
-      ({ body } = await action(offset, limit, query));
-      ({ total, items } = body!);
+      ({ total, items } = await fetch(offset, limit, query));
     }
 
     const hasNext = offset + limit < total;

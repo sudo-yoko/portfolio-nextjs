@@ -8,12 +8,12 @@ const logPrefix = 'server-error-handler.ts: ';
 /**
  * サーバーサイドエラーハンドリング
  */
-export function withErrorHandling<T>(func: () => T): T {
+export function withErrorHandling<T>(thunk: () => T): T {
   const fname = 'withErrorHandling: ';
 
   try {
-    // 引数に渡された関数を実行
-    return func();
+    // 引数に渡されたサンクを実行
+    return thunk();
   } catch (error) {
     handleError(error, fname);
     // 再スローすることで、Next.jsが未処理の例外としてキャッチしerror.tsxをレンダリングする。
@@ -25,13 +25,13 @@ export function withErrorHandling<T>(func: () => T): T {
  * サーバーサイドエラーハンドリング（非同期処理用）
  */
 export async function withErrorHandlingAsync<T>(
-  func: () => Promise<T>,
+  thunk: () => Promise<T>,
 ): Promise<T> {
   const fname = 'withErrorHandlingAsync: ';
 
   try {
-    // 引数に渡された関数を実行
-    return await func();
+    // 引数に渡されたサンクを実行
+    return await thunk();
   } catch (error) {
     handleError(error, fname);
     throw error;

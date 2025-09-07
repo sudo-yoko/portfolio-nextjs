@@ -3,9 +3,9 @@
 import { InputValues } from '@/modules/(system)/types/input-values';
 import { createPager } from '@/modules/(system)/pager/pager';
 import { Pager } from '@/modules/(system)/pager/types';
-import { pagerAction } from '@/modules/users/models/pager-action';
 import { InputName, User } from '@/modules/users/models/types';
 import { useRef, useState } from 'react';
+import { fetch } from '@/modules/users/models/fetcher';
 
 export default function UserList() {
   const [inputValues, setInputValues] = useState<InputValues<InputName>>({ userName: '' });
@@ -23,7 +23,7 @@ export default function UserList() {
   //}, []);
 
   function handleSearch() {
-    pager.current = createPager(pagerAction, { perPage: 4, query: { userName: inputValues.userName } });
+    pager.current = createPager(fetch, { perPage: 4, query: { userName: inputValues.userName } });
     pager.current.current().then((p) => setUsers(p.items));
   }
 

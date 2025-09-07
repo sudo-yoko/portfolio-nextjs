@@ -13,9 +13,9 @@ type RES = {
 };
 
 export async function send(offset: number, limit: number, query: UsersQuery): Promise<Users> {
-  return withErrorHandlingAsync(() => serverProcess());
+  return withErrorHandlingAsync(() => send());
 
-  async function serverProcess(): Promise<Users> {
+  async function send(): Promise<Users> {
     const url = env('USERS_API');
     const res = await client.get<RES>(url, { params: { offset, limit, ...query } });
     return { ...res.data };

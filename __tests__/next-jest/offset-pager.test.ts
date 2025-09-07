@@ -1,6 +1,6 @@
 import { PagerAction, PagerActionResult, Pager } from '@/modules/(system)/pager/types';
 import { createPager } from '@/modules/(system)/pager/pager';
-import { send } from '@/modules/users/models/client';
+import { send } from '@/modules/users/models/sender';
 import type { User, UsersQuery } from '@/modules/users/models/types';
 import { printf } from './utils/test-logger';
 

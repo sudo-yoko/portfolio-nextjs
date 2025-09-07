@@ -1,21 +1,26 @@
-import { ActionResult } from '../types/server-action-interface';
+export type FetchPage<TItems, TQuery> = (
+  offset: number,
+  limit: number,
+  query: TQuery,
+) => Promise<FetchPageResult<TItems>>;
 
-/**
- * Pager サーバーアクション関数の型
- */
+export type FetchPageResult<TItems> = {
+  total: number;
+  items: TItems;
+};
+
+/*
 export type PagerAction<TItems, TQuery> = (
   offset: number,
   limit: number,
   query: TQuery,
-) => Promise<ActionResult<PagerActionResult<TItems>>>;
+) => Promise<ActionResult<PagerActionResult<TItems>> | ActionResult<void>>;
 
-/**
- * Pager サーバーアクション関数の戻り値の型
- */
 export type PagerActionResult<TItems> = {
   total: number;
   items: TItems;
 };
+*/
 
 /**
  * ページング制御オブジェクト

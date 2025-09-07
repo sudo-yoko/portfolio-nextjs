@@ -26,21 +26,22 @@ export const applyEffect = (
     // サーバーアクション呼び出し
     const actionResult = await sendAction(state.formData);
     // 正常
-    if (actionResult.status === 200) {
+    //if (actionResult.status === 200) {
+    if (!actionResult.result) {
       toComplete(dispatch);
       return;
     }
     // バリデーションエラー
-    if (actionResult.status === 400) {
-      if (actionResult.body) {
-        const violations = actionResult.body;
-        if (hasError(violations)) {
-          setViolations(dispatch, violations);
-          toInput(dispatch);
-          return;
-        }
+    //if (actionResult.status === 400) {
+    if (actionResult.result) {
+      const violations = actionResult.result;
+      if (hasError(violations)) {
+        setViolations(dispatch, violations);
+        toInput(dispatch);
+        return;
       }
     }
+    //}
     // 上記以外は予期しないエラー
     throw new Error('予期しないエラーが発生しました。');
   }
