@@ -87,6 +87,8 @@ useReducerを使用した実装例。状態管理ロジックをreducer関数と
 
 ***
 
+アプリケーションの実装を統一し一貫性を持たせるための共通部品
+
 ## :heavy_check_mark: バリデーターインターフェース
 バリデーターインターフェースを提供することで、アプリケーションがバリデーションの実装に強く依存しない設計にしています。バリデーションの実装にはZodなどのライブラリや、独自の実装を使用できます。
 
@@ -108,7 +110,7 @@ useReducerを使用した実装例。状態管理ロジックをreducer関数と
 後からロギングライブラリを変更したくなった際に、最小限の修正で済みます。
 
 :open_file_folder: コード：[modules/(system)/logging-facade/](modules/(system)/logging-facade/)  
-:spiral_notepad: 使用例
+:pencil: 使用例
 ```ts
 import logger from '@/modules/(system)/logging-facade/logger';
 ...
@@ -127,7 +129,7 @@ logger.info('ログメッセージ');
 以降はキャッシュされたロガーを再利用するため効率的です。
 
 :open_file_folder: コード：[logger-debug.ts](modules/(system)/loggers/logger-debug.ts)  
-:spiral_notepad: 使用例
+:pencil: 使用例
 ```ts
 import debug from '@/modules/(system)/loggers/logger-debug';
 ...
