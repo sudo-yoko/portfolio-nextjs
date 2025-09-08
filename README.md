@@ -248,7 +248,7 @@ const [formData, setFormData] = useState<FormData<FormKeys>>({
 });
 ```
 プロパティ名の正当性は静的に担保されます。入力候補も効くようになり扱いやすくなります。
-```ts
+```html
 <input type="text" value={formData.name} ... />
 <input type="text" value={formData.email} ... />
 <input type="text" value={formData.body} ... />
