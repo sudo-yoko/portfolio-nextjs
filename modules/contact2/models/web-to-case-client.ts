@@ -10,9 +10,9 @@ const logPrefix = 'web-to-case-client.ts: ';
 
 export async function send(model: ContactBody): Promise<void> {
   // エラーハンドリングを追加して処理を実行する。
-  return withErrorHandlingAsync(() => process());
+  return withErrorHandlingAsync(() => func());
 
-  async function process() {
+  async function func() {
     const url = env('WEB_TO_CASE_URL');
     const body = new URLSearchParams(model).toString();
     logger.info(logPrefix + `Request(Outbound) -> url=${url}, body:${body}`);

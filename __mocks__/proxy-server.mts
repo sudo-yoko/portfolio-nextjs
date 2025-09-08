@@ -1,5 +1,5 @@
 //
-// プロキシサーバーのモック。プロキシ転送を模倣する。
+// プロキシサーバーのモック。プロキシ転送を模倣する。（フォワードプロキシ）
 //
 // curl -x http://localhost:9999 -X POST http://localhost:3001/servlet/servlet.WebToCase?encoding=UTF-8 -H "Content-Type: application/x-www-form-urlencoded" -d "name=111&email=eeee"
 //
