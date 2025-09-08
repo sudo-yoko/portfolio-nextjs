@@ -141,8 +141,7 @@ debug('ログメッセージ');
 ***
 
 ## :boom: エラーハンドリング
-エラーハンドリングの実装を統一し、一貫性を持たせます。  
-javascriptの関数を引数にとれる性質と、クロージャを活用しています。
+エラーハンドリングの実装を統一し、一貫性を持たせます。javascriptの関数を引数にとれる性質と、クロージャを活用しています。
 
 #### サーバーサイドエラーハンドリング
 例外をキャッチして再スローします。  
@@ -152,12 +151,13 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 :open_file_folder: 使用例：[app/contact/page.tsx#L16](app/contact/page.tsx#L16)  
 
 #### サーバーアクションエラーハンドリング
-例外をキャッチして、戻り値にステータスコード500(INTERNAL_SERVER_ERROR)を返します。呼び元は戻り値のステータスコードを確認し、呼び元がエラーハンドリングを行う必要があります。  
 
-サーバーアクションはHTTPエンドポイントとして実行されるため、サーバーアクション内で例外をスローしても、呼び元にそのまま伝播しません。シリアライズ可能なオブジェクトの形式で、戻り値として返却する必要があると考えています。
+サーバーアクションはHTTPエンドポイントとして実行されるため、サーバーアクション内で例外をスローしても、呼び元にそのまま伝播しない。シリアライズ可能なオブジェクトの形式で、戻り値として返却する必要があると考える。
+
+例外をキャッチして戻り値にステータスフラグ(ERROR)を返し、呼び元はフラグを見てエラーハンドリングを行う設計とした。
 
 :open_file_folder: コード：[modules/(system)/error-handlers/action-error-handler.ts](modules/(system)/error-handlers/action-error-handler.ts)  
-:open_file_folder: 使用例：[modules/contact/send-action.ts#L19](modules/contact/send-action.ts#L19)  
+:open_file_folder: 使用例：[app/contact/sending.tsx](app/contact/sending.tsx)  
 
 #### クライアントサイドエラーハントリング
 例外をキャッチしたら、Reactのフックを使ってクライアントサイドでエラーページに遷移させています。
@@ -242,7 +242,7 @@ Next.js15から、クエリパラメーターは非同期で取得されるよ�
 
 テストフレームワークや開発中に使用するモックなど
 
-## :mag: テスト＆モック :performing_arts:
+## :performing_arts: テスト＆モック
 
 #### node:test
 Node.js 組み込みのテストランナー。手軽に利用できるが、Next.js環境外で動作するため `import server-only` などはエラーとなってしまう。
