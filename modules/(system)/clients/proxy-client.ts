@@ -15,15 +15,20 @@ function create(): AxiosInstance {
   const port = envNumber('PROXY_PORT');
   const proxyUrl = `${protocol}://${host}:${port}`;
 
-  const agent: Agent =
-    protocol === 'http'
-      ? new HttpProxyAgent(proxyUrl)
-      : new HttpsProxyAgent(proxyUrl);
+  //const agent: Agent =
+  //  protocol === 'http'
+  //    ? new HttpProxyAgent(proxyUrl)
+  //    : new HttpsProxyAgent(proxyUrl);
+
+  const httpAgent = new HttpProxyAgent(proxyUrl);
+  const httpsAgent = new HttpsProxyAgent(proxyUrl);
 
   return axios.create({
     proxy: false,
-    httpAgent: agent,
-    httpsAgent: agent,
+    //httpAgent: agent,
+    //httpsAgent: agent,
+    httpAgent,
+    httpsAgent,
   });
 }
 

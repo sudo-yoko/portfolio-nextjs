@@ -24,9 +24,7 @@ export function withErrorHandling<T>(thunk: () => T): T {
 /**
  * サーバーサイドエラーハンドリング（非同期処理用）
  */
-export async function withErrorHandlingAsync<T>(
-  thunk: () => Promise<T>,
-): Promise<T> {
+export async function withErrorHandlingAsync<T>(thunk: () => Promise<T>): Promise<T> {
   const fname = 'withErrorHandlingAsync: ';
 
   try {
@@ -42,7 +40,7 @@ export function handleError(error: unknown, fname: string): void {
   // axiosのエラーの場合
   // ステータスが200以外の場合は、axiosが例外をスローする
   if (axios.isAxiosError(error) && error.response) {
-    const description = `Response(Inbound) -> status=${error.response.status}`;
+    const description = `Response(Inbound) -> status=${error.response.status}, data=${error.response.data}`;
     logger.error(logPrefix + fname + serialize(error, description));
     return;
   }
