@@ -1,7 +1,7 @@
 # ポートフォリオ
 Next.js の実装集
 
-## 目次
+## :open_book: 目次
 
 1. [フロントエンドアーキテクチャ考察](#thinking-フロントエンドアーキテクチャ考察)
 2. 簡単なアプリケーション
@@ -19,9 +19,10 @@ Next.js の実装集
 
 ***
 
+Next.jsアプリケーションを実装する際の指針
+
 ## :thinking: フロントエンドアーキテクチャ考察
 
-これは自分がNext.jsアプリケーションを実装する際の指針です。  
 フロントエンドはMVVM構成とし、各構成要素であるModel、View、ViewModelを以下のように考える。
 
 * View  
@@ -235,8 +236,24 @@ Next.js15から、クエリパラメーターは非同期で取得されるよ�
 
 #### フォーム入力値を保持する汎用マップ型
 
-:open_file_folder: コード：[input-values.ts](modules/(system)/types/input-values.ts)  
-:open_file_folder: 使用例：
+:open_file_folder: コード：[form-data.ts](modules/(system)/types/form-data.ts)  
+:pencil: 使用例：キー名をリテラルのユニオンで作成し、型パラメータに渡します。
+```ts
+type FormKeys = 'name' | 'email' | 'body';
+...
+const [formData, setFormData] = useState<FormData<FormKeys>>({
+	name: '',
+	email: '',
+	body: '',
+});
+```
+プロパティ名の正当性は静的に担保されます。入力候補も効くようになり扱いやすくなります。
+```ts
+<input type="text" value={formData.name} ... />
+<input type="text" value={formData.email} ... />
+<input type="text" value={formData.body} ... />
+```
+
 
 ***
 
