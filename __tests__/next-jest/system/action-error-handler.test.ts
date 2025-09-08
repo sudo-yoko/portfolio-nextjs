@@ -1,6 +1,6 @@
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/action-error-handler';
 import { User } from '@/modules/users/models/types';
-import { printf } from './utils/test-logger';
+import { printf } from '../_utils/test-logger';
 
 const print = printf({ logPrefix: '>>> [action-error-handler.test.ts]', stdout: true });
 

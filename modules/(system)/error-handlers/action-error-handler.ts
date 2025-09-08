@@ -14,10 +14,10 @@ export async function withErrorHandlingAsync<T>(thunk: () => Promise<T>): Promis
   try {
     // 引数に渡されたサンクを呼ぶ
     const result = await thunk();
-    return { abort: false, result };
+    return ActionResult.ok(result);
   } catch (error) {
     logger.error(logPrefix + fname + serialize(error));
-    return { abort: true };
+    return ActionResult.abort();
   }
 }
 

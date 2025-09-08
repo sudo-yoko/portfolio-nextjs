@@ -6,12 +6,24 @@ export type ActionResult<T> = Aborted | Succeed<T>;
 
 type Aborted = {
   abort: true;
-  result?: never;
+  //data?: never;
 };
 
 type Succeed<T> = {
   abort: false;
-  result: T;
+  data: T;
+};
+
+/**
+ * ActionResult を生成する
+ */
+export const ActionResult = {
+  ok<T>(data: T): ActionResult<T> {
+    return { abort: false, data };
+  },
+  abort(): ActionResult<never> {
+    return { abort: true };
+  },
 };
 
 /*

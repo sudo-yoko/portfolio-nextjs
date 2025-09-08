@@ -9,6 +9,6 @@ export const fetch: FetchPage<User[], UsersQuery> = async (offset, limit, query)
   if (result.abort) {
     throw actionError();
   }
-  const { total, items } = result.result;
+  const { total, items } = result.data;
   return { total, items };
 };

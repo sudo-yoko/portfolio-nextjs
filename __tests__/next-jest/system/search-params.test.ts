@@ -1,5 +1,5 @@
 import { getQueryParams, SearchParam, SearchParams } from '@/modules/(system)/types/search-params';
-import { printf } from './utils/test-logger';
+import { printf } from '../_utils/test-logger';
 
 // npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/search-params.test.ts
 const print = printf({ logPrefix: '>>> [search-params.test.ts]', stdout: true });

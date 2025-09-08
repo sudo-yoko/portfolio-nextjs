@@ -1,3 +1,4 @@
+import { actionError } from '@/modules/(system)/error-handlers/action-error';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
 import { hasError, Violations } from '@/modules/(system)/validators/validator';
 import { FormData, FormKey } from '@/modules/contact/model';
@@ -19,32 +20,27 @@ export default function Sending({
 }) {
   useEffect(() => {
     // エラーハンドリングを追加して処理を実行する。
-    withErrorHandlingAsync(() => process(), setError);
+    withErrorHandlingAsync(() => func(), setError);
 
-    async function process() {
+    async function func() {
       // サーバーアクション呼び出し
       const actionResult = await sendAction(formData);
-
-      // 正常
-      //if (actionResult.status === 200) {
-      if (!actionResult.result) {
-        setViolations({});
-        onNext();
-        return;
+      if (actionResult.abort) {
+        throw actionError();
       }
-      // バリデーションエラー
-      //if (actionResult.status === 400) {
-      if (actionResult.result) {
-        const result = actionResult.result;
+      // バリデーションエラーあり
+      if (actionResult.data) {
+        const result = actionResult.data;
         if (hasError(result)) {
           setViolations(result);
           onBack();
           return;
         }
       }
-      //}
-      // 上記以外は予期しないエラー
-      throw new Error('予期しないエラーが発生しました。');
+      // 正常
+      setViolations({});
+      onNext();
+      return;
     }
   });
 

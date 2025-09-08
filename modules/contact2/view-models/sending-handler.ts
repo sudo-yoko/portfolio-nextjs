@@ -1,5 +1,6 @@
 'use client';
 
+import { actionError } from '@/modules/(system)/error-handlers/action-error';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
 import { hasError } from '@/modules/(system)/validators/validator';
 import { sendAction } from '@/modules/contact2/view-models/send-action';
@@ -20,29 +21,25 @@ export const applyEffect = (
   setError: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   // エラーハンドリングを追加して処理を実行する。
-  withErrorHandlingAsync(() => effectProcess(), setError);
+  withErrorHandlingAsync(() => func(), setError);
 
-  async function effectProcess() {
+  async function func() {
     // サーバーアクション呼び出し
     const actionResult = await sendAction(state.formData);
-    // 正常
-    //if (actionResult.status === 200) {
-    if (!actionResult.result) {
-      toComplete(dispatch);
-      return;
+    if (actionResult.abort) {
+      throw actionError();
     }
-    // バリデーションエラー
-    //if (actionResult.status === 400) {
-    if (actionResult.result) {
-      const violations = actionResult.result;
+    // バリデーションエラーあり
+    if (actionResult.data) {
+      const violations = actionResult.data;
       if (hasError(violations)) {
         setViolations(dispatch, violations);
         toInput(dispatch);
         return;
       }
     }
-    //}
-    // 上記以外は予期しないエラー
-    throw new Error('予期しないエラーが発生しました。');
+    // 正常
+    toComplete(dispatch);
+    return;
   }
 };

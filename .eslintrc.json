@@ -1,14 +1,18 @@
 {
   "plugins": ["tsdoc", "tailwindcss"],
-  "extends": [
-    "next/core-web-vitals",
-    "next/typescript",
-    "prettier",
-    "plugin:tailwindcss/recommended"
-  ],
+  "extends": ["next/core-web-vitals", "next/typescript", "prettier", "plugin:tailwindcss/recommended"],
   "rules": {
     "tsdoc/syntax": "warn",
-    "jest/expect-expect": "off"
+    "jest/expect-expect": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ]
   },
   "overrides": [
     {

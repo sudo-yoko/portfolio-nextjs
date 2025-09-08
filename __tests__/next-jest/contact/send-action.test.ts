@@ -1,6 +1,6 @@
 import { FormData } from '@/modules/contact/model';
 import { sendAction } from '@/modules/contact/send-action';
-import { printf } from '../utils/test-logger';
+import { printf } from '../_utils/test-logger';
 
 const print = printf({ logPrefix: '>>> [contact/send-action.test.ts]', stdout: true });
 
@@ -10,7 +10,9 @@ test('test1', async () => {
   const result = await sendAction(formData);
   print(`Result -> ${JSON.stringify(result)}`);
   print(`Result -> status=${result.abort}`);
-  print(`Result -> body=${JSON.stringify(result.result)}`);
+  if (!result.abort) {
+    print(`Result -> body=${JSON.stringify(result.data)}`);
+  }
 });
 
 // npm run mock2
@@ -20,5 +22,7 @@ test('test2', async () => {
   const result = await sendAction(formData);
   print(`Result -> ${JSON.stringify(result)}`);
   print(`Result -> status=${result.abort}`);
-  print(`Result -> body=${JSON.stringify(result.result)}`);
+  if (!result.abort) {
+    print(`Result -> body=${JSON.stringify(result.data)}`);
+  }
 });
