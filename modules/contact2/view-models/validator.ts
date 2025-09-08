@@ -1,20 +1,13 @@
-import {
-  required,
-  requiredEmail,
-  Validator,
-  Violations,
-} from '@/modules/(system)/validators/validator';
-import {
-  FormData,
-  FormKey,
-} from '@/modules/contact2/view-models/steps-reducer';
+import { FormData } from '@/modules/(system)/types/form-data';
+import { required, requiredEmail, Validator, Violations } from '@/modules/(system)/validators/validator';
+import { FormKeys } from '@/modules/contact2/view-models/steps-reducer';
 import { z } from 'zod';
 
 /**
  * フォームのバリデーション
  */
-export function validate(formData: FormData): Violations<FormKey> {
-  const errors: Violations<FormKey> = {};
+export function validate(formData: FormData<FormKeys>): Violations<FormKeys> {
+  const errors: Violations<FormKeys> = {};
   errors['name'] = required('お名前', formData.name);
   errors['email'] = requiredEmail('メールアドレス', formData.email);
   errors['body'] = requiredMax50('お問い合わせ内容', formData.body);
@@ -32,10 +25,7 @@ const requiredMax50: Validator = (name, value) => {
     return errors;
   }
   // 桁数チェック
-  const result = z
-    .string()
-    .max(50, `${name}は50文字以内にしてください。`)
-    .safeParse(value);
+  const result = z.string().max(50, `${name}は50文字以内にしてください。`).safeParse(value);
   if (result.error) {
     errors = result.error.errors.map((issue) => issue.message);
     return errors;

@@ -1,14 +1,14 @@
 'use client';
 
-import { InputValues } from '@/modules/(system)/types/input-values';
+import { FormData } from '@/modules/(system)/types/form-data';
 import { createPager } from '@/modules/(system)/pager/pager';
 import { Pager } from '@/modules/(system)/pager/types';
-import { InputName, User } from '@/modules/users/models/types';
+import { FormKeys, User } from '@/modules/users/models/types';
 import { useRef, useState } from 'react';
 import { fetch } from '@/modules/users/models/fetcher';
 
 export default function UserList() {
-  const [inputValues, setInputValues] = useState<InputValues<InputName>>({ userName: '' });
+  const [formData, setFormData] = useState<FormData<FormKeys>>({ userName: '' });
   const [users, setUsers] = useState<User[]>([]);
   const pager = useRef<Pager<User[]>>(null);
 
@@ -23,7 +23,7 @@ export default function UserList() {
   //}, []);
 
   function handleSearch() {
-    pager.current = createPager(fetch, { perPage: 4, query: { userName: inputValues.userName } });
+    pager.current = createPager(fetch, { perPage: 4, query: { userName: formData.userName } });
     pager.current.current().then((p) => setUsers(p.items));
   }
 
@@ -43,8 +43,8 @@ export default function UserList() {
           <div>
             <input
               type="text"
-              value={inputValues.userName}
-              onChange={(e) => setInputValues({ ...inputValues, userName: e.target.value })}
+              value={formData.userName}
+              onChange={(e) => setFormData({ ...formData, userName: e.target.value })}
               className="w-80 border-2 border-gray-400"
             />
             <button type="button" onClick={handleSearch} className="rounded-lg bg-indigo-300 px-4 py-2">

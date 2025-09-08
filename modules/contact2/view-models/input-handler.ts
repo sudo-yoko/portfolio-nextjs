@@ -3,7 +3,7 @@
 import { hasError, Violations } from '@/modules/(system)/validators/validator';
 import {
   Action,
-  FormKey,
+  FormKeys,
   setViolations,
   State,
   toConfirm,
@@ -14,7 +14,7 @@ import { validate } from '@/modules/contact2/view-models/validator';
  * コンポーネントがレンダリングされた後に実行される処理
  */
 export const applyEffect = (
-  violations: Violations<FormKey>,
+  violations: Violations<FormKeys>,
   dispatch: React.ActionDispatch<[action: Action]>,
 ) => {
   if (violations && hasError(violations)) {
@@ -30,7 +30,7 @@ export function handleNext(
   dispatch: React.ActionDispatch<[action: Action]>,
 ) {
   // バリデーション
-  ((violations: Violations<FormKey>) => {
+  ((violations: Violations<FormKeys>) => {
     if (hasError(violations)) {
       setViolations(dispatch, violations);
       return;

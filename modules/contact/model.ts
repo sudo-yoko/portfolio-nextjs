@@ -1,11 +1,7 @@
 // お問い合わせフォームのモデル定義
 
-import {
-  required,
-  requiredEmail,
-  Validator,
-  Violations,
-} from '@/modules/(system)/validators/validator';
+import type { FormData } from '@/modules/(system)/types/form-data';
+import { required, requiredEmail, Validator, Violations } from '@/modules/(system)/validators/validator';
 import { z } from 'zod';
 
 export type Step = 'input' | 'confirm' | 'sending' | 'complete';
@@ -14,20 +10,21 @@ export type Step = 'input' | 'confirm' | 'sending' | 'complete';
  * 入力フォームのキー。
  * お名前、メールアドレス、お問い合わせ内容
  */
-export type FormKey = 'name' | 'email' | 'body';
+export type FormKeys = 'name' | 'email' | 'body';
 
 /**
  * フォームの値を格納するオブジェクトの定義
- */
-export type FormData = {
-  [key in FormKey]: string;
-};
+*/
+//export type FormData = {
+//  [key in FormKey]: string;
+//};
+
 
 /**
  * フォームのバリデーション
  */
-export function validate(formData: FormData): Violations<FormKey> {
-  const errors: Violations<FormKey> = {};
+export function validate(formData: FormData<FormKeys>): Violations<FormKeys> {
+  const errors: Violations<FormKeys> = {};
   errors['name'] = required('お名前', formData.name);
   errors['email'] = requiredEmail('メールアドレス', formData.email);
   errors['body'] = requiredMax50('お問い合わせ内容', formData.body);
@@ -45,10 +42,7 @@ const requiredMax50: Validator = (name, value) => {
     return errors;
   }
   // 桁数チェック
-  const result = z
-    .string()
-    .max(50, `${name}は50文字以内にしてください。`)
-    .safeParse(value);
+  const result = z.string().max(50, `${name}は50文字以内にしてください。`).safeParse(value);
   if (result.error) {
     errors = result.error.errors.map((issue) => issue.message);
     return errors;

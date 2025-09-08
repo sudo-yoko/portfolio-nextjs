@@ -1,8 +1,9 @@
 'use client';
 
+import { FormData } from '@/modules/(system)/types/form-data';
 import { resizeTextarea } from '@/modules/(system)/utils/dom-utils';
 import { hasError, Violations } from '@/modules/(system)/validators/validator';
-import { FormData, FormKey, validate } from '@/modules/contact/model';
+import { FormKeys, validate } from '@/modules/contact/model';
 import { useEffect, useState } from 'react';
 
 export default function Input({
@@ -11,12 +12,12 @@ export default function Input({
   onChange,
   onNext,
 }: {
-  formData: FormData;
-  violations?: Violations<FormKey>;
-  onChange: (formData: FormData) => void;
+  formData: FormData<FormKeys>;
+  violations?: Violations<FormKeys>;
+  onChange: (formData: FormData<FormKeys>) => void;
   onNext: () => void;
 }) {
-  const [fieldErrors, setFieldErrors] = useState<Violations<FormKey>>({});
+  const [fieldErrors, setFieldErrors] = useState<Violations<FormKeys>>({});
 
   useEffect(() => {
     if (violations && hasError(violations)) {
@@ -26,7 +27,7 @@ export default function Input({
 
   function handleNext() {
     // バリデーション
-    ((violations: Violations<FormKey>) => {
+    ((violations: Violations<FormKeys>) => {
       if (hasError(violations)) {
         setFieldErrors(violations);
         return;
@@ -90,11 +91,7 @@ export default function Input({
           ))}
         </div>
         <div>
-          <button
-            type="button"
-            onClick={handleNext}
-            className="rounded-lg bg-indigo-300 px-4 py-2"
-          >
+          <button type="button" onClick={handleNext} className="rounded-lg bg-indigo-300 px-4 py-2">
             次へ
           </button>
         </div>

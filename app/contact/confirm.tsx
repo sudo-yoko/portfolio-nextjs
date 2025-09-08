@@ -1,13 +1,14 @@
 'use client';
 
-import { FormData } from '@/modules/contact/model';
+import { FormData } from '@/modules/(system)/types/form-data';
+import { FormKeys } from '@/modules/contact/model';
 
 export default function Confirm({
   formData,
   onBack,
   onNext,
 }: {
-  formData: FormData;
+  formData: FormData<FormKeys>;
   onBack: () => void;
   onNext: () => void;
 }) {
@@ -24,18 +25,10 @@ export default function Confirm({
           <div className="whitespace-pre-line">{formData.body}</div>
         </div>
         <div className="space-x-4">
-          <button
-            type="button"
-            onClick={onBack}
-            className="rounded-lg bg-indigo-300 px-4 py-2"
-          >
+          <button type="button" onClick={onBack} className="rounded-lg bg-indigo-300 px-4 py-2">
             修正する
           </button>
-          <button
-            type="button"
-            onClick={onNext}
-            className="rounded-lg bg-indigo-300 px-4 py-2"
-          >
+          <button type="button" onClick={onNext} className="rounded-lg bg-indigo-300 px-4 py-2">
             送信する
           </button>
         </div>

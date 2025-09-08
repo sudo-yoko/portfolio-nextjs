@@ -2,11 +2,12 @@
 
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/action-error-handler';
 import logger from '@/modules/(system)/logging-facade/logger';
+import { FormData } from '@/modules/(system)/types/form-data';
 import { ActionResult } from '@/modules/(system)/types/server-action-interface';
 import { Violations, hasError } from '@/modules/(system)/validators/validator';
 import { ContactBody } from '@/modules/contact2/models/contact-model';
 import { send } from '@/modules/contact2/models/web-to-case-client';
-import { FormData, FormKey } from '@/modules/contact2/view-models/steps-reducer';
+import { FormKeys } from '@/modules/contact2/view-models/steps-reducer';
 import { validate } from '@/modules/contact2/view-models/validator';
 
 const logPrefix = 'send-action.ts: ';
@@ -14,7 +15,9 @@ const logPrefix = 'send-action.ts: ';
 /**
  * お問い合わせの送信 サーバーアクション
  */
-export async function sendAction(formData: FormData): Promise<ActionResult<Violations<FormKey> | void>> {
+export async function sendAction(
+  formData: FormData<FormKeys>,
+): Promise<ActionResult<Violations<FormKeys> | void>> {
   // エラーハンドリングを追加して処理を実行する。
   return await withErrorHandlingAsync(() => process());
 
@@ -34,7 +37,7 @@ export async function sendAction(formData: FormData): Promise<ActionResult<Viola
           `validation error. status=${result.status}, body=${JSON.stringify(result.body)}`,
       );
       */
-      const result: Violations<FormKey> = errors;
+      const result: Violations<FormKeys> = errors;
       logger.info(logPrefix + `validation error. ${JSON.stringify(result)}`);
       return result;
     }

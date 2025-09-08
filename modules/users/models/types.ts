@@ -2,7 +2,7 @@
  * 入力フォームのキー。
  * 検索条件のユーザー名
  */
-export type InputName = 'userName';
+export type FormKeys = 'userName';
 
 /**
  * 検索条件

@@ -1,7 +1,8 @@
 import { actionError } from '@/modules/(system)/error-handlers/action-error';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
+import { FormData } from '@/modules/(system)/types/form-data';
 import { hasError, Violations } from '@/modules/(system)/validators/validator';
-import { FormData, FormKey } from '@/modules/contact/model';
+import { FormKeys } from '@/modules/contact/model';
 import { sendAction } from '@/modules/contact/send-action';
 import React, { useEffect } from 'react';
 
@@ -12,8 +13,8 @@ export default function Sending({
   onNext,
   setError,
 }: {
-  formData: FormData;
-  setViolations: React.Dispatch<React.SetStateAction<Violations<FormKey>>>;
+  formData: FormData<FormKeys>;
+  setViolations: React.Dispatch<React.SetStateAction<Violations<FormKeys>>>;
   onBack: () => void;
   onNext: () => void;
   setError: React.Dispatch<React.SetStateAction<boolean>>;

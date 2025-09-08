@@ -1,4 +1,5 @@
-import client from '@/modules/(system)/clients/proxy-client';
+//import client from '@/modules/(system)/clients/proxy-client';
+import { client } from '@/modules/(system)/clients/client';
 import { env } from '@/modules/(system)/env/env-helper';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/server-error-handler';
 import logger from '@/modules/(system)/logging-facade/logger';

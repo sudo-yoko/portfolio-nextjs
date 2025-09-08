@@ -1,6 +1,7 @@
 // お問い合わせフォームのモデル定義
 'use client';
 
+import { FormData } from '@/modules/(system)/types/form-data';
 import { Violations } from '@/modules/(system)/validators/validator';
 import React, { Reducer } from 'react';
 
@@ -8,14 +9,14 @@ import React, { Reducer } from 'react';
  * 入力フォームのキー
  * お名前、メールアドレス、お問い合わせ内容
  */
-export type FormKey = 'name' | 'email' | 'body';
+export type FormKeys = 'name' | 'email' | 'body';
 
 /**
  * フォームの値を格納するオブジェクトの定義
  */
-export type FormData = {
-  [key in FormKey]: string;
-};
+//export type FormData = {
+//  [key in FormKey]: string;
+//};
 
 /**
  * ステップ定義
@@ -29,8 +30,8 @@ export type Step = 'input' | 'confirm' | 'sending' | 'complete';
  */
 export type State = {
   step: Step;
-  formData: FormData;
-  violations: Violations<FormKey>;
+  formData: FormData<FormKeys>;
+  violations: Violations<FormKeys>;
 };
 
 /**
@@ -50,15 +51,15 @@ export type Action =
   | { type: 'toConfirm' }
   | { type: 'toSending' }
   | { type: 'toComplete' }
-  | { type: 'setValue'; key: FormKey; value: string }
-  | { type: 'setViolations'; violations: Violations<FormKey> };
+  | { type: 'setValue'; key: FormKeys; value: string }
+  | { type: 'setViolations'; violations: Violations<FormKeys> };
 
 /**
  * 状態の更新：フォームに値を入力
  */
 export function setValue(
   dispatch: React.ActionDispatch<[action: Action]>,
-  key: FormKey,
+  key: FormKeys,
   value: string,
 ): void {
   dispatch({ type: 'setValue', key, value });
@@ -67,36 +68,28 @@ export function setValue(
 /**
  * 状態の更新：入力モード
  */
-export function toInput(
-  dispatch: React.ActionDispatch<[action: Action]>,
-): void {
+export function toInput(dispatch: React.ActionDispatch<[action: Action]>): void {
   dispatch({ type: 'toInput' });
 }
 
 /**
  * 状態の更新：確認モード
  */
-export function toConfirm(
-  dispatch: React.ActionDispatch<[action: Action]>,
-): void {
+export function toConfirm(dispatch: React.ActionDispatch<[action: Action]>): void {
   dispatch({ type: 'toConfirm' });
 }
 
 /**
  * 状態の更新：送信中
  */
-export function toSending(
-  dispatch: React.ActionDispatch<[action: Action]>,
-): void {
+export function toSending(dispatch: React.ActionDispatch<[action: Action]>): void {
   dispatch({ type: 'toSending' });
 }
 
 /**
  * 状態の更新：完了
  */
-export function toComplete(
-  dispatch: React.ActionDispatch<[action: Action]>,
-): void {
+export function toComplete(dispatch: React.ActionDispatch<[action: Action]>): void {
   dispatch({ type: 'toComplete' });
 }
 
@@ -105,7 +98,7 @@ export function toComplete(
  */
 export function setViolations(
   dispatch: React.ActionDispatch<[action: Action]>,
-  violations: Violations<FormKey>,
+  violations: Violations<FormKeys>,
 ): void {
   dispatch({ type: 'setViolations', violations });
 }
@@ -118,10 +111,7 @@ export function setViolations(
  * @param action - dispatchに渡されたアクション
  * @returns 新しい状態
  */
-export const reducer: Reducer<State, Action> = (
-  state: State,
-  action: Action,
-): State => {
+export const reducer: Reducer<State, Action> = (state: State, action: Action): State => {
   switch (action.type) {
     case 'setValue':
       return setValueState(state, action);
@@ -140,10 +130,7 @@ export const reducer: Reducer<State, Action> = (
   }
 };
 
-const setValueState = (
-  state: State,
-  action: Extract<Action, { type: 'setValue' }>,
-): State => {
+const setValueState = (state: State, action: Extract<Action, { type: 'setValue' }>): State => {
   return {
     ...state,
     formData: { ...state.formData, [action.key]: action.value },
