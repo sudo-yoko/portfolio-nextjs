@@ -51,10 +51,22 @@ export interface Pager<T> {
  */
 export type PagerResult<T> = {
   items: T;
+  /**
+   * 現在選択されているページ
+   */
   page: number;
+  /**
+   * 総件数
+   */
   total: number;
+  /**
+   * 総ページ数
+   */
   totalPage: number;
-  offset: number; // 実効オフセット（補正あり）
+  /**
+   * 実効オフセット（補正あり）
+   */
+  offset: number;
   hasNext: boolean;
   hasPrev: boolean;
 };
