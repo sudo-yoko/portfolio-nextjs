@@ -23,7 +23,7 @@ Next.js の実装集
 
 Next.js アプリケーションをつくる際の指針
 
-* Next.js はデカップルド・アーキテクチャ（decoupled architecture）におけるフロントエンドとする。  
+* Next.js はデカップルド・アーキテクチャ（decoupled architecture）におけるフロントエンドとする。
 * Route Handlers と Server Actions は BFF 層として位置付ける。
 
 ```mermaid
@@ -97,19 +97,18 @@ flowchart LR
 
 ## :envelope: お問い合わせフォーム
 
-入力されたお問い合わせを、SalesforceのWeb-to-Caseに送信します。  
+入力されたお問い合わせをSalesforceのWeb-to-Caseに送信します。  
 
-useStateを使用した実装例。入力フォームに項目が少ない場合は、この実装が簡単です。
+useReducerを使用し、状態管理ロジックをreducer関数としてモデルに分離することで、UIとモデルを切り分けています。MVVM（Model-View-ViewModel）パターンに基づいた構成のわかりやすい例だと思います。
 
 :open_file_folder: 画面サンプル：[_docs/contact/contact.gif](_docs/contact/contact.gif)  
-:open_file_folder: コンポーネント：[app/contact/](app/contact)  
-:open_file_folder: モジュール：[modules/contact/](modules/contact)  
-
-
-useReducerを使用した実装例。状態管理ロジックをreducer関数としてモデルに分離しています。UIとモデルの切り分けがより明確になっています。MVVM（Model-View-ViewModel）パターンに基づいた構成です。
-
 :open_file_folder: コンポーネント：[app/contact2/](app/contact2)  
 :open_file_folder: モジュール：[modules/contact2/](modules/contact2)  
+
+以下はuseStateを使用した実装例です。入力フォームに項目が少ない場合はこの実装が簡単ですが、ViewとViewモデルが切り分けづらい状態だと思います。
+
+:open_file_folder: コンポーネント：[app/contact/](app/contact)  
+:open_file_folder: モジュール：[modules/contact/](modules/contact)  
 
 ***
 
