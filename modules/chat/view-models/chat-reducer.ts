@@ -1,19 +1,20 @@
 'use client';
 
+import { FormData } from '@/modules/(system)/types/form-data';
 import { Dispatch, Reducer } from 'react';
 
 /**
  * 入力フォームのキー
  * プロンプト、AIモデル
  */
-export type FormKey = 'prompt' | 'ai_model';
+export type FormKeys = 'prompt' | 'ai_model';
 
 /**
  * フォームの値を格納するオブジェクトの定義
  */
-export type FormData = {
-  [key in FormKey]: string;
-};
+//export type FormData = {
+//  [key in FormKey]: string;
+//};
 
 /**
  * ステップ
@@ -47,7 +48,7 @@ export type ChatHist = Chat[];
  */
 export type State = {
   step: ChatStep;
-  formData: FormData;
+  formData: FormData<FormKeys>;
   chatHist?: ChatHist;
   loadingChat?: Chat;
 };
@@ -64,7 +65,7 @@ export const initialState: State = {
  * アクション定義
  */
 export type Action =
-  | { type: 'setValue'; key: FormKey; value: string }
+  | { type: 'setValue'; key: FormKeys; value: string }
   | { type: 'addChatHist'; chat: Chat }
   | { type: 'startResponse' }
   | { type: 'appendResponse'; chunk: string }
@@ -75,7 +76,7 @@ export type Action =
  */
 export function setValue(
   dispatch: Dispatch<Action>,
-  key: FormKey,
+  key: FormKeys,
   value: string,
 ): void {
   dispatch({ type: 'setValue', key, value });

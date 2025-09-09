@@ -2,11 +2,7 @@
  * OpenAI APIのインターフェースを、アプリケーションに合わせて変換する
  */
 import { env } from '@/modules/(system)/env/env-helper';
-import {
-  dataChunk,
-  dataLabel,
-  errChunk,
-} from '@/modules/chat/models/chat-model';
+import { Chunk } from '@/modules/chat/models/chat-types';
 import 'server-only';
 
 const logPrefix = 'openai-adapter.ts: ';
@@ -27,10 +23,9 @@ export interface Data {
   }[];
 }
 
-export async function send(
-  req: ChatRequest,
-  signal: AbortSignal,
-): Promise<ReadableStream> {
+const dataLabel = 'data: ';
+
+export async function send(req: ChatRequest, signal: AbortSignal): Promise<ReadableStream> {
   const url = env('OPEN_AI_API');
   const res = await fetch(url, {
     method: 'POST',
@@ -84,4 +79,19 @@ export async function send(
       controller.close();
     },
   });
+}
+
+function dataChunk(value: string): Uint8Array {
+  const chunk: Chunk = { type: 'data', value };
+  return ndjson(chunk);
+}
+
+function errChunk(value: string): Uint8Array {
+  const chunk: Chunk = { type: 'error', value };
+  return ndjson(chunk);
+}
+
+function ndjson(chunk: Chunk): Uint8Array {
+  const encoder = new TextEncoder();
+  return encoder.encode(JSON.stringify(chunk) + '\n');
 }

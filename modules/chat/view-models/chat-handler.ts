@@ -1,7 +1,7 @@
 'use client';
 
-import { send } from '@/modules/chat/clients/chat-client';
-import { Chunk } from '@/modules/chat/models/chat-model';
+import { send } from '@/modules/chat/view-models/chat-sender';
+import { Chunk } from '@/modules/chat/models/chat-types';
 import {
   Action,
   addChatHist,

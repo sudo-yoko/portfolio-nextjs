@@ -1,15 +1,8 @@
 'use client';
 
-import {
-  handleCancel,
-  handleSend,
-} from '@/modules/chat/view-models/chat-handler';
+import { handleCancel, handleSend } from '@/modules/chat/view-models/chat-handler';
 import type { Chat } from '@/modules/chat/view-models/chat-reducer';
-import {
-  initialState,
-  reducer,
-  setValue,
-} from '@/modules/chat/view-models/chat-reducer';
+import { initialState, reducer, setValue } from '@/modules/chat/view-models/chat-reducer';
 import { useReducer, useRef } from 'react';
 
 /**

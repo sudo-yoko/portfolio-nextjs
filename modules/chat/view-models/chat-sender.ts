@@ -1,4 +1,4 @@
-import { ChatRequest } from '@/modules/chat/models/openai-adapter';
+import { ChatRequest } from '@/modules/chat/models/chat-client';
 import 'client-only';
 
 export async function send(
