@@ -262,6 +262,10 @@ Next.js15から、クエリパラメーターは非同期で取得されるよ�
 :open_file_folder: コード：[form-data.ts](modules/(system)/types/form-data.ts)  
 :pencil: 使用例：キー名をリテラルのユニオンで作成し、型パラメータに渡します。
 ```ts
+// form-data.ts
+export type FormData<T extends string> = Record<T, string>;
+...
+// 使用例
 type FormKeys = 'name' | 'email' | 'body';
 ...
 const [formData, setFormData] = useState<FormData<FormKeys>>({
@@ -270,7 +274,7 @@ const [formData, setFormData] = useState<FormData<FormKeys>>({
 	body: '',
 });
 ```
-プロパティ名の正当性は静的に担保されます。入力候補も効くようになり扱いやすくなります。
+キー名の正当性は静的に担保されます。入力候補も効くようになり扱いやすくなります。
 ```html
 <input type="text" value={formData.name} ... />
 <input type="text" value={formData.email} ... />
