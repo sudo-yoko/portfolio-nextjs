@@ -19,21 +19,44 @@ Next.js の実装集
 
 ***
 
-Next.jsアプリケーションを実装する際の指針
-
 ## :thinking: フロントエンドアーキテクチャ考察
 
-フロントエンドはMVVM構成とし、各構成要素であるModel、View、ViewModelを以下のように考える。
+Next.js アプリケーションをつくる際の指針
 
-* View  
-  .tsxをViewとする。コンポーネントを実装する。
-* ViewModel  
+* Next.js はデカップルド・アーキテクチャ（decoupled architecture）におけるフロントエンドとする。  
+* Route Handlers と Server Actions は BFF 層として位置付ける。
+
+```mermaid
+flowchart LR
+	subgraph "フロントエンド(Next.js)"
+	    subgraph "UI<br>(クライアントサイド)"
+	    	U["ページ／<br>コンポーネント"]
+	    end
+	    subgraph "BFF<br>(サーバーサイド)"
+	    	B[Route Handlers／<br>Server Actions]
+	    end
+	end
+	U-->B
+	subgraph "バックエンド"
+		REST["REST API"]
+	end
+	B-->REST
+```
+	
+* フロントエンドはMVVM構成とし、各構成要素であるModel、View、ViewModelを以下のように整理する。  
+
+	* View  
+  .tsxをViewとする。ページやコンポーネントのUIを実装する。
+   
+	* ViewModel  
   Viewに公開するもの(依存関係のあるもの)。Viewの状態や操作を実装する。
-* Model  
-  Viewに依存しない処理。上記以外のものはすべてここに分類する。
-* 依存方向をView ⇒ ViewModel ⇒ Modelとする。
 
-フォルダ構成を以下とする。
+	* Model  
+  Viewに依存しない処理。上記以外のものはすべてここに分類する。
+
+	* 依存方向をView ⇒ ViewModel ⇒ Modelとする。
+
+* フォルダ構成を以下とする。
 ```text
 .
 ├── app                        コンポーネント(.tsx)を格納する。
