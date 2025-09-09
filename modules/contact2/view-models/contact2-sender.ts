@@ -3,19 +3,19 @@
 import { actionError } from '@/modules/(system)/error-handlers/action-error';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
 import { hasError } from '@/modules/(system)/validators/validator';
-import { sendAction } from '@/modules/contact2/models/send-action';
+import { action } from '@/modules/contact2/models/contact2-action';
 import {
   Action,
   setViolations,
   State,
   toComplete,
   toInput,
-} from '@/modules/contact2/view-models/steps-reducer';
+} from '@/modules/contact2/view-models/contact2-reducer';
 
 /**
  * コンポーネントがレンダリングされた後に実行される処理
  */
-export const applyEffect = (
+export const send = (
   state: State,
   dispatch: React.ActionDispatch<[action: Action]>,
   setError: React.Dispatch<React.SetStateAction<boolean>>,
@@ -25,7 +25,7 @@ export const applyEffect = (
 
   async function func() {
     // サーバーアクション呼び出し
-    const actionResult = await sendAction(state.formData);
+    const actionResult = await action(state.formData);
     if (actionResult.abort) {
       throw actionError();
     }

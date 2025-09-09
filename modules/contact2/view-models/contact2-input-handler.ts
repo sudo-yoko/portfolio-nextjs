@@ -7,8 +7,8 @@ import {
   setViolations,
   State,
   toConfirm,
-} from '@/modules/contact2/view-models/steps-reducer';
-import { validate } from '@/modules/contact2/models/validator';
+} from '@/modules/contact2/view-models/contact2-reducer';
+import { validate } from '@/modules/contact2/view-models/contact2-validator';
 
 /**
  * コンポーネントがレンダリングされた後に実行される処理
@@ -25,10 +25,7 @@ export const applyEffect = (
 /**
  * 次へボタンを押したときの処理
  */
-export function handleNext(
-  state: State,
-  dispatch: React.ActionDispatch<[action: Action]>,
-) {
+export function handleNext(state: State, dispatch: React.ActionDispatch<[action: Action]>) {
   // バリデーション
   ((violations: Violations<FormKeys>) => {
     if (hasError(violations)) {

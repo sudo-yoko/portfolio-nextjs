@@ -1,6 +1,6 @@
 import { FormData } from '@/modules/(system)/types/form-data';
 import { required, requiredEmail, Validator, Violations } from '@/modules/(system)/validators/validator';
-import { FormKeys } from '@/modules/contact2/view-models/steps-reducer';
+import { FormKeys } from '@/modules/contact2/view-models/contact2-reducer';
 import { z } from 'zod';
 
 /**

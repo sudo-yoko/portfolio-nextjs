@@ -5,23 +5,23 @@ import logger from '@/modules/(system)/logging-facade/logger';
 import { FormData } from '@/modules/(system)/types/form-data';
 import { ActionResult } from '@/modules/(system)/types/server-action-interface';
 import { Violations, hasError } from '@/modules/(system)/validators/validator';
-import { ContactBody } from '@/modules/contact2/models/contact-model';
-import { send } from '@/modules/contact2/models/web-to-case-client';
-import { FormKeys } from '@/modules/contact2/view-models/steps-reducer';
-import { validate } from '@/modules/contact2/models/validator';
+import { ContactBody } from '@/modules/contact2/models/contact2-types';
+import { validate } from '@/modules/contact2/view-models/contact2-validator';
+import { send } from '@/modules/contact2/models/contact2-client';
+import { FormKeys } from '@/modules/contact2/view-models/contact2-reducer';
 
-const logPrefix = 'send-action.ts: ';
+const logPrefix = 'contact2-action.ts: ';
 
 /**
  * お問い合わせの送信 サーバーアクション
  */
-export async function sendAction(
+export async function action(
   formData: FormData<FormKeys>,
 ): Promise<ActionResult<Violations<FormKeys> | void>> {
   // エラーハンドリングを追加して処理を実行する。
-  return await withErrorHandlingAsync(() => process());
+  return await withErrorHandlingAsync(() => func());
 
-  async function process() {
+  async function func() {
     logger.info(logPrefix + `formData=${JSON.stringify(formData)}`);
 
     // バリデーション

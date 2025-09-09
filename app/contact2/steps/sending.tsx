@@ -1,7 +1,7 @@
 'use client';
 
-import { applyEffect } from '@/modules/contact2/view-models/sending-handler';
-import { Action, State } from '@/modules/contact2/view-models/steps-reducer';
+import { Action, State } from '@/modules/contact2/view-models/contact2-reducer';
+import { send } from '@/modules/contact2/view-models/contact2-sender';
 import React, { useEffect } from 'react';
 
 /**
@@ -17,16 +17,14 @@ export default function Sending({
   setError: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   useEffect(() => {
-    applyEffect(state, dispatch, setError);
+    send(state, dispatch, setError);
   }, [dispatch, setError, state, state.formData]);
 
   return (
     <div>
       <div className="inset-0 z-50 flex flex-col items-center justify-center bg-white/50">
         <div className="size-16 animate-spin rounded-full border-t-4 border-solid border-t-gray-300"></div>
-        <p className="mt-4 animate-pulse text-lg text-gray-700">
-          送信中です。しばらくお待ちください・・・
-        </p>
+        <p className="mt-4 animate-pulse text-lg text-gray-700">送信中です。しばらくお待ちください・・・</p>
       </div>
     </div>
   );

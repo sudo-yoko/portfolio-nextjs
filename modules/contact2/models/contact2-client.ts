@@ -3,10 +3,10 @@ import { client } from '@/modules/(system)/clients/client';
 import { env } from '@/modules/(system)/env/env-helper';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/server-error-handler';
 import logger from '@/modules/(system)/logging-facade/logger';
-import { ContactBody } from '@/modules/contact2/models/contact-model';
+import { ContactBody } from '@/modules/contact2/models/contact2-types';
 import 'server-only';
 
-const logPrefix = 'web-to-case-client.ts: ';
+const logPrefix = 'contact2-client.ts: ';
 
 export async function send(model: ContactBody): Promise<void> {
   // エラーハンドリングを追加して処理を実行する。
