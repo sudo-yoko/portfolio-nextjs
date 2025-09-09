@@ -1,11 +1,11 @@
 'use client';
 
-import { FormData } from '@/modules/(system)/types/form-data';
 import { createPager } from '@/modules/(system)/pager/pager';
 import { Pager } from '@/modules/(system)/pager/types';
-import { FormKeys, User } from '@/modules/users/models/types';
+import { FormData } from '@/modules/(system)/types/form-data';
+import { fetch } from '@/modules/users/models/users-fetcher';
+import { FormKeys, User } from '@/modules/users/models/users-types';
 import { useRef, useState } from 'react';
-import { fetch } from '@/modules/users/models/fetcher';
 
 export default function UserList() {
   const [formData, setFormData] = useState<FormData<FormKeys>>({ userName: '' });

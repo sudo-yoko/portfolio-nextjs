@@ -2,8 +2,8 @@
 
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/action-error-handler';
 import { FetchPageResult } from '@/modules/(system)/pager/types';
-import { send } from '@/modules/users/models/sender';
-import { User, UsersQuery } from '@/modules/users/models/types';
+import { send } from '@/modules/users/models/users-client';
+import { User, UsersQuery } from '@/modules/users/models/users-types';
 
 export async function action(offset: number, limit: number, query: UsersQuery) {
   return await withErrorHandlingAsync(() => action());

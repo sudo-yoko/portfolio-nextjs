@@ -8,7 +8,7 @@ import {
   State,
   toConfirm,
 } from '@/modules/contact2/view-models/steps-reducer';
-import { validate } from '@/modules/contact2/view-models/validator';
+import { validate } from '@/modules/contact2/models/validator';
 
 /**
  * コンポーネントがレンダリングされた後に実行される処理

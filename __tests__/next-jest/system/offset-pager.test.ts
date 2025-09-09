@@ -1,7 +1,7 @@
 import { PagerAction, PagerActionResult, Pager } from '@/modules/(system)/pager/types';
 import { createPager } from '@/modules/(system)/pager/pager';
-import { send } from '@/modules/users/models/sender';
-import type { User, UsersQuery } from '@/modules/users/models/types';
+import { send } from '@/modules/users/models/users-client';
+import type { User, UsersQuery } from '@/modules/users/models/users-types';
 import { printf } from '../_utils/test-logger';
 
 const print = printf({ logPrefix: '>>> [offset-pager.test.ts]', stdout: true });

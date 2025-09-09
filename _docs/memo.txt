@@ -3,8 +3,8 @@
 ServerActionsを使う場合の構成
 action -> fetcher -> client
 
-fetcher -> action -> client
-fetcher -> api Route -> client
+fetcher/sender  ->  action(BFF)     -> client -> client(axios)
+fetcher/sender  ->  api Route(BFF)  -> client -> client(axios)
 
 ファイルの命名
 

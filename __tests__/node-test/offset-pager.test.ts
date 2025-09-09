@@ -3,7 +3,7 @@
 
 import { PagerAction, PagerActionResult, Pager } from '@/modules/(system)/pager/types';
 import { createPager } from '@/modules/(system)/pager/pager';
-import type { User, UsersQuery } from '@/modules/users/models/types';
+import type { User, UsersQuery } from '@/modules/users/models/users-types';
 import test from 'node:test';
 
 const consolePrefix = '### test: offset-pager.test.ts >>> ';

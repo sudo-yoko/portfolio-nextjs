@@ -8,7 +8,7 @@ import { Violations, hasError } from '@/modules/(system)/validators/validator';
 import { ContactBody } from '@/modules/contact2/models/contact-model';
 import { send } from '@/modules/contact2/models/web-to-case-client';
 import { FormKeys } from '@/modules/contact2/view-models/steps-reducer';
-import { validate } from '@/modules/contact2/view-models/validator';
+import { validate } from '@/modules/contact2/models/validator';
 
 const logPrefix = 'send-action.ts: ';
 

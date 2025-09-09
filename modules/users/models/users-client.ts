@@ -1,7 +1,7 @@
 import { client } from '@/modules/(system)/clients/client';
 import { env } from '@/modules/(system)/env/env-helper';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/server-error-handler';
-import { Users, UsersQuery } from '@/modules/users/models/types';
+import { Users, UsersQuery } from '@/modules/users/models/users-types';
 import 'server-only';
 
 type RES = {

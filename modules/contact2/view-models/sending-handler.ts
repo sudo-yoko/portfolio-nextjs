@@ -3,7 +3,7 @@
 import { actionError } from '@/modules/(system)/error-handlers/action-error';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
 import { hasError } from '@/modules/(system)/validators/validator';
-import { sendAction } from '@/modules/contact2/view-models/send-action';
+import { sendAction } from '@/modules/contact2/models/send-action';
 import {
   Action,
   setViolations,

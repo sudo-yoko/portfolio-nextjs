@@ -1,7 +1,7 @@
 import { actionError } from '@/modules/(system)/error-handlers/action-error';
 import { FetchPage } from '@/modules/(system)/pager/types';
-import { action } from '@/modules/users/models/action';
-import { User, UsersQuery } from '@/modules/users/models/types';
+import { action } from '@/modules/users/models/users-action';
+import { User, UsersQuery } from '@/modules/users/models/users-types';
 import 'client-only';
 
 /**
