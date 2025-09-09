@@ -3,8 +3,8 @@
 import { FormData } from '@/modules/(system)/types/form-data';
 import { resizeTextarea } from '@/modules/(system)/utils/dom-utils';
 import { hasError, Violations } from '@/modules/(system)/validators/validator';
-import { FormKeys } from '@/modules/contact/model/contact-types';
-import { validate } from '@/modules/contact/model/contact-validator';
+import { FormKeys } from '@/modules/contact/models/contact-types';
+import { validate } from '@/modules/contact/models/contact-validator';
 import { useEffect, useState } from 'react';
 
 export default function Input({

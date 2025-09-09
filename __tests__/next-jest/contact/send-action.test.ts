@@ -1,5 +1,5 @@
 import { FormData } from '@/modules/(system)/types/form-data';
-import { sendAction } from '@/modules/contact/model/contact-action';
+import { sendAction } from '@/modules/contact/models/contact-action';
 import { printf } from '../_utils/test-logger';
 
 const print = printf({ logPrefix: '>>> [contact/send-action.test.ts]', stdout: true });

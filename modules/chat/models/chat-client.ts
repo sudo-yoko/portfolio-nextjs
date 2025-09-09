@@ -5,7 +5,7 @@ import { env } from '@/modules/(system)/env/env-helper';
 import { Chunk } from '@/modules/chat/models/chat-types';
 import 'server-only';
 
-const logPrefix = 'openai-adapter.ts: ';
+const logPrefix = 'chat-client.ts: ';
 
 export interface ChatRequest {
   prompt: string;

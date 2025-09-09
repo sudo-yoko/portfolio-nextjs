@@ -6,9 +6,9 @@ import { send } from '@/modules/users/models/users-client';
 import { User, UsersQuery } from '@/modules/users/models/users-types';
 
 export async function action(offset: number, limit: number, query: UsersQuery) {
-  return await withErrorHandlingAsync(() => action());
+  return await withErrorHandlingAsync(() => func());
 
-  async function action() {
+  async function func() {
     const { total, users } = await send(offset, limit, query);
     const result: FetchPageResult<User[]> = { total, items: users };
     return result;

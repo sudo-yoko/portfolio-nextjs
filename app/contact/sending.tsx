@@ -2,8 +2,8 @@ import { actionError } from '@/modules/(system)/error-handlers/action-error';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
 import { FormData } from '@/modules/(system)/types/form-data';
 import { hasError, Violations } from '@/modules/(system)/validators/validator';
-import { sendAction } from '@/modules/contact/model/contact-action';
-import { FormKeys } from '@/modules/contact/model/contact-types';
+import { sendAction } from '@/modules/contact/models/contact-action';
+import { FormKeys } from '@/modules/contact/models/contact-types';
 import React, { useEffect } from 'react';
 
 export default function Sending({

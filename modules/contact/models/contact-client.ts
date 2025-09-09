@@ -4,10 +4,10 @@ import { env } from '@/modules/(system)/env/env-helper';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/server-error-handler';
 import logger from '@/modules/(system)/logging-facade/logger';
 import { FormData } from '@/modules/(system)/types/form-data';
-import { FormKeys } from '@/modules/contact/model/contact-types';
+import { FormKeys } from '@/modules/contact/models/contact-types';
 import 'server-only';
 
-const logPrefix = 'web-to-case-client.ts: ';
+const logPrefix = 'contact-client.ts: ';
 
 export async function send(formData: FormData<FormKeys>): Promise<void> {
   return withErrorHandlingAsync(() => func());
