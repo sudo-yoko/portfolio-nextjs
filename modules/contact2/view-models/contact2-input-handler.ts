@@ -11,9 +11,9 @@ import {
 import { validate } from '@/modules/contact2/view-models/contact2-validator';
 
 /**
- * コンポーネントがレンダリングされた後に実行される処理
+ * バリデーションエラーが取得されている場合にUIに反映する。
  */
-export const applyEffect = (
+export const applyViolations = (
   violations: Violations<FormKeys>,
   dispatch: React.ActionDispatch<[action: Action]>,
 ) => {

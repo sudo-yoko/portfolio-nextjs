@@ -4,7 +4,7 @@ import { env } from '@/modules/(system)/env/env-helper';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/server-error-handler';
 import logger from '@/modules/(system)/logging-facade/logger';
 import { FormData } from '@/modules/(system)/types/form-data';
-import { FormKeys } from '@/modules/contact/model';
+import { FormKeys } from '@/modules/contact/model/contact-types';
 import 'server-only';
 
 const logPrefix = 'web-to-case-client.ts: ';

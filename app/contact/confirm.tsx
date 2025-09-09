@@ -1,7 +1,7 @@
 'use client';
 
 import { FormData } from '@/modules/(system)/types/form-data';
-import { FormKeys } from '@/modules/contact/model';
+import { FormKeys } from '@/modules/contact/model/contact-types';
 
 export default function Confirm({
   formData,

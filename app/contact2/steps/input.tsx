@@ -1,7 +1,7 @@
 'use client';
 
 import { resizeTextarea } from '@/modules/(system)/utils/dom-utils';
-import { applyEffect, handleNext } from '@/modules/contact2/view-models/contact2-input-handler';
+import { applyViolations, handleNext } from '@/modules/contact2/view-models/contact2-input-handler';
 import { Action, setValue, State } from '@/modules/contact2/view-models/contact2-reducer';
 import { useEffect } from 'react';
 
@@ -16,7 +16,7 @@ export default function Input({
   dispatch: React.ActionDispatch<[action: Action]>;
 }) {
   useEffect(() => {
-    applyEffect(state.violations, dispatch);
+    applyViolations(state.violations, dispatch);
   }, [dispatch, state.violations]);
 
   return (

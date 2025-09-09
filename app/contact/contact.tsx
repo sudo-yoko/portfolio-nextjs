@@ -7,7 +7,7 @@ import Input from '@/app/contact/input';
 import Sending from '@/app/contact/sending';
 import { FormData } from '@/modules/(system)/types/form-data';
 import { Violations } from '@/modules/(system)/validators/validator';
-import { FormKeys, Step } from '@/modules/contact/model';
+import { FormKeys, Step } from '@/modules/contact/model/contact-types';
 import { useState } from 'react';
 
 export default function Contact() {
