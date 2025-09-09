@@ -92,8 +92,9 @@ useReducerを使用した実装例。状態管理ロジックをreducer関数と
 
 アプリケーションの実装を統一し、一貫性を持たせるための共通設計
 
-## :heavy_check_mark: バリデーターインターフェース
-バリデーターインターフェースを提供することで、アプリケーションがバリデーションの実装に強く依存しない設計にしています。バリデーションの実装にはZodなどのライブラリや、独自の実装を使用できます。
+## :heavy_check_mark: バリデーション
+#### バリデーションインターフェース
+アプリケーションがバリデーションの実装に強く依存しない設計にしています。実装にはZodなどのライブラリや、独自の実装を使用できます。
 
 :open_file_folder: コード：[modules/(system)/validators/validator.ts](modules/(system)/validators/validator.ts)  
 :open_file_folder: 使用例：[modules/contact/model.ts#L29](modules/contact/model.ts#L29)
