@@ -29,12 +29,12 @@ Next.js アプリケーションをつくる際の指針
 ```mermaid
 flowchart LR
 	subgraph "フロントエンド(Next.js)"
-	    subgraph "UI<br>(クライアントサイド)"
-	    	U["ページ／<br>コンポーネント"]
-	    end
-	    subgraph "BFF<br>(サーバーサイド)"
-	    	B[Route Handlers／<br>Server Actions]
-	    end
+		subgraph "UI"
+			U["ページ／<br>コンポーネント"]
+		end
+		subgraph "BFF"
+			B[Route Handlers／<br>Server Actions]
+		end
 	end
 	U-->B
 	subgraph "バックエンド"
