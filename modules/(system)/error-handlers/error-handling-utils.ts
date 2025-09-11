@@ -1,5 +1,5 @@
 /**
- * Errorオブジェクトの文字列表現
+ * Errorオブジェクトの文字列表現を作成する
  */
 export function serialize(error: unknown, description?: string): string {
   if (typeof error === 'string') {

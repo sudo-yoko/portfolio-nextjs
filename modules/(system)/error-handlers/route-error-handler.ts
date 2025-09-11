@@ -1,4 +1,4 @@
-import { isErrorOf } from '@/modules/(system)/error-handlers/custom-error';
+import { ErrTypes, errorOf } from '@/modules/(system)/error-handlers/custom-error';
 import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
 import logger from '@/modules/(system)/logging-facade/logger';
 import 'server-only';
@@ -13,10 +13,10 @@ export async function withErrorHandlingAsync(thunk: () => Promise<Response>): Pr
 
   try {
     return await thunk();
-  } catch (error) {
-    logger.error(logPrefix + fname + serialize(error));
-    if (error instanceof Error) {
-      if (isErrorOf(error, 'AuthError')) {
+  } catch (e) {
+    logger.error(logPrefix + fname + serialize(e));
+    if (e instanceof Error) {
+      if (errorOf(e, ErrTypes.AUTH_ERROR)) {
         return new Response(null, { status: 401 });
       }
     }

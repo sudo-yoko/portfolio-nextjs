@@ -1,5 +1,5 @@
-import { actionError } from '@/modules/(system)/error-handlers/action-error';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
+import { customError, ErrTypes } from '@/modules/(system)/error-handlers/custom-error';
 import { FormData } from '@/modules/(system)/types/form-data';
 import { hasError, Violations } from '@/modules/(system)/validators/validator';
 import { sendAction } from '@/modules/contact/models/contact-action';
@@ -27,7 +27,7 @@ export default function Sending({
       // サーバーアクション呼び出し
       const actionResult = await sendAction(formData);
       if (actionResult.abort) {
-        throw actionError();
+        throw customError(ErrTypes.ACTION_ERROR);
       }
       // バリデーションエラーあり
       if (actionResult.data) {
