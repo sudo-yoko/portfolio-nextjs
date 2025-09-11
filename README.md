@@ -243,6 +243,26 @@ opt
 end
 ```
 
+#### カスタムエラー型
+
+型を使ったカスタムエラーの実装例です。組み込みのErrorインスタンスに独自のプロパティを1つ追加しています。カスタムエラーはclassを使った実装方法もありますが、ここでは型ベースの実装を採用しています。
+
+:open_file_folder: コード：[custom-error.ts](modules/(system)/error-handlers/custom-error.ts)  
+:pencil: 使用例：
+
+```ts
+  try {
+    // ...
+    throw authError();
+  } catch (e) {
+    if (isAuthError(e)) {
+      // ...
+    }
+    throw e;
+  }
+});
+```
+
 ***
 
 ## :hammer_and_wrench: ユーティリティ型
