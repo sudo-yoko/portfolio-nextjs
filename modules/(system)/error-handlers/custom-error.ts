@@ -2,9 +2,9 @@
 
 /**
  * カスタムエラーの種類
- * - ActionError  - Server Actions のエラー
- * - AuthError    - 認証エラー
- * - RouteError   - Route Handlers のエラー
+ * - ActionError  - Server Actions でエラーが発生したことを示すカスタムエラー
+ * - AuthError    - 認証エラーが発生したことを示すカスタムエラー
+ * - RouteError   - Route Handlers でエラーが発生したことを示すカスタムエラー
  */
 export type ErrType = 'ActionError' | 'AuthError' | 'RouteError';
 
@@ -30,7 +30,7 @@ function customError<T extends ErrType>(type: T, message?: string): CustomError<
 }
 
 /**
- * 種類別カスタムエラー
+ * 種類別カスタムエラー生成ファクトリ
  */
 const errorOfType =
   <T extends ErrType>(type: T) =>
@@ -38,28 +38,45 @@ const errorOfType =
     customError(type, message);
 
 /**
- * Server Actions でエラーが発生
+ * ActionError を生成する
  */
 export const actionError = errorOfType('ActionError');
 
 /**
- * 認証エラー発生
+ * AuthError を生成する
  */
 export const authError = errorOfType('AuthError');
 
 /**
- * Route Handlers でエラーが発生
+ * RouteError を生成する
  */
 export const routeError = errorOfType('RouteError');
 
 /**
- * カスタムエラーの種類を判定する
+ * 種類別カスタムエラー判定ファクトリ
  */
-export function errorOf<T extends ErrType>(e: Error, type: T): boolean {
-  if (ERR_TYPE in e) {
-    if ((e as CustomError<T>)[ERR_TYPE] === type) {
-      return true;
+function isErrorOf<T extends ErrType>(type: T) {
+  return (e: Error) => {
+    if (ERR_TYPE in e) {
+      if ((e as CustomError<T>)[ERR_TYPE] === type) {
+        return true;
+      }
     }
-  }
-  return false;
+    return false;
+  };
 }
+
+/**
+ * ActionError かどうかを判定する
+ */
+export const isActionError = isErrorOf('ActionError');
+
+/**
+ * AuthError かどうかを判定する
+ */
+export const isAuthError = isErrorOf('AuthError');
+
+/**
+ * RouteError かどうかを判定する
+ */
+export const isRouteError = isErrorOf('RouteError');
