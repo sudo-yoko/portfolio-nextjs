@@ -1,4 +1,4 @@
-import { ErrTypes, errorOf } from '@/modules/(system)/error-handlers/custom-error';
+import { errorOf } from '@/modules/(system)/error-handlers/custom-error';
 import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
 import logger from '@/modules/(system)/logging-facade/logger';
 import 'server-only';
@@ -16,7 +16,7 @@ export async function withErrorHandlingAsync(thunk: () => Promise<Response>): Pr
   } catch (e) {
     logger.error(logPrefix + fname + serialize(e));
     if (e instanceof Error) {
-      if (errorOf(e, ErrTypes.AUTH_ERROR)) {
+      if (errorOf(e, 'AuthError')) {
         return new Response(null, { status: 401 });
       }
     }

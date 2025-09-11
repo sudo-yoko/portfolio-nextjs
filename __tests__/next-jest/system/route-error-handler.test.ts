@@ -1,6 +1,6 @@
+import { withAuthAsync } from '@/modules/(system)/auth/auth-handler';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/route-error-handler';
 import { printf } from '../_utils/test-logger';
-import { withAuthAsync } from '@/modules/(system)/auth/auth-handler';
 
 const print = printf({ logPrefix: '>>> [route-error-handler.test.ts]', stdout: true });
 

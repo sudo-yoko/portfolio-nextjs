@@ -1,4 +1,4 @@
-import { customError, ErrTypes } from '@/modules/(system)/error-handlers/custom-error';
+import { authError } from '@/modules/(system)/error-handlers/custom-error';
 import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
 import logger from '@/modules/(system)/logging-facade/logger';
 import 'server-only';
@@ -13,7 +13,7 @@ export async function withAuthAsync<T>(thunk: () => Promise<T>): Promise<T> {
 
   try {
     if (process.env['AUTH_ERROR']) {
-      throw customError(ErrTypes.AUTH_ERROR, '認証エラー');
+      throw authError();
     }
     return await thunk();
   } catch (e) {

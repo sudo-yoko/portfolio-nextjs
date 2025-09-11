@@ -1,4 +1,4 @@
-import { customError, ErrTypes } from '@/modules/(system)/error-handlers/custom-error';
+import { actionError } from '@/modules/(system)/error-handlers/custom-error';
 import { FetchPage } from '@/modules/(system)/pager/types';
 import { action } from '@/modules/users/models/users-action';
 import { User, UsersQuery } from '@/modules/users/models/users-types';
@@ -10,7 +10,7 @@ import 'client-only';
 const fetchAction: FetchPage<User[], UsersQuery> = async (offset, limit, query) => {
   const result = await action(offset, limit, query);
   if (result.abort) {
-    throw customError(ErrTypes.ACTION_ERROR);
+    throw actionError();
   }
   const { total, items } = result.data;
   return { total, items };

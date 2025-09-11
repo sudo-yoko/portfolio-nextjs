@@ -1,7 +1,7 @@
 'use client';
 
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
-import { customError, ErrTypes } from '@/modules/(system)/error-handlers/custom-error';
+import { actionError } from '@/modules/(system)/error-handlers/custom-error';
 import { hasError } from '@/modules/(system)/validators/validator';
 import { action } from '@/modules/contact2/models/contact2-action';
 import {
@@ -27,7 +27,7 @@ export const send = (
     // サーバーアクション呼び出し
     const actionResult = await action(state.formData);
     if (actionResult.abort) {
-      throw customError(ErrTypes.ACTION_ERROR);
+      throw actionError();
     }
     // バリデーションエラーあり
     if (actionResult.data) {
