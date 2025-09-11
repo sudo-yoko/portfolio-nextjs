@@ -9,13 +9,13 @@
 export type ErrType = 'ActionError' | 'AuthError' | 'RouteError';
 
 /**
- * Errorオブジェクトに追加するプロパティ
+ * Errorインスタンスに追加するプロパティ
  */
 export const ERR_TYPE = Symbol.for('err.type'); // シリアライズで消えるので注意
 
 /**
  * カスタムエラーの型。
- * ErrorオブジェクトにERR_TYPEプロパティを追加したもの
+ * ErrorインスタンスにERR_TYPEプロパティを追加したもの
  */
 export type CustomError<T extends ErrType> = Error & { [ERR_TYPE]: T };
 
@@ -56,10 +56,12 @@ export const routeError = errorOfType('RouteError');
  * 種類別カスタムエラー判定ファクトリ
  */
 function isErrorOf<T extends ErrType>(type: T) {
-  return (e: Error) => {
-    if (ERR_TYPE in e) {
-      if ((e as CustomError<T>)[ERR_TYPE] === type) {
-        return true;
+  return (e: unknown) => {
+    if (e instanceof Error) {
+      if (ERR_TYPE in e) {
+        if ((e as CustomError<T>)[ERR_TYPE] === type) {
+          return true;
+        }
       }
     }
     return false;

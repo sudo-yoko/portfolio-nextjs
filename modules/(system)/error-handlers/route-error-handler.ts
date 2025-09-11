@@ -15,10 +15,8 @@ export async function withErrorHandlingAsync(thunk: () => Promise<Response>): Pr
     return await thunk();
   } catch (e) {
     logger.error(logPrefix + fname + serialize(e));
-    if (e instanceof Error) {
-      if (isAuthError(e)) {
-        return new Response(null, { status: 401 });
-      }
+    if (isAuthError(e)) {
+      return new Response(null, { status: 401 });
     }
     return new Response(null, { status: 500 });
   }
