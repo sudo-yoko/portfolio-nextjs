@@ -21,9 +21,8 @@ Next.js の実装集
 
 ## :thinking: フロントエンドアーキテクチャ考察
 
-Next.js アプリケーションをつくる際の指針
+ここで紹介する Next.js アプリケーションは、デカップルド・アーキテクチャ（decoupled architecture）におけるフロントエンドの位置付けです。以下は私が Next.js アプリケーションをつくる際に指針とする考え方です。
 
-* ここで紹介するNext.jsアプリケーションは、デカップルド・アーキテクチャ（decoupled architecture）におけるフロントエンドの位置付けとする。
 * Route Handlers と Server Actions は BFF 層として位置付ける。
 * バックエンド API は BFF 層から呼び出す方式とする。
 
