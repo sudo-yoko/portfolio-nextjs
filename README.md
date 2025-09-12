@@ -184,6 +184,13 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 :open_file_folder: コード：[modules/(system)/error-handlers/action-error-handler.ts](modules/(system)/error-handlers/action-error-handler.ts)  
 :open_file_folder: 使用例：[app/contact/sending.tsx](app/contact/sending.tsx)  
 
+#### ルートエラーハンドリング
+
+Route Handlers で例外で発生した際のエラーハンドリングです。Route Handlers は Next.js 内エンドポイントで、Response オブジェクトを返す必要があります。例外発生時は500エラーを返します。呼び元はステータスコードを見てエラーハンドリングを行います。
+
+:open_file_folder: コード：[route-error-handler.ts](modules/(system)/error-handlers/route-error-handler.ts)  
+:open_file_folder: 使用例：
+
 #### クライアントサイドエラーハントリング
 例外をキャッチしたら、Reactのフックを使ってクライアントサイドでエラーページに遷移させています。
 
