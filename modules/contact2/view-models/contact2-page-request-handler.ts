@@ -16,7 +16,7 @@ export const handleRequest = async (searchParams?: SearchParams) => {
 
   async function func() {
     // クエリパラメータを取得する
-    const params: ContactParams = await getQueryParams(['category', 'from'], searchParams);
+    const params: ContactParams = await getQueryParams(searchParams, 'category', 'from');
     logger.info(logPrefix + `category=${params.category}, from=${params.from}`);
   }
 };
