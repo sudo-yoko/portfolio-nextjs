@@ -1,3 +1,6 @@
+//
+// Route Handlers エラーハンドリング
+//
 import { isAuthError } from '@/modules/(system)/error-handlers/custom-error';
 import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
 import logger from '@/modules/(system)/logging-facade/logger';

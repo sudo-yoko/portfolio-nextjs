@@ -1,3 +1,6 @@
+//
+// Server Actions エラーハンドリング
+//
 import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
 import logger from '@/modules/(system)/logging-facade/logger';
 import { ActionResult } from '@/modules/(system)/types/action-result';
@@ -6,7 +9,7 @@ import 'server-only';
 const logPrefix = 'action-error-handler.ts: ';
 
 /**
- * サーバーアクションエラーハンドリング
+ * 引数に渡されたサンクにエラーハンドリングを追加して実行する。
  */
 export async function withErrorHandlingAsync<T>(thunk: () => Promise<T>): Promise<ActionResult<T>> {
   const fname = 'withErrorHandlingAsync: ';

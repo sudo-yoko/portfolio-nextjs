@@ -1,3 +1,6 @@
+//
+// サーバーサイドエラーハンドリング
+//
 import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
 import logger from '@/modules/(system)/logging-facade/logger';
 import axios from 'axios';
@@ -6,7 +9,7 @@ import 'server-only';
 const logPrefix = 'server-error-handler.ts: ';
 
 /**
- * サーバーサイドエラーハンドリング
+ * 引数に渡されたサンクにエラーハンドリングを追加して実行する。（同期処理用）
  */
 export function withErrorHandling<T>(thunk: () => T): T {
   const fname = 'withErrorHandling: ';
@@ -22,7 +25,7 @@ export function withErrorHandling<T>(thunk: () => T): T {
 }
 
 /**
- * サーバーサイドエラーハンドリング（非同期処理用）
+ * 引数に渡されたサンクにエラーハンドリングを追加して実行する。（非同期処理用）
  */
 export async function withErrorHandlingAsync<T>(thunk: () => Promise<T>): Promise<T> {
   const fname = 'withErrorHandlingAsync: ';
@@ -36,7 +39,7 @@ export async function withErrorHandlingAsync<T>(thunk: () => Promise<T>): Promis
   }
 }
 
-export function handleError(error: unknown, fname: string): void {
+function handleError(error: unknown, fname: string): void {
   // axiosのエラーの場合
   // ステータスが200以外の場合は、axiosが例外をスローする
   if (axios.isAxiosError(error) && error.response) {
@@ -44,7 +47,6 @@ export function handleError(error: unknown, fname: string): void {
     logger.error(logPrefix + fname + serialize(error, description));
     return;
   }
-
   // 上記以外のエラーの場合
   logger.error(logPrefix + fname + serialize(error));
 }
