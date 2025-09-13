@@ -25,7 +25,6 @@ const fetchRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) =
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ offset, limit, query }),
   });
-
   if (!res.ok) {
     throw routeError();
   }

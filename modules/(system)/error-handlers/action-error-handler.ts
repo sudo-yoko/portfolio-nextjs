@@ -1,6 +1,6 @@
 import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
 import logger from '@/modules/(system)/logging-facade/logger';
-import { ActionResult } from '@/modules/(system)/types/server-action-interface';
+import { ActionResult } from '@/modules/(system)/types/action-result';
 import 'server-only';
 
 const logPrefix = 'action-error-handler.ts: ';
@@ -14,7 +14,7 @@ export async function withErrorHandlingAsync<T>(thunk: () => Promise<T>): Promis
   try {
     // 引数に渡されたサンクを呼ぶ
     const result = await thunk();
-    return ActionResult.ok(result);
+    return ActionResult.complete(result);
   } catch (error) {
     logger.error(logPrefix + fname + serialize(error));
     return ActionResult.abort();

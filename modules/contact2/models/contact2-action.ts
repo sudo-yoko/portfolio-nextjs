@@ -2,13 +2,13 @@
 
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/action-error-handler';
 import logger from '@/modules/(system)/logging-facade/logger';
+import { ActionResult } from '@/modules/(system)/types/action-result';
 import { FormData } from '@/modules/(system)/types/form-data';
-import { ActionResult } from '@/modules/(system)/types/server-action-interface';
 import { Violations, hasError } from '@/modules/(system)/validators/validator';
-import { ContactBody } from '@/modules/contact2/models/contact2-types';
-import { validate } from '@/modules/contact2/view-models/contact2-validator';
 import { send } from '@/modules/contact2/models/contact2-client';
+import { ContactBody } from '@/modules/contact2/models/contact2-types';
 import { FormKeys } from '@/modules/contact2/view-models/contact2-reducer';
+import { validate } from '@/modules/contact2/view-models/contact2-validator';
 
 const logPrefix = 'contact2-action.ts: ';
 

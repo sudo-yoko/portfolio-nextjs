@@ -1,15 +1,15 @@
 //
-// サーバーアクションのインターフェース定義
+// Server Actions の戻り値定義
 //
 
-export type ActionResult<T> = Aborted | Succeed<T>;
+export type ActionResult<T> = Aborted | Completed<T>;
 
 type Aborted = {
   abort: true;
   //data?: never;
 };
 
-type Succeed<T> = {
+type Completed<T> = {
   abort: false;
   data: T;
 };
@@ -18,7 +18,7 @@ type Succeed<T> = {
  * ActionResult を生成する
  */
 export const ActionResult = {
-  ok<T>(data: T): ActionResult<T> {
+  complete<T>(data: T): ActionResult<T> {
     return { abort: false, data };
   },
   abort(): ActionResult<never> {
