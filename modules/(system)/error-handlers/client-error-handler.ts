@@ -1,5 +1,5 @@
 import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
-import { logError } from '@/modules/(system)/loggers/remote-logger';
+import { logError } from '@/modules/(system)/loggers/logger-client';
 import 'client-only';
 import React from 'react';
 

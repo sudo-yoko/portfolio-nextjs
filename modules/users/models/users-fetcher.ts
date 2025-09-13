@@ -1,8 +1,11 @@
 import { actionError, routeError } from '@/modules/(system)/error-handlers/custom-error';
+import { logError } from '@/modules/(system)/loggers/logger-client';
 import { FetchPage, FetchPageResult } from '@/modules/(system)/pager/types';
 import { action } from '@/modules/users/models/users-action';
 import { User, UsersQuery } from '@/modules/users/models/users-types';
 import 'client-only';
+
+const logPrefix = 'users-fetcher.ts: ';
 
 /**
  * Server Actions を使ったデータフェッチ実装
@@ -26,6 +29,7 @@ const fetchRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) =
     body: JSON.stringify({ offset, limit, query }),
   });
   if (!res.ok) {
+    logError(logPrefix + `res=${JSON.stringify(res.status)}`);
     throw routeError();
   }
   const body: FetchPageResult<User[]> = await res.json();

@@ -41,3 +41,19 @@ test('test4', () => {
   expect(isAuthError(e)).toBe(false);
   expect(isRouteError(e)).toBe(false);
 });
+
+// npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/system/custom-error.test.ts -t 'test5'
+test('test5', () => {
+  try {
+    throw actionError();
+  } catch (e) {
+    // e is unknown
+    expect(isActionError(e)).toBe(true);
+  }
+});
+
+// npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/system/custom-error.test.ts -t 'test6'
+test('test6', () => {
+  const e = new String('test');
+  expect(isActionError(e)).toBe(false);
+});

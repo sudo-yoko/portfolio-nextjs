@@ -1,3 +1,6 @@
+//
+// Server Actions を使ってクライアントからサーバーへログを送信する。
+//
 'use server';
 
 import logger from '@/modules/(system)/logging-facade/logger';

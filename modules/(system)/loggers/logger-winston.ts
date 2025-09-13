@@ -49,7 +49,7 @@ const options: DailyRotateFile.DailyRotateFileTransportOptions = {
   dirname: logDir,
   datePattern: 'YYYY-MM-DD',
 };
-options.maxSize = '100k'; // ローテーションの最大ファイルサイズ：100KB
+options.maxSize = '1000k'; // ローテーションの最大ファイルサイズ：1000KB
 options.maxFiles = '1d'; // ログの保管期間：1日
 const transport = new winston.transports.DailyRotateFile(options);
 
