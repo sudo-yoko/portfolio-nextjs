@@ -1,17 +1,29 @@
 /**
  * Errorオブジェクトの文字列表現を作成する
  */
-export function serialize(error: unknown, description?: string): string {
+export function stringify(
+  error: unknown,
+  description?: string,
+): {
+  /**
+   * Error の文字列表現
+   */
+  representation: string;
+  /**
+   * Error のエラーメッセージのみ
+   */
+  message: string;
+} {
   if (typeof error === 'string') {
     const message = error;
-    return buildMessage({ description, message });
+    return { representation: join({ description, message }), message };
   } else if (error instanceof Error) {
     const { message } = error;
     const stacks = getStackTrace(error);
-    return buildMessage({ description, message, stacks });
+    return { representation: join({ description, message, stacks }), message };
   } else {
     const message = 'unknown type error.';
-    return buildMessage({ description, message });
+    return { representation: join({ description, message }), message };
   }
 }
 
@@ -42,7 +54,7 @@ function getStackTrace(error: Error): string[] {
  * @param stack - スタックトレース
  * @returns エラーメッセージ
  */
-function buildMessage({
+function join({
   description,
   message,
   details,

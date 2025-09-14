@@ -5,7 +5,7 @@ import { send } from '@/modules/users/models/users-client';
 import { User, UsersQuery } from '@/modules/users/models/users-types';
 import 'server-only';
 
-interface Body {
+interface ReqBody {
   offset: number;
   limit: number;
   query: UsersQuery;
@@ -15,10 +15,10 @@ export async function handleRequest(req: Request): Promise<Response> {
   return await withErrorHandlingAsync(() => withAuthAsync(() => func()));
 
   async function func() {
-    const body: Body = await req.json();
-    const { limit, offset, query } = body;
+    const reqBody: ReqBody = await req.json();
+    const { limit, offset, query } = reqBody;
     const { total, users } = await send(offset, limit, query);
-    const result: FetchPageResult<User[]> = { total, items: users };
-    return new Response(JSON.stringify(result), { status: 200 });
+    const resBody: FetchPageResult<User[]> = { total, items: users };
+    return new Response(JSON.stringify(resBody), { status: 200 });
   }
 }

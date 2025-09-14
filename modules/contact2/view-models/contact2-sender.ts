@@ -27,7 +27,7 @@ export const send = (
     // サーバーアクション呼び出し
     const actionResult = await action(state.formData);
     if (actionResult.abort) {
-      throw actionError();
+      throw actionError(actionResult);
     }
     // バリデーションエラーあり
     if (actionResult.data) {

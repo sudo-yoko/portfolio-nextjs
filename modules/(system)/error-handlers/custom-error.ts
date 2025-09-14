@@ -1,5 +1,8 @@
 // カスタムエラー定義
 
+import { ActionResult } from '@/modules/(system)/types/action-result';
+import { Aborted } from '@/modules/(system)/types/route-response';
+
 /**
  * カスタムエラーの種類
  * - ActionError  - Server Actions でエラーが発生したことを示すカスタムエラー
@@ -33,24 +36,39 @@ function customError<T extends ErrType>(type: T, message?: string): CustomError<
  * 種類別カスタムエラー生成ファクトリ
  */
 const errorOfType =
-  <T extends ErrType>(type: T) =>
-  (message?: string) =>
-    customError(type, message);
-
-/**
- * ActionError を生成する
- */
-export const actionError = errorOfType('ActionError');
+  <T extends ErrType>(type: T, cause?: string) =>
+  () =>
+    customError(type, cause);
 
 /**
  * AuthError を生成する
  */
-export const authError = errorOfType('AuthError');
+export const authError = errorOfType('AuthError', '認証エラー');
 
 /**
- * RouteError を生成する
+ * ActionError を生成する
  */
-export const routeError = errorOfType('RouteError');
+// export const actionError = errorOfType('ActionError', 'An exception occurred in a Server Action.');
+export function actionError<T>(result: ActionResult<T>): CustomError<'ActionError'> {
+  const cause = `ActionResult=${JSON.stringify(result)}`;
+  return customError('ActionError', cause);
+}
+
+/**
+ * RouteError を生成する　※awaitを付けて呼ぶこと
+ */
+// export const routeError = errorOfType('RouteError', 'An exception occurred in a Route Handler.');
+export async function routeError(res: Response): Promise<CustomError<'RouteError'>> {
+  const status = res.status;
+  const body = await res.json();
+
+  const cause: string[] = [];
+  cause.push(`status=${status.toString()}`);
+  if (body) {
+    cause.push(`body=${JSON.stringify(body)}`);
+  }
+  return customError('RouteError', cause.join(', '));
+}
 
 /**
  * 種類別カスタムエラー判定ファクトリ

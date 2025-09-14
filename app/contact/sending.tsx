@@ -27,7 +27,7 @@ export default function Sending({
       // サーバーアクション呼び出し
       const actionResult = await sendAction(formData);
       if (actionResult.abort) {
-        throw actionError();
+        throw actionError(actionResult);
       }
       // バリデーションエラーあり
       if (actionResult.data) {

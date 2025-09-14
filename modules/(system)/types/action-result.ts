@@ -6,6 +6,7 @@ export type ActionResult<T> = Aborted | Completed<T>;
 
 type Aborted = {
   abort: true;
+  cause?: string;
   //data?: never;
 };
 
@@ -21,8 +22,8 @@ export const ActionResult = {
   complete<T>(data: T): ActionResult<T> {
     return { abort: false, data };
   },
-  abort(): ActionResult<never> {
-    return { abort: true };
+  abort(cause?: string): ActionResult<never> {
+    return { abort: true, cause };
   },
 };
 

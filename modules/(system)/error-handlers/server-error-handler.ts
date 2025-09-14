@@ -1,7 +1,7 @@
 //
 // サーバーサイドエラーハンドリング
 //
-import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
+import { stringify } from '@/modules/(system)/error-handlers/error-handling-utils';
 import logger from '@/modules/(system)/logging-facade/logger';
 import axios from 'axios';
 import 'server-only';
@@ -44,9 +44,9 @@ function handleError(error: unknown, fname: string): void {
   // ステータスが200以外の場合は、axiosが例外をスローする
   if (axios.isAxiosError(error) && error.response) {
     const description = `Response(Inbound) -> status=${error.response.status}, data=${error.response.data}`;
-    logger.error(logPrefix + fname + serialize(error, description));
+    logger.error(logPrefix + fname + stringify(error, description).representation);
     return;
   }
   // 上記以外のエラーの場合
-  logger.error(logPrefix + fname + serialize(error));
+  logger.error(logPrefix + fname + stringify(error).representation);
 }

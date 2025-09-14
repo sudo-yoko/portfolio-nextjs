@@ -1,5 +1,5 @@
 import { authError } from '@/modules/(system)/error-handlers/custom-error';
-import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
+import { stringify } from '@/modules/(system)/error-handlers/error-handling-utils';
 import logger from '@/modules/(system)/logging-facade/logger';
 import 'server-only';
 
@@ -17,7 +17,7 @@ export async function withAuthAsync<T>(thunk: () => Promise<T>): Promise<T> {
     }
     return await thunk();
   } catch (e) {
-    logger.error(logPrefix + fname + serialize(e));
+    logger.error(logPrefix + fname + stringify(e).representation);
     throw e;
   }
 }

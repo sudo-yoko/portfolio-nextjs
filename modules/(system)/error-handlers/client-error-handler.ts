@@ -1,7 +1,9 @@
-import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
+import { stringify } from '@/modules/(system)/error-handlers/error-handling-utils';
 import { logError } from '@/modules/(system)/loggers/logger-client';
+import axios from 'axios';
 import 'client-only';
 import React from 'react';
+import { isRouteError } from './custom-error';
 
 const logPrefix = 'client-error-handler.ts: ';
 
@@ -17,8 +19,8 @@ export function withErrorHandling<T>(
   try {
     // 引数に渡されたサンクを実行
     return thunk();
-  } catch (error) {
-    logError(logPrefix + fname + serialize(error));
+  } catch (e) {
+    logError(logPrefix + fname + stringify(e).representation);
     setHasError(true);
   }
 }
@@ -35,8 +37,8 @@ export async function withErrorHandlingAsync<T>(
   try {
     // 引数に渡されたサンクを実行
     return await thunk();
-  } catch (error) {
-    logError(logPrefix + fname + serialize(error));
+  } catch (e) {
+    logError(logPrefix + fname + stringify(e).representation);
     setHasError(true);
   }
 }

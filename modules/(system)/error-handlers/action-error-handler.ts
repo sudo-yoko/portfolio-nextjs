@@ -1,7 +1,7 @@
 //
 // Server Actions エラーハンドリング
 //
-import { serialize } from '@/modules/(system)/error-handlers/error-handling-utils';
+import { stringify } from '@/modules/(system)/error-handlers/error-handling-utils';
 import logger from '@/modules/(system)/logging-facade/logger';
 import { ActionResult } from '@/modules/(system)/types/action-result';
 import 'server-only';
@@ -18,9 +18,16 @@ export async function withErrorHandlingAsync<T>(thunk: () => Promise<T>): Promis
     // 引数に渡されたサンクを呼ぶ
     const result = await thunk();
     return ActionResult.complete(result);
-  } catch (error) {
-    logger.error(logPrefix + fname + serialize(error));
-    return ActionResult.abort();
+  } catch (e) {
+    const { message } = stringify(e);
+    const result: ActionResult<never> = ActionResult.abort(message);
+
+    //logger.error(logPrefix + fname + message); // 再スローしないのにスタックトレースをログに出すとログがわかりづらくなる。再スローしない場合はメッセージのみログに出力する
+    logger.error(
+      logPrefix + fname + `Error -> message=${message}, Result(Outbound) -> ActionResult=${JSON.stringify(result)}`,
+    );
+
+    return result;
   }
 }
 
