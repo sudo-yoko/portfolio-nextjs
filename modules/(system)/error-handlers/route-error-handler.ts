@@ -27,7 +27,11 @@ export async function withErrorHandlingAsync(thunk: () => Promise<Response>): Pr
     } else {
       status = 500;
     }
-    logger.error(logPrefix + fname + `Error -> message=${message}, Response(Outbound) -> status=${status}, body=${JSON.stringify(res)}`);
+    logger.error(
+      logPrefix +
+        fname +
+        `Error -> message=${message}, Response(Outbound) -> status=${status}, body=${JSON.stringify(res)}`,
+    );
     return new Response(JSON.stringify(res), { status });
   }
 }

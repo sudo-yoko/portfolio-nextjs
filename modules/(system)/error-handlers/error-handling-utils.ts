@@ -6,24 +6,24 @@ export function stringify(
   description?: string,
 ): {
   /**
-   * Error の文字列表現
-   */
-  representation: string;
-  /**
-   * Error のエラーメッセージのみ
+   * エラーメッセージのみ（スタックトレースを含まない）
    */
   message: string;
+  /**
+   * スタックトレースを含むすべてのメッセージ
+   */
+  all: string;
 } {
   if (typeof error === 'string') {
     const message = error;
-    return { representation: join({ description, message }), message };
+    return { message, all: join({ description, message }) };
   } else if (error instanceof Error) {
     const { message } = error;
     const stacks = getStackTrace(error);
-    return { representation: join({ description, message, stacks }), message };
+    return { message, all: join({ description, message, stacks }) };
   } else {
     const message = 'unknown type error.';
-    return { representation: join({ description, message }), message };
+    return { message, all: join({ description, message }) };
   }
 }
 

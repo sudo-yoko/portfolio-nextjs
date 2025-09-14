@@ -27,8 +27,6 @@ test('test1-1', () => {
   expect(isActionError(e)).toBe(true);
   expect(isAuthError(e)).toBe(false);
   expect(isRouteError(e)).toBe(false);
-  const { message, representation } = stringify(e);
-  print(`message=${message}, representation=${representation}`);
 });
 
 test('test1-2', () => {
@@ -72,19 +70,20 @@ test('test1-5', () => {
 // npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/system/custom-error.test.ts -t 'test1-6'
 test('test1-6', () => {
   const e = new String('test');
+  // e is string
   expect(isActionError(e)).toBe(false);
 });
 
 // ======================
-// ActionError Test
+// actionError() Test
 // ======================
 
 // npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/system/custom-error.test.ts -t 'test2-1'
 test('test2-1', () => {
   const result = ActionResult.abort();
   const e = actionError(result);
-  const { message, representation } = stringify(e);
-  print(`message=${message}, representation=${representation}`);
+  const { message, all } = stringify(e);
+  print(`message=${message}, all=${all}`);
 });
 
 // npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/system/custom-error.test.ts -t 'test2-2'
@@ -93,8 +92,8 @@ test('test2-2', () => {
 
   const result = ActionResult.abort(cause);
   const e = actionError(result);
-  const { message, representation } = stringify(e);
-  print(`message=${message}, representation=${representation}`);
+  const { message, all } = stringify(e);
+  print(`message=${message}, all=${all}`);
 });
 
 // npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/system/custom-error.test.ts -t 'test2-3'
@@ -103,6 +102,6 @@ test('test2-3', () => {
   print(`result=${JSON.stringify(result)}`);
 
   const e = actionError(result);
-  const { message, representation } = stringify(e);
-  print(`message=${message}, representation=${representation}`);
+  const { message, all } = stringify(e);
+  print(`message=${message}, all=${all}`);
 });

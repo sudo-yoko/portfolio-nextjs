@@ -10,14 +10,13 @@ const logPrefix = 'auth-handler.ts: ';
  */
 export async function withAuthAsync<T>(thunk: () => Promise<T>): Promise<T> {
   const fname = 'withAuthAsync: ';
-
   try {
     if (process.env['AUTH_ERROR']) {
       throw authError();
     }
     return await thunk();
   } catch (e) {
-    logger.error(logPrefix + fname + stringify(e).representation);
+    logger.error(logPrefix + fname + stringify(e).all);
     throw e;
   }
 }

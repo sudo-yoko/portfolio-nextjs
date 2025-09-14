@@ -1,7 +1,7 @@
+//
 // カスタムエラー定義
-
+//
 import { ActionResult } from '@/modules/(system)/types/action-result';
-import { Aborted } from '@/modules/(system)/types/route-response';
 
 /**
  * カスタムエラーの種類

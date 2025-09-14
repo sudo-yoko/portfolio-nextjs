@@ -1,7 +1,5 @@
 import { actionError, routeError } from '@/modules/(system)/error-handlers/custom-error';
-import { logError } from '@/modules/(system)/loggers/logger-client';
 import { FetchPage, FetchPageResult } from '@/modules/(system)/pager/types';
-import { Aborted, RouteResult } from '@/modules/(system)/types/route-response';
 import { action } from '@/modules/users/models/users-action';
 import { User, UsersQuery } from '@/modules/users/models/users-types';
 import 'client-only';
@@ -28,7 +26,6 @@ const _fetchRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) 
     body: JSON.stringify({ offset, limit, query }),
   });
   if (res.status != 200) {
-    //logError(`status=${res.status}, body=${JSON.stringify(await res.json())}`);
     throw await routeError(res);
   }
   const body: FetchPageResult<User[]> = await res.json();

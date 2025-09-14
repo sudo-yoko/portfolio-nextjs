@@ -1,14 +1,15 @@
+//
+// クライアントサイドエラーハンドリング
+//
 import { stringify } from '@/modules/(system)/error-handlers/error-handling-utils';
 import { logError } from '@/modules/(system)/loggers/logger-client';
-import axios from 'axios';
 import 'client-only';
 import React from 'react';
-import { isRouteError } from './custom-error';
 
 const logPrefix = 'client-error-handler.ts: ';
 
 /**
- * クライアントサイドエラーハンドリング
+ * 引数に渡されたサンクにエラーハンドリングを追加して実行する。
  */
 export function withErrorHandling<T>(
   thunk: () => T,
@@ -20,13 +21,13 @@ export function withErrorHandling<T>(
     // 引数に渡されたサンクを実行
     return thunk();
   } catch (e) {
-    logError(logPrefix + fname + stringify(e).representation);
+    logError(logPrefix + fname + stringify(e).all);
     setHasError(true);
   }
 }
 
 /**
- * クライアントサイドエラーハンドリング（非同期処理用）
+ * 引数に渡されたサンクにエラーハンドリングを追加して実行する。（非同期処理用）
  */
 export async function withErrorHandlingAsync<T>(
   thunk: () => Promise<T>,
@@ -38,7 +39,7 @@ export async function withErrorHandlingAsync<T>(
     // 引数に渡されたサンクを実行
     return await thunk();
   } catch (e) {
-    logError(logPrefix + fname + stringify(e).representation);
+    logError(logPrefix + fname + stringify(e).all);
     setHasError(true);
   }
 }

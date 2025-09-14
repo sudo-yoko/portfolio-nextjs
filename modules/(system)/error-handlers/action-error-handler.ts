@@ -22,11 +22,12 @@ export async function withErrorHandlingAsync<T>(thunk: () => Promise<T>): Promis
     const { message } = stringify(e);
     const result: ActionResult<never> = ActionResult.abort(message);
 
-    //logger.error(logPrefix + fname + message); // 再スローしないのにスタックトレースをログに出すとログがわかりづらくなる。再スローしない場合はメッセージのみログに出力する
+    // 再スローしないのにスタックトレースをログに出すとログがわかりづらくなる。再スローしない場合はメッセージのみログに出力する
     logger.error(
-      logPrefix + fname + `Error -> message=${message}, Result(Outbound) -> ActionResult=${JSON.stringify(result)}`,
+      logPrefix +
+        fname +
+        `Error -> message=${message}, Result(Outbound) -> ActionResult=${JSON.stringify(result)}`,
     );
-
     return result;
   }
 }
