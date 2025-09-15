@@ -63,7 +63,11 @@ flowchart LR
 ├── app                        コンポーネント(.tsx)を格納する。
 │   ├── (system)               共通のView
 │   ├── chat                   業務アプリのView
-│   └── contact                業務アプリのView
+│   ├── contact                業務アプリのView
+│   │
+│   └── api                    Route Handlersを格納する。（※1）
+│        ├── caht              業務アプリのRoute Handlers
+│        └── contact           業務アプリのRoute Handlers
 │
 ├── modules                    モジュール(.ts)を格納する。
 │   ├── (system)               共通のモジュール
@@ -77,6 +81,23 @@ flowchart LR
 │        └── view-models       業務アプリのモジュール(viewModel)
 │
 └── public
+```
+（※1）Route Handlers は制約上 `app/api` に置く必要があるため、ここはパススルーに留める。実質的な処理は別モジュールに切り出し、`modules/**/models` のフォルダに配置する。
+
+:pencil: 実装例
+```ts
+// /app/api/contact/route.ts
+import { handleRequest } from '@/modules/contact/models/contact-route';
+export async function POST(req: Request): Promise<Response> {
+　// 処理をパススルーする
+  return handleRequest(req);
+}
+
+// /modules/contact/models/contact-route.ts
+export async function handleRequest(req: Request): Promise<Response> {
+  // 実質的な処理はこちらに記述する
+  // ...
+}
 ```
 
 ***
