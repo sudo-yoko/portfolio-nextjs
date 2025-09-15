@@ -43,7 +43,7 @@ function handleError(error: unknown, fname: string): void {
   // axiosのエラーの場合
   // ステータスが200以外の場合は、axiosが例外をスローする
   if (axios.isAxiosError(error) && error.response) {
-    const description = `Response(Inbound) -> status=${error.response.status}, data=${error.response.data}`;
+    const description = `Axios Error: Response(Inbound) -> status=${error.response.status}, data=${error.response.data}`;
     logger.error(logPrefix + fname + stringify(error, description).all);
     return;
   }
