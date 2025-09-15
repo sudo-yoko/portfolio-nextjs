@@ -7,7 +7,7 @@ import 'client-only';
 /**
  * Server Actions を使ったデータフェッチ実装
  */
-const fetchAction: FetchPage<User[], UsersQuery> = async (offset, limit, query) => {
+const _fetchAction: FetchPage<User[], UsersQuery> = async (offset, limit, query) => {
   const result = await action(offset, limit, query);
   if (result.abort) {
     throw actionError(result);
@@ -19,7 +19,7 @@ const fetchAction: FetchPage<User[], UsersQuery> = async (offset, limit, query) 
 /**
  * Route Handlers を使ったデータフェッチ実装
  */
-const _fetchRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) => {
+const fetchRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) => {
   const res = await window.fetch('api/users', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -33,4 +33,4 @@ const _fetchRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) 
   return { total, items };
 };
 
-export const fetch: FetchPage<User[], UsersQuery> = fetchAction;
+export const fetch: FetchPage<User[], UsersQuery> = fetchRoute;

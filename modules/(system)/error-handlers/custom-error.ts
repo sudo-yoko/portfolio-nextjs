@@ -50,8 +50,15 @@ export const authError = errorOfType('AuthError', '認証エラー');
  */
 // export const actionError = errorOfType('ActionError', 'An exception occurred in a Server Action.');
 export function actionError<T>(result: ActionResult<T>): CustomError<'ActionError'> {
-  const cause = `ActionResult=${JSON.stringify(result)}`;
-  return customError('ActionError', cause);
+  const cause: string[] = [];
+  cause.push(`abort=${result.abort}`);
+  if (result.abort) {
+    cause.push(`cause=${result.cause}`);
+  }
+  if (!result.abort) {
+    cause.push(`data=${JSON.stringify(result.data)}`);
+  }
+  return customError('ActionError', cause.join(', '));
 }
 
 /**
