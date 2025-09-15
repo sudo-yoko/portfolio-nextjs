@@ -1,19 +1,23 @@
 'use client';
 
 import { ErrorHandler } from '@/app/(system)/error-handler';
+import { Pagination } from '@/app/(system)/pagination/pagination';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
 import { createPager } from '@/modules/(system)/pager/pager';
 import { Pager } from '@/modules/(system)/pager/types';
 import { FormData } from '@/modules/(system)/types/form-data';
 import { fetch } from '@/modules/users/models/users-fetcher';
-import { FormKeys, User } from '@/modules/users/models/users-types';
+import { FormKeys, User, Users, UsersQuery } from '@/modules/users/models/users-types';
 import { useRef, useState } from 'react';
 
 export default function UserList() {
   const [error, setError] = useState(false);
+  const [search, setSearch] = useState(false);
   const [formData, setFormData] = useState<FormData<FormKeys>>({ userName: '' });
   const [users, setUsers] = useState<User[]>([]);
   const pager = useRef<Pager<User[]>>(null);
+
+  const initParam: UsersQuery = { userName: formData.userName };
 
   // Pagerインスタンスを1度だけ作成する（初期化）
   //if (!pager.current) {
@@ -26,22 +30,24 @@ export default function UserList() {
   //}, []);
 
   function handleSearch() {
-    withErrorHandlingAsync(() => func(), setError);
+    //withErrorHandlingAsync(() => func(), setError);
 
-    async function func() {
-      pager.current = createPager(fetch, { perPage: 4, query: { userName: formData.userName } });
-      const current = await pager.current.current();
-      setUsers(current.items);
-      // Promiseチェーンで書く場合は、withErrorHandlingのエラーハンドリングは効果が無いので以下のように記述する
-      /*
+    //async function func() {
+    setSearch(true);
+    //pager.current = createPager(fetch, { perPage: 4, query: { userName: formData.userName } });
+    //const current = await pager.current.current();
+    //setUsers(current.items);
+    // Promiseチェーンで書く場合は、withErrorHandlingのエラーハンドリングは効果が無いので以下のように記述する
+    /*
       pager.current
         .current()
         .then((p) => setUsers(p.items))
         .catch((_e) => setError(true));
         */
-    }
+    //}
   }
 
+  /*
   function handleNext() {
     pager.current
       ?.next()
@@ -54,11 +60,12 @@ export default function UserList() {
       ?.prev()
       .then((p) => setUsers(p.items))
       .catch((_e) => setError(true));
-  }
+  }*/
 
   return (
     <>
       {error && <ErrorHandler />}
+
       <div>
         <div>
           <div>
@@ -76,12 +83,17 @@ export default function UserList() {
             </div>
           </div>
         </div>
-        <button type="button" onClick={() => handlePrev()} className="rounded-lg bg-indigo-300 px-4 py-2">
-          前へ
-        </button>
-        <button type="button" onClick={() => handleNext()} className="rounded-lg bg-indigo-300 px-4 py-2">
-          次へ
-        </button>
+
+        {/** ページネーションコンポーネント */}
+        {search && (
+          <Pagination<User[], UsersQuery>
+            fetch={fetch}
+            fetchArgs={{ perPage: 4, query: initParam }}
+            setItems={setUsers}
+          />
+        )}
+        {/** ページネーションコンポーネント */}
+        
         <table className="border-collapse border border-gray-400">
           <thead>
             <tr>

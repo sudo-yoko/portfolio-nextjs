@@ -12,8 +12,7 @@ const _fetchAction: FetchPage<User[], UsersQuery> = async (offset, limit, query)
   if (result.abort) {
     throw actionError(result);
   }
-  const { total, items } = result.data;
-  return { total, items };
+  return result.data;
 };
 
 /**
@@ -29,8 +28,7 @@ const fetchRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) =
     throw await routeError(res);
   }
   const body: FetchPageResult<User[]> = await res.json();
-  const { total, items } = body;
-  return { total, items };
+  return body;
 };
 
 export const fetch: FetchPage<User[], UsersQuery> = fetchRoute;

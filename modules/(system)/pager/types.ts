@@ -1,9 +1,15 @@
+/**
+ * ページデータ取得インターフェース。関数の型
+ */
 export type FetchPage<TItems, TQuery> = (
   offset: number,
   limit: number,
   query: TQuery,
 ) => Promise<FetchPageResult<TItems>>;
 
+/**
+ * ページデータ取得インターフェース。関数の戻り値の型
+ */
 export type FetchPageResult<TItems> = {
   total: number;
   items: TItems;
