@@ -84,7 +84,7 @@ flowchart LR
 ```
 （※1）Route Handlers は制約上 `app/api` に置く必要があるため、ここはパススルーに留める。実質的な処理は別モジュールに切り出し、`modules/**/models` のフォルダに配置する。
 
-:pencil: 実装例
+:pencil: パススルーの実装例
 ```ts
 // /app/api/contact/route.ts
 import { handleRequest } from '@/modules/contact/models/contact-route';
@@ -190,11 +190,26 @@ debug('ログメッセージ');
 javascriptの関数を引数にとれる性質と、クロージャを活用した設計です。実行したい処理をサンクとして受け取り、その実行を共通の try/catch で囲んでエラーハンドリングを行います。
 
 #### サーバーサイドエラーハンドリング
-例外をキャッチして再スローします。  
-この例外が処理されなければ、Next.jsは未処理の例外として処理し、標準のエラーページ(error.tsx)をレンダリングします。
+例外をキャッチして再スローします。Next.jsはこれを未処理の例外として処理し、既定のエラーページ(error.tsx)をレンダリングします。
 
 :open_file_folder: コード：[modules/(system)/error-handlers/server-error-handler.ts](modules/(system)/error-handlers/server-error-handler.ts)  
-:open_file_folder: 使用例：[app/contact/page.tsx#L16](app/contact/page.tsx#L16)  
+:open_file_folder: 使用例：[app/contact/page.tsx](app/contact/page.tsx)
+
+使用例説明：サーバーサイド処理をすべて内部関数に包んで、サンクとしてwithErrorHandlingAsyncに渡しています。内部関数に引数は無いが、クロージャによってpropsがキャプチャされ実行時に利用されます。
+```ts
+export default async function Page(props: { searchParams?: SearchParams }) {
+	return await withErrorHandlingAsync(() => func());
+
+	// サーバーサイド処理をすべて内部関数に包む
+	async function func() {
+		const params = await props.searchParams;
+		// ...
+		return (
+			// ...
+		);
+	}
+}
+```
 
 #### サーバーアクションエラーハンドリング
 
