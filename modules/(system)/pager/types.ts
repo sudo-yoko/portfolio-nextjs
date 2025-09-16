@@ -60,7 +60,7 @@ export type PagerResult<T> = {
   /**
    * 現在選択されているページ
    */
-  page: number;
+  currentPage: number;
   /**
    * 総件数
    */
@@ -68,7 +68,7 @@ export type PagerResult<T> = {
   /**
    * 総ページ数
    */
-  totalPage: number;
+  totalPages: number;
   /**
    * 実効オフセット（補正あり）
    */

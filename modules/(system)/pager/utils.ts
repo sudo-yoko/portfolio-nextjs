@@ -1,6 +1,6 @@
-// ---------------------------
+// 
 // ページネーションユーティリティ
-// ---------------------------
+// 
 
 /**
  * ページ番号をオフセットに変換
@@ -27,8 +27,29 @@ export function calcPagination(
   total: number,
 ): { currentPage: number; totalPages: number; effectiveOffset: number } {
   const totalPages = total == 0 ? 0 : Math.ceil(total / limit);
-  // offsetがtotalを超えている場合は、最後のページオフセットに補正する
-  const effectiveOffset = offset >= total ? offsetOfLastPage(total, limit) : offset;
+  const effectiveOffset = toEffectiveOffset(offset, limit, total);
   const currentPage = Math.floor(effectiveOffset / limit) + 1;
   return { currentPage, totalPages, effectiveOffset };
+}
+
+/**
+ * 実効オフセットに補正する（下限用）
+ */
+export function toEffectiveOffsetMin(offset: number): number {
+  if (offset < 0) {
+    return 0;
+  }
+  return offset;
+}
+
+/**
+ * 実効オフセットに補正する
+ */
+export function toEffectiveOffset(offset: number, limit: number, total: number): number {
+  let effectiveOffset = toEffectiveOffsetMin(offset);
+  // offsetがtotalを超えている場合は、最後のページオフセットに補正する
+  if (effectiveOffset >= total) {
+    effectiveOffset = offsetOfLastPage(total, limit);
+  }
+  return effectiveOffset;
 }

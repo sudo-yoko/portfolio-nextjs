@@ -1,31 +1,29 @@
 'use client';
 
-import { ErrorHandler } from '@/app/(system)/error-handler';
 import { Pagination } from '@/app/(system)/pagination/pagination';
 import { FormData } from '@/modules/(system)/types/form-data';
 import { fetch } from '@/modules/users/models/users-fetcher';
 import { FormKeys, User, UsersQuery } from '@/modules/users/models/users-types';
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
+
+const initialPage = 1;
+const perPage = 4;
 
 export default function UserList() {
-  const [error, setError] = useState(false);
   const [search, setSearch] = useState(false);
   const [formData, setFormData] = useState<FormData<FormKeys>>({ userName: '' });
   const [users, setUsers] = useState<User[]>([]);
-
-  const initialPage = 1;
-  const perPage = 4;
   const { userName } = formData; // 各レンダーで作り直される“その回のスナップショット”
-  const queryMemo: UsersQuery = useMemo(() => ({ userId: '', userName }), [userName]);
-  const fetchCallback = useCallback(fetch, [queryMemo]);
+  const [query, setQuery] = useState<UsersQuery>({ userId: '', userName });
+  //const queryMemo: UsersQuery = useMemo(() => ({ userId: '', userName:'' }), []);
 
   function handleSearch() {
+    setQuery({ ...query, userName: formData.userName });
     setSearch(true);
   }
 
   return (
     <>
-      {error && <ErrorHandler />}
       <div>
         <div>
           <div>
@@ -44,16 +42,14 @@ export default function UserList() {
           </div>
         </div>
         {/** ページネーションコンポーネント */}
-        {search && (
-          <Pagination
-            fetchCallback={fetchCallback}
-            initialPage={initialPage}
-            perPage={perPage}
-            queryMemo={queryMemo}
-            setItems={setUsers}
-            setError={setError}
-          />
-        )}
+        <Pagination
+          search={search}
+          fetch={fetch}
+          initialPage={initialPage}
+          perPage={perPage}
+          query={query}
+          setItems={setUsers}
+        />
         {/** 一覧 */}
         {users.length > 0 && <List users={users} />}
       </div>
