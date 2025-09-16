@@ -13,9 +13,9 @@ const logPrefix = 'app/contact/page.tsx: ';
  */
 export default async function Page(props: { searchParams?: SearchParams }) {
   // エラーハンドリングを追加して処理を実行する。
-  return await withErrorHandlingAsync(() => process());
+  return await withErrorHandlingAsync(() => func());
 
-  async function process() {
+  async function func() {
     const params = await props.searchParams;
     logger.info(logPrefix + `searchParams=${JSON.stringify(params)}`);
 
