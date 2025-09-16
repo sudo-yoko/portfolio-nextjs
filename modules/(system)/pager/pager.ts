@@ -1,4 +1,4 @@
-// 
+//
 // クライアントサイド用にページネーションを提供する
 //
 // totalが常に取得できる前提の設計
@@ -6,7 +6,7 @@
 //
 
 import { Pager, FetchPage, PagerResult } from '@/modules/(system)/pager/types';
-import { offsetOfLastPage, pageToOffset } from '@/modules/(system)/pager/utils';
+import { calcPagination, offsetOfLastPage, pageToOffset } from '@/modules/(system)/pager/utils';
 import 'client-only';
 
 /**
@@ -37,7 +37,16 @@ export function createPager<T, Q>(
 
     let { total, items } = await fetch(offset, limit, query);
     if (total === 0) {
-      return { total, offset, items, hasNext: false, hasPrev: false, page: 0, totalPage: 0 };
+      const { effectiveOffset, currentPage, totalPages } = calcPagination(offset, limit, total);
+      return {
+        total,
+        offset: effectiveOffset,
+        items,
+        hasNext: false,
+        hasPrev: false,
+        page: currentPage,
+        totalPage: totalPages,
+      };
     }
 
     // 実効オフセットに補正して再取得
@@ -48,7 +57,16 @@ export function createPager<T, Q>(
 
     const hasNext = offset + limit < total;
     const hasPrev = offset > 0;
-    return { total, offset, items, hasNext, hasPrev, page: 0, totalPage: 0 };
+    const { effectiveOffset, currentPage, totalPages } = calcPagination(offset, limit, total);
+    return {
+      total,
+      offset: effectiveOffset,
+      items,
+      hasNext,
+      hasPrev,
+      page: currentPage,
+      totalPage: totalPages,
+    };
   };
 
   const pager: Pager<T> = {
