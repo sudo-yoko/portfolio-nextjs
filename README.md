@@ -197,6 +197,7 @@ javascriptの関数を引数にとれる性質と、クロージャを活用し�
 
 使用例説明：サーバーサイド処理をすべて内部関数に包んで、サンクとしてwithErrorHandlingAsyncに渡しています。内部関数に引数は無いが、クロージャによってpropsがキャプチャされ実行時に利用されます。
 ```ts
+import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/server-error-handler';
 export default async function Page(props: { searchParams?: SearchParams }) {
 	return await withErrorHandlingAsync(() => func());
 
