@@ -1,10 +1,3 @@
-//
-// クライアントサイド用にページネーションを提供する
-//
-// totalが常に取得できる前提の設計
-// 連打に非対応（呼び元で制御必要）
-//
-
 import { Pager, FetchPage, PagerResult } from '@/modules/(system)/pager/types';
 import {
   calcPagination,
@@ -15,27 +8,25 @@ import {
 import 'client-only';
 
 /**
- * Pager を作成して返す
+ * ページャ関数を返す
  *
- * @typeParam L - 結果リストの型
+ * @typeParam T - 結果リストの型
  * @typeParam Q - 検索条件の型
  *
- * @param fetcher - ページネーションで使用するサーバーアクションを指定する
- * @param fetchArgs -
- * @returns
+ * @param fetch - データ取得関数
+ * @param params - パラメーター
+ * @returns ページャ関数
  */
 export function createPager<T, Q>(
   fetch: FetchPage<T, Q>,
-  fetchArgs: { initialPage?: number; perPage: number; query: Q },
+  params: { initialPage?: number; perPage: number; query: Q },
 ): Pager<T> {
-  const { perPage, query } = fetchArgs;
-  const initPage = fetchArgs.initialPage ?? 1;
+  const { perPage, query } = params;
+  const initPage = params.initialPage ?? 1;
   const limit = perPage;
   let { offset } = pageToOffset(perPage, initPage);
 
-  /**
-   * データ取得関数
-   */
+  // データ取得関数を使ってページデータを取得する関数を作成する
   const fetchData = async (): Promise<PagerResult<T>> => {
     //
     // 実効オフセットに補正（下限値）
@@ -70,9 +61,8 @@ export function createPager<T, Q>(
     return { total, offset, items, hasNext, hasPrev, currentPage, totalPages };
   };
 
-  /**
-   * ページャ関数を返す
-   */
+  // ページャ関数を作成する。
+  // 検索条件や表示件数などは関数の中にエンクロージングされる
   const pager: Pager<T> = {
     current() {
       return fetchData();
@@ -86,5 +76,7 @@ export function createPager<T, Q>(
       return fetchData();
     },
   };
+
+  // ページャ関数を返す
   return pager;
 }

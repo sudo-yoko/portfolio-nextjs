@@ -1,39 +1,24 @@
-/**
- * ページデータ取得インターフェース。関数の型
- */
-export type FetchPage<TItems, TQuery> = (
-  offset: number,
-  limit: number,
-  query: TQuery,
-) => Promise<FetchPageResult<TItems>>;
+//
+// ページネーションの型定義
+//
 
 /**
- * ページデータ取得インターフェース。関数の戻り値の型
+ * データ取得関数の関数シグネチャ
  */
-export type FetchPageResult<TItems> = {
+export interface FetchPage<TItems, TQuery> {
+  (offset: number, limit: number, query: TQuery): Promise<FetchPageResult<TItems>>;
+}
+
+/**
+ * データ取得関数の戻り値の型
+ */
+export interface FetchPageResult<TItems> {
   total: number;
   items: TItems;
-};
-
-/*
-export type PagerAction<TItems, TQuery> = (
-  offset: number,
-  limit: number,
-  query: TQuery,
-) => Promise<ActionResult<PagerActionResult<TItems>> | ActionResult<void>>;
-
-export type PagerActionResult<TItems> = {
-  total: number;
-  items: TItems;
-};
-*/
+}
 
 /**
- * ページング制御オブジェクト
- *
- * 検索条件や表示件数などはPagerの中にエンクロージングされる
- *
- * @typeParam T - ページ内アイテム(リスト)の型
+ * ページャ関数の関数シグネチャ
  */
 export interface Pager<T> {
   /**
@@ -51,11 +36,9 @@ export interface Pager<T> {
 }
 
 /**
- * Pagerが返す結果
- *
- * @typeParam T - ページ内アイテム(リスト)の型
+ * ページャ関数の戻り値の型
  */
-export type PagerResult<T> = {
+export interface PagerResult<T> {
   items: T;
   /**
    * 現在選択されているページ
@@ -73,6 +56,12 @@ export type PagerResult<T> = {
    * 実効オフセット（補正あり）
    */
   offset: number;
+  /**
+   * 次ページがあるか
+   */
   hasNext: boolean;
+  /**
+   * 前ページがあるか
+   */
   hasPrev: boolean;
-};
+}
