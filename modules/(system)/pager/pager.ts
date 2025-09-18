@@ -1,4 +1,4 @@
-import { Pager, FetchPage, PagerResult } from '@/modules/(system)/pager/types';
+import { FetchPage, Pager, PagerResult } from '@/modules/(system)/pager/types';
 import {
   calcPagination,
   offsetOfLastPage,

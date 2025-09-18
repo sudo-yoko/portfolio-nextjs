@@ -19,13 +19,14 @@ const _fetchAction: FetchPage<User[], UsersQuery> = async (offset, limit, query)
  * Route Handlers を使ったデータフェッチ実装
  */
 const fetchRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) => {
-  const res = await window.fetch('api/users', {
+  const url = 'http://localhost:3000/api/users';
+  const res = await window.fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ offset, limit, query }),
   });
   if (res.status != 200) {
-    throw await routeError(res);
+    throw await routeError(res, { method: 'POST', route: url });
   }
   const body: FetchPageResult<User[]> = await res.json();
   return body;
