@@ -41,7 +41,6 @@ export function Pagination<TItems, TQuery>({
       setItems(page.items);
       setPage(page.currentPage);
     }
-    //}, [fetch, fetchArgs, setItems]); // これらを依存配列に入れると親が再レンダリングされるたびに参照が新しくなり無限ループになる
   }, [fetchCallback, initialPage, perPage, query, search, setItems]);
 
   function handleNext() {

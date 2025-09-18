@@ -67,20 +67,20 @@ export function actionError<T>(result: ActionResult<T>): CustomError<'ActionErro
 // export const routeError = errorOfType('RouteError', 'An exception occurred in a Route Handler.');
 export async function routeError(
   res: Response,
-  details?: { method?: string; route?: string },
+  meta?: { method?: string; route?: string },
 ): Promise<CustomError<'RouteError'>> {
   const status = res.status;
   const body = await res.text(); // bodyがjsonとは限らないのでtextで取得する。エラーの場合はhtmlが返ってくることもある
   const cause: string[] = [];
-  if (details?.method) {
-    cause.push(`method=${details.method}`);
+  if (meta?.method) {
+    cause.push(`method=${meta.method}`);
   }
-  if (details?.route) {
-    cause.push(`route=${details.route}`);
+  if (meta?.route) {
+    cause.push(`route=${meta.route}`);
   }
   cause.push(`status=${status.toString()}`);
   if (body) {
-    cause.push(`body=${JSON.stringify(body)}`);
+    cause.push(`body=${body}`);
   }
   return customError('RouteError', cause.join(', '));
 }

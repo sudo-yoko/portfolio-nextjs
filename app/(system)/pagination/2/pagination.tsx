@@ -18,7 +18,7 @@ export function Pagination<TItems, TQuery>({
   query,
   setItems,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   search: boolean;
   fetchCallback: FetchPage<TItems, TQuery>;
   initialPage: number;
@@ -73,16 +73,20 @@ export function Pagination<TItems, TQuery>({
       {search && (
         <div>
           <div>検索条件：{JSON.stringify(query)}</div>
-          <PagerControl onPrev={() => handlePrev()} onNext={() => handleNext()} page={page} />
-          <div>{children}</div>
-          <PagerControl onPrev={() => handlePrev()} onNext={() => handleNext()} />
+          <Controller onPrev={() => handlePrev()} onNext={() => handleNext()} page={page} />
+          {children && (
+            <div>
+              <div>{children}</div>
+              <Controller onPrev={() => handlePrev()} onNext={() => handleNext()} />
+            </div>
+          )}
         </div>
       )}
     </div>
   );
 }
 
-function PagerControl({ onPrev, onNext, page }: { onPrev: () => void; onNext: () => void; page?: number }) {
+function Controller({ onPrev, onNext, page }: { onPrev: () => void; onNext: () => void; page?: number }) {
   return (
     <div>
       <button type="button" onClick={onPrev} className="rounded-lg bg-indigo-300 px-4 py-2">
