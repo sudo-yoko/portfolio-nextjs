@@ -6,8 +6,7 @@ import { ActionResult } from '@/modules/(system)/types/action-result';
 import { FormData } from '@/modules/(system)/types/form-data';
 import { Violations, hasError } from '@/modules/(system)/validators/validator';
 import { send } from '@/modules/contact2/models/contact2-client';
-import { ContactBody } from '@/modules/contact2/models/contact2-types';
-import { FormKeys } from '@/modules/contact2/view-models/contact2-reducer';
+import { ContactBody, FormKeys } from '@/modules/contact2/models/contact2-types';
 import { validate } from '@/modules/contact2/view-models/contact2-validator';
 
 const logPrefix = 'contact2-action.ts: ';

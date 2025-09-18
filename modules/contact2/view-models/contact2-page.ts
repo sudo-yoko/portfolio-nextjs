@@ -1,9 +1,8 @@
-import 'server-only';
-
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/server-error-handler';
 import logger from '@/modules/(system)/logging-facade/logger';
 import { getQueryParams, SearchParams } from '@/modules/(system)/types/search-params';
 import { ContactParams } from '@/modules/contact2/models/contact2-types';
+import 'server-only';
 
 const logPrefix = 'contact2-page-request-handler.ts: ';
 

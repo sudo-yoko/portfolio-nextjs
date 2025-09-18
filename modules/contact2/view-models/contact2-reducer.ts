@@ -3,13 +3,8 @@
 
 import { FormData } from '@/modules/(system)/types/form-data';
 import { Violations } from '@/modules/(system)/validators/validator';
+import { FormKeys } from '@/modules/contact2/models/contact2-types';
 import React, { Reducer } from 'react';
-
-/**
- * 入力フォームのキー
- * お名前、メールアドレス、お問い合わせ内容
- */
-export type FormKeys = 'name' | 'email' | 'body';
 
 /**
  * フォームの値を格納するオブジェクトの定義

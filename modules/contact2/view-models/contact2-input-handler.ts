@@ -1,13 +1,8 @@
 'use client';
 
 import { hasError, Violations } from '@/modules/(system)/validators/validator';
-import {
-  Action,
-  FormKeys,
-  setViolations,
-  State,
-  toConfirm,
-} from '@/modules/contact2/view-models/contact2-reducer';
+import { FormKeys } from '@/modules/contact2/models/contact2-types';
+import { Action, setViolations, State, toConfirm } from '@/modules/contact2/view-models/contact2-reducer';
 import { validate } from '@/modules/contact2/view-models/contact2-validator';
 
 /**
