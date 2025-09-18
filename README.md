@@ -349,8 +349,8 @@ const [formData, setFormData] = useState<FormData<FormKeys>>({
 ## :books: ページネーション
 ページネーション用の共通コンポーネントです。利用側は、指定の型契約に適合するデータ取得関数を用意する必要があります。コンポーネントにはその取得関数と、リスト項目を保持するReact状態更新関数（例: setUsers）を渡します。コンポーネントは受け取った取得関数でページデータを取得し、状態更新関数で状態を更新して再レンダーを発生させます。
 
-:open_file_folder: コード：[pagination.tsx](app/(system)/pagination.tsx), [modules/(system)/pager/](modules/(system)/pager/)  
-:pencil: 使用例：[modules/users/models/](modules/users/models/), [app/users/](app/users/)  
+:open_file_folder: コード：[pagination.tsx](app/(system)/pagination/1/pagination.tsx), [modules/(system)/pager/](modules/(system)/pager/)  
+:pencil: 使用例：[modules/users/models/](modules/users/models/), [app/users/1](app/users/1)  
 
 ```ts
 // user-list.tsx
