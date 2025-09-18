@@ -1,8 +1,8 @@
 // テスト実行
 // npm exec -- node --test --import tsx __tests__/node-test/offset-pager.test.ts
 
-import { createPager } from '@/modules/(system)/pager/pager';
-import { FetchPage, FetchPageResult, Pager } from '@/modules/(system)/pager/types';
+import { createPager } from '@/modules/(system)/pagination/pager';
+import { FetchPage, FetchPageResult, Pager } from '@/modules/(system)/pagination/types';
 import type { User, UsersQuery } from '@/modules/users/models/users-types';
 import test from 'node:test';
 

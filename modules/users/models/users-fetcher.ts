@@ -1,5 +1,5 @@
 import { actionError, routeError } from '@/modules/(system)/error-handlers/custom-error';
-import { FetchPage, FetchPageResult } from '@/modules/(system)/pager/types';
+import { FetchPage, FetchPageResult } from '@/modules/(system)/pagination/types';
 import { action } from '@/modules/users/models/users-action';
 import { User, UsersQuery } from '@/modules/users/models/users-types';
 import 'client-only';
