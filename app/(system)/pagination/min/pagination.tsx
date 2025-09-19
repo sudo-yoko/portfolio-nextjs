@@ -5,22 +5,20 @@
 
 import { ErrorHandler } from '@/app/(system)/error-handler';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
-import { createPager } from '@/modules/(system)/pagination/pager';
-import { FetchPage, Pager } from '@/modules/(system)/pagination/types';
-import React, { useEffect, useRef, useState } from 'react';
+import { createPager } from '@/modules/(system)/pagination/min/pager';
+import { FetchPage, Pager } from '@/modules/(system)/pagination/min/types';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 export function Pagination<TItems, TQuery>({
-  children,
   search,
-  fetchCallback,
+  fetch,
   initialPage,
   perPage,
   query,
   setItems,
 }: {
-  children?: React.ReactNode;
   search: boolean;
-  fetchCallback: FetchPage<TItems, TQuery>;
+  fetch: FetchPage<TItems, TQuery>;
   initialPage: number;
   perPage: number;
   query: TQuery;
@@ -29,6 +27,7 @@ export function Pagination<TItems, TQuery>({
   const [error, setError] = useState(false);
   const [page, setPage] = useState(initialPage);
   const pager = useRef<Pager<TItems>>(null);
+  const fetchCallback = useCallback(fetch, [fetch]);
 
   useEffect(() => {
     withErrorHandlingAsync(() => func(), setError);
@@ -42,7 +41,6 @@ export function Pagination<TItems, TQuery>({
       setItems(page.items);
       setPage(page.currentPage);
     }
-    //}, [fetch, fetchArgs, setItems]); // これらを依存配列に入れると親が再レンダリングされるたびに参照が新しくなり無限ループになる
   }, [fetchCallback, initialPage, perPage, query, search, setItems]);
 
   function handleNext() {
@@ -73,29 +71,17 @@ export function Pagination<TItems, TQuery>({
       {search && (
         <div>
           <div>検索条件：{JSON.stringify(query)}</div>
-          <Controller onPrev={() => handlePrev()} onNext={() => handleNext()} page={page} />
-          {children && (
-            <div>
-              <div>{children}</div>
-              <Controller onPrev={() => handlePrev()} onNext={() => handleNext()} />
-            </div>
-          )}
+          <div>
+            <button type="button" onClick={() => handlePrev()} className="rounded-lg bg-indigo-300 px-4 py-2">
+              前へ
+            </button>
+            {page}
+            <button type="button" onClick={() => handleNext()} className="rounded-lg bg-indigo-300 px-4 py-2">
+              次へ
+            </button>
+          </div>
         </div>
       )}
-    </div>
-  );
-}
-
-function Controller({ onPrev, onNext, page }: { onPrev: () => void; onNext: () => void; page?: number }) {
-  return (
-    <div>
-      <button type="button" onClick={onPrev} className="rounded-lg bg-indigo-300 px-4 py-2">
-        前へ
-      </button>
-      {page && page}
-      <button type="button" onClick={onNext} className="rounded-lg bg-indigo-300 px-4 py-2">
-        次へ
-      </button>
     </div>
   );
 }

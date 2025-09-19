@@ -1,6 +1,6 @@
 'use client';
 
-import { Pagination } from '@/app/(system)/pagination/1/pagination';
+import { Pagination } from '@/app/(system)/pagination/min/pagination';
 import { FormData } from '@/modules/(system)/types/form-data';
 import { fetch } from '@/modules/users/min/models/users-fetcher';
 import { FormKeys, User, UsersQuery } from '@/modules/users/min/models/users-types';

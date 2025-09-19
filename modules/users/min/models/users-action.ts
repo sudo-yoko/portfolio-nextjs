@@ -2,7 +2,7 @@
 
 import { withAuthAsync } from '@/modules/(system)/auth/auth-handler';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/action-error-handler';
-import { FetchPageResult } from '@/modules/(system)/pagination/types';
+import { FetchPageResult } from '@/modules/(system)/pagination/min/types';
 import { send } from '@/modules/users/min/models/users-client';
 import { User, UsersQuery } from '@/modules/users/min/models/users-types';
 

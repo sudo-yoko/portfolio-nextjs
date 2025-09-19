@@ -1,6 +1,6 @@
 'use client';
 
-import { Pagination } from '@/app/(system)/pagination/2/pagination';
+import { Pagination } from '@/app/(system)/pagination/mvvm/pagination';
 import UserList from '@/app/users/mvvm/user-list';
 import { FormData } from '@/modules/(system)/types/form-data';
 import { fetch } from '@/modules/users/min/models/users-fetcher';
