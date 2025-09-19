@@ -1,0 +1,9 @@
+import UserList from '@/app/users/min/user-list';
+
+export default function Page() {
+  return (
+    <div className="flex h-screen w-screen flex-col items-center py-10">
+      <UserList />
+    </div>
+  );
+}

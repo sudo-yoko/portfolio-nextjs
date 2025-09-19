@@ -1,5 +1,5 @@
 import { ActionResult } from '@/modules/(system)/types/action-result';
-import { User } from '@/modules/users/models/users-types';
+import { User } from '@/modules/users/min/models/users-types';
 
 // 型の制約によるコンパイルエラーを確認するコード
 

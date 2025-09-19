@@ -11,7 +11,7 @@ import {
 import { stringify } from '@/modules/(system)/error-handlers/error-handling-utils';
 import { ActionResult } from '@/modules/(system)/types/action-result';
 import { RouteResult } from '@/modules/(system)/types/route-response';
-import { User } from '@/modules/users/models/users-types';
+import { User } from '@/modules/users/min/models/users-types';
 import { printf } from '../_utils/test-logger';
 
 const print = printf({ logPrefix: '>>> [custom-error.test.test.ts]', stdout: true });
