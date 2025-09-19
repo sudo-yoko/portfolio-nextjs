@@ -111,8 +111,8 @@ export async function handleRequest(req: Request): Promise<Response> {
 対話型AIのAPIはモックを作成し、AIの回答を模した文字列を１文字ずつチャンク単位のストリーム形式でレスポンスしています。Next.jsのクライアントサイドでは、受信した文字列を順次差分レンダリングしています。
 
 :open_file_folder: 画面サンプル：[_docs/chat/caht.gif](_docs/chat/caht.gif)  
-:open_file_folder: コンポーネント：[app/chat/](app/chat)  
-:open_file_folder: モジュール：[modules/chat/](modules/chat),  [app/api/chat/](app/api/chat)  
+:open_file_folder: コンポーネント：[app/chat/mvvm/](app/chat/mvvm)  
+:open_file_folder: モジュール：[modules/chat/mvvm/](modules/chat/mvvm/),  [app/api/chat/](app/api/chat/)  
 :open_file_folder: AIモック：[__mocks__/openai-mock.mts](__mocks__/openai-mock.mts)  
 :open_file_folder: シーケンス図：[_docs/chat/sequenceDiagram.md](_docs/chat/sequenceDiagram.md)  
 
@@ -125,13 +125,13 @@ export async function handleRequest(req: Request): Promise<Response> {
 useReducerを使用し、状態管理ロジックをreducer関数としてモデルに分離することで、UIとモデルを切り分けています。MVVM（Model-View-ViewModel）パターンに基づいた構成のわかりやすい例だと思います。
 
 :open_file_folder: 画面サンプル：[_docs/contact/contact.gif](_docs/contact/contact.gif)  
-:open_file_folder: コンポーネント：[app/contact2/](app/contact2)  
-:open_file_folder: モジュール：[modules/contact2/](modules/contact2)  
+:open_file_folder: コンポーネント：[app/contact/mvvm/](app/contact/mvvm/)  
+:open_file_folder: モジュール：[modules/contact/mvvm/](modules/contact/mvvm)  
 
-以下はuseStateを使用した実装例です。入力フォームに項目が少ない場合はこの実装が簡単ですが、ViewとViewモデルが切り分けづらい状態だと思います。
+以下はuseStateを使用した実装例です。モデルとビューだけの最小構成です。入力フォームに項目が少ない場合はこの実装が簡単です。
 
-:open_file_folder: コンポーネント：[app/contact/](app/contact)  
-:open_file_folder: モジュール：[modules/contact/](modules/contact)  
+:open_file_folder: コンポーネント：[app/contact/min/](app/contact/min/)  
+:open_file_folder: モジュール：[modules/contact/min/](modules/contact/min)  
 
 ***
 
