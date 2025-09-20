@@ -4,10 +4,14 @@
 'use client';
 
 import { ErrorHandler } from '@/app/(system)/error-handler';
-import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
-import { createPager } from '@/modules/(system)/pagination/mvvm/models/pager';
 import { FetchPage, Pager } from '@/modules/(system)/pagination/mvvm/models/types';
-import React, { useEffect, useRef, useState } from 'react';
+import {
+  applyItems,
+  executeSearch,
+  handlePagination,
+} from '@/modules/(system)/pagination/mvvm/view-models/behaviors';
+import { reducer } from '@/modules/(system)/pagination/mvvm/view-models/reducer';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 
 export function Pagination<TItems, TQuery>({
   children,
@@ -26,58 +30,45 @@ export function Pagination<TItems, TQuery>({
   query: TQuery;
   setItems: React.Dispatch<React.SetStateAction<TItems>>;
 }) {
+  const [state, dispatch] = useReducer(reducer<TItems>, { step: 'initial' });
   const [error, setError] = useState(false);
-  const [page, setPage] = useState(initialPage);
   const pager = useRef<Pager<TItems>>(null);
 
+  /**
+   * 検索時
+   */
   useEffect(() => {
-    withErrorHandlingAsync(() => func(), setError);
+    executeSearch(search, pager, fetchCallback, initialPage, perPage, query, dispatch, setError);
+  }, [fetchCallback, initialPage, perPage, query, search]);
 
-    async function func() {
-      if (!search) {
-        return;
-      }
-      pager.current = createPager(fetchCallback, { initialPage, perPage, query });
-      const page = await pager.current.current();
-      setItems(page.items);
-      setPage(page.currentPage);
-    }
-    //}, [fetch, fetchArgs, setItems]); // これらを依存配列に入れると親が再レンダリングされるたびに参照が新しくなり無限ループになる
-  }, [fetchCallback, initialPage, perPage, query, search, setItems]);
-
-  function handleNext() {
-    // Promiseチェーンで書く場合は、withErrorHandlingのエラーハンドリングは効果が無いので
-    // 以下のようにエラーハンドリングを記述する
-    pager.current
-      ?.next()
-      .then((page) => {
-        setItems(page.items);
-        setPage(page.currentPage);
-      })
-      .catch((_e) => setError(true));
-  }
-
-  function handlePrev() {
-    pager.current
-      ?.prev()
-      .then((page) => {
-        setItems(page.items);
-        setPage(page.currentPage);
-      })
-      .catch((_e) => setError(true));
-  }
+  /**
+   * 検索結果の反映
+   */
+  useEffect(() => {
+    // dispatchした結果のstateを同じeffect内で安全に見られない。
+    // dispatchした結果のstateを他コンポーネントに連携する関係で結果のstateを取得する必要がある。
+    // そのため別の依存配列の別effectにしている。
+    applyItems(state, setItems, setError);
+  }, [setItems, state]);
 
   return (
     <div>
       {error && <ErrorHandler />}
-      {search && (
+      {search && state.step === 'results' && (
         <div>
           <div>検索条件：{JSON.stringify(query)}</div>
-          <Controller onPrev={() => handlePrev()} onNext={() => handleNext()} page={page} />
+          <Controller
+            onPrev={() => handlePagination('prev', pager, dispatch, setError)}
+            onNext={() => handlePagination('next', pager, dispatch, setError)}
+            page={state.page}
+          />
           {children && (
             <div>
               <div>{children}</div>
-              <Controller onPrev={() => handlePrev()} onNext={() => handleNext()} />
+              <Controller
+                onPrev={() => handlePagination('prev', pager, dispatch, setError)}
+                onNext={() => handlePagination('next', pager, dispatch, setError)}
+              />
             </div>
           )}
         </div>
