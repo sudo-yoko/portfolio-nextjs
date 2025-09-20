@@ -1,5 +1,5 @@
 import { createPager } from '@/modules/(system)/pagination/min/models/pager';
-import { FetchPage, FetchPageResult, Pager } from '@/modules/(system)/pagination/types';
+import { FetchPage, FetchPageResult, Pager } from '@/modules/(system)/pagination/min/models/types';
 import { send } from '@/modules/users/min/models/users-client';
 import type { User, UsersQuery } from '@/modules/users/min/models/users-types';
 import { printf } from '../_utils/test-logger';

@@ -30,7 +30,7 @@ export async function executeSearch<T, Q>(
   dispatch: ItemsDispatch<T>,
   setError: SetError,
 ) {
-  return withErrorHandlingAsync(() => func(), setError);
+  withErrorHandlingAsync(() => func(), setError);
 
   async function func() {
     if (!search) {
@@ -48,7 +48,7 @@ export async function executeSearch<T, Q>(
  * @typeParam T - アイテムの型
  */
 export function applyItems<T>(state: State<T>, setItems: SetItems<T>, setError: SetError): void {
-  return withErrorHandling(() => func(), setError);
+  withErrorHandling(() => func(), setError);
 
   function func() {
     if (state.step === 'results') {
@@ -68,7 +68,7 @@ export async function handlePagination<T>(
   dispatch: ItemsDispatch<T>,
   setError: SetError,
 ): Promise<void> {
-  return withErrorHandlingAsync(() => func(), setError);
+  withErrorHandlingAsync(() => func(), setError);
 
   async function func() {
     if (pager?.current == null) {
