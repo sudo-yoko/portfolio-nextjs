@@ -1,10 +1,10 @@
 'use client';
 
-import { Pagination } from '@/app/(system)/pagination/mvvm2/view-models/pagination';
-import UserList from '@/app/users/mvvm/user-list';
+import { Pagination } from '@/presentation/(system)/pagination/mvvm2/view-models/pagination';
+import UserList from '@/presentation/users/mvvm/view/user-list';
 import { FormData } from '@/modules/(system)/types/form-data';
-import { fetch } from '@/modules/users/min/models/users-fetcher';
-import { FormKeys, User, UsersQuery } from '@/modules/users/min/models/users-types';
+import { fetch } from '@/presentation/users/min/models/users-fetcher';
+import { FormKeys, User, UsersQuery } from '@/presentation/users/min/models/users-types';
 import { useCallback, useState } from 'react';
 
 export function Main() {

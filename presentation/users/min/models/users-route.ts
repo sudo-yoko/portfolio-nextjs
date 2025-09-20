@@ -1,8 +1,8 @@
 import { withAuthAsync } from '@/modules/(system)/auth/auth-handler';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/route-error-handler';
-import { FetchPageResult } from '@/modules/(system)/pagination/min/models/types';
-import { send } from '@/modules/users/min/models/users-client';
-import { User, UsersQuery } from '@/modules/users/min/models/users-types';
+import { FetchPageResult } from '@/presentation/(system)/pagination/min/models/types';
+import { send } from '@/presentation/users/min/models/users-client';
+import { User, UsersQuery } from '@/presentation/users/min/models/users-types';
 import 'server-only';
 
 interface ReqBody {

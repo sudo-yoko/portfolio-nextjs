@@ -1,10 +1,10 @@
-import { FetchPage, Pager, PagerResult } from '@/modules/(system)/pagination/mvvm/models/types';
+import { FetchPage, Pager, PagerResult } from '@/presentation/(system)/pagination/mvvm/models/types';
 import {
   calcPagination,
   offsetOfLastPage,
   pageToOffset,
   toEffectiveOffsetMin,
-} from '@/modules/(system)/pagination/mvvm/models/utils';
+} from '@/presentation/(system)/pagination/mvvm/models/utils';
 import 'client-only';
 
 /**

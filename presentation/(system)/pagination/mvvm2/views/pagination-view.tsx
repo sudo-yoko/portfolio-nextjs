@@ -4,7 +4,7 @@
 'use client';
 
 import { ErrorHandler } from '@/app/(system)/error-handler';
-import { State } from '@/modules/(system)/pagination/mvvm/view-models/reducer';
+import { State } from '@/presentation/(system)/pagination/mvvm/view-models/reducer';
 import React from 'react';
 
 export function PaginationView<TItems, TQuery>({

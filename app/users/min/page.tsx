@@ -1,4 +1,4 @@
-import UserList from '@/app/users/min/user-list';
+import UserList from '@/presentation/users/min/view/user-list';
 
 export default function Page() {
   return (

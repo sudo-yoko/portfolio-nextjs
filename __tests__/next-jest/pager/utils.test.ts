@@ -1,4 +1,4 @@
-import { calcPagination } from '@/modules/(system)/pagination/min/models/utils';
+import { calcPagination } from '@/presentation/(system)/pagination/min/models/utils';
 import { printf } from '../_utils/test-logger';
 
 const print = printf({ logPrefix: '>>> [pager/utils.test.ts]', stdout: true });

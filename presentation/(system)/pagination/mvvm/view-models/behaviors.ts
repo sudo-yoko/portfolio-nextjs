@@ -5,9 +5,9 @@ import {
   withErrorHandling,
   withErrorHandlingAsync,
 } from '@/modules/(system)/error-handlers/client-error-handler';
-import { createPager } from '@/modules/(system)/pagination/mvvm/models/pager';
-import { FetchPage, Pager } from '@/modules/(system)/pagination/mvvm/models/types';
-import { Action, State, toResults } from '@/modules/(system)/pagination/mvvm/view-models/reducer';
+import { createPager } from '@/presentation/(system)/pagination/mvvm/models/pager';
+import { FetchPage, Pager } from '@/presentation/(system)/pagination/mvvm/models/types';
+import { Action, State, toResults } from '@/presentation/(system)/pagination/mvvm/view-models/reducer';
 import 'client-only';
 import React from 'react';
 

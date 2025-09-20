@@ -4,13 +4,13 @@
 'use client';
 
 import { ErrorHandler } from '@/app/(system)/error-handler';
-import { FetchPage, Pager } from '@/modules/(system)/pagination/mvvm/models/types';
+import { FetchPage, Pager } from '@/presentation/(system)/pagination/mvvm/models/types';
 import {
   applyItems,
   executeSearch,
   handlePagination,
-} from '@/modules/(system)/pagination/mvvm/view-models/behaviors';
-import { reducer } from '@/modules/(system)/pagination/mvvm/view-models/reducer';
+} from '@/presentation/(system)/pagination/mvvm/view-models/behaviors';
+import { reducer } from '@/presentation/(system)/pagination/mvvm/view-models/reducer';
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 
 export function Pagination<TItems, TQuery>({

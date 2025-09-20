@@ -5,8 +5,8 @@
 
 import { ErrorHandler } from '@/app/(system)/error-handler';
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
-import { createPager } from '@/modules/(system)/pagination/min/models/pager';
-import { FetchPage, Pager } from '@/modules/(system)/pagination/min/models/types';
+import { createPager } from '@/presentation/(system)/pagination/min/models/pager';
+import { FetchPage, Pager } from '@/presentation/(system)/pagination/min/models/types';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 export function Pagination<TItems, TQuery>({

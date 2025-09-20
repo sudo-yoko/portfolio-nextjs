@@ -1,4 +1,4 @@
-import { Main } from '@/app/users/mvvm/main';
+import { Main } from '@/presentation/users/mvvm/view/main';
 
 export default function Page() {
   return (

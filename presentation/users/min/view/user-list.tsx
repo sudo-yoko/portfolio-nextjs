@@ -1,9 +1,9 @@
 'use client';
 
-import { Pagination } from '@/app/(system)/pagination/min/pagination';
+import { Pagination } from '@/presentation/(system)/pagination/min/pagination';
 import { FormData } from '@/modules/(system)/types/form-data';
-import { fetch } from '@/modules/users/min/models/users-fetcher';
-import { FormKeys, User, UsersQuery } from '@/modules/users/min/models/users-types';
+import { fetch } from '@/presentation/users/min/models/users-fetcher';
+import { FormKeys, User, UsersQuery } from '@/presentation/users/min/models/users-types';
 import { useState } from 'react';
 
 const initialPage = 1;
