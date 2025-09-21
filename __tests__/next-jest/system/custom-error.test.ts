@@ -8,7 +8,7 @@ import {
   isRouteError,
   routeError,
 } from '@/presentation/(system)/error-handlers/custom-error';
-import { stringify } from '@/presentation/(system)/error-handlers/error-handling-utils';
+import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
 import { ActionResult } from '@/modules/(system)/types/action-result';
 import { RouteResult } from '@/modules/(system)/types/route-response';
 import { User } from '@/presentation/users/min/models/users-types';

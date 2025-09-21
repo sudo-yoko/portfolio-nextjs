@@ -2,7 +2,7 @@
 // Route Handlers エラーハンドリング
 //
 import { isAuthError } from '@/presentation/(system)/error-handlers/custom-error';
-import { stringify } from '@/presentation/(system)/error-handlers/error-handling-utils';
+import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
 import logger from '@/presentation/(system)/logging-facade/logger';
 import { Aborted, RouteResult } from '@/presentation/(system)/types/route-response';
 import 'server-only';

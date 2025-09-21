@@ -1,7 +1,7 @@
 //
 // クライアントサイドエラーハンドリング
 //
-import { stringify } from '@/presentation/(system)/error-handlers/error-handling-utils';
+import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
 import { logError } from '@/presentation/(system)/loggers/logger-client';
 import 'client-only';
 import React from 'react';
