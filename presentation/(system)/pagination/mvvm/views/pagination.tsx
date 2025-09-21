@@ -5,7 +5,7 @@
 
 import { ErrorHandler } from '@/app/(system)/error-handler';
 import { FetchPage } from '@/presentation/(system)/pagination/mvvm/models/types';
-import { handlePagination } from '@/presentation/(system)/pagination/mvvm/view-models/behaviors';
+import { handlePagination } from '@/presentation/(system)/pagination/mvvm/view-models/event-handlers';
 import { usePagination } from '@/presentation/(system)/pagination/mvvm/view-models/use-pagination';
 import React from 'react';
 

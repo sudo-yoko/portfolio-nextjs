@@ -1,16 +1,11 @@
 //
-// UI の振る舞いロジック
+// イベントハンドラー
 //
 import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
 import { Pager } from '@/presentation/(system)/pagination/mvvm/models/types';
-import { Action, toResults } from '@/presentation/(system)/pagination/mvvm/view-models/reducer';
+import { Action, toResults } from '@/presentation/(system)/pagination/mvvm/models/reducer';
 import 'client-only';
 import React from 'react';
-
-// 型の別名。よく使う型名の名前が長いので、短い別名を作成
-type PagerRef<T> = React.RefObject<Pager<T> | null>;
-type ItemsDispatch<T> = React.ActionDispatch<[action: Action<T>]>;
-type SetError = React.Dispatch<React.SetStateAction<boolean>>;
 
 /**
  * 次へ／前へボタンを押したとき
@@ -19,9 +14,9 @@ type SetError = React.Dispatch<React.SetStateAction<boolean>>;
  */
 export async function handlePagination<T>(
   destination: 'next' | 'prev',
-  pager: PagerRef<T>,
-  dispatch: ItemsDispatch<T>,
-  setError: SetError,
+  pager: React.RefObject<Pager<T> | null>,
+  dispatch: React.ActionDispatch<[action: Action<T>]>,
+  setError: React.Dispatch<React.SetStateAction<boolean>>,
 ): Promise<void> {
   withErrorHandlingAsync(() => func(), setError);
 

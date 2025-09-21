@@ -1,13 +1,13 @@
 //
 // カスタムフック
-
+//
 import {
   withErrorHandling,
   withErrorHandlingAsync,
 } from '@/modules/(system)/error-handlers/client-error-handler';
 import { createPager } from '@/presentation/(system)/pagination/mvvm/models/pager';
 import { FetchPage, Pager } from '@/presentation/(system)/pagination/mvvm/models/types';
-import { reducer, toResults } from '@/presentation/(system)/pagination/mvvm/view-models/reducer';
+import { reducer, toResults } from '@/presentation/(system)/pagination/mvvm/models/reducer';
 import { useEffect, useReducer, useRef, useState } from 'react';
 
 //
