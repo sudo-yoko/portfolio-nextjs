@@ -1,10 +1,10 @@
 import Contact from '@/app/contact/min/contact';
-import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/server-error-handler';
-import logger from '@/modules/(system)/logging-facade/logger';
+import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/server-error-handler';
+import logger from '@/presentation/(system)/logging-facade/logger';
 import {
   SearchParam,
   SearchParams,
-} from '@/modules/(system)/types/search-params';
+} from '@/presentation/(system)/types/search-params';
 
 const logPrefix = 'app/contact/page.tsx: ';
 

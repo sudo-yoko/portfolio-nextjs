@@ -3,8 +3,8 @@
 //
 'use client';
 
-import { ErrorHandler } from '@/app/(system)/error-handler';
-import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
+import { ErrorHandler } from '@/presentation/(system)/error-handlers/error-handler';
+import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/client-error-handler';
 import { createPager } from '@/presentation/(system)/pagination/min/models/pager';
 import { FetchPage, Pager } from '@/presentation/(system)/pagination/min/models/types';
 import React, { useCallback, useEffect, useRef, useState } from 'react';

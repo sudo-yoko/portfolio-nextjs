@@ -1,7 +1,7 @@
-import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
-import { actionError } from '@/modules/(system)/error-handlers/custom-error';
-import { FormData } from '@/modules/(system)/types/form-data';
-import { hasError, Violations } from '@/modules/(system)/validators/validator';
+import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/client-error-handler';
+import { actionError } from '@/presentation/(system)/error-handlers/custom-error';
+import { FormData } from '@/presentation/(system)/types/form-data';
+import { hasError, Violations } from '@/presentation/(system)/validators/validator';
 import { sendAction } from '@/modules/contact/min/models/contact-action';
 import { FormKeys } from '@/modules/contact/min/models/contact-types';
 import React, { useEffect } from 'react';

@@ -1,8 +1,8 @@
 'use client';
 
-import { FormData } from '@/modules/(system)/types/form-data';
-import { resizeTextarea } from '@/modules/(system)/utils/dom-utils';
-import { hasError, Violations } from '@/modules/(system)/validators/validator';
+import { FormData } from '@/presentation/(system)/types/form-data';
+import { resizeTextarea } from '@/presentation/(system)/utils/dom-utils';
+import { hasError, Violations } from '@/presentation/(system)/validators/validator';
 import { FormKeys } from '@/modules/contact/min/models/contact-types';
 import { validate } from '@/modules/contact/min/models/contact-validator';
 import { useEffect, useState } from 'react';

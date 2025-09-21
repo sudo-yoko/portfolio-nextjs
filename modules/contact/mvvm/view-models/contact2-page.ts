@@ -1,6 +1,6 @@
-import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/server-error-handler';
-import logger from '@/modules/(system)/logging-facade/logger';
-import { getQueryParams, SearchParams } from '@/modules/(system)/types/search-params';
+import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/server-error-handler';
+import logger from '@/presentation/(system)/logging-facade/logger';
+import { getQueryParams, SearchParams } from '@/presentation/(system)/types/search-params';
 import { ContactParams } from '@/modules/contact/mvvm/models/contact2-types';
 import 'server-only';
 

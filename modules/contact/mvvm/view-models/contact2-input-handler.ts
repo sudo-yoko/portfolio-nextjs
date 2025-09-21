@@ -1,6 +1,6 @@
 'use client';
 
-import { hasError, Violations } from '@/modules/(system)/validators/validator';
+import { hasError, Violations } from '@/presentation/(system)/validators/validator';
 import { FormKeys } from '@/modules/contact/mvvm/models/contact2-types';
 import { Action, setViolations, State, toConfirm } from '@/modules/contact/mvvm/view-models/contact2-reducer';
 import { validate } from '@/modules/contact/mvvm/view-models/contact2-validator';

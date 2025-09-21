@@ -1,4 +1,4 @@
-import { logError } from '@/modules/(system)/loggers/logger-client';
+import { logError } from '@/presentation/(system)/loggers/logger-client';
 import 'client-only';
 import { useEffect } from 'react';
 

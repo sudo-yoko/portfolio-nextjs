@@ -1,5 +1,5 @@
-import { FormData } from '@/modules/(system)/types/form-data';
-import { required, requiredEmail, Validator, Violations } from '@/modules/(system)/validators/validator';
+import { FormData } from '@/presentation/(system)/types/form-data';
+import { required, requiredEmail, Validator, Violations } from '@/presentation/(system)/validators/validator';
 import { FormKeys } from '@/modules/contact/min/models/contact-types';
 import { z } from 'zod';
 

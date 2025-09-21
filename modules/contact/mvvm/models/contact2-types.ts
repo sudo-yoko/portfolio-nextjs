@@ -1,4 +1,4 @@
-import { SearchParam } from '@/modules/(system)/types/search-params';
+import { SearchParam } from '@/presentation/(system)/types/search-params';
 
 /**
  * クエリパラメータ

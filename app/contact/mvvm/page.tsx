@@ -1,5 +1,5 @@
 import Steps from '@/app/contact/mvvm/steps';
-import { SearchParams } from '@/modules/(system)/types/search-params';
+import { SearchParams } from '@/presentation/(system)/types/search-params';
 import { handleRequest } from '@/modules/contact/mvvm/view-models/contact2-page';
 
 /**

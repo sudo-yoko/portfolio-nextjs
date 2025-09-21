@@ -1,7 +1,7 @@
 /**
  * OpenAI APIのインターフェースを、アプリケーションに合わせて変換する
  */
-import { env } from '@/modules/(system)/env/env-helper';
+import { env } from '@/presentation/(system)/env/env-helper';
 import { Chunk } from '@/modules/chat/mvvm/models/chat-types';
 import 'server-only';
 

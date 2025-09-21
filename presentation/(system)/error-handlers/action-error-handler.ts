@@ -1,9 +1,9 @@
 //
 // Server Actions エラーハンドリング
 //
-import { stringify } from '@/modules/(system)/error-handlers/error-handling-utils';
-import logger from '@/modules/(system)/logging-facade/logger';
-import { ActionResult } from '@/modules/(system)/types/action-result';
+import { stringify } from '@/presentation/(system)/error-handlers/error-handling-utils';
+import logger from '@/presentation/(system)/logging-facade/logger';
+import { ActionResult } from '@/presentation/(system)/types/action-result';
 import 'server-only';
 
 const logPrefix = 'action-error-handler.ts: ';

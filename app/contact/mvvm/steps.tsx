@@ -1,6 +1,6 @@
 'use client';
 
-import { ErrorHandler } from '@/app/(system)/error-handler';
+import { ErrorHandler } from '@/presentation/(system)/error-handlers/error-handler';
 import Complete from '@/app/contact/mvvm/complete';
 import Confirm from '@/app/contact/mvvm/confirm';
 import Input from '@/app/contact/mvvm/input';

@@ -1,7 +1,7 @@
 //
 // イベントハンドラー
 //
-import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
+import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/client-error-handler';
 import { Pager } from '@/presentation/(system)/pagination/mvvm/models/types';
 import { Action, toResults } from '@/presentation/(system)/pagination/mvvm/models/reducer';
 import 'client-only';

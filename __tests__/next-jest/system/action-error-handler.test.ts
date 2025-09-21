@@ -1,4 +1,4 @@
-import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/action-error-handler';
+import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/action-error-handler';
 import { User } from '@/presentation/users/min/models/users-types';
 import { printf } from '../_utils/test-logger';
 

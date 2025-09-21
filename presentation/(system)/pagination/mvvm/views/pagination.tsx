@@ -3,7 +3,7 @@
 //
 'use client';
 
-import { ErrorHandler } from '@/app/(system)/error-handler';
+import { ErrorHandler } from '@/presentation/(system)/error-handlers/error-handler';
 import { FetchPage } from '@/presentation/(system)/pagination/mvvm/models/types';
 import { handlePagination } from '@/presentation/(system)/pagination/mvvm/view-models/event-handlers';
 import { usePagination } from '@/presentation/(system)/pagination/mvvm/view-models/use-pagination';

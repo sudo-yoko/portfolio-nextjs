@@ -22,7 +22,7 @@ test('logger test', async (t) => {
   // server-onlyをモックする
   t.mock.module('server-only', { defaultExport: {}, namedExports: {} });
   // モックしてからloggerを読み込む
-  const logger = (await import('@/modules/(system)/logging-facade/logger')).default;
+  const logger = (await import('@/presentation/(system)/logging-facade/logger')).default;
 
   logger.info('aaaaaaaaaa');
 });

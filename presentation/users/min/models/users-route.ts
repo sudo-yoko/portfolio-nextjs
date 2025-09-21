@@ -1,5 +1,5 @@
-import { withAuthAsync } from '@/modules/(system)/auth/auth-handler';
-import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/route-error-handler';
+import { withAuthAsync } from '@/presentation/(system)/auth/auth-handler';
+import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/route-error-handler';
 import { FetchPageResult } from '@/presentation/(system)/pagination/min/models/types';
 import { send } from '@/presentation/users/min/models/users-client';
 import { User, UsersQuery } from '@/presentation/users/min/models/users-types';

@@ -1,4 +1,4 @@
-import { withAuthAsync } from '@/modules/(system)/auth/auth-handler';
+import { withAuthAsync } from '@/presentation/(system)/auth/auth-handler';
 import { printf } from '../_utils/test-logger';
 
 const print = printf({ logPrefix: '>>> [auth-handler.test.ts]', stdout: true });

@@ -1,7 +1,7 @@
 //
 // 環境変数取得ユーティリティ
 //
-import logger from '@/modules/(system)/logging-facade/logger';
+import logger from '@/presentation/(system)/logging-facade/logger';
 import 'server-only';
 
 export function env(key: string): string {

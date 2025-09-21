@@ -1,7 +1,7 @@
 //
 // カスタムエラー定義
 //
-import { ActionResult } from '@/modules/(system)/types/action-result';
+import { ActionResult } from '@/presentation/(system)/types/action-result';
 
 /**
  * カスタムエラーの種類

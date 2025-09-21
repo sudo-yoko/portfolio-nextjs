@@ -1,12 +1,12 @@
 'use client';
 
-import { ErrorHandler } from '@/app/(system)/error-handler';
+import { ErrorHandler } from '@/presentation/(system)/error-handlers/error-handler';
 import Complete from '@/app/contact/min/complete';
 import Confirm from '@/app/contact/min/confirm';
 import Input from '@/app/contact/min/input';
 import Sending from '@/app/contact/min/sending';
-import { FormData } from '@/modules/(system)/types/form-data';
-import { Violations } from '@/modules/(system)/validators/validator';
+import { FormData } from '@/presentation/(system)/types/form-data';
+import { Violations } from '@/presentation/(system)/validators/validator';
 import { FormKeys, Step } from '@/modules/contact/min/models/contact-types';
 import { useState } from 'react';
 

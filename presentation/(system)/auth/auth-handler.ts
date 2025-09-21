@@ -1,6 +1,6 @@
-import { authError } from '@/modules/(system)/error-handlers/custom-error';
-import { stringify } from '@/modules/(system)/error-handlers/error-handling-utils';
-import logger from '@/modules/(system)/logging-facade/logger';
+import { authError } from '@/presentation/(system)/error-handlers/custom-error';
+import { stringify } from '@/presentation/(system)/error-handlers/error-handling-utils';
+import logger from '@/presentation/(system)/logging-facade/logger';
 import 'server-only';
 
 const logPrefix = 'auth-handler.ts: ';
