@@ -1,4 +1,4 @@
-import Chat from '@/app/chat/mvvm/chat';
+import Chat from '@/presentation/chat/mvvm/views/chat';
 
 /**
  * AIチャット ページコンポーネント

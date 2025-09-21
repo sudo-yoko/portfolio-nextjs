@@ -1,4 +1,4 @@
-import Contact from '@/app/contact/min/contact';
+import Contact from '@/presentation/contact/min/views/contact';
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/server-error-handler';
 import logger from '@/presentation/(system)/logging-facade/logger';
 import {

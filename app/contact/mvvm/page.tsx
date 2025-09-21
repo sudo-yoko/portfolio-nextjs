@@ -1,6 +1,6 @@
-import Steps from '@/app/contact/mvvm/steps';
+import Steps from '@/presentation/contact/mvvm/views/steps';
 import { SearchParams } from '@/presentation/(system)/types/search-params';
-import { handleRequest } from '@/modules/contact/mvvm/view-models/contact2-page';
+import { handleRequest } from '@/presentation/contact/mvvm/view-models/contact2-page';
 
 /**
  * お問い合わせフォーム ページコンポーネント
