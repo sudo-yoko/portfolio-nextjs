@@ -4,14 +4,10 @@
 'use client';
 
 import { ErrorHandler } from '@/app/(system)/error-handler';
-import { FetchPage, Pager } from '@/presentation/(system)/pagination/mvvm/models/types';
-import {
-  applyItems,
-  executeSearch,
-  handlePagination,
-} from '@/presentation/(system)/pagination/mvvm/view-models/behaviors';
-import { reducer } from '@/presentation/(system)/pagination/mvvm/view-models/reducer';
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import { FetchPage } from '@/presentation/(system)/pagination/mvvm/models/types';
+import { handlePagination } from '@/presentation/(system)/pagination/mvvm/view-models/behaviors';
+import { usePagination } from '@/presentation/(system)/pagination/mvvm/view-models/use-pagination';
+import React from 'react';
 
 export function Pagination<TItems, TQuery>({
   children,
@@ -30,26 +26,14 @@ export function Pagination<TItems, TQuery>({
   query: TQuery;
   setItems: React.Dispatch<React.SetStateAction<TItems>>;
 }) {
-  const [state, dispatch] = useReducer(reducer<TItems>, { step: 'initial' });
-  const [error, setError] = useState(false);
-  const pager = useRef<Pager<TItems>>(null);
-
-  /**
-   * 検索時
-   */
-  useEffect(() => {
-    executeSearch(search, pager, fetchCallback, initialPage, perPage, query, dispatch, setError);
-  }, [fetchCallback, initialPage, perPage, query, search]);
-
-  /**
-   * 検索結果の反映
-   */
-  useEffect(() => {
-    // dispatchした結果のstateを同じeffect内で安全に見られない。
-    // dispatchした結果のstateを他コンポーネントに連携する関係で結果のstateを取得する必要がある。
-    // そのため別の依存配列の別effectにしている。
-    applyItems(state, setItems, setError);
-  }, [setItems, state]);
+  const { error, state, pager, dispatch, setError } = usePagination({
+    search,
+    fetchCallback,
+    initialPage,
+    perPage,
+    query,
+    setItems,
+  });
 
   return (
     <div>

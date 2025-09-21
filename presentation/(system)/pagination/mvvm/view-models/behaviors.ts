@@ -1,13 +1,9 @@
 //
 // UI の振る舞いロジック
 //
-import {
-  withErrorHandling,
-  withErrorHandlingAsync,
-} from '@/modules/(system)/error-handlers/client-error-handler';
-import { createPager } from '@/presentation/(system)/pagination/mvvm/models/pager';
-import { FetchPage, Pager } from '@/presentation/(system)/pagination/mvvm/models/types';
-import { Action, State, toResults } from '@/presentation/(system)/pagination/mvvm/view-models/reducer';
+import { withErrorHandlingAsync } from '@/modules/(system)/error-handlers/client-error-handler';
+import { Pager } from '@/presentation/(system)/pagination/mvvm/models/types';
+import { Action, toResults } from '@/presentation/(system)/pagination/mvvm/view-models/reducer';
 import 'client-only';
 import React from 'react';
 
@@ -15,47 +11,6 @@ import React from 'react';
 type PagerRef<T> = React.RefObject<Pager<T> | null>;
 type ItemsDispatch<T> = React.ActionDispatch<[action: Action<T>]>;
 type SetError = React.Dispatch<React.SetStateAction<boolean>>;
-type SetItems<T> = React.Dispatch<React.SetStateAction<T>>;
-
-/**
- * 検索の実行
- */
-export async function executeSearch<T, Q>(
-  search: boolean,
-  pager: PagerRef<T>,
-  fetchCallback: FetchPage<T, Q>,
-  initialPage: number,
-  perPage: number,
-  query: Q,
-  dispatch: ItemsDispatch<T>,
-  setError: SetError,
-) {
-  withErrorHandlingAsync(() => func(), setError);
-
-  async function func() {
-    if (!search) {
-      return;
-    }
-    pager.current = createPager(fetchCallback, { initialPage, perPage, query });
-    const page = await pager.current.current();
-    toResults(dispatch, page.items, page.currentPage);
-  }
-}
-
-/**
- * 検索結果のアイテムをUIに適用
- *
- * @typeParam T - アイテムの型
- */
-export function applyItems<T>(state: State<T>, setItems: SetItems<T>, setError: SetError): void {
-  withErrorHandling(() => func(), setError);
-
-  function func() {
-    if (state.step === 'results') {
-      setItems(state.items);
-    }
-  }
-}
 
 /**
  * 次へ／前へボタンを押したとき
