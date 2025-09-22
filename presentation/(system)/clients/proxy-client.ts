@@ -1,7 +1,7 @@
 //
 // プロキシ設定付きRESTクライアント（Axiosインスタンス）
 //
-import { env, envNumber, envProtocol } from '@/presentation/(system)/env/env-helper';
+import { env, envNumber, envProtocol } from '@/presentation/(system)/env/env-validated.s';
 import type { AxiosInstance } from 'axios';
 import axios from 'axios';
 import 'server-only';

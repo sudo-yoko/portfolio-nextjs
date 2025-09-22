@@ -1,6 +1,6 @@
 //import client from '@/modules/(system)/clients/proxy-client';
 import { client } from '@/presentation/(system)/clients/client';
-import { env } from '@/presentation/(system)/env/env-helper';
+import { env } from '@/presentation/(system)/env/env-validated.s';
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/server-error-handler';
 import logger from '@/presentation/(system)/logging-facade/logger';
 import { ContactBody } from '@/presentation/contact/mvvm/models/contact2-types';

@@ -1,5 +1,5 @@
 import { client } from '@/presentation/(system)/clients/client';
-import { env } from '@/presentation/(system)/env/env-helper';
+import { env } from '@/presentation/(system)/env/env-validated.s';
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/server-error-handler';
 import { Users, UsersQuery } from '@/presentation/users/mvvm/models/users-types';
 import 'server-only';
