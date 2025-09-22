@@ -1,5 +1,6 @@
 //
 // 環境変数取得ユーティリティ
+// バリデーション付き。安全に環境変数を取得する。サーバーサイド専用
 //
 import logger from '@/presentation/(system)/logging-facade/logger';
 import 'server-only';

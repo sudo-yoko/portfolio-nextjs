@@ -7,8 +7,8 @@
 import nextJest from 'next/jest.js';
 
 const createJestConfig = nextJest({
- dir: './', 
-})
+  dir: './',
+});
 
 const config = {
   // All imported modules in your tests should be mocked automatically
@@ -38,7 +38,7 @@ const config = {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: "v8",
+  coverageProvider: 'v8',
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -102,7 +102,9 @@ const config = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/$1',
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -159,7 +161,7 @@ const config = {
 
   // The test environment that will be used for testing
   // testEnvironment: "jest-environment-node",
-  testEnvironment: "node",
+  testEnvironment: 'node',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -172,9 +174,7 @@ const config = {
   //   "**/__tests__/**/*.?([mc])[jt]s?(x)",
   //   "**/?(*.)+(spec|test).?([mc])[jt]s?(x)"
   // ],
-  testMatch: [
-     "**/__tests__/next-jest/**/*.?([mc])[jt]s?(x)",
-  ],
+  testMatch: ['**/__tests__/next-jest/**/*.?([mc])[jt]s?(x)'],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
@@ -211,7 +211,7 @@ const config = {
   // Whether to use watchman for file crawling
   // watchman: true,
 
-    extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
 };
 
 //export default config;
