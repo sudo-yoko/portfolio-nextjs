@@ -1,3 +1,4 @@
+import { envByStaticKey as env } from '@/presentation/(system)/env/env-testable.s';
 import fs from 'fs';
 import path from 'path';
 import 'server-only';
@@ -56,7 +57,7 @@ const transport = new winston.transports.DailyRotateFile(options);
 // ログをファイルに出力
 logger.add(transport);
 // 開発時はコンソールにも出力
-if (process.env.NODE_ENV != 'production') {
+if (env.NODE_ENV != 'production') {
   logger.add(new transports.Console());
 }
 
