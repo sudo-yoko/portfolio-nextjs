@@ -24,9 +24,9 @@ Next.js の実装集
 
 ここで紹介する Next.js アプリケーションは、以下の設計に基づいて作っています。
 
-* アプリケーションは、デカップルド・アーキテクチャ（decoupled architecture）におけるフロントエンドの位置付けとする。
-* Route Handlers と Server Actions は BFF 層として位置付ける。
-* バックエンド API は BFF 層から呼び出す方式とする。
+* アプリケーションは、デカップルド・アーキテクチャ（decoupled architecture）におけるフロントエンドの位置付けとする。また、レイヤードアーキテクチャにおけるプレゼンテーション層とする。
+* Route Handlers と Server Actions は BFF (backend for frontend) として位置付ける。
+* バックエンド API は BFF から呼び出す方式とする。
 
 ```mermaid
 flowchart LR
@@ -61,43 +61,51 @@ flowchart LR
 * フォルダ構成を以下とする。
 ```text
 .
-├── app                        コンポーネント(.tsx)を格納する。
-│   ├── (system)               共通のView
-│   ├── chat                   業務アプリのView
-│   ├── contact                業務アプリのView
+├── app                        （※１）
+│   ├── (system)               システム共通
 │   │
-│   └── api                    Route Handlersを格納する。（※1）
-│        ├── caht              業務アプリのRoute Handlers
-│        └── contact           業務アプリのRoute Handlers
+│   ├── chat
+│   │   └── page.tsx           業務アプリのページ
+│   ├── contact
+│   │   └── page.tsx           業務アプリのページ
+│   └── api
+│       ├── chat              
+│       │   └── route.ts       業務アプリの Route Handlers
+│       └── contact
+│           └── route.ts       業務アプリの Route Handlers
 │
-├── modules                    モジュール(.ts)を格納する。
-│   ├── (system)               共通のモジュール
+├── presentation               （※２）
+│   ├── (system)               システム共通
 │   │
-│   ├── chat                   業務アプリのモジュール
-│   │   ├── models             業務アプリのモジュール(model)
-│   │   └── view-models        業務アプリのモジュール(viewModel)
-│   │
-│   └── contact                業務アプリのモジュール
-│        ├── models            業務アプリのモジュール(model)
-│        └── view-models       業務アプリのモジュール(viewModel)
-│
+│   ├── chat                   
+│   │   ├── models             業務アプリmodel
+│   │   ├── views              業務アプリview
+│   │   └── view-models        業務アプリview-model
+│   └── contact
+│       ├── models             業務アプリmodel
+│       ├── views              業務アプリview
+│       └── view-models        業務アプリview-model
 └── public
+
 ```
-（※1）Route Handlers は制約上 `app/api` に置く必要があるため、ここはパススルーに留める。実質的な処理は別モジュールに切り出し、`modules/**/models` のフォルダに配置する。
+* （※１）Next.jsの既定に従い app 配下のフォルダ構成でルーティングを定義する。
+* （※２）実装は別モジュールに分離し、presentation のフォルダに配置する。
 
-:pencil: パススルーの実装例
+
+:pencil: 実装例
 ```ts
-// /app/api/contact/route.ts
-import { handleRequest } from '@/modules/contact/models/contact-route';
-export async function POST(req: Request): Promise<Response> {
-　// 処理をパススルーする
-  return handleRequest(req);
-}
+// /app/contact/page.tsx
+export { default } from '@/presentation/contact/mvvm/views/page.impl';
 
-// /modules/contact/models/contact-route.ts
-export async function handleRequest(req: Request): Promise<Response> {
-  // 実質的な処理はこちらに記述する
-  // ...
+// /presentation/contact/views/page.impl.tsx
+export default function Page() {
+	// ...
+    return (
+      <>
+        // ...
+      </>
+    );
+  }
 }
 ```
 
