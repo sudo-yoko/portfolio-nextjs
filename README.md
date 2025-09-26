@@ -92,12 +92,14 @@ flowchart LR
 （※１）Next.jsの既定に従い app 配下のフォルダ構成でルーティングを定義する。実装は別モジュールに分離し、presentation のフォルダに配置する。
 
 
-:pencil: 実装例
+:pencil: 実装例：[app/contact/mvvm/page.tsx](app/contact/mvvm/page.tsx), [presentation/contact/mvvm/views/page.impl.tsx](presentation/contact/mvvm/views/page.impl.tsx)  
 ```ts
 // /app/contact/page.tsx
-export { default } from '@/presentation/contact/mvvm/views/page.impl';
+// ページの実装をpage.impl.tsxからインポートし、それをpage.tsxからエクスポートしています。
+export { default } from '@/presentation/contact/views/page.impl';
 
 // /presentation/contact/views/page.impl.tsx
+// pege.impl.tsxにページのコードを実装します。
 export default function Page() {
 	// ...
     return (
