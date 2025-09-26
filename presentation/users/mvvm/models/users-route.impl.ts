@@ -11,7 +11,7 @@ interface ReqBody {
   query: UsersQuery;
 }
 
-export async function handleRequest(req: Request): Promise<Response> {
+export async function POST(req: Request): Promise<Response> {
   return await withErrorHandlingAsync(() => withAuthAsync(() => func()));
 
   async function func() {

@@ -7,7 +7,7 @@ export async function send(
   signal: AbortSignal,
 ): Promise<Response> {
   const body: ChatRequest = { prompt, aiModel };
-  const res = await fetch('/api/chat', {
+  const res = await fetch('/api/chat/mvvm', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',

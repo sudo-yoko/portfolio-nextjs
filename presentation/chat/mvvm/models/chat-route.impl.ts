@@ -1,12 +1,9 @@
 import { ChatRequest, send } from '@/presentation/chat/mvvm/models/chat-client';
 import 'server-only';
 
-const logPrefix = 'chat-route-request-handler.ts: ';
+const logPrefix = 'chat-route.impl.ts: ';
 
-/**
- * APIルート処理
- */
-export async function handleRequest(req: Request): Promise<Response> {
+export async function POST(req: Request): Promise<Response> {
   const abort = new AbortController();
 
   req.signal.addEventListener('abort', () => {

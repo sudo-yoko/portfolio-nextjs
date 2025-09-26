@@ -19,7 +19,7 @@ const _fetchAction: FetchPage<User[], UsersQuery> = async (offset, limit, query)
  * Route Handlers を使ったデータフェッチ実装
  */
 const fetchRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) => {
-  const url = 'http://localhost:3000/api/users';
+  const url = 'http://localhost:3000/api/users/mvvm';
   const res = await window.fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
