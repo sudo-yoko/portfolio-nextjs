@@ -74,7 +74,7 @@ flowchart LR
 │       └── contact
 │           └── route.ts       業務アプリの Route Handlers
 │
-├── presentation               （※２）
+├── presentation
 │   ├── (system)               システム共通
 │   │
 │   ├── chat                   
@@ -88,8 +88,8 @@ flowchart LR
 └── public
 
 ```
-* （※１）Next.jsの既定に従い app 配下のフォルダ構成でルーティングを定義する。
-* （※２）実装は別モジュールに分離し、presentation のフォルダに配置する。
+
+（※１）Next.jsの既定に従い app 配下のフォルダ構成でルーティングを定義する。実装は別モジュールに分離し、presentation のフォルダに配置する。
 
 
 :pencil: 実装例
