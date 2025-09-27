@@ -36,3 +36,18 @@ web-to-caseをプロキシ経由で送信すると400エラーになる
 
 TSDocはMarkdownが使える
 
+イベントリスナーでリサイズを登録
+https://github.com/vercel/commerce/blob/main/components/layout/navbar/mobile-menu.tsx
+
+
+環境変数取得の設計
+環境変数をモックしやすい作りにする
+ラッパー越し env.NODE_ENV を条件分岐に使う　→NG
+ツリーシェイクしたい条件分岐は直接 process.env.NODE_ENV を使う。
+process.env[key] の動的参照はビルド置換されないため、NEXT_PUBLIC_* でも undefined になる
+クライアントで使うなら静的参照にする。process.env.NEXT_PUBLIC_DEBUG_LOG
+クライアントでは環境変数を静的参照で参照する
+
+グローバルハンドラでフロントのエラーを捕捉
+window.addEventListener('error', (ev) => {
+
