@@ -1,6 +1,6 @@
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { required, requiredEmail, Validator, Violations } from '@/presentation/(system)/validators/validator';
-import { FormKeys } from '@/presentation/contact/min/models/contact-types';
+import { FormKeys } from '@/presentation/contact/min/modules/contact-types';
 import { z } from 'zod';
 
 /**

@@ -3,7 +3,7 @@
 import { ErrorHandler } from '@/presentation/(system)/error-handlers/error-handler';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { Violations } from '@/presentation/(system)/validators/validator';
-import { FormKeys, Step } from '@/presentation/contact/min/models/contact-types';
+import { FormKeys, Step } from '@/presentation/contact/min/modules/contact-types';
 import Complete from '@/presentation/contact/min/views/complete';
 import Confirm from '@/presentation/contact/min/views/confirm';
 import Input from '@/presentation/contact/min/views/input';

@@ -4,9 +4,9 @@ import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/a
 import logger from '@/presentation/(system)/logging-facade/logger';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { Violations, hasError } from '@/presentation/(system)/validators/validator';
-import { send } from '@/presentation/contact/min/models/contact-client';
-import { FormKeys } from '@/presentation/contact/min/models/contact-types';
-import { validate } from '@/presentation/contact/min/models/contact-validator';
+import { send } from '@/presentation/contact/min/modules/contact-client';
+import { FormKeys } from '@/presentation/contact/min/modules/contact-types';
+import { validate } from '@/presentation/contact/min/modules/contact-validator';
 
 const logPrefix = 'contact-action.ts: ';
 

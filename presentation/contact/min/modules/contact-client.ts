@@ -4,7 +4,7 @@ import { env } from '@/presentation/(system)/env/env-validated.s';
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/server-error-handler';
 import logger from '@/presentation/(system)/logging-facade/logger';
 import { FormData } from '@/presentation/(system)/types/form-data';
-import { FormKeys } from '@/presentation/contact/min/models/contact-types';
+import { FormKeys } from '@/presentation/contact/min/modules/contact-types';
 import 'server-only';
 
 const logPrefix = 'contact-client.ts: ';

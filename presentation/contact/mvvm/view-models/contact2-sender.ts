@@ -3,7 +3,7 @@
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/client-error-handler';
 import { actionError } from '@/presentation/(system)/error-handlers/custom-error';
 import { hasError } from '@/presentation/(system)/validators/validator';
-import { action } from '@/presentation/contact/mvvm/models/contact2-action';
+import { action } from '@/presentation/contact/mvvm/bff/contact2-action';
 import {
   Action,
   setViolations,
