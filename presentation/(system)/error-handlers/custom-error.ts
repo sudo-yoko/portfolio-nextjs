@@ -2,14 +2,16 @@
 // カスタムエラー定義
 //
 import { ActionResult } from '@/presentation/(system)/types/action-result';
+import { Violations } from '@/presentation/(system)/validators/validator';
 
 /**
  * カスタムエラーの種類
- * - ActionError  - Server Actions でエラーが発生したことを示すカスタムエラー
- * - AuthError    - 認証エラーが発生したことを示すカスタムエラー
- * - RouteError   - Route Handlers でエラーが発生したことを示すカスタムエラー
+ * - ActionError      - Server Actions でエラーが発生したことを示すカスタムエラー
+ * - AuthError        - 認証エラーが発生したことを示すカスタムエラー
+ * - RouteError       - Route Handlers でエラーが発生したことを示すカスタムエラー
+ * - ValidationError  - BFF
  */
-export type ErrType = 'ActionError' | 'AuthError' | 'RouteError';
+export type ErrType = 'ActionError' | 'AuthError' | 'RouteError' | 'ValidationError';
 
 /**
  * Errorインスタンスに追加するプロパティ
@@ -83,6 +85,13 @@ export async function routeError(
     cause.push(`body=${body}`);
   }
   return customError('RouteError', cause.join(', '));
+}
+
+export function validationError<T extends string>(violations: Violations<T>): CustomError<'ValidationError'> {
+  const cause = Object.entries(violations)
+    .flatMap(([key, value]) => (Array.isArray(value) ? value.map((m: string) => `${m}[${key}]`) : []))
+    .join(', ');
+  return customError('ValidationError', cause);
 }
 
 /**

@@ -1,5 +1,5 @@
 // npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/system/custom-error.test.ts
-
+import { printf } from '@/__tests__/next-jest/_utils/test-logger';
 import {
   actionError,
   authError,
@@ -7,12 +7,14 @@ import {
   isAuthError,
   isRouteError,
   routeError,
+  validationError,
 } from '@/presentation/(system)/error-handlers/custom-error';
 import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
-import { ActionResult } from '@/modules/(system)/types/action-result';
-import { RouteResult } from '@/modules/(system)/types/route-response';
+import { ActionResult } from '@/presentation/(system)/types/action-result';
+import { RouteResult } from '@/presentation/(system)/types/route-response';
+import { Violations } from '@/presentation/(system)/validators/validator';
+import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
 import { User } from '@/presentation/users/min/models/users-types';
-import { printf } from '../_utils/test-logger';
 
 const print = printf({ logPrefix: '>>> [custom-error.test.test.ts]', stdout: true });
 
@@ -138,6 +140,21 @@ test('test3-2', async () => {
   const body = RouteResult.abort(cause);
   const resp: Response = new Response(JSON.stringify(body), { status: 500 });
   const e = await routeError(resp);
+  const { message, all } = stringify(e);
+  print(`message=${message}, all=${all}`);
+});
+
+// ======================
+// validationError Test
+// ======================
+
+// npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/system/custom-error.test.ts -t 'test4-1'
+test('test4-1', () => {
+  const violations: Violations<FormKeys> = {
+    name: ['名前が長すぎます。', '名前が不正です。'],
+    email: ['不正なメールアドレスです。'],
+  };
+  const e = validationError(violations);
   const { message, all } = stringify(e);
   print(`message=${message}, all=${all}`);
 });
