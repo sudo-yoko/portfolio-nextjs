@@ -1,1 +1,1 @@
-export { POST } from '@/presentation/users/mvvm/models/users-route.impl';
+export { POST } from '@/presentation/users/mvvm/bff/users-route.impl';
