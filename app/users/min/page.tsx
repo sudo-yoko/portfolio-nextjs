@@ -1,4 +1,4 @@
-import UserList from '@/presentation/users/min/view/user-list';
+import UserList from '@/presentation/users/min/components/user-list';
 
 export default function Page() {
   return (

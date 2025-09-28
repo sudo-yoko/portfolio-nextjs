@@ -2,8 +2,8 @@
 
 import { Pagination } from '@/presentation/(system)/pagination/min/views/pagination';
 import { FormData } from '@/presentation/(system)/types/form-data';
-import { fetch } from '@/presentation/users/min/models/users-fetcher';
-import { FormKeys, User, UsersQuery } from '@/presentation/users/min/models/users-types';
+import { fetch } from '@/presentation/users/min/modules/users-fetcher';
+import { FormKeys, User, UsersQuery } from '@/presentation/users/min/modules/users-types';
 import { useState } from 'react';
 
 const initialPage = 1;

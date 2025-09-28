@@ -1,5 +1,5 @@
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/action-error-handler';
-import { User } from '@/presentation/users/min/models/users-types';
+import { User } from '@/presentation/users/min/modules/users-types';
 import { printf } from '../_utils/test-logger';
 
 const print = printf({ logPrefix: '>>> [action-error-handler.test.ts]', stdout: true });

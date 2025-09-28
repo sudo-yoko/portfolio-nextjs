@@ -14,7 +14,7 @@ import { ActionResult } from '@/presentation/(system)/types/action-result';
 import { RouteResult } from '@/presentation/(system)/types/route-response';
 import { Violations } from '@/presentation/(system)/validators/validator';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
-import { User } from '@/presentation/users/min/models/users-types';
+import { User } from '@/presentation/users/min/modules/users-types';
 
 const print = printf({ logPrefix: '>>> [custom-error.test.test.ts]', stdout: true });
 
