@@ -1,4 +1,4 @@
-import { ChatRequest, send } from '@/presentation/chat/mvvm/models/chat-client';
+import { ChatRequest, send } from '@/presentation/chat/mvvm/bff/chat-client';
 import 'server-only';
 
 const logPrefix = 'chat-route.impl.ts: ';

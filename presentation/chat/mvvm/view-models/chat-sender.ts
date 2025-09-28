@@ -1,4 +1,4 @@
-import { ChatRequest } from '@/presentation/chat/mvvm/models/chat-client';
+import { ChatRequest } from '@/presentation/chat/mvvm/bff/chat-client';
 import 'client-only';
 
 export async function send(
