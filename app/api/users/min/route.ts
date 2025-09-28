@@ -1,6 +1,6 @@
 import { withAuthAsync } from '@/presentation/(system)/auth/auth-handler';
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/route-error-handler';
-import { FetchPageResult } from '@/presentation/(system)/pagination/min/models/types';
+import { FetchPageResult } from '@/presentation/(system)/pagination/min/modules/types';
 import { send } from '@/presentation/users/min/modules/users-client';
 import { User, UsersQuery } from '@/presentation/users/min/modules/users-types';
 import 'server-only';
