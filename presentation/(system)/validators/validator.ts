@@ -5,7 +5,7 @@ import { z } from 'zod';
  * 引数は問わず、戻り値はエラーメッセージの配列とする。
  */
 export interface Validator {
-  (...args: string[]): string[];
+  (...args: (string | undefined)[]): string[];
 }
 
 /**
@@ -28,7 +28,7 @@ export function hasError<T extends string>(errors: Violations<T>): boolean {
  */
 export const required: Validator = (name, value) => {
   const errors: string[] = [];
-  if (value.trim() === '') {
+  if (!value || value.trim() === '') {
     errors.push(`${name}を入力してください。`);
   }
   return errors;
@@ -57,7 +57,5 @@ export const requiredEmail: Validator = (name, value) => {
  */
 export const validateEmail: Validator = (name, value) => {
   const result = z.string().email(`${name}の形式が不正です。`).safeParse(value);
-  return result.success
-    ? []
-    : result.error.errors.map((issue) => issue.message);
+  return result.success ? [] : result.error.errors.map((issue) => issue.message);
 };

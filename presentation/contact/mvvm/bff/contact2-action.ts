@@ -7,7 +7,7 @@ import { FormData } from '@/presentation/(system)/types/form-data';
 import { Violations, hasError } from '@/presentation/(system)/validators/validator';
 import { send } from '@/presentation/contact/mvvm/bff/contact2-client';
 import { ContactBody, FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
-import { validate } from '@/presentation/contact/mvvm/view-models/contact2-validator';
+import { validate } from '@/presentation/contact/mvvm/models/contact2-validator';
 
 const logPrefix = 'contact2-action.ts: ';
 

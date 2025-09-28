@@ -1,7 +1,7 @@
 import { FormData } from '@/modules/(system)/types/form-data';
 import { send } from '@/presentation/contact/min/modules/contact-client';
 import { FormKeys } from '@/presentation/contact/min/modules/contact-types';
-import { printf } from '../_utils/test-logger';
+import { printf } from '../../_utils/test-logger';
 
 const print = printf({ logPrefix: '>>> [contact/contact-client.test.ts]', stdout: true });
 
