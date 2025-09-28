@@ -6,6 +6,9 @@ import { z } from 'zod';
  */
 export interface Validator {
   (...args: (string | undefined)[]): string[];
+  // 以下のようにjsonを引数に渡した場合はundefinedになる可能性がある
+  // const contactBody: ContactBody = await req.json();
+  // const result = validate(contactBody);
 }
 
 /**

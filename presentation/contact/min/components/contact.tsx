@@ -4,10 +4,10 @@ import { ErrorHandler } from '@/presentation/(system)/error-handlers/error-handl
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { Violations } from '@/presentation/(system)/validators/validator';
 import { FormKeys, Step } from '@/presentation/contact/min/modules/contact-types';
-import Complete from '@/presentation/contact/min/views/complete';
-import Confirm from '@/presentation/contact/min/views/confirm';
-import Input from '@/presentation/contact/min/views/input';
-import Sending from '@/presentation/contact/min/views/sending';
+import Complete from '@/presentation/contact/min/components/complete';
+import Confirm from '@/presentation/contact/min/components/confirm';
+import Input from '@/presentation/contact/min/components/input';
+import Sending from '@/presentation/contact/min/components/sending';
 import { useState } from 'react';
 
 export default function Contact() {

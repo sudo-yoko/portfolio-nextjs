@@ -26,7 +26,9 @@ const fetchRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) =
     body: JSON.stringify({ offset, limit, query }),
   });
   if (res.status != 200) {
-    throw await routeError(res, { method: 'POST', route: url });
+    const clone = res.clone();
+    const body = await clone.text();
+    throw await routeError(res.status, { body, method: 'POST', route: url });
   }
   const body: FetchPageResult<User[]> = await res.json();
   return body;
