@@ -1,3 +1,7 @@
+//
+// お問い合わせフォーム BFF
+// (Server Actions を使った実装)
+//
 'use server';
 
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/action-error-handler';

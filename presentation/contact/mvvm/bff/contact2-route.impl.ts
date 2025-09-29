@@ -1,3 +1,7 @@
+//
+// お問い合わせフォーム BFF
+// (Route Handlers を使った実装)
+//
 import { withAuthAsync } from '@/presentation/(system)/auth/auth-handler';
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/route-error-handler';
 import logger from '@/presentation/(system)/logging-facade/logger';
