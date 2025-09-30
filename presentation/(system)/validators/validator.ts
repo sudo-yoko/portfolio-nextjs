@@ -1,3 +1,5 @@
+import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
+import debug from '@/presentation/(system)/loggers/logger-debug';
 import { z } from 'zod';
 
 /**
@@ -18,6 +20,30 @@ export interface Validator {
 export type Violations<T extends string> = {
   [key in T]?: string[];
 };
+
+/**
+ * Violations型に適合するか判定する
+ */
+export function isViolations(text: string, ...keys: string[]): boolean {
+  try {
+    // JSONにパースできること
+    const parsed = JSON.parse(text);
+    for (const [key, value] of Object.entries(parsed)) {
+      // 値がstring[]であること
+      if (!Array.isArray(value)) {
+        return false;
+      }
+      // キーの配列も渡せる場合はキーのチェックも行う
+      if (keys.length > 0 && !keys.includes(key)) {
+        return false;
+      }
+    }
+    return true;
+  } catch (e) {
+    debug(stringify(e).message);
+    return false;
+  }
+}
 
 /**
  * バリデーションエラーの有無を調べる

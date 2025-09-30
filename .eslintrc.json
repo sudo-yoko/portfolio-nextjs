@@ -12,7 +12,8 @@
         "caughtErrorsIgnorePattern": "^_",
         "ignoreRestSiblings": true
       }
-    ]
+    ],
+    "no-warning-comments": ["warn", { "terms": ["todo", "fixme", "hack"], "location": "start" }]
   },
   "overrides": [
     {

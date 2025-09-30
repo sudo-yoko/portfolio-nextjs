@@ -1,3 +1,6 @@
+//
+// 外部APIクライアント
+//
 //import client from '@/modules/(system)/clients/proxy-client';
 import { client } from '@/presentation/(system)/clients/client';
 import { env } from '@/presentation/(system)/env/env-validated.s';

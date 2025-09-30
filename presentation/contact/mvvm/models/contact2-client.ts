@@ -1,5 +1,5 @@
 //
-// お問い合わせの送信 BFFクライアント
+// お問い合わせの送信 バックエンドファサード
 //
 import { CONTENT_TYPE_APPLICATION_JSON_UTF8, POST } from '@/presentation/(system)/clients/constants';
 import {
@@ -7,10 +7,10 @@ import {
   routeError,
   validationError,
 } from '@/presentation/(system)/error-handlers/custom-error';
+import debug from '@/presentation/(system)/loggers/logger-debug';
 import logger from '@/presentation/(system)/logging-facade/logger';
 import { FormData } from '@/presentation/(system)/types/form-data';
-import { tryParseJson } from '@/presentation/(system)/utils/json-utils';
-import { hasError } from '@/presentation/(system)/validators/validator';
+import { hasError, isViolations } from '@/presentation/(system)/validators/validator';
 import { action } from '@/presentation/contact/mvvm/bff/contact2-action';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
 import 'client-only';
@@ -22,22 +22,25 @@ interface Send {
 }
 
 /**
- * BFF が Server Actions の場合のクライアント実装
+ * Server Actions を使った BFF 実装
  */
 const _sendAction: Send = async (formData) => {
+  // Server Action を呼び出す
   const result = await action(formData);
   if (result.abort) {
     throw actionError(result);
   }
+  // バリデーションエラー
   if (result.data && hasError(result.data)) {
     throw validationError(result.data);
   }
 };
 
 /**
- * BFF が Route Handlers の場合のクライアント実装
+ * Route Handlers を使った BFF 実装
  */
 const sendRoute: Send = async (formData) => {
+  // Route Handler を呼び出す
   const url = '/api/contact/mvvm';
   const { name, email, body } = formData;
   const res = await fetch(url, {
@@ -55,20 +58,24 @@ const sendRoute: Send = async (formData) => {
   if (res.status === 400) {
     const clone = res.clone();
     const text = await clone.text();
-    if (text && tryParseJson(text)) {
+    debug(text);
+    if (isViolations(text)) {
       // const violations: Violations<FormKeys> = JSON.parse(text) as Violations<FormKeys>;
-      // ボディがJSONパースできればviolationsでなくてもバリデーションエラーと判定されてしまうのはやむなしか。
+      // TODO: ボディがJSONパースできればviolationsでなくてもバリデーションエラーと判定されてしまうのはやむなしか。
       // hasErrorの実装も再確認
-      const anyJson = JSON.parse(text);
-      logger.info(logPrefix + `violations=${JSON.stringify(anyJson)}`);
-      if (hasError(anyJson)) {
-        throw validationError(anyJson);
+      const violations = JSON.parse(text);
+      logger.info(logPrefix + `violations=${JSON.stringify(violations)}`);
+      if (hasError(violations)) {
+        throw validationError(violations);
       }
     }
   }
   // 上記以外
-  const text = await res.text();
+  const text = await res.text(); // bodyがjsonとは限らないのでtextで取得する。エラーの場合はhtmlが返ってくることもある
   throw await routeError(res.status, { body: text, method: POST, route: url });
 };
 
+/**
+ * お問い合わせを送信する
+ */
 export const send: Send = sendRoute;
