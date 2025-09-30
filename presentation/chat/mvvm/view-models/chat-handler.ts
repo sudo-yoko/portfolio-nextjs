@@ -1,6 +1,6 @@
 'use client';
 
-import { send } from '@/presentation/chat/mvvm/view-models/chat-sender';
+import { send } from '@/presentation/chat/mvvm/models/chat-be-facade';
 import { Chunk } from '@/presentation/chat/mvvm/models/chat-types';
 import {
   Action,
