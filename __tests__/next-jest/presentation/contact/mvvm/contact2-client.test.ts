@@ -1,7 +1,7 @@
 import { printf } from '@/__tests__/next-jest/_utils/test-logger';
 import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
 import { FormData } from '@/presentation/(system)/types/form-data';
-import { send } from '@/presentation/contact/mvvm/models/contact2-client';
+import { send } from '@/presentation/contact/mvvm/models/contact2-be-facade';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
 import { jest } from '@jest/globals';
 
