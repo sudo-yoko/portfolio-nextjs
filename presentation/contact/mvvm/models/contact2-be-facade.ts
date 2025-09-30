@@ -8,7 +8,6 @@ import {
   validationError,
 } from '@/presentation/(system)/error-handlers/custom-error';
 import debug from '@/presentation/(system)/loggers/logger-debug';
-import logger from '@/presentation/(system)/logging-facade/logger';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { hasError, isViolations } from '@/presentation/(system)/validators/validator';
 import { action } from '@/presentation/contact/mvvm/bff/contact2-action';
@@ -17,14 +16,14 @@ import 'client-only';
 
 const logPrefix = 'contact2-client.ts: ';
 
-interface Send {
+interface SendRequest {
   (formData: FormData<FormKeys>): Promise<void>;
 }
 
 /**
  * Server Actions を使った BFF 実装
  */
-const _sendAction: Send = async (formData) => {
+const sendAction: SendRequest = async (formData) => {
   // Server Action を呼び出す
   const result = await action(formData);
   if (result.abort) {
@@ -39,7 +38,7 @@ const _sendAction: Send = async (formData) => {
 /**
  * Route Handlers を使った BFF 実装
  */
-const sendRoute: Send = async (formData) => {
+const sendRoute: SendRequest = async (formData) => {
   // Route Handler を呼び出す
   const url = '/api/contact/mvvm';
   const { name, email, body } = formData;
@@ -64,7 +63,7 @@ const sendRoute: Send = async (formData) => {
       // TODO: ボディがJSONパースできればviolationsでなくてもバリデーションエラーと判定されてしまうのはやむなしか。
       // hasErrorの実装も再確認
       const violations = JSON.parse(text);
-      logger.info(logPrefix + `violations=${JSON.stringify(violations)}`);
+      debug(logPrefix + `violations=${JSON.stringify(violations)}`);
       if (hasError(violations)) {
         throw validationError(violations);
       }
@@ -78,4 +77,4 @@ const sendRoute: Send = async (formData) => {
 /**
  * お問い合わせを送信する
  */
-export const send: Send = sendRoute;
+export const sendRequest: SendRequest = sendAction;

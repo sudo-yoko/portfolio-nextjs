@@ -1,7 +1,7 @@
 import { printf } from '@/__tests__/next-jest/_utils/test-logger';
 import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
 import { FormData } from '@/presentation/(system)/types/form-data';
-import { send } from '@/presentation/contact/mvvm/models/contact2-be-facade';
+import { sendRequest } from '@/presentation/contact/mvvm/models/contact2-be-facade';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
 import { jest } from '@jest/globals';
 
@@ -27,7 +27,7 @@ test('test1-1', async () => {
   };
   // 実行
   try {
-    const result = await send(formData);
+    const result = await sendRequest(formData);
     print(`success -> result=${JSON.stringify(result)}`);
   } catch (e) {
     print(`error -> ${stringify(e).all}`);
