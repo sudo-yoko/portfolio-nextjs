@@ -27,25 +27,28 @@ Next.js の実装集
 * アプリケーションは、デカップルド・アーキテクチャ（decoupled architecture）におけるフロントエンドの位置付けとする。また、レイヤードアーキテクチャにおけるプレゼンテーション層とする。
 * Route Handlers と Server Actions は BFF (backend for frontend) として位置付ける。
 * バックエンド API は BFF から呼び出す方式とする。
+* UI と BFF の間には「バックエンド・ファサード」を挟む。「バックエンド・ファサード」とは、バックエンド呼び出し処理の詳細を隠蔽し、UI向けにシンプルな呼び出し窓口を提供するレイヤーである。クライアント→BFF→バックエンドAPIといった複数レイヤーにまたがるリクエストをファサードの背面に隠し、UIには呼び出し関数のみを提供することを目的とする。
 
 ```mermaid
 flowchart LR
 	subgraph "フロントエンド(Next.js)"
 		subgraph "UI"
 			U["ページ／<br>コンポーネント"]
+			F["バックエンド・<br>ファサード"]
 		end
 		subgraph "BFF"
 			B[Route Handlers／<br>Server Actions]
 		end
 	end
-	U-->B
+	U-->F
+	F-- request -->B
 	subgraph "バックエンド"
 		REST["REST API"]
 	end
-	B-->REST
+	B-- request -->REST
 ```
 	
-* フロントエンドはMVVM構成とし、各構成要素であるModel、View、ViewModelを以下のように整理する。  
+* UI層はMVVM構成とし、各構成要素であるModel、View、ViewModelを以下のように整理する。  
 
 	* View  
   .tsxをViewとする。ページやコンポーネントのUIを実装する。
