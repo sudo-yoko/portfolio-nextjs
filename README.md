@@ -32,11 +32,11 @@ Next.js の実装集
 ```mermaid
 flowchart LR
 	subgraph "フロントエンド(Next.js)"
-		subgraph "UI"
+		subgraph "UI<br><br><br><br><br>クライアントサイド"
 			U["ページ／<br>コンポーネント"]
 			F["バックエンド・<br>ファサード"]
 		end
-		subgraph "BFF"
+		subgraph "BFF<br><br><br><br><br>サーバーサイド"
 			B[Route Handlers／<br>Server Actions]
 		end
 	end
@@ -47,6 +47,8 @@ flowchart LR
 	end
 	B-- request -->REST
 ```
+
+* バックエンド・ファサードとBFFは、リクエストをパススルーする中継層とし、業務ロジックを保持しない。ただしサーバーサイドの入力バリデーションについてはBFFに実装する。
 	
 * UI層はMVVM構成とし、各構成要素であるModel、View、ViewModelを以下のように整理する。  
 
