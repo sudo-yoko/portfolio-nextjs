@@ -48,7 +48,7 @@ export async function send(
   setError: React.Dispatch<React.SetStateAction<boolean>>,
 ) {
   // エラーハンドリングを追加して処理を実行する。
-  withErrorHandlingAsync(() => func(), setError);
+  await withErrorHandlingAsync(() => func(), setError);
 
   async function func() {
     await sendRequest(state.formData);

@@ -55,3 +55,9 @@ window.addEventListener('error', (ev) => {
 バリデーションはクライアントとBFFの両方で行うについて
 BFF()でバリデーションすると、本来の返却とバリデーションエラーのレスポンスの２種類必要になってしまう。
 BFFのバリデーションエラーは例外とするか
+
+
+*******************
+非同期関数にawaitつけ忘れ防止
+→lint設定できる
+npm i -D eslint-plugin-promise

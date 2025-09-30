@@ -21,7 +21,8 @@ export function withErrorHandling<T>(
     // 引数に渡されたサンクを実行
     return thunk();
   } catch (e) {
-    logError(logPrefix + fname + stringify(e).all);
+    // 非同期関数を呼ぶときにvoidを付けると、awaitしないことを明示的に示せる
+    void logError(logPrefix + fname + stringify(e).all);
     setHasError(true);
   }
 }
@@ -39,7 +40,8 @@ export async function withErrorHandlingAsync<T>(
     // 引数に渡されたサンクを実行
     return await thunk();
   } catch (e) {
-    logError(logPrefix + fname + stringify(e).all);
+    // 非同期関数を呼ぶときにvoidを付けると、awaitしないことを明示的に示せる
+    void logError(logPrefix + fname + stringify(e).all);
     setHasError(true);
   }
 }
