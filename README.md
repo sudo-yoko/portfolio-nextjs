@@ -34,7 +34,7 @@ flowchart LR
 	subgraph "フロントエンド(Next.js)"
 		subgraph "UI<br><br><br><br><br>クライアントサイド"
 			U["ページ／<br>コンポーネント"]
-			F["バックエンド・<br>ファサード"]
+			F{{"バックエンド・<br>ファサード"}}
 		end
 		subgraph "BFF<br><br><br><br><br>サーバーサイド"
 			B[Route Handlers／<br>Server Actions]
