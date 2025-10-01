@@ -1,7 +1,7 @@
 import { ChatRequest } from '@/presentation/chat/mvvm/bff/chat-client';
 import 'client-only';
 
-export async function send(
+export async function sendRequest(
   prompt: string,
   aiModel: string,
   signal: AbortSignal,

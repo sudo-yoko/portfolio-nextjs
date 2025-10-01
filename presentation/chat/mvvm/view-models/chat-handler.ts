@@ -1,6 +1,6 @@
 'use client';
 
-import { send } from '@/presentation/chat/mvvm/models/chat-be-facade';
+import { sendRequest } from '@/presentation/chat/mvvm/models/chat-be-facade';
 import { Chunk } from '@/presentation/chat/mvvm/models/chat-types';
 import {
   Action,
@@ -37,7 +37,7 @@ export async function handleSend(
   // ストリーミング応答のキャンセル用コントローラー
   const controller = new AbortController();
   // AI API呼び出し
-  const res = await send(prompt, ai_model, controller.signal);
+  const res = await sendRequest(prompt, ai_model, controller.signal);
   if (!res.body) {
     return;
   }

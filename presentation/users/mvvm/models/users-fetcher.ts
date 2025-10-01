@@ -7,7 +7,7 @@ import 'client-only';
 /**
  * Server Actions を使ったデータフェッチ実装
  */
-const _fetchAction: FetchPage<User[], UsersQuery> = async (offset, limit, query) => {
+const _viaAction: FetchPage<User[], UsersQuery> = async (offset, limit, query) => {
   const result = await action(offset, limit, query);
   if (result.abort) {
     throw actionError(result);
@@ -18,7 +18,7 @@ const _fetchAction: FetchPage<User[], UsersQuery> = async (offset, limit, query)
 /**
  * Route Handlers を使ったデータフェッチ実装
  */
-const fetchRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) => {
+const viaRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) => {
   const url = 'http://localhost:3000/api/users/mvvm';
   const res = await window.fetch(url, {
     method: 'POST',
@@ -34,4 +34,4 @@ const fetchRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) =
   return body;
 };
 
-export const fetch: FetchPage<User[], UsersQuery> = fetchRoute;
+export const fetch: FetchPage<User[], UsersQuery> = viaRoute;
