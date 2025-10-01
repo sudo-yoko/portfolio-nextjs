@@ -1,6 +1,6 @@
 'use client';
 
-import { sendRequest } from '@/presentation/chat/mvvm/models/chat-be-facade';
+import { sendRequest } from '@/presentation/chat/mvvm/models/backend-facade';
 import { Chunk } from '@/presentation/chat/mvvm/models/chat-types';
 import {
   Action,

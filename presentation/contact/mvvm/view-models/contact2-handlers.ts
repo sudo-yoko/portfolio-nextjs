@@ -2,7 +2,7 @@
 
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/client-error-handler';
 import { hasError, Violations } from '@/presentation/(system)/validators/validator';
-import { sendRequest } from '@/presentation/contact/mvvm/models/contact2-be-facade';
+import { sendRequest } from '@/presentation/contact/mvvm/models/backend-facade';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
 import { validate } from '@/presentation/contact/mvvm/models/contact2-validator';
 import {
