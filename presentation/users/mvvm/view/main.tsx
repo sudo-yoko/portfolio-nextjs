@@ -2,7 +2,7 @@
 
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { Pagination } from '@/presentation/(system)/pagination/mvvm/views/pagination';
-import { fetch } from '@/presentation/users/mvvm/models/backend-facade';
+import { fetchPage } from '@/presentation/users/mvvm/models/backend-facade';
 import { FormKeys, User, UsersQuery } from '@/presentation/users/mvvm/models/users-types';
 import UserList from '@/presentation/users/mvvm/view/user-list';
 import { useCallback, useState } from 'react';
@@ -13,7 +13,7 @@ export function Main() {
   const { userName } = formData;
   const [users, setUsers] = useState<User[]>([]);
   const [query, setQuery] = useState<UsersQuery>({ userId: '', userName });
-  const fetchCallback = useCallback(fetch, [fetch]);
+  const fetchCallback = useCallback(fetchPage, [fetchPage]);
 
   const initialPage = 1;
   const perPage = 4;

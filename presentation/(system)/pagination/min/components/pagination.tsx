@@ -11,14 +11,14 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 export function Pagination<TItems, TQuery>({
   search,
-  fetch,
+  fetchPage,
   initialPage,
   perPage,
   query,
   setItems,
 }: {
   search: boolean;
-  fetch: FetchPage<TItems, TQuery>;
+  fetchPage: FetchPage<TItems, TQuery>;
   initialPage: number;
   perPage: number;
   query: TQuery;
@@ -27,7 +27,7 @@ export function Pagination<TItems, TQuery>({
   const [error, setError] = useState(false);
   const [page, setPage] = useState(initialPage);
   const pager = useRef<Pager<TItems>>(null);
-  const fetchCallback = useCallback(fetch, [fetch]);
+  const fetchCallback = useCallback(fetchPage, [fetchPage]);
 
   useEffect(() => {
     withErrorHandlingAsync(() => func(), setError);

@@ -34,4 +34,4 @@ const viaRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) => 
   return body;
 };
 
-export const fetch: FetchPage<User[], UsersQuery> = viaRoute;
+export const fetchPage: FetchPage<User[], UsersQuery> = viaRoute;

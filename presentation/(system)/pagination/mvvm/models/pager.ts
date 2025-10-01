@@ -13,12 +13,12 @@ import 'client-only';
  * @typeParam T - 結果リストの型
  * @typeParam Q - 検索条件の型
  *
- * @param fetch - データ取得関数
+ * @param fetchPage - データ取得関数
  * @param params - パラメーター
  * @returns ページャ関数
  */
 export function createPager<T, Q>(
-  fetch: FetchPage<T, Q>,
+  fetchPage: FetchPage<T, Q>,
   params: { initialPage?: number; perPage: number; query: Q },
 ): Pager<T> {
   const { perPage, query } = params;
@@ -35,7 +35,7 @@ export function createPager<T, Q>(
     //
     // データ取得
     //
-    let { total, items } = await fetch(offset, limit, query);
+    let { total, items } = await fetchPage(offset, limit, query);
     //
     // データなし
     //
@@ -49,7 +49,7 @@ export function createPager<T, Q>(
     //
     if (offset > total) {
       offset = offsetOfLastPage(total, limit); // 最終ページの先頭の1件目
-      ({ total, items } = await fetch(offset, limit, query));
+      ({ total, items } = await fetchPage(offset, limit, query));
     }
     //
     // データを返却

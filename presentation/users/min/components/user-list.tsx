@@ -44,7 +44,7 @@ export default function UserList() {
         {/** ページネーションコンポーネント */}
         <Pagination
           search={search}
-          fetch={fetch}
+          fetchPage={fetch}
           initialPage={initialPage}
           perPage={perPage}
           query={query}
