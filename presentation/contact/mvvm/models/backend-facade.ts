@@ -5,12 +5,9 @@
 // クライアント→BFF→バックエンドAPIといった複数レイヤーにまたがるリクエストをファサードの背面に隠し、UIには呼び出し関数のみを提供する。
 //
 import { CONTENT_TYPE_APPLICATION_JSON_UTF8, POST } from '@/presentation/(system)/clients/constants';
-import {
-  actionError,
-  routeError,
-  validationError,
-} from '@/presentation/(system)/error-handlers/custom-error';
+import { actionError, routeError } from '@/presentation/(system)/error-handlers/custom-error';
 import debug from '@/presentation/(system)/loggers/logger-debug';
+import * as FacadeResult from '@/presentation/(system)/types/facade-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { hasError, isViolations } from '@/presentation/(system)/validators/validator';
 import { action } from '@/presentation/contact/mvvm/bff/contact2-action';
@@ -19,9 +16,12 @@ import 'client-only';
 
 const logPrefix = 'contact2-be-facade.ts: ';
 
-interface SendRequest {
-  (formData: FormData<FormKeys>): Promise<void>;
-}
+/**
+ *
+ */
+type SendRequest = {
+  (formData: FormData<FormKeys>): Promise<FacadeResult.Ok | FacadeResult.RejectViolation<FormKeys>>;
+};
 
 /**
  * Server Actions による実装
@@ -34,8 +34,16 @@ const _viaAction: SendRequest = async (formData) => {
   }
   // バリデーションエラー
   if (result.data && hasError(result.data)) {
-    throw validationError(result.data);
+    //throw validationError(result.data);
+    const reject: FacadeResult.RejectViolation<FormKeys> = {
+      tag: 'reject',
+      kind: 'violation',
+      data: result.data,
+    };
+    return reject;
   }
+  const ok: FacadeResult.Ok = { tag: 'ok' };
+  return ok;
 };
 
 /**
@@ -54,7 +62,7 @@ const viaRoute: SendRequest = async (formData) => {
   });
   // 正常（バリデーションエラーなし）
   if (res.status === 200) {
-    return;
+    return { tag: 'ok' };
   }
   // バリデーションエラー
   if (res.status === 400) {
@@ -68,7 +76,8 @@ const viaRoute: SendRequest = async (formData) => {
       const violations = JSON.parse(text);
       debug(logPrefix + `violations=${JSON.stringify(violations)}`);
       if (hasError(violations)) {
-        throw validationError(violations);
+        //throw validationError(violations);
+        return { tag: 'reject', kind: 'violation', data: violations };
       }
     }
   }

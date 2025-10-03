@@ -6,6 +6,12 @@ action -> fetcher -> client
 fetcher/sender  ->  action(BFF)     -> client -> client(axios)
 fetcher/sender  ->  api Route(BFF)  -> client -> client(axios)
 
+依存の方向
+・view -> view-model -> model
+・BFF -> model
+
+
+
 ファイルの命名
 
 サンク＝引数なしの関数。呼べば実行する関数
@@ -16,8 +22,12 @@ web-to-caseをプロキシ経由で送信すると400エラーになる
 ・リクエスト先にはリクエストがとどいており、ステータス２００を返しているようですが、プロキシモックからクライアントにステータス４００が返っている
 →http-proxy-agent をやめて、Axios 標準の proxy オプションを使用したところエラーが解消
 
-BFFに認証をつける
-サーバーアクションとAPIルートの認証
+・BFFに認証をつける
+　サーバーアクションとAPIルートの認証
+　BFFの認証エラーは例外
+・BFFでバリデーション
+  バリデーションエラーは戻すか
+BFFでのエラーはクライアントに返し、クライアント側でエラーハンドリングを行う
 
 カスタムエラーの作成
 

@@ -11,6 +11,7 @@ import {
   State,
   toComplete,
   toConfirm,
+  toInput,
 } from '@/presentation/contact/mvvm/view-models/contact2-reducer';
 
 /**
@@ -51,7 +52,17 @@ export async function send(
   await withErrorHandlingAsync(() => func(), setError);
 
   async function func() {
-    await sendRequest(state.formData);
+    const result = await sendRequest(state.formData);
+    // バリデーションエラーあり
+    if (result.tag === 'reject' && result.kind === 'violation') {
+      const violations = result.data;
+      if (hasError(violations)) {
+        setViolations(dispatch, violations);
+        toInput(dispatch);
+        return;
+      }
+    }
+    // 正常
     toComplete(dispatch);
     return;
   }
