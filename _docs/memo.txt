@@ -10,6 +10,9 @@ fetcher/sender  ->  api Route(BFF)  -> client -> client(axios)
 ・view -> view-model -> model
 ・BFF -> model
 
+view
+・JSXをリターンするもの
+
 
 
 ファイルの命名
