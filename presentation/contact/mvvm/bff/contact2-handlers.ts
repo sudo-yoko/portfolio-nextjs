@@ -2,7 +2,6 @@
 
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/client-error-handler';
 import { hasError, Violations } from '@/presentation/(system)/validators/validator';
-import { sendRequest } from '@/presentation/contact/mvvm/models/backend-facade';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
 import { validate } from '@/presentation/contact/mvvm/models/contact2-validator';
 import {
@@ -13,6 +12,7 @@ import {
   toConfirm,
   toInput,
 } from '@/presentation/contact/mvvm/view-models/contact2-reducer';
+import { sendRequest } from '../boundary/facade';
 
 /**
  * バリデーションエラーが取得されている場合にUIに反映する。
@@ -54,8 +54,10 @@ export async function send(
   async function func() {
     const result = await sendRequest(state.formData);
     // バリデーションエラーあり
-    if (result.tag === 'reject' && result.kind === 'violation') {
-      const violations = result.data;
+    // if (result.tag === 'reject' && result.kind === 'violation') {
+    // const violations = result.data;
+    if (result.tag == 'reject') {
+      const violations = result.reason;
       if (hasError(violations)) {
         setViolations(dispatch, violations);
         toInput(dispatch);

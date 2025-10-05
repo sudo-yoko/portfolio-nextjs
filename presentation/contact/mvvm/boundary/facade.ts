@@ -33,7 +33,7 @@ const _viaAction: SendRequest = async (formData) => {
     throw boundaryError(result.cause);
   }
   if (result.tag === 'reject') {
-    return reject(result.cause);
+    return reject(result.label, result.reason);
   }
   return ok();
 };
@@ -68,7 +68,7 @@ const viaRoute: SendRequest = async (formData) => {
       const violations = JSON.parse(text);
       debug(logPrefix + `violations=${JSON.stringify(violations)}`);
       if (hasError(violations)) {
-        return reject(violations);
+        return reject('violation', violations);
       }
     }
   }

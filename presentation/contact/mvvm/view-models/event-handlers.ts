@@ -53,17 +53,20 @@ export async function send(
 
   async function func() {
     const result = await sendRequest(state.formData);
+    // 正常
+    if (result.tag === 'ok') {
+      toComplete(dispatch);
+      return;
+    }
     // バリデーションエラーあり
-    if (result.tag === 'reject') {
-      const violations = result.cause;
+    if (result.tag === 'reject' && result.label === 'violation') {
+      const violations = result.reason;
       if (hasError(violations)) {
         setViolations(dispatch, violations);
         toInput(dispatch);
         return;
       }
     }
-    // 正常
-    toComplete(dispatch);
-    return;
+    throw Error('予期しない例外');
   }
 }

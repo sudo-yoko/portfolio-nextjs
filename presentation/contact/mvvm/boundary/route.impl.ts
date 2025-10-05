@@ -18,7 +18,7 @@ export async function POST(req: Request): Promise<Response> {
       return new Response(null, { status: 200 });
     }
     if (result.tag === 'reject') {
-      return new Response(JSON.stringify(result.cause), { status: 400 });
+      return new Response(JSON.stringify(result), { status: 400 });
     }
     // TODO: 到達可能か
     throw Error();

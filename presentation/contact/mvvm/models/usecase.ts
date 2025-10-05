@@ -24,7 +24,7 @@ export async function execute(formData: FormData<FormKeys>): Promise<Ok | Reject
   const result = validate(formData);
   if (hasError(result)) {
     logger.info(logPrefix + `validation error. ${JSON.stringify(result)}`);
-    return reject(result);
+    return reject('violation', result);
   }
   //
   // 送信

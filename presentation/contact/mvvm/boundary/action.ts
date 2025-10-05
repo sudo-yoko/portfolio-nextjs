@@ -25,8 +25,8 @@ export async function action(
     if (result.tag === 'ok') {
       return ok();
     }
-    if (result.tag === 'reject') {
-      return reject(result.cause);
+    if (result.tag === 'reject' && result.label === 'violation') {
+      return reject(result.label, result.reason);
     }
     // TODO: 到達可能か
     throw Error();
