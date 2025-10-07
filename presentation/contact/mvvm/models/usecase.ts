@@ -6,7 +6,7 @@ import type { Ok, Rejected } from '@/presentation/(system)/types/boundary-result
 import { ok, reject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { hasError, Violations } from '@/presentation/(system)/validators/validator';
-import { send } from '@/presentation/contact/mvvm/bff/contact2-client';
+import { send } from '@/presentation/contact/mvvm/models/contact2-client';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
 import { validate } from '@/presentation/contact/mvvm/models/contact2-validator';
 import 'server-only';
