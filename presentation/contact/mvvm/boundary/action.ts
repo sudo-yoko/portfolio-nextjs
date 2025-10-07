@@ -1,6 +1,6 @@
 'use server';
 
-import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/boundary-error-hander';
+import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/boundary-error-handler';
 import logger from '@/presentation/(system)/logging-facade/logger';
 import { BoundaryResult } from '@/presentation/(system)/types/boundary-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
