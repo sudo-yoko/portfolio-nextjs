@@ -2,7 +2,7 @@
 
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/boundary-error-hander';
 import logger from '@/presentation/(system)/logging-facade/logger';
-import { BoundaryResult, ok, reject } from '@/presentation/(system)/types/boundary-result';
+import { BoundaryResult, ok, reject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { Violations } from '@/presentation/(system)/validators/validator';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
@@ -25,8 +25,8 @@ export async function action(
     if (result.tag === 'ok') {
       return ok();
     }
-    if (result.tag === 'reject' && result.label === 'violation') {
-      return reject(result.label, result.reason);
+    if (result.tag === 'reject' && result.label === REJECTION_LABELS.VIOLATION) {
+      return reject(result.label, result.data);
     }
     // TODO: 到達可能か
     throw Error();

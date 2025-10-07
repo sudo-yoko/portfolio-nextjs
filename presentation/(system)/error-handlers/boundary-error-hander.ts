@@ -5,9 +5,9 @@ import { abort, complete } from '@/presentation/(system)/types/boundary-result';
 
 const logPrefix = 'boundary-error-handler.ts: ';
 
-export async function withErrorHandlingAsync<C, R>(
-  thunk: () => Promise<Ok<C> | Rejected<R>>,
-): Promise<BoundaryResult<C, R>> {
+export async function withErrorHandlingAsync<RESULT, REASON>(
+  thunk: () => Promise<Ok<RESULT> | Rejected<REASON>>,
+): Promise<BoundaryResult<RESULT, REASON>> {
   const fname = 'withErrorHandlingAsync: ';
   try {
     const result = await thunk();

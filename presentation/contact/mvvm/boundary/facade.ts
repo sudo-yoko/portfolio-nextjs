@@ -7,7 +7,15 @@
 import { CONTENT_TYPE_APPLICATION_JSON_UTF8, POST } from '@/presentation/(system)/clients/constants';
 import { boundaryError } from '@/presentation/(system)/error-handlers/custom-error';
 import debug from '@/presentation/(system)/loggers/logger-debug';
-import { BoundaryResult, ok, reject } from '@/presentation/(system)/types/boundary-result';
+import {
+  BoundaryResult,
+  isAbort,
+  isReject,
+  ok,
+  parseBoundaryResult,
+  reject,
+  REJECTION_LABELS,
+} from '@/presentation/(system)/types/boundary-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { hasError, isViolations, Violations } from '@/presentation/(system)/validators/validator';
 import { action } from '@/presentation/contact/mvvm/boundary/action';
@@ -29,11 +37,11 @@ type SendRequest = {
 const _viaAction: SendRequest = async (formData) => {
   // Server Action を呼び出す
   const result = await action(formData);
-  if (result.tag === 'abort') {
+  if(isAbort(result)) {
     throw boundaryError(result.cause);
   }
-  if (result.tag === 'reject') {
-    return reject(result.label, result.reason);
+  if(isReject(result)) {
+    return reject(result.label, result.data);
   }
   return ok();
 };
@@ -61,6 +69,17 @@ const viaRoute: SendRequest = async (formData) => {
     const clone = res.clone();
     const text = await clone.text();
     debug(text);
+
+    const parsed = parseBoundaryResult<void, Violations<FormKeys>>(text);
+    if (parsed !== null) {
+      if (parsed.tag === 'reject' && parsed.label === REJECTION_LABELS.VIOLATION) {
+        const violations = parsed.data;
+        if (hasError(violations)) {
+          return reject(parsed.label, violations);
+        }
+      }
+    }
+
     if (isViolations(text)) {
       // const violations: Violations<FormKeys> = JSON.parse(text) as Violations<FormKeys>;
       // TODO: ボディがJSONパースできればviolationsでなくてもバリデーションエラーと判定されてしまうのはやむなしか。

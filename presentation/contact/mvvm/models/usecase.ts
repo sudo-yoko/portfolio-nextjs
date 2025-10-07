@@ -3,7 +3,7 @@
 //
 import logger from '@/presentation/(system)/logging-facade/logger';
 import type { Ok, Rejected } from '@/presentation/(system)/types/boundary-result';
-import { ok, reject } from '@/presentation/(system)/types/boundary-result';
+import { ok, reject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { hasError, Violations } from '@/presentation/(system)/validators/validator';
 import { send } from '@/presentation/contact/mvvm/bff/contact2-client';
@@ -24,7 +24,7 @@ export async function execute(formData: FormData<FormKeys>): Promise<Ok | Reject
   const result = validate(formData);
   if (hasError(result)) {
     logger.info(logPrefix + `validation error. ${JSON.stringify(result)}`);
-    return reject('violation', result);
+    return reject(REJECTION_LABELS.VIOLATION, result);
   }
   //
   // 送信

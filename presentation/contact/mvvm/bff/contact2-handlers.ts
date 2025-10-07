@@ -57,7 +57,7 @@ export async function send(
     // if (result.tag === 'reject' && result.kind === 'violation') {
     // const violations = result.data;
     if (result.tag == 'reject') {
-      const violations = result.reason;
+      const violations = result.data;
       if (hasError(violations)) {
         setViolations(dispatch, violations);
         toInput(dispatch);

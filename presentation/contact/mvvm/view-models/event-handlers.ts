@@ -1,6 +1,7 @@
 'use client';
 
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/client-error-handler';
+import { isOk, isReject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
 import { hasError, Violations } from '@/presentation/(system)/validators/validator';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
 import { validate } from '@/presentation/contact/mvvm/models/contact2-validator';
@@ -54,13 +55,13 @@ export async function send(
   async function func() {
     const result = await sendRequest(state.formData);
     // 正常
-    if (result.tag === 'ok') {
+    if (isOk(result)) {
       toComplete(dispatch);
       return;
     }
     // バリデーションエラーあり
-    if (result.tag === 'reject' && result.label === 'violation') {
-      const violations = result.reason;
+    if (isReject(result) && result.label === REJECTION_LABELS.VIOLATION) {
+      const violations = result.data;
       if (hasError(violations)) {
         setViolations(dispatch, violations);
         toInput(dispatch);
