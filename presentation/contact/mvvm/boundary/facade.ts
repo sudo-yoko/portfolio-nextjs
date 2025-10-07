@@ -8,8 +8,9 @@ import { CONTENT_TYPE_APPLICATION_JSON_UTF8, POST } from '@/presentation/(system
 import { boundaryError } from '@/presentation/(system)/error-handlers/custom-error';
 import debug from '@/presentation/(system)/loggers/logger-debug';
 import {
-  BoundaryResult,
+  Completed,
   isAbort,
+  isOk,
   isReject,
   ok,
   parseBoundaryResult,
@@ -22,13 +23,13 @@ import { action } from '@/presentation/contact/mvvm/boundary/action';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
 import 'client-only';
 
-const logPrefix = 'contact2-be-facade.ts: ';
+const logPrefix = 'facade.ts: ';
 
 /**
  *
  */
 type SendRequest = {
-  (formData: FormData<FormKeys>): Promise<BoundaryResult<void, Violations<FormKeys>>>;
+  (formData: FormData<FormKeys>): Promise<Completed<void, Violations<FormKeys>>>;
 };
 
 /**
@@ -37,13 +38,16 @@ type SendRequest = {
 const _viaAction: SendRequest = async (formData) => {
   // Server Action を呼び出す
   const result = await action(formData);
-  if(isAbort(result)) {
-    throw boundaryError(result.cause);
+  if (isOk(result)) {
+    return ok();
   }
-  if(isReject(result)) {
+  if (isReject(result) && result.label === REJECTION_LABELS.VIOLATION) {
     return reject(result.label, result.data);
   }
-  return ok();
+  if (isAbort(result)) {
+    throw boundaryError(result.cause);
+  }
+  throw boundaryError(JSON.stringify(result));
 };
 
 /**
@@ -60,19 +64,38 @@ const viaRoute: SendRequest = async (formData) => {
     },
     body: JSON.stringify({ name, email, body }),
   });
-  // 正常（バリデーションエラーなし）
+
   if (res.status === 200) {
-    return ok();
+    const clone = res.clone();
+    const text = await clone.text();
+    debug(text);
+    const parsed = parseBoundaryResult<void, Violations<FormKeys>>(text);
+    if (parsed !== null) {
+      // 正常（バリデーションエラーなし）
+      if (isOk(parsed)) {
+        return ok();
+      }
+      // バリデーションエラー
+      if (isReject(parsed) && parsed.label === REJECTION_LABELS.VIOLATION) {
+        const violations = parsed.data;
+        if (hasError(violations)) {
+          return reject(parsed.label, violations);
+        }
+      }
+      // 失敗
+      if (isAbort(parsed)) {
+        throw boundaryError(JSON.stringify(parsed));
+      }
+    }
   }
   // バリデーションエラー
   if (res.status === 400) {
     const clone = res.clone();
     const text = await clone.text();
     debug(text);
-
     const parsed = parseBoundaryResult<void, Violations<FormKeys>>(text);
     if (parsed !== null) {
-      if (parsed.tag === 'reject' && parsed.label === REJECTION_LABELS.VIOLATION) {
+      if (isReject(parsed) && parsed.label === REJECTION_LABELS.VIOLATION) {
         const violations = parsed.data;
         if (hasError(violations)) {
           return reject(parsed.label, violations);

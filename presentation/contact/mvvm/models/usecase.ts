@@ -1,8 +1,9 @@
 //
 // お問い合わせの送信 ユースケース
 //
+import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/boundary-error-hander';
 import logger from '@/presentation/(system)/logging-facade/logger';
-import type { Ok, Rejected } from '@/presentation/(system)/types/boundary-result';
+import type { BoundaryResult } from '@/presentation/(system)/types/boundary-result';
 import { ok, reject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { hasError, Violations } from '@/presentation/(system)/validators/validator';
@@ -16,19 +17,25 @@ const logPrefix = 'usecase.ts: ';
 /**
  * ユースケースの実行
  */
-export async function execute(formData: FormData<FormKeys>): Promise<Ok | Rejected<Violations<FormKeys>>> {
-  logger.info(logPrefix + `formData=${JSON.stringify(formData)}`);
-  //
-  // バリデーション
-  //
-  const result = validate(formData);
-  if (hasError(result)) {
-    logger.info(logPrefix + `validation error. ${JSON.stringify(result)}`);
-    return reject(REJECTION_LABELS.VIOLATION, result);
+export async function execute(
+  formData: FormData<FormKeys>,
+): Promise<BoundaryResult<void, Violations<FormKeys>>> {
+  return await withErrorHandlingAsync(() => func());
+
+  async function func() {
+    logger.info(logPrefix + `formData=${JSON.stringify(formData)}`);
+    //
+    // バリデーション
+    //
+    const result = validate(formData);
+    if (hasError(result)) {
+      logger.info(logPrefix + `validation error. ${JSON.stringify(result)}`);
+      return reject(REJECTION_LABELS.VIOLATION, result);
+    }
+    //
+    // 送信
+    //
+    await send({ ...formData });
+    return ok();
   }
-  //
-  // 送信
-  //
-  await send({ ...formData });
-  return ok();
 }

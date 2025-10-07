@@ -1,5 +1,5 @@
 //
-// 境界設計インターフェース
+// クライアントサイド - サーバーサイド境界インターフェース
 //
 
 /**
@@ -46,22 +46,21 @@ export type Completed<RESULT = void, REASON = never> = Ok<RESULT> | Rejected<REA
  */
 export type Aborted = { tag: 'abort'; cause?: string };
 
+// オーバーロードシグネチャ
 /**
  * 境界返却値生成ファクトリ：正常終了（返却データなし）
- * ※オーバーロードシグネチャ
  */
 export function ok(): Ok<void>;
 
+// オーバーロードシグネチャ
 /**
  * 境界返却値生成ファクトリ：正常終了（返却データあり）
- *
- * ※オーバーロードシグネチャ
  */
 export function ok<RESULT>(data: RESULT): Ok<RESULT>;
 
+// 実装シグネチャ
 /**
  * 境界返却値生成ファクトリ：正常終了
- * - 実装シグネチャ
  */
 export function ok<RESULT>(data?: RESULT) {
   return data === undefined ? { tag: 'ok' } : { tag: 'ok', data };
@@ -136,4 +135,10 @@ export function isAbort<RESULT = void, REASON = never>(
   result: BoundaryResult<RESULT, REASON>,
 ): result is Aborted {
   return result.tag === 'abort';
+}
+
+export function isComplete<RESULT = void, REASON = never>(
+  result: BoundaryResult<RESULT, REASON>,
+): result is Completed<RESULT, REASON> {
+  return result.tag === 'ok' || result.tag === 'reject';
 }

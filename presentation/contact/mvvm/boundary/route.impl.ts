@@ -1,7 +1,6 @@
 import { withAuthAsync } from '@/presentation/(system)/auth/auth-handler';
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/route-error-handler';
 import logger from '@/presentation/(system)/logging-facade/logger';
-import { isOk, isReject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
 import { ContactBody } from '@/presentation/contact/mvvm/models/contact2-types';
 import { execute } from '@/presentation/contact/mvvm/models/usecase';
 
@@ -15,13 +14,6 @@ export async function POST(req: Request): Promise<Response> {
     logger.info(logPrefix + `formData=${JSON.stringify(contactBody)}`);
 
     const result = await execute({ ...contactBody });
-    if (isOk(result)) {
-      return new Response(null, { status: 200 });
-    }
-    if (isReject(result) && result.label === REJECTION_LABELS.VIOLATION) {
-      return new Response(JSON.stringify(result), { status: 400 });
-    }
-    // TODO: 到達可能か
-    throw Error();
+    return new Response(JSON.stringify(result), { status: 200 });
   }
 }
