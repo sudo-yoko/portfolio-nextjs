@@ -6,6 +6,11 @@ import 'server-only';
 
 const logPrefix = 'boundary-error-handler.ts: ';
 
+/**
+ * クライアント／サーバー境界 エラーハンドリング.
+ *
+ * @remarks 引数に渡されたサンクにエラーハンドリングを追加して実行する。
+ */
 export async function withErrorHandlingAsync<RESULT, REASON>(
   thunk: () => Promise<BoundaryResult<RESULT, REASON>>,
 ): Promise<BoundaryResult<RESULT, REASON>> {
@@ -13,9 +18,8 @@ export async function withErrorHandlingAsync<RESULT, REASON>(
   try {
     return await thunk();
   } catch (e) {
-    const { message } = stringify(e);
-    const aborted = abort(message);
-    logger.error(logPrefix + fname + `BoundaryResult=${JSON.stringify(aborted)}`);
-    return aborted;
+    const { message, all } = stringify(e);
+    logger.error(logPrefix + fname + all);
+    return abort(message);
   }
 }

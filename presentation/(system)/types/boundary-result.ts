@@ -2,21 +2,21 @@
 // クライアントサイド - サーバーサイド境界インターフェース
 //
 
-/**
- * 境界返却値がとりうる値を定義する
- *
- * @typeParam RESULT - 正常終了時の返却データの型
- * @typeParam REASON - エラー時返却データの型
- */
-export type BoundaryResult<RESULT = void, REASON = never> = Ok<RESULT> | Rejected<REASON> | Aborted;
+//////////////////////////
+// 境界返却値
+//////////////////////////
 
 /**
- * 境界返却値：処理の正常終了
+ * 処理の正常終了
+ *
+ * @typeParam RESULT - 返却するデータの型。返却データが無い場合は void を指定する。
  */
 export type Ok<RESULT = void> = [RESULT] extends [void] ? { tag: 'ok' } : { tag: 'ok'; data: RESULT };
 
 /**
- * 境界返却値：処理の差し戻し
+ * 処理の差し戻し(再試行可能)
+ *
+ * @typeParam REASON - 返却するデータの型。省略可能。
  */
 export type Rejected<REASON = never> = [REASON] extends [never]
   ? { tag: 'reject'; label: string }
@@ -31,37 +31,50 @@ export const REJECTION_LABELS = {
    */
   VIOLATION: 'violation',
   /**
-   * タイムアウト（再試行可能）
+   * タイムアウト
    */
   TIMEOUT: 'timeout',
 } as const;
 
 /**
- * 境界返却値：処理の完走（正常／差し戻し 問わず）
- */
-export type Completed<RESULT = void, REASON = never> = Ok<RESULT> | Rejected<REASON>;
-
-/**
- * 境界返却値：処理の失敗
+ * 処理の失敗
  */
 export type Aborted = { tag: 'abort'; cause?: string };
 
-// オーバーロードシグネチャ
 /**
- * 境界返却値生成ファクトリ：正常終了（返却データなし）
+ * 境界返却値のユニオン型
+ *
+ * 正常終了｜差し戻し｜失敗
  */
+export type BoundaryResult<RESULT = void, REASON = never> = Ok<RESULT> | Rejected<REASON> | Aborted;
+
+/**
+ * 境界返却値のユニオン型
+ *
+ * 処理の完走（正常｜差し戻し）
+ */
+export type Completed<RESULT = void, REASON = never> = Ok<RESULT> | Rejected<REASON>;
+
+//////////////////////////
+// 境界返却値生成ファクトリ
+//////////////////////////
+
+/**
+ * 正常終了（返却データなし）
+ */
+// オーバーロードシグネチャ
 export function ok(): Ok<void>;
 
-// オーバーロードシグネチャ
 /**
- * 境界返却値生成ファクトリ：正常終了（返却データあり）
+ * 正常終了（返却データあり）
  */
+// オーバーロードシグネチャ
 export function ok<RESULT>(data: RESULT): Ok<RESULT>;
 
-// 実装シグネチャ
 /**
- * 境界返却値生成ファクトリ：正常終了
+ * 正常終了
  */
+// 実装シグネチャ
 export function ok<RESULT>(data?: RESULT) {
   return data === undefined ? { tag: 'ok' } : { tag: 'ok', data };
 }
@@ -82,9 +95,10 @@ export function abort(cause?: string): Aborted {
   return { tag: 'abort', cause };
 }
 
-/**
- * BoundaryResult型に解析する
- */
+//////////////////////////
+// 型解析、型ガード関数
+//////////////////////////
+
 export function parseBoundaryResult<RESULT, REASON>(text: string): BoundaryResult<RESULT, REASON> | null {
   try {
     const parsed = JSON.parse(text);
@@ -94,9 +108,6 @@ export function parseBoundaryResult<RESULT, REASON>(text: string): BoundaryResul
   }
 }
 
-/**
- * 型ガード関数
- */
 function isBoundaryResult<RESULT, REASON>(text: unknown): text is BoundaryResult<RESULT, REASON> {
   if (text === null) {
     return false;

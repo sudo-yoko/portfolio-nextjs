@@ -27,10 +27,10 @@ export async function execute(
     //
     // バリデーション
     //
-    const result = validate(formData);
-    if (hasError(result)) {
-      logger.info(logPrefix + `validation error. ${JSON.stringify(result)}`);
-      return reject(REJECTION_LABELS.VIOLATION, result);
+    const violations = validate(formData);
+    if (hasError(violations)) {
+      logger.info(logPrefix + `validation error. ${JSON.stringify(violations)}`);
+      return reject(REJECTION_LABELS.VIOLATION, violations);
     }
     //
     // 送信

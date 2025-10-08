@@ -3,6 +3,7 @@ import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/r
 import logger from '@/presentation/(system)/logging-facade/logger';
 import { ContactBody } from '@/presentation/contact/mvvm/models/contact2-types';
 import { execute } from '@/presentation/contact/mvvm/models/usecase';
+import 'server-only';
 
 const logPrefix = '/contact/route.impl.ts: ';
 

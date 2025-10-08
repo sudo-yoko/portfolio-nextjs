@@ -1,5 +1,6 @@
 'use server';
 
+import { withAuthAsync } from '@/presentation/(system)/auth/auth-handler';
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/boundary-error-handler';
 import logger from '@/presentation/(system)/logging-facade/logger';
 import { BoundaryResult } from '@/presentation/(system)/types/boundary-result';
@@ -16,7 +17,7 @@ const logPrefix = '/contact/action.ts: ';
 export async function action(
   formData: FormData<FormKeys>,
 ): Promise<BoundaryResult<void, Violations<FormKeys>>> {
-  return await withErrorHandlingAsync(() => func());
+  return await withErrorHandlingAsync(() => withAuthAsync(() => func()));
 
   async function func() {
     logger.info(logPrefix + `formData=${JSON.stringify(formData)}`);

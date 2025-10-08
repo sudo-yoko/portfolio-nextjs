@@ -68,6 +68,7 @@ export async function send(
         return;
       }
     }
+    // 上記以外
     throw Error('予期しない例外');
   }
 }
