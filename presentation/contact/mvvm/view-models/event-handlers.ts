@@ -3,6 +3,7 @@
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/client-error-handler';
 import { isOk, isReject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
 import { hasError, Violations } from '@/presentation/(system)/validators/validator';
+import { sendRequest } from '@/presentation/contact/mvvm/boundary/facade';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
 import { validate } from '@/presentation/contact/mvvm/models/contact2-validator';
 import {
@@ -13,7 +14,6 @@ import {
   toConfirm,
   toInput,
 } from '@/presentation/contact/mvvm/view-models/contact2-reducer';
-import { sendRequest } from '../boundary/facade';
 
 /**
  * バリデーションエラーが取得されている場合にUIに反映する。
