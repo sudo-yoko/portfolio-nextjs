@@ -30,13 +30,15 @@ export function usePagination<TItems, TQuery>({
   const [error, setError] = useState(false);
   const pager = useRef<Pager<TItems>>(null);
 
-  console.log('presentation')
+  console.log('presentation');
 
   /**
    * 検索時
    */
   useEffect(() => {
-    withErrorHandlingAsync(() => func(), setError);
+    void (async () => {
+      await withErrorHandlingAsync(() => func(), setError);
+    })();
 
     async function func() {
       if (!search) {

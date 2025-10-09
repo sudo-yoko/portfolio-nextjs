@@ -60,21 +60,22 @@ export type Completed<RESULT = void, REASON = never> = Ok<RESULT> | Rejected<REA
 //////////////////////////
 
 /**
- * 正常終了（返却データなし）
+ * 正常終了を表す返却値オブジェクトを生成する。
+ *
+ * @typeParam RESULT - 返却するデータの型。返却データが無い場合は void を指定する。
+ * 2
  */
-// オーバーロードシグネチャ
-export function ok(): Ok<void>;
+export function ok(): Ok<void>; // オーバーロードシグネチャ
 
 /**
- * 正常終了（返却データあり）
+ * 正常終了を表す返却値オブジェクトを生成する。
+ *
+ * @typeParam RESULT - 返却するデータの型。返却データが無い場合は void を指定する。
  */
-// オーバーロードシグネチャ
-export function ok<RESULT>(data: RESULT): Ok<RESULT>;
+export function ok<RESULT>(data: RESULT): Ok<RESULT>; // オーバーロードシグネチャ
 
-/**
- * 正常終了
- */
 // 実装シグネチャ
+// 実装シグネチャのTSDocは表示されないため書いても無意味
 export function ok<RESULT>(data?: RESULT) {
   return data === undefined ? { tag: 'ok' } : { tag: 'ok', data };
 }

@@ -15,13 +15,13 @@ import {
 /**
  * コンポーネントがレンダリングされた後に実行される処理
  */
-export const send = (
+export const send = async (
   state: State,
   dispatch: React.ActionDispatch<[action: Action]>,
   setError: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   // エラーハンドリングを追加して処理を実行する。
-  withErrorHandlingAsync(() => func(), setError);
+  await withErrorHandlingAsync(() => func(), setError);
 
   async function func() {
     // サーバーアクション呼び出し

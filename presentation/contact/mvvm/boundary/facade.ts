@@ -20,8 +20,6 @@ import { action } from '@/presentation/contact/mvvm/boundary/action';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
 import 'client-only';
 
-const logPrefix = 'facade.ts: ';
-
 /**
  *
  */

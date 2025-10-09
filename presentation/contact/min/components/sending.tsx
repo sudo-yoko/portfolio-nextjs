@@ -21,7 +21,9 @@ export default function Sending({
 }) {
   useEffect(() => {
     // エラーハンドリングを追加して処理を実行する。
-    withErrorHandlingAsync(() => func(), setError);
+    void (async () => {
+      await withErrorHandlingAsync(() => func(), setError);
+    })();
 
     async function func() {
       // サーバーアクション呼び出し

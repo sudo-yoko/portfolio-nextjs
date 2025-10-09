@@ -18,7 +18,7 @@ export async function handlePagination<T>(
   dispatch: React.ActionDispatch<[action: Action<T>]>,
   setError: React.Dispatch<React.SetStateAction<boolean>>,
 ): Promise<void> {
-  withErrorHandlingAsync(() => func(), setError);
+  await withErrorHandlingAsync(() => func(), setError);
 
   async function func() {
     if (pager?.current == null) {

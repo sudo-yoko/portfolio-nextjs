@@ -30,7 +30,9 @@ export function Pagination<TItems, TQuery>({
   const fetchCallback = useCallback(fetchPage, [fetchPage]);
 
   useEffect(() => {
-    withErrorHandlingAsync(() => func(), setError);
+    void (async () => {
+      await withErrorHandlingAsync(() => func(), setError);
+    })();
 
     async function func() {
       if (!search) {

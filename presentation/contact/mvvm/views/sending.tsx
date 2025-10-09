@@ -17,7 +17,19 @@ export default function Sending({
   setError: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   useEffect(() => {
-    send(state, dispatch, setError);
+    // 書き方その１
+    void (async () => {
+      await send(state, dispatch, setError);
+    })();
+
+    // 書き方その２
+    // async function process() {
+    // await send(state, dispatch, setError);
+    // }
+    // void process();
+
+    // 書き方その３
+    // void send(state, dispatch, setError).then(() => {});
   }, [dispatch, setError, state, state.formData]);
 
   return (
