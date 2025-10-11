@@ -1,3 +1,5 @@
+'use server';
+
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/boundary-error-handler';
 import { execute } from '@/presentation/users/mvvm/models/usecase';
 import { UsersQuery } from '@/presentation/users/mvvm/models/users-types';

@@ -1,6 +1,7 @@
-import { actionError, routeError } from '@/presentation/(system)/error-handlers/custom-error';
+import { boundaryError } from '@/presentation/(system)/error-handlers/custom-error';
 import { FetchPage, FetchPageResult } from '@/presentation/(system)/pagination/mvvm/models/types';
-import { action } from '@/presentation/users/mvvm/bff/users-action';
+import { isOk, parseBoundaryResult } from '@/presentation/(system)/types/boundary-result';
+import { action } from '@/presentation/users/mvvm/boundary/action';
 import { User, UsersQuery } from '@/presentation/users/mvvm/models/users-types';
 import 'client-only';
 
@@ -9,10 +10,10 @@ import 'client-only';
  */
 const _viaAction: FetchPage<User[], UsersQuery> = async (offset, limit, query) => {
   const result = await action(offset, limit, query);
-  if (result.abort) {
-    throw actionError(result);
+  if (isOk(result)) {
+    return result;
   }
-  return result.data;
+  throw boundaryError(JSON.stringify(result));
 };
 
 /**
@@ -25,13 +26,18 @@ const viaRoute: FetchPage<User[], UsersQuery> = async (offset, limit, query) => 
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ offset, limit, query }),
   });
-  if (res.status != 200) {
+  if (res.status === 200) {
     const clone = res.clone();
-    const body = await clone.text();
-    throw await routeError(res.status, { body, method: 'POST', route: url });
+    const text = await clone.text();
+    const parsed = parseBoundaryResult<FetchPageResult<User[]>, never>(text);
+    if (parsed !== null) {
+      if (isOk(parsed)) {
+        return parsed;
+      }
+    }
   }
-  const body: FetchPageResult<User[]> = await res.json();
-  return body;
+  const text = await res.text();
+  throw boundaryError(text);
 };
 
 export const fetchPage: FetchPage<User[], UsersQuery> = viaRoute;

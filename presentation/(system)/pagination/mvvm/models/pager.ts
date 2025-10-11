@@ -5,6 +5,7 @@ import {
   pageToOffset,
   toEffectiveOffsetMin,
 } from '@/presentation/(system)/pagination/mvvm/models/utils';
+import { isOk } from '@/presentation/(system)/types/boundary-result';
 import 'client-only';
 
 /**
@@ -35,7 +36,11 @@ export function createPager<T, Q>(
     //
     // データ取得
     //
-    let { total, items } = await fetchPage(offset, limit, query);
+    let result = await fetchPage(offset, limit, query);
+    if (!isOk(result)) {
+      throw Error();
+    }
+    let { total, items } = result.data;
     //
     // データなし
     //
@@ -49,7 +54,11 @@ export function createPager<T, Q>(
     //
     if (offset > total) {
       offset = offsetOfLastPage(total, limit); // 最終ページの先頭の1件目
-      ({ total, items } = await fetchPage(offset, limit, query));
+      result = await fetchPage(offset, limit, query);
+      if (!isOk(result)) {
+        throw Error();
+      }
+      ({ total, items } = result.data);
     }
     //
     // データを返却
