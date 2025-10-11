@@ -1,12 +1,19 @@
 //
 // ページネーションの型定義
 //
+import { BoundaryResult } from '@/presentation/(system)/types/boundary-result';
+import 'client-only';
 
 /**
  * データ取得関数の関数シグネチャ
+ *
+ * @typeParam TItems - 返却データの型（ページのデータ）
+ * @typeParam TQuery - 検索条件を格納するオブジェクトの型
+ * @returns
+ * BoundaryResult型。正常時の返却データがFetchPageResult<TItems>型、Rejectなし。
  */
 export interface FetchPage<TItems, TQuery> {
-  (offset: number, limit: number, query: TQuery): Promise<FetchPageResult<TItems>>;
+  (offset: number, limit: number, query: TQuery): Promise<BoundaryResult<FetchPageResult<TItems>>>;
 }
 
 /**
