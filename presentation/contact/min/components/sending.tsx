@@ -5,6 +5,7 @@ import { hasError, Violations } from '@/presentation/(system)/validators/validat
 import { sendAction } from '@/presentation/contact/min/modules/contact-action';
 import { FormKeys } from '@/presentation/contact/min/modules/contact-types';
 import React, { useEffect } from 'react';
+import { sendRequest } from '../modules/backend-facade';
 
 export default function Sending({
   formData,
@@ -27,7 +28,7 @@ export default function Sending({
 
     async function func() {
       // サーバーアクション呼び出し
-      const actionResult = await sendAction(formData);
+      const actionResult = await sendRequest(formData);
       if (actionResult.abort) {
         throw actionError(actionResult);
       }

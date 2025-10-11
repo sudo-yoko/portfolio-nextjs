@@ -10,8 +10,8 @@ import debug from '@/presentation/(system)/loggers/logger-debug';
 import * as FacadeResult from '@/presentation/(system)/types/facade-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { hasError, isViolations } from '@/presentation/(system)/validators/validator';
-import { action } from '@/presentation/contact/mvvm/bff/contact2-action';
-import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
+import { sendAction } from '@/presentation/contact/min/modules/contact-action';
+import { FormKeys } from '@/presentation/contact/min/modules/contact-types';
 import 'client-only';
 
 const logPrefix = 'contact2-be-facade.ts: ';
@@ -28,7 +28,7 @@ type SendRequest = {
  */
 const _viaAction: SendRequest = async (formData) => {
   // Server Action を呼び出す
-  const result = await action(formData);
+  const result = await sendAction(formData);
   if (result.abort) {
     throw actionError(result);
   }
@@ -51,7 +51,7 @@ const _viaAction: SendRequest = async (formData) => {
  */
 const viaRoute: SendRequest = async (formData) => {
   // Route Handler を呼び出す
-  const url = '/api/contact/mvvm';
+  const url = '/api/contact/min';
   const { name, email, body } = formData;
   const res = await fetch(url, {
     method: POST,

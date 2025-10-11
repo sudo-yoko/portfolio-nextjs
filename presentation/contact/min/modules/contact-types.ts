@@ -14,3 +14,12 @@ export type FormKeys = 'name' | 'email' | 'body';
 //export type FormData = {
 //  [key in FormKey]: string;
 //};
+
+/**
+ * お問い合わせ入力内容
+ */
+export type ContactBody = {
+  name: string;
+  email: string;
+  body: string;
+};

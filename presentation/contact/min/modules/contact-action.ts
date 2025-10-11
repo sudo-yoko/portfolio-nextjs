@@ -1,7 +1,9 @@
+// min
 'use server';
 
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/action-error-handler';
 import logger from '@/presentation/(system)/logging-facade/logger';
+import { ActionResult } from '@/presentation/(system)/types/action-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { Violations, hasError } from '@/presentation/(system)/validators/validator';
 import { send } from '@/presentation/contact/min/modules/contact-client';
@@ -13,7 +15,9 @@ const logPrefix = 'contact-action.ts: ';
 /**
  * お問い合わせの送信 サーバーアクション
  */
-export async function sendAction(formData: FormData<FormKeys>) {
+export async function sendAction(
+  formData: FormData<FormKeys>,
+): Promise<ActionResult<Violations<FormKeys> | void>> {
   // エラーハンドリングを追加して処理を実行する。
   return await withErrorHandlingAsync(() => func());
 
