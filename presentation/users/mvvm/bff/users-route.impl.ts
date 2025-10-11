@@ -1,7 +1,7 @@
 import { withAuthAsync } from '@/presentation/(system)/auth/auth-handler';
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/route-error-handler';
 import { FetchPageResult } from '@/presentation/(system)/pagination/mvvm/models/types';
-import { send } from '@/presentation/users/mvvm/bff/users-client';
+import { send } from '@/presentation/users/mvvm/models/users-client';
 import { User, UsersQuery } from '@/presentation/users/mvvm/models/users-types';
 import 'server-only';
 
