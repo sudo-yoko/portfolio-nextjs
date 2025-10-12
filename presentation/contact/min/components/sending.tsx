@@ -1,11 +1,10 @@
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/client-error-handler';
-import { actionError } from '@/presentation/(system)/error-handlers/custom-error';
+import { isOk, isReject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { hasError, Violations } from '@/presentation/(system)/validators/validator';
-import { sendAction } from '@/presentation/contact/min/modules/contact-action';
+import { sendRequest } from '@/presentation/contact/min/modules/backend-facade';
 import { FormKeys } from '@/presentation/contact/min/modules/contact-types';
 import React, { useEffect } from 'react';
-import { sendRequest } from '../modules/backend-facade';
 
 export default function Sending({
   formData,
@@ -27,24 +26,22 @@ export default function Sending({
     })();
 
     async function func() {
-      // サーバーアクション呼び出し
-      const actionResult = await sendRequest(formData);
-      if (actionResult.abort) {
-        throw actionError(actionResult);
+      const result = await sendRequest(formData);
+      // 正常
+      if (isOk(result)) {
+        setViolations({});
+        onNext();
+        return;
       }
       // バリデーションエラーあり
-      if (actionResult.data) {
-        const result = actionResult.data;
-        if (hasError(result)) {
-          setViolations(result);
+      if (isReject(result) && result.label === REJECTION_LABELS.VIOLATION) {
+        if (hasError(result.data)) {
+          setViolations(result.data);
           onBack();
           return;
         }
       }
-      // 正常
-      setViolations({});
-      onNext();
-      return;
+      throw Error('予期しない例外');
     }
   });
 
