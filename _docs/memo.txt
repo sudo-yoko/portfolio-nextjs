@@ -74,3 +74,8 @@ BFFのバリデーションエラーは例外とするか
 非同期関数にawaitつけ忘れ防止
 →lint設定できる
 npm i -D eslint-plugin-promise
+
+*******************
+実行境界、境界呼び出し設計
+boundary call, boundary invocation, Boundary Calling
+バックエンド・ファサードにおける境界呼び出しの設計について
