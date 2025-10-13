@@ -2,7 +2,7 @@ import { printf } from '@/__tests__/next-jest/_utils/test-logger';
 import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { sendRequest } from '@/presentation/contact/min/modules/backend-facade';
-import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
+import { FormKeys } from '@/presentation/contact/mvvm/models/types';
 import { jest } from '@jest/globals';
 
 const print = printf({ logPrefix: '>>> [contact2-client.test.ts]', stdout: true });

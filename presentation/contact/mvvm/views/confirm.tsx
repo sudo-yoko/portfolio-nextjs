@@ -1,6 +1,6 @@
 'use client';
 
-import { Action, State, toInput, toSending } from '@/presentation/contact/mvvm/view-models/contact2-reducer';
+import { Action, State, toInput, toSending } from '@/presentation/contact/mvvm/view-models/reducer';
 
 /**
  * 確認表示コンポーネント

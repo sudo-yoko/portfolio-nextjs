@@ -4,8 +4,8 @@ import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/c
 import { isOk, isReject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
 import { hasError, Violations } from '@/presentation/(system)/validators/validator';
 import { sendRequest } from '@/presentation/contact/mvvm/boundary/facade';
-import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
-import { validate } from '@/presentation/contact/mvvm/models/contact2-validator';
+import { FormKeys } from '@/presentation/contact/mvvm/models/types';
+import { validate } from '@/presentation/contact/mvvm/models/validator';
 import {
   Action,
   setViolations,
@@ -13,7 +13,7 @@ import {
   toComplete,
   toConfirm,
   toInput,
-} from '@/presentation/contact/mvvm/view-models/contact2-reducer';
+} from '@/presentation/contact/mvvm/view-models/reducer';
 
 /**
  * バリデーションエラーが取得されている場合にUIに反映する。

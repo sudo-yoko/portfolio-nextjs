@@ -1,7 +1,7 @@
 'use client';
 
 import { ErrorHandler } from '@/presentation/(system)/error-handlers/error-handler';
-import { initialState, reducer } from '@/presentation/contact/mvvm/view-models/contact2-reducer';
+import { initialState, reducer } from '@/presentation/contact/mvvm/view-models/reducer';
 import Complete from '@/presentation/contact/mvvm/views/complete';
 import Confirm from '@/presentation/contact/mvvm/views/confirm';
 import Input from '@/presentation/contact/mvvm/views/input';

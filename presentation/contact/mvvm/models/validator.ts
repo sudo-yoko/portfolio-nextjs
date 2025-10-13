@@ -1,4 +1,4 @@
-import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
+import { FormKeys } from '@/presentation/contact/mvvm/models/types';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { required, requiredEmail, Validator, Violations } from '@/presentation/(system)/validators/validator';
 import { z } from 'zod';

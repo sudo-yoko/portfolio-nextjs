@@ -13,7 +13,7 @@ import { stringify } from '@/presentation/(system)/error-handlers/stringify-erro
 import { ActionResult } from '@/presentation/(system)/types/action-result';
 import { RouteResult } from '@/presentation/(system)/types/route-response';
 import { Violations } from '@/presentation/(system)/validators/validator';
-import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
+import { FormKeys } from '@/presentation/contact/mvvm/models/types';
 import { User } from '@/presentation/users/min/modules/users-types';
 
 const print = printf({ logPrefix: '>>> [custom-error.test.test.ts]', stdout: true });

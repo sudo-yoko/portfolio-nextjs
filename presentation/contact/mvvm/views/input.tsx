@@ -1,7 +1,7 @@
 'use client';
 
 import { resizeTextarea } from '@/presentation/(system)/utils/dom-utils';
-import { Action, setValue, State } from '@/presentation/contact/mvvm/view-models/contact2-reducer';
+import { Action, setValue, State } from '@/presentation/contact/mvvm/view-models/reducer';
 import { applyViolations, handleNext } from '@/presentation/contact/mvvm/view-models/event-handlers';
 import { useEffect } from 'react';
 

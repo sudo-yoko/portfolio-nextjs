@@ -6,8 +6,8 @@ import logger from '@/presentation/(system)/logging-facade/logger';
 import { BoundaryResult } from '@/presentation/(system)/types/boundary-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { Violations } from '@/presentation/(system)/validators/validator';
-import { FormKeys } from '@/presentation/contact/mvvm/models/contact2-types';
-import { execute } from '@/presentation/contact/mvvm/models/usecase';
+import { FormKeys } from '@/presentation/contact/mvvm/models/types';
+import { execute } from '@/presentation/contact/mvvm/models/interactor';
 
 const logPrefix = '/contact/action.ts: ';
 
