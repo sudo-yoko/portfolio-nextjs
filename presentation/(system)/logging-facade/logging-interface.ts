@@ -36,7 +36,7 @@ export type LogExtras = {
 /**
  * ログ出力インターフェース
  */
-export interface ILogger {
+export interface Logger {
   log(level: Level, message: string, ext?: LogExtras): void;
   info(message: string, ext?: LogExtras): void;
   warn(message: string, ext?: LogExtras): void;

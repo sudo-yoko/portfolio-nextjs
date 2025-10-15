@@ -1,11 +1,11 @@
 import winston from '@/presentation/(system)/loggers/logger-winston';
-import type { ILogger } from '@/presentation/(system)/logging-facade/logging-interface';
+import type { Logger } from '@/presentation/(system)/logging-facade/logging-interface';
 import { LogExtrasKey } from '@/presentation/(system)/logging-facade/logging-interface';
 
 /**
  * winstonロガーを、ロギングファサードの統一インターフェースにマップする
  */
-export const loggerImpl: ILogger = {
+export const loggerImpl: Logger = {
   log: (level, message, ext) => {
     winston.log(level, message, { [LogExtrasKey.traceId]: ext?.traceId });
   },
