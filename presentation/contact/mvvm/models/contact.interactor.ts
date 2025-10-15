@@ -7,9 +7,9 @@ import type { BoundaryResult } from '@/presentation/(system)/types/boundary-resu
 import { ok, reject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { hasError, Violations } from '@/presentation/(system)/validators/validator';
-import { send } from '@/presentation/contact/mvvm/models/webtoCase-client';
-import { FormKeys } from '@/presentation/contact/mvvm/models/types';
-import { validate } from '@/presentation/contact/mvvm/models/validator';
+import { send } from '@/presentation/contact/mvvm/models/contact.webToCase-client';
+import { FormKeys } from '@/presentation/contact/mvvm/models/contact.types';
+import { validate } from '@/presentation/contact/mvvm/models/contact.validator';
 import 'server-only';
 
 const logPrefix = 'usecase.ts: ';

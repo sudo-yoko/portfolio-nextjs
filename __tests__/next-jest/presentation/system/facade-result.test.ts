@@ -1,6 +1,6 @@
 import { Ok, OkData, RejectViolation } from '@/presentation/(system)/types/facade-result';
 import { Violations } from '@/presentation/(system)/validators/validator';
-import { FormKeys } from '@/presentation/contact/mvvm/models/types';
+import { FormKeys } from '@/presentation/contact/mvvm/models/contact.types';
 import { User } from '@/presentation/users/mvvm/models/users-types';
 
 // npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/presentation/system/facade-result.test.ts -t 'test1-1'

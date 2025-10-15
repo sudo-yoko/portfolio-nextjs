@@ -1,11 +1,11 @@
 'use client';
 
 import { ErrorHandler } from '@/presentation/(system)/error-handlers/error-handler';
-import { initialState, reducer } from '@/presentation/contact/mvvm/view-models/reducer';
-import Complete from '@/presentation/contact/mvvm/views/complete';
-import Confirm from '@/presentation/contact/mvvm/views/confirm';
-import Input from '@/presentation/contact/mvvm/views/input';
-import Sending from '@/presentation/contact/mvvm/views/sending';
+import { initialState, reducer } from '@/presentation/contact/mvvm/view-models/contact.reducer';
+import Complete from '@/presentation/contact/mvvm/views/contact.complete';
+import Confirm from '@/presentation/contact/mvvm/views/contact.confirm';
+import Input from '@/presentation/contact/mvvm/views/contact.input';
+import Sending from '@/presentation/contact/mvvm/views/contact.sending';
 import { useReducer, useState } from 'react';
 
 /**

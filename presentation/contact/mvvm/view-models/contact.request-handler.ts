@@ -1,6 +1,6 @@
 import logger from '@/presentation/(system)/logging-facade/logger';
 import { getQueryParams, SearchParams } from '@/presentation/(system)/types/search-params';
-import { ContactParams } from '@/presentation/contact/mvvm/models/types';
+import { ContactParams } from '@/presentation/contact/mvvm/models/contact.types';
 import 'server-only';
 
 const logPrefix = '/contact/mvvm/view-models/request-handler.ts: ';

@@ -1,7 +1,7 @@
 'use client';
 
-import { Action, State } from '@/presentation/contact/mvvm/view-models/reducer';
-import { send } from '@/presentation/contact/mvvm/view-models/event-handlers';
+import { Action, State } from '@/presentation/contact/mvvm/view-models/contact.reducer';
+import { send } from '@/presentation/contact/mvvm/view-models/contact.event-handlers';
 import React, { useEffect } from 'react';
 
 /**
