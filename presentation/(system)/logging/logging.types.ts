@@ -50,4 +50,9 @@ export interface Logger {
   warn(message: string, option?: Option): void;
   error(message: string, option?: Option): void;
   debug(message: string, option?: Option): void;
+  logAsync(level: Level, message: string, option?: Option): Promise<void>;
+  infoAsync(message: string, option?: Option): Promise<void>;
+  warnAsync(message: string, option?: Option): Promise<void>;
+  errorAsync(message: string, option?: Option): Promise<void>;
+  debugAsync(message: string, option?: Option): Promise<void>;
 }

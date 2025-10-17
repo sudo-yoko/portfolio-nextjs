@@ -11,9 +11,17 @@ import type { Logger } from '@/presentation/(system)/logging/logging.types';
 
 export const loggerImpl: Logger = {
   log: () => {},
+  logAsync: async () => {},
+
   info: (message, _ext) => void logInfo(message),
+  infoAsync: async (message, _ext) => void logInfo(message),
+
   warn: () => {},
+  warnAsync: async () => {},
+
   error: (message, _ext) => void logError(message),
+  errorAsync: async (message, _ext) => void logError(message),
+
   debug: (message, _ext) => {
     // デバッグログをコンソールに出力
     debug(message);
@@ -21,5 +29,8 @@ export const loggerImpl: Logger = {
     if (env.NEXT_PUBLIC_DEBUG_LOGGER) {
       void logDebug(message);
     }
+  },
+  debugAsync: async (message, _ext) => {
+    debug(message);
   },
 };

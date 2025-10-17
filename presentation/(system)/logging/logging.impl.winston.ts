@@ -30,4 +30,9 @@ export const loggerImpl: Logger = {
       winston.debug(message, { [OptionKeys.traceId]: ext?.traceId });
     }
   },
+  logAsync: async () => {}, // Not implemented
+  infoAsync: async () => {}, // Not implemented
+  warnAsync: async () => {}, // Not implemented
+  errorAsync: async () => {}, // Not implemented
+  debugAsync: async () => {}, // Not implemented
 };
