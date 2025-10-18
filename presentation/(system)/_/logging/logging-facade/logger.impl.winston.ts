@@ -1,6 +1,6 @@
-import winston from '@/presentation/(system)/_logging/loggers/logger-winston';
-import type { Logger } from '@/presentation/(system)/_logging/logging-facade/logging-interface';
-import { LogExtrasKey } from '@/presentation/(system)/_logging/logging-facade/logging-interface';
+import winston from '@/presentation/(system)/_/logging/loggers/logger-winston';
+import type { Logger } from '@/presentation/(system)/_/logging/logging-facade/logging-interface';
+import { LogExtrasKey } from '@/presentation/(system)/_/logging/logging-facade/logging-interface';
 
 /**
  * winstonロガーを、ロギングファサードの統一インターフェースにマップする
