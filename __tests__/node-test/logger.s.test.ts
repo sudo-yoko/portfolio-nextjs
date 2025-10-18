@@ -14,15 +14,15 @@
 // npm i -D tsx
 //
 // ■ node:testをESMで実行する。
-// npm exec -- node --test --experimental-test-module-mocks --import tsx __tests__/node-test/logger.test.ts
-// 
+// npm exec -- node --test --experimental-test-module-mocks --import tsx __tests__/node-test/logger.s.test.ts
+//
 import test from 'node:test';
 
-test('logger test', async (t) => {
+await test('logger test', async (t) => {
   // server-onlyをモックする
   t.mock.module('server-only', { defaultExport: {}, namedExports: {} });
   // モックしてからloggerを読み込む
-  const logger = (await import('@/presentation/(system)/logging_/logging-facade/logger')).default;
+  const logger = (await import('@/presentation/(system)/logging/logger.s')).default;
 
   logger.info('aaaaaaaaaa');
 });
