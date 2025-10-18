@@ -80,3 +80,6 @@ npm i -D eslint-plugin-promise
 boundary call, boundary invocation, Boundary Calling
 バックエンド・ファサードにおける境界呼び出しの設計について
 サーバー境界について
+
+命名について
+　実体と領域
