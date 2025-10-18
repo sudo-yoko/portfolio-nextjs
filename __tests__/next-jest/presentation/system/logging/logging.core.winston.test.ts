@@ -1,9 +1,9 @@
 import { printf } from '@/__tests__/next-jest/_utils/test-logger';
 import { jest } from '@jest/globals';
 
-const print = printf({ logPrefix: '>>> [logger-winston.test.ts]', stdout: true });
+const print = printf({ logPrefix: '>>> [logging.core.winston.test.ts]', stdout: true });
 
-// npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/presentation/system/logger-winston.test.ts -t 'test1-1'
+// npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/presentation/system/logging/logging.core.winston.test.ts -t 'test1-1'
 test('test1-1', async () => {
   const mocked = '@/presentation/(system)/env/env-testable.s';
 
@@ -13,6 +13,7 @@ test('test1-1', async () => {
     envByStaticKey: {
       get NODE_ENV() {
         return 'test';
+        // return 'production';
       },
     },
     envByDynamicKey: (key: string) => {
@@ -21,7 +22,7 @@ test('test1-1', async () => {
   }));
 
   // モック後にimport
-  const logger = (await import('@/presentation/(system)/loggers/logger-winston')).default;
+  const logger = (await import('@/presentation/(system)/logging/logging.core.winston')).default;
 
   print('start');
   logger.info('test');
