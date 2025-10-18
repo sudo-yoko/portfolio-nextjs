@@ -1,4 +1,4 @@
-import logger from '@/presentation/(system)/logging-facade/logger';
+import logger from '@/presentation/(system)/logging/logger.s';
 import { getQueryParams, SearchParams } from '@/presentation/(system)/types/search-params';
 import { ContactParams } from '@/presentation/contact/mvvm/models/contact.types';
 import 'server-only';

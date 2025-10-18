@@ -1,5 +1,5 @@
 import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
-import debug from '@/presentation/(system)/loggers/logger-debug';
+import logger from '@/presentation/(system)/logging/logger.i';
 import { z } from 'zod';
 
 /**
@@ -40,7 +40,7 @@ export function isViolations(text: string, ...keys: string[]): boolean {
     }
     return true;
   } catch (e) {
-    debug(stringify(e).message);
+    logger.debug(stringify(e).message);
     return false;
   }
 }

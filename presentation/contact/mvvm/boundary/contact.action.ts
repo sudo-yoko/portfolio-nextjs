@@ -2,7 +2,7 @@
 
 import { withAuthAsync } from '@/presentation/(system)/auth/auth-handler';
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/boundary-error-handler';
-import logger from '@/presentation/(system)/logging-facade/logger';
+import logger from '@/presentation/(system)/logging/logger.s';
 import { BoundaryResult } from '@/presentation/(system)/types/boundary-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { Violations } from '@/presentation/(system)/validators/validator';

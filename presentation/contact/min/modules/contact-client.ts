@@ -2,7 +2,7 @@
 import { client } from '@/presentation/(system)/clients/client';
 import { env } from '@/presentation/(system)/env/env-validated.s';
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/server-error-handler';
-import logger from '@/presentation/(system)/logging-facade/logger';
+import logger from '@/presentation/(system)/logging/logger.s';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { FormKeys } from '@/presentation/contact/min/modules/contact-types';
 import 'server-only';

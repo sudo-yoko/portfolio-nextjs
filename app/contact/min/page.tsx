@@ -1,10 +1,7 @@
 import Contact from '@/presentation/contact/min/components/contact';
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/server-error-handler';
-import logger from '@/presentation/(system)/logging-facade/logger';
-import {
-  SearchParam,
-  SearchParams,
-} from '@/presentation/(system)/types/search-params';
+import logger from '@/presentation/(system)/logging/logger.s';
+import { SearchParam, SearchParams } from '@/presentation/(system)/types/search-params';
 
 const logPrefix = 'app/contact/page.tsx: ';
 

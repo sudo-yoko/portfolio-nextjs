@@ -1,10 +1,10 @@
-import { logError } from '@/presentation/(system)/loggers/logger-client';
+import logger from '@/presentation/(system)/logging/logger.c';
 import 'client-only';
 import { useEffect } from 'react';
 
 export const useRemoteLogger = (message: string) => {
   useEffect(() => {
-    logError(message)
+    logger.errorAsync(message)
       .then(() => {
         console.info('Successfully sent error log to the server.');
       })

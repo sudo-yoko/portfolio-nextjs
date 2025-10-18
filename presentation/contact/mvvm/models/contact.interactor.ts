@@ -2,7 +2,7 @@
 // お問い合わせの送信 ユースケース
 //
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/boundary-error-handler';
-import logger from '@/presentation/(system)/logging-facade/logger';
+import logger from '@/presentation/(system)/logging/logger.s';
 import type { BoundaryResult } from '@/presentation/(system)/types/boundary-result';
 import { ok, reject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
 import { FormData } from '@/presentation/(system)/types/form-data';

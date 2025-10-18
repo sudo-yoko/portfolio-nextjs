@@ -2,7 +2,7 @@
 'use server';
 
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/action-error-handler';
-import logger from '@/presentation/(system)/logging-facade/logger';
+import logger from '@/presentation/(system)/logging/logger.s';
 import { ActionResult } from '@/presentation/(system)/types/action-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { Violations, hasError } from '@/presentation/(system)/validators/validator';

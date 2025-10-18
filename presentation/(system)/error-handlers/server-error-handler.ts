@@ -2,7 +2,7 @@
 // サーバーサイドエラーハンドリング
 //
 import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
-import logger from '@/presentation/(system)/logging-facade/logger';
+import logger from '@/presentation/(system)/logging/logger.s';
 import axios from 'axios';
 import 'server-only';
 

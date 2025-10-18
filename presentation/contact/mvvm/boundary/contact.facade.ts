@@ -6,7 +6,7 @@
 //
 import { CONTENT_TYPE_APPLICATION_JSON_UTF8, POST } from '@/presentation/(system)/clients/constants';
 import { boundaryError } from '@/presentation/(system)/error-handlers/custom-error';
-import debug from '@/presentation/(system)/loggers/logger-debug';
+import logger from '@/presentation/(system)/logging/logger.c';
 import {
   Completed,
   isOk,
@@ -60,7 +60,7 @@ const viaRoute: SendRequest = async (formData) => {
   if (res.status === 200) {
     const clone = res.clone();
     const text = await clone.text();
-    debug(text);
+    logger.debug(text);
     const parsed = parseBoundaryResult<void, Violations<FormKeys>>(text);
     if (parsed !== null) {
       if (isOk(parsed)) {

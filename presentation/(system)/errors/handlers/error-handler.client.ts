@@ -4,7 +4,7 @@
 import 'client-only';
 
 import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
-import { logError } from '@/presentation/(system)/loggers/logger-client';
+import logger from '@/presentation/(system)/logging/logger.c';
 import React from 'react';
 
 const logPrefix = 'client-error-handler.ts: ';
@@ -23,7 +23,7 @@ export function withErrorHandling<T>(
     return thunk();
   } catch (e) {
     // 非同期関数を呼ぶときにvoidを付けると、awaitしないことを明示的に示せる
-    void logError(logPrefix + fname + stringify(e).all);
+    void logger.errorAsync(logPrefix + fname + stringify(e).all);
     setHasError(true);
   }
 }
@@ -42,7 +42,7 @@ export async function withErrorHandlingAsync<T>(
     return await thunk();
   } catch (e) {
     // 非同期関数を呼ぶときにvoidを付けると、awaitしないことを明示的に示せる
-    void logError(logPrefix + fname + stringify(e).all);
+    void logger.errorAsync(logPrefix + fname + stringify(e).all);
     setHasError(true);
   }
 }

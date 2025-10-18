@@ -4,7 +4,7 @@
 import 'server-only';
 
 import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
-import logger from '@/presentation/(system)/logging-facade/logger';
+import logger from '@/presentation/(system)/logging/logger.s';
 import axios from 'axios';
 
 const logPrefix = 'server-error-handler.ts: ';

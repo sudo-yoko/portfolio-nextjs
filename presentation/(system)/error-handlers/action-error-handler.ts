@@ -2,7 +2,7 @@
 // Server Actions エラーハンドリング
 //
 import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
-import logger from '@/presentation/(system)/logging-facade/logger';
+import logger from '@/presentation/(system)/logging/logger.s';
 import { ActionResult } from '@/presentation/(system)/types/action-result';
 import 'server-only';
 

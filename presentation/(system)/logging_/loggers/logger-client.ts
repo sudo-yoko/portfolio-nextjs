@@ -3,7 +3,7 @@
 //
 'use server';
 
-import logger from '@/presentation/(system)/logging-facade/logger';
+import logger from '@/presentation/(system)/logging_/logging-facade/logger';
 
 export async function logInfo(message: string) {
   logger.info(message);

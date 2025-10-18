@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
-import logger from '@/presentation/(system)/logging-facade/logger';
+import logger from '@/presentation/(system)/logging/logger.s';
 import type { BoundaryResult } from '@/presentation/(system)/types/boundary-result';
 import { abort } from '@/presentation/(system)/types/boundary-result';
 
