@@ -1,13 +1,13 @@
 import { printf } from '@/__tests__/next-jest/_utils/test-logger';
 import { FormData, Validator } from '@/presentation/(system)/validation/validation.types';
 
-const print = printf({ logPrefix: '>>> [validator.test.ts]', stdout: true });
+const print = printf({ logPrefix: '>>> [validation.types.test.ts]', stdout: true });
 
 // =============================
 // type FormData のテスト
 // =============================
 
-// npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/presentation/system/validation/validator.test.ts -t 'test1-1'
+// npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/presentation/system/validation/validation.types.test.ts -t 'test1-1'
 test('test1-1', () => {
   // キーの定義
   const FormKeys = {
@@ -34,7 +34,7 @@ test('test1-1', () => {
 // type Validator のテスト
 // =============================
 
-// npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/presentation/system/validation/validator.test.ts -t 'test3-1'
+// npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/presentation/system/validation/validation.types.test.ts -t 'test3-1'
 test('test3-1', () => {
   const validate: Validator = (value, label) => {
     const errors: string[] = [];
@@ -51,7 +51,7 @@ test('test3-1', () => {
   print(result);
 });
 
-// npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/presentation/system/validation/validator.test.ts -t 'test3-5'
+// npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/presentation/system/validation/validation.types.test.ts -t 'test3-5'
 test('test3-5', () => {
   type Range = 'ymd_st' | 'ymd_ed';
   const formData: FormData<Range> = {
