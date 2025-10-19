@@ -1,16 +1,6 @@
-//
-// バリデーションエラーを保持する型
-//
 import { stringify } from '@/presentation/(system)/errors/stringify-error';
 import logger from '@/presentation/(system)/logging/logger.i';
-
-/**
- * 入力フィールドのキーに対応するエラーメッセージを配列で保持するオブジェクトの型。
- * 入力フィールドのキーは型パラメータで渡す。
- */
-export type Violations<T extends string> = {
-  [key in T]?: string[];
-};
+import { Violations } from '@/presentation/(system)/validators/validator';
 
 /**
  * バリデーションエラーの有無を調べる
@@ -20,7 +10,7 @@ export function hasError<T extends string>(errors: Violations<T>): boolean {
 }
 
 /**
- * Violations型に適合するか判定する
+ * Violations型に適合するか調べる
  */
 export function isViolations(text: string, ...keys: string[]): boolean {
   try {
