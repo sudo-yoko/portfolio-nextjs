@@ -10,3 +10,14 @@ export const required: Validator = (value, label) => {
   }
   return errors;
 };
+
+/**
+ * バリデーション：入力禁止
+ */
+export const forbidden: Validator = (value, label) => {
+  const errors: string[] = [];
+  if (value) {
+    errors.push(`${label}は入力できません。`);
+  }
+  return errors;
+};

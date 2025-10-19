@@ -2,7 +2,7 @@
 // メールアドレスのバリデーター
 //
 import { Validator } from '@/presentation/(system)/validation/validation.types';
-import { required } from '@/presentation/(system)/validation/validators.required';
+import { required } from '@/presentation/(system)/validation/validators.presence';
 import { z } from 'zod';
 
 /**
