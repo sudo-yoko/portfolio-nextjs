@@ -22,8 +22,8 @@ if (!fs.existsSync(logDir)) {
 }
 
 // ログフォーマットの指定
-const logFormat = format.printf(({ level, message, timestamp }) => {
-  return `[${timestamp}] [${level}] [${appName}] [] [] [] [] [] [[${message}]]`;
+const logFormat = format.printf(({ level, message, timestamp, ...meta }) => {
+  return `[${timestamp}] [${level}] [${appName}] [${meta?.opt1 ?? ''}] [${meta?.opt2 ?? ''}] [${meta?.opt3 ?? ''}] [${meta?.opt4 ?? ''}] [${meta?.opt5 ?? ''}] [[${message}]]`;
 });
 
 // タイムスタンプの形式。日本時間 YYYY/MM/DD hh:mm:ss 形式

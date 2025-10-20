@@ -4,30 +4,29 @@ import { envByDynamicKey as env } from '@/presentation/(system)/env/env-testable
 import debug from '@/presentation/(system)/logging/logging.core.debug';
 import winston from '@/presentation/(system)/logging/logging.core.winston';
 import type { Logger } from '@/presentation/(system)/logging/logging.types';
-import { OptionKeys } from '@/presentation/(system)/logging/logging.types';
 
 /**
- * winstonロガーを、ロギングファサードの統一インターフェースにマップする
+ * winston によるロガー実装
  */
 export const loggerImpl: Logger = {
   log: (level, message, ext) => {
-    winston.log(level, message, { [OptionKeys.traceId]: ext?.traceId });
+    winston.log(level, message, { ...ext });
   },
   info: (message, ext) => {
-    winston.info(message, { [OptionKeys.traceId]: ext?.traceId });
+    winston.info(message, { ...ext });
   },
   warn: (message, ext) => {
-    winston.warn(message, { [OptionKeys.traceId]: ext?.traceId });
+    winston.warn(message, { ...ext });
   },
   error: (message, ext) => {
-    winston.error(message, { [OptionKeys.traceId]: ext?.traceId });
+    winston.error(message, { ...ext });
   },
   debug: (message, ext) => {
     // デバッグログをコンソールに出力
     debug(message);
     // デバッグログをファイルにも出力したい場合
     if (env('DEBUG_FILE')) {
-      winston.debug(message, { [OptionKeys.traceId]: ext?.traceId });
+      winston.debug(message, { ...ext });
     }
   },
   logAsync: async () => {}, // Not implemented

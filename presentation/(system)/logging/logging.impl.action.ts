@@ -9,6 +9,9 @@ import { logDebug, logError, logInfo } from '@/presentation/(system)/logging/log
 import debug from '@/presentation/(system)/logging/logging.core.debug';
 import type { Logger } from '@/presentation/(system)/logging/logging.types';
 
+/**
+ * ServerActions によるロガー実装
+ */
 export const loggerImpl: Logger = {
   log: () => {},
   logAsync: async () => {},

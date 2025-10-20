@@ -17,13 +17,7 @@ export type Level = (typeof Level)[keyof typeof Level];
 /**
  * 追加のログ情報のキー(値)
  */
-export const OptionKeys = {
-  traceId: 'traceId',
-  requestId: 'requestId',
-  ext1: 'ext1',
-  ext2: 'ext2',
-  ext3: 'ext3',
-} as const;
+export const OptionKeys = { opt1: 'opt1', opt2: 'opt2', opt3: 'opt3', opt4: 'opt4', opt5: 'opt5' } as const;
 
 /**
  * 追加のログ情報のキー(型)
@@ -34,11 +28,11 @@ export type OptionKeys = (typeof OptionKeys)[keyof typeof OptionKeys];
  * 追加のログ情報
  */
 export type Option = {
-  [OptionKeys.traceId]?: string;
-  [OptionKeys.requestId]?: string;
-  [OptionKeys.ext1]?: string;
-  [OptionKeys.ext2]?: string;
-  [OptionKeys.ext3]?: string;
+  [OptionKeys.opt1]?: string;
+  [OptionKeys.opt2]?: string;
+  [OptionKeys.opt3]?: string;
+  [OptionKeys.opt4]?: string;
+  [OptionKeys.opt5]?: string;
 };
 
 /**

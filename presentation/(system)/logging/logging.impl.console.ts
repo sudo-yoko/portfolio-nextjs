@@ -2,7 +2,7 @@ import debug from '@/presentation/(system)/logging/logging.core.debug';
 import type { Logger } from '@/presentation/(system)/logging/logging.types';
 
 /**
- * コンソールベースのロガー実装
+ * コンソールによるロガー実装
  */
 export const loggerImpl: Logger = {
   log: (_level, message, _ext) => {

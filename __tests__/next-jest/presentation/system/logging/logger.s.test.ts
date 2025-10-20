@@ -25,5 +25,6 @@ import logger from '@/presentation/(system)/logging/logger.s';
 
 // npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/presentation/system/logging/logger.s.test.ts -t 'test1-1'
 test('test1-1', () => {
+  logger.info('logger test', { opt1: '1', opt2: '2', opt3: '3', opt4: '4', opt5: '5' });
   logger.info('logger test');
 });
