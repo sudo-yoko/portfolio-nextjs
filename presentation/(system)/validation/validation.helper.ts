@@ -2,7 +2,7 @@
 // バリデーションのヘルパー関数
 //
 import { stringify } from '@/presentation/(system)/errors/stringify-error';
-import logger from '@/presentation/(system)/logging/logger.i';
+import logger from '@/presentation/(system)/logging/logger';
 import { Violations } from '@/presentation/(system)/validators/validator';
 
 /**

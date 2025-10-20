@@ -1,5 +1,5 @@
 import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
-import logger from '@/presentation/(system)/logging/logger.i';
+import logger from '@/presentation/(system)/logging/logger';
 import { z } from 'zod';
 
 /**
