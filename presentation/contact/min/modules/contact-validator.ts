@@ -1,4 +1,3 @@
-import logger from '@/presentation/(system)/logging/logger';
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { Validator, Violations } from '@/presentation/(system)/validation/validation.types';
 import { requiredEmail } from '@/presentation/(system)/validation/validators.email';
