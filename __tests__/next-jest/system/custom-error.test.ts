@@ -12,7 +12,7 @@ import {
 import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
 import { ActionResult } from '@/presentation/(system)/types/action-result';
 import { RouteResult } from '@/presentation/(system)/types/route-response';
-import { Violations } from '@/presentation/(system)/validators/validator';
+import { Violations } from '@/presentation/(system)/_/validators/validator';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact.types';
 import { User } from '@/presentation/users/min/modules/users-types';
 

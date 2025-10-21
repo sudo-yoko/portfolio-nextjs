@@ -2,7 +2,7 @@
 'use client';
 
 import { FormData } from '@/presentation/(system)/types/form-data';
-import { Violations } from '@/presentation/(system)/validators/validator';
+import { Violations } from '@/presentation/(system)/validation/validation.types';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact.types';
 import React, { Reducer } from 'react';
 

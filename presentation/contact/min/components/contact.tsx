@@ -2,12 +2,12 @@
 
 import { ErrorHandler } from '@/presentation/(system)/error-handlers/error-handler';
 import { FormData } from '@/presentation/(system)/types/form-data';
-import { Violations } from '@/presentation/(system)/validators/validator';
-import { FormKeys, Step } from '@/presentation/contact/min/modules/contact-types';
+import { Violations } from '@/presentation/(system)/validation/validation.types';
 import Complete from '@/presentation/contact/min/components/complete';
 import Confirm from '@/presentation/contact/min/components/confirm';
 import Input from '@/presentation/contact/min/components/input';
 import Sending from '@/presentation/contact/min/components/sending';
+import { FormKeys, Step } from '@/presentation/contact/min/modules/contact-types';
 import { useState } from 'react';
 
 export default function Contact() {

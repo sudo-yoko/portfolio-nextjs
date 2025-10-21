@@ -15,7 +15,7 @@ import {
   REJECTION_LABELS,
 } from '@/presentation/(system)/types/boundary-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
-import { Violations } from '@/presentation/(system)/validators/validator';
+import { Violations } from '@/presentation/(system)/validation/validation.types';
 import { action } from '@/presentation/contact/mvvm/boundary/contact.action';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact.types';
 import 'client-only';

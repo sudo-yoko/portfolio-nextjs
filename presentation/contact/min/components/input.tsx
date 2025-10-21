@@ -2,7 +2,8 @@
 
 import { FormData } from '@/presentation/(system)/types/form-data';
 import { resizeTextarea } from '@/presentation/(system)/utils/dom-utils';
-import { hasError, Violations } from '@/presentation/(system)/validators/validator';
+import { hasError } from '@/presentation/(system)/validation/validation.helper';
+import { Violations } from '@/presentation/(system)/validation/validation.types';
 import { FormKeys } from '@/presentation/contact/min/modules/contact-types';
 import { validate } from '@/presentation/contact/min/modules/contact-validator';
 import { useEffect, useState } from 'react';

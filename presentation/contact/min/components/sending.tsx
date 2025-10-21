@@ -1,7 +1,8 @@
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/client-error-handler';
 import { isOk, isReject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
-import { hasError, Violations } from '@/presentation/(system)/validators/validator';
+import { hasError } from '@/presentation/(system)/validation/validation.helper';
+import { Violations } from '@/presentation/(system)/validation/validation.types';
 import { sendRequest } from '@/presentation/contact/min/modules/backend-facade';
 import { FormKeys } from '@/presentation/contact/min/modules/contact-types';
 import React, { useEffect } from 'react';

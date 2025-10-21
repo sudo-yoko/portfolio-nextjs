@@ -2,7 +2,7 @@
 // カスタムエラー定義
 //
 import { ActionResult } from '@/presentation/(system)/types/action-result';
-import { Violations } from '@/presentation/(system)/validators/validator';
+import { Violations } from '@/presentation/(system)/validation/validation.types';
 
 /**
  * カスタムエラーの種類

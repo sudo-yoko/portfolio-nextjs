@@ -2,7 +2,8 @@
 
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/client-error-handler';
 import { isOk, isReject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
-import { hasError, Violations } from '@/presentation/(system)/validators/validator';
+import { hasError } from '@/presentation/(system)/validation/validation.helper';
+import { Violations } from '@/presentation/(system)/validation/validation.types';
 import { sendRequest } from '@/presentation/contact/mvvm/boundary/contact.facade';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact.types';
 import { validate } from '@/presentation/contact/mvvm/models/contact.validator';

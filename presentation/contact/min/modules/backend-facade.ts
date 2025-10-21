@@ -9,7 +9,8 @@ import { actionError, routeError } from '@/presentation/(system)/error-handlers/
 import logger from '@/presentation/(system)/logging/logger.c';
 import { Completed, ok, reject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
 import { FormData } from '@/presentation/(system)/types/form-data';
-import { hasError, isViolations, Violations } from '@/presentation/(system)/validators/validator';
+import { hasError, isViolations } from '@/presentation/(system)/validation/validation.helper';
+import { Violations } from '@/presentation/(system)/validation/validation.types';
 import { sendAction } from '@/presentation/contact/min/modules/contact-action';
 import { FormKeys } from '@/presentation/contact/min/modules/contact-types';
 import 'client-only';

@@ -1,7 +1,7 @@
 import { withAuthAsync } from '@/presentation/(system)/auth/auth-handler';
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/route-error-handler';
 import logger from '@/presentation/(system)/logging/logger.s';
-import { hasError } from '@/presentation/(system)/validators/validator';
+import { hasError } from '@/presentation/(system)/validation/validation.helper';
 import { send } from '@/presentation/contact/min/modules/contact-client';
 import { ContactBody } from '@/presentation/contact/min/modules/contact-types';
 import { validate } from '@/presentation/contact/min/modules/contact-validator';

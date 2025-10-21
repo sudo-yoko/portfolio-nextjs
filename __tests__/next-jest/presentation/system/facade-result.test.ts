@@ -1,5 +1,5 @@
 import { Ok, OkData, RejectViolation } from '@/presentation/(system)/types/facade-result';
-import { Violations } from '@/presentation/(system)/validators/validator';
+import { Violations } from '@/presentation/(system)/_/validators/validator';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact.types';
 import { User } from '@/presentation/users/mvvm/models/users-types';
 

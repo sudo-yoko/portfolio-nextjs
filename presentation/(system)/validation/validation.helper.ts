@@ -3,7 +3,7 @@
 //
 import { stringify } from '@/presentation/(system)/errors/stringify-error';
 import logger from '@/presentation/(system)/logging/logger';
-import { Violations } from '@/presentation/(system)/validators/validator';
+import { Violations } from '@/presentation/(system)/validation/validation.types';
 
 /**
  * バリデーションエラーの有無を調べる

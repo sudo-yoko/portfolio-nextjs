@@ -1,7 +1,7 @@
 // テスト実行
 // npm exec -- node --test --import tsx __tests__/node-test/validator.test.ts
 
-import { required, requiredEmail } from '@/presentation/(system)/validators/validator';
+import { required, requiredEmail } from '@/presentation/(system)/_/validators/validator';
 import test from 'node:test';
 
 const consolePrefix = '### test: validator.test.ts >>> ';
