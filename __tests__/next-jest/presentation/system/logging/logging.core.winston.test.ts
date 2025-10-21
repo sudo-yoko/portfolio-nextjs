@@ -25,6 +25,7 @@ test('test1-1', async () => {
   const logger = (await import('@/presentation/(system)/logging/logging.core.winston')).default;
 
   print('start');
-  logger.info('test');
+  logger.info('logger test', { extra1: '1', extra2: '2', extra3: '3', extra4: '4', extra5: '5' });
+  logger.info('logger test');
   print('end');
 });

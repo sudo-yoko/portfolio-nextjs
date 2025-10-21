@@ -23,7 +23,8 @@ if (!fs.existsSync(logDir)) {
 
 // ログフォーマットの指定
 const logFormat = format.printf(({ level, message, timestamp, ...meta }) => {
-  return `[${timestamp}] [${level}] [${appName}] [${meta?.opt1 ?? ''}] [${meta?.opt2 ?? ''}] [${meta?.opt3 ?? ''}] [${meta?.opt4 ?? ''}] [${meta?.opt5 ?? ''}] [[${message}]]`;
+  const { extra1 = '', extra2 = '', extra3 = '', extra4 = '', extra5 = '' } = meta; // 拡張項目
+  return `[${timestamp}] [${level}] [${appName}] [${extra1}] [${extra2}] [${extra3}] [${extra4}] [${extra5}] [[${message}]]`;
 });
 
 // タイムスタンプの形式。日本時間 YYYY/MM/DD hh:mm:ss 形式

@@ -9,24 +9,24 @@ import type { Logger } from '@/presentation/(system)/logging/logging.types';
  * winston によるロガー実装
  */
 export const loggerImpl: Logger = {
-  log: (level, message, ext) => {
-    winston.log(level, message, { ...ext });
+  log: (level, message, extras) => {
+    winston.log(level, message, { ...extras });
   },
-  info: (message, ext) => {
-    winston.info(message, { ...ext });
+  info: (message, extras) => {
+    winston.info(message, { ...extras });
   },
-  warn: (message, ext) => {
-    winston.warn(message, { ...ext });
+  warn: (message, extras) => {
+    winston.warn(message, { ...extras });
   },
-  error: (message, ext) => {
-    winston.error(message, { ...ext });
+  error: (message, extras) => {
+    winston.error(message, { ...extras });
   },
-  debug: (message, ext) => {
+  debug: (message, extras) => {
     // デバッグログをコンソールに出力
     debug(message);
     // デバッグログをファイルにも出力したい場合
     if (env('DEBUG_FILE')) {
-      winston.debug(message, { ...ext });
+      winston.debug(message, { ...extras });
     }
   },
   logAsync: async () => {}, // Not implemented

@@ -5,19 +5,19 @@ import type { Logger } from '@/presentation/(system)/logging/logging.types';
  * コンソールによるロガー実装
  */
 export const loggerImpl: Logger = {
-  log: (_level, message, _ext) => {
+  log: (_level, message, _extras) => {
     console.log(message);
   },
-  info: (message, _ext) => {
+  info: (message, _extras) => {
     console.info(message);
   },
-  warn: (message, _ext) => {
+  warn: (message, _extras) => {
     console.warn(message);
   },
-  error: (message, _ext) => {
+  error: (message, _extras) => {
     console.error(message);
   },
-  debug: (message, _ext) => {
+  debug: (message, _extras) => {
     debug(message);
   },
   logAsync: async () => {}, // Not implemented

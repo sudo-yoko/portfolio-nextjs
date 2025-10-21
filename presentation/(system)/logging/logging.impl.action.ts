@@ -16,16 +16,16 @@ export const loggerImpl: Logger = {
   log: () => {},
   logAsync: async () => {},
 
-  info: (message, _ext) => void logInfo(message),
-  infoAsync: async (message, _ext) => void logInfo(message),
+  info: (message, _extras) => void logInfo(message),
+  infoAsync: async (message, _extras) => void logInfo(message),
 
   warn: () => {},
   warnAsync: async () => {},
 
-  error: (message, _ext) => void logError(message),
-  errorAsync: async (message, _ext) => void logError(message),
+  error: (message, _extras) => void logError(message),
+  errorAsync: async (message, _extras) => void logError(message),
 
-  debug: (message, _ext) => {
+  debug: (message, _extras) => {
     // デバッグログをコンソールに出力
     debug(message);
     // デバッグログをファイルにも出力したい場合
@@ -33,7 +33,7 @@ export const loggerImpl: Logger = {
       void logDebug(message);
     }
   },
-  debugAsync: async (message, _ext) => {
+  debugAsync: async (message, _extras) => {
     debug(message);
   },
 };
