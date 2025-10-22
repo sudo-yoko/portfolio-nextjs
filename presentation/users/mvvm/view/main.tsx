@@ -1,7 +1,7 @@
 'use client';
 
-import { FormData } from '@/presentation/(system)/types/form-data';
 import { Pagination } from '@/presentation/(system)/pagination/mvvm/views/pagination';
+import { FormData } from '@/presentation/(system)/validation/validation.types';
 import { fetchPage } from '@/presentation/users/mvvm/boundary/facade';
 import { FormKeys, User, UsersQuery } from '@/presentation/users/mvvm/models/users-types';
 import UserList from '@/presentation/users/mvvm/view/user-list';

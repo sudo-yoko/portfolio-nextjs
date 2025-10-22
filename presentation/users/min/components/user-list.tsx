@@ -1,7 +1,7 @@
 'use client';
 
 import { Pagination } from '@/presentation/(system)/pagination/min/components/pagination';
-import { FormData } from '@/presentation/(system)/types/form-data';
+import { FormData } from '@/presentation/(system)/validation/validation.types';
 import { fetch } from '@/presentation/users/min/modules/users-fetcher';
 import { FormKeys, User, UsersQuery } from '@/presentation/users/min/modules/users-types';
 import { useState } from 'react';

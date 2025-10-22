@@ -4,9 +4,8 @@
 import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/action-error-handler';
 import logger from '@/presentation/(system)/logging/logger.s';
 import { ActionResult } from '@/presentation/(system)/types/action-result';
-import { FormData } from '@/presentation/(system)/types/form-data';
 import { hasError } from '@/presentation/(system)/validation/validation.helper';
-import { Violations } from '@/presentation/(system)/validation/validation.types';
+import { FormData, Violations } from '@/presentation/(system)/validation/validation.types';
 import { send } from '@/presentation/contact/min/modules/contact-client';
 import { FormKeys } from '@/presentation/contact/min/modules/contact-types';
 import { validate } from '@/presentation/contact/min/modules/contact-validator';

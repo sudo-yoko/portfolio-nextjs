@@ -1,5 +1,4 @@
-import { FormData } from '@/presentation/(system)/types/form-data';
-import { Validator, Violations } from '@/presentation/(system)/validation/validation.types';
+import { FormData, Validator, Violations } from '@/presentation/(system)/validation/validation.types';
 import { requiredEmail } from '@/presentation/(system)/validation/validators.email';
 import { required } from '@/presentation/(system)/validation/validators.presence';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact.types';

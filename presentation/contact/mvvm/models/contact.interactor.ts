@@ -7,9 +7,8 @@ import { withErrorHandlingAsync } from '@/presentation/(system)/error-handlers/b
 import logger from '@/presentation/(system)/logging/logger.s';
 import type { BoundaryResult } from '@/presentation/(system)/types/boundary-result';
 import { ok, reject, REJECTION_LABELS } from '@/presentation/(system)/types/boundary-result';
-import { FormData } from '@/presentation/(system)/types/form-data';
 import { hasError } from '@/presentation/(system)/validation/validation.helper';
-import { Violations } from '@/presentation/(system)/validation/validation.types';
+import { FormData, Violations } from '@/presentation/(system)/validation/validation.types';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact.types';
 import { validate } from '@/presentation/contact/mvvm/models/contact.validator';
 import { send } from '@/presentation/contact/mvvm/models/contact.webToCase-client';

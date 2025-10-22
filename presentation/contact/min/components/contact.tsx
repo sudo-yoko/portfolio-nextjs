@@ -1,8 +1,7 @@
 'use client';
 
 import { ErrorHandler } from '@/presentation/(system)/error-handlers/error-handler';
-import { FormData } from '@/presentation/(system)/types/form-data';
-import { Violations } from '@/presentation/(system)/validation/validation.types';
+import { FormData, Violations } from '@/presentation/(system)/validation/validation.types';
 import Complete from '@/presentation/contact/min/components/complete';
 import Confirm from '@/presentation/contact/min/components/confirm';
 import Input from '@/presentation/contact/min/components/input';
