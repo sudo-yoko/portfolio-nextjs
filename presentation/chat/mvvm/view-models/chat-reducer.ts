@@ -1,6 +1,6 @@
 'use client';
 
-import { FormData } from '@/presentation/(system)/_/form-data';
+import { FormData } from '@/presentation/(system)/validation/validation.types';
 import { Dispatch, Reducer } from 'react';
 
 /**

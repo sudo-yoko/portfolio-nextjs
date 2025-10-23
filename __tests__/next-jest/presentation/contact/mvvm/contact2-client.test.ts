@@ -1,6 +1,6 @@
 import { printf } from '@/__tests__/next-jest/_utils/test-logger';
 import { stringify } from '@/presentation/(system)/error-handlers/stringify-error';
-import { FormData } from '@/presentation/(system)/_/form-data';
+import { FormData } from '@/presentation/(system)/validation/validation.types';
 import { sendRequest } from '@/presentation/contact/min/modules/backend-facade';
 import { FormKeys } from '@/presentation/contact/mvvm/models/contact.types';
 import { jest } from '@jest/globals';
