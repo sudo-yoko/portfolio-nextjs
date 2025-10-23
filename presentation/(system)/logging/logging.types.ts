@@ -1,7 +1,10 @@
-// isomorphic
+//
+// ロギングインターフェース
+// アプリケーションとロギングライブラリの直接依存を避け、疎結合に保つためのインターフェース型
+//
 
 /**
- * ログレベル(値)
+ * ログレベルの定数オブジェクト
  */
 export const Level = {
   Info: 'info',
@@ -10,12 +13,12 @@ export const Level = {
 } as const;
 
 /**
- * ログレベル(型)
+ * ログレベルの型
  */
 export type Level = (typeof Level)[keyof typeof Level];
 
 /**
- * 追加のログ情報のキー(値)
+ * 予備スロットのキーの定数オブジェクト
  */
 export const ExtraKeys = {
   extra1: 'extra1',
@@ -26,12 +29,12 @@ export const ExtraKeys = {
 } as const;
 
 /**
- * 追加のログ情報のキー(型)
+ * 予備スロットのキーの型
  */
 export type ExtraKeys = (typeof ExtraKeys)[keyof typeof ExtraKeys];
 
 /**
- * 追加のログ情報
+ * 予備スロットの定数オブジェクト
  */
 export type Extras = {
   [ExtraKeys.extra1]?: string;
@@ -42,9 +45,9 @@ export type Extras = {
 };
 
 /**
- * ログ出力インターフェース
+ * ロギングのインターフェース型
  */
-export interface Logger {
+export type Logger = {
   log(level: Level, message: string, extras?: Extras): void;
   info(message: string, extras?: Extras): void;
   warn(message: string, extras?: Extras): void;
@@ -55,4 +58,4 @@ export interface Logger {
   warnAsync(message: string, extras?: Extras): Promise<void>;
   errorAsync(message: string, extras?: Extras): Promise<void>;
   debugAsync(message: string, extras?: Extras): Promise<void>;
-}
+};

@@ -22,9 +22,28 @@
 //　npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/logger.test.ts
 //
 import logger from '@/presentation/(system)/logging/logger.s';
+import { Level } from '@/presentation/(system)/logging/logging.types';
 
 // npm exec -- cross-env NODE_OPTIONS=--experimental-vm-modules jest __tests__/next-jest/presentation/system/logging/logger.s.test.ts -t 'test1-1'
 test('test1-1', () => {
+  logger.log(Level.Info, 'logger test', {
+    extra1: '10',
+    extra2: '20',
+    extra3: '30',
+    extra4: '40',
+    extra5: '50',
+  });
+  logger.log(Level.Info, 'logger test');
+
   logger.info('logger test', { extra1: '10', extra2: '20', extra3: '30', extra4: '40', extra5: '50' });
   logger.info('logger test');
+
+  logger.warn('logger test', { extra1: '10', extra2: '20', extra3: '30', extra4: '40', extra5: '50' });
+  logger.warn('logger test');
+
+  logger.error('logger test', { extra1: '10', extra2: '20', extra3: '30', extra4: '40', extra5: '50' });
+  logger.error('logger test');
+
+  logger.debug('logger test', { extra1: '10', extra2: '20', extra3: '30', extra4: '40', extra5: '50' });
+  logger.debug('logger test');
 });
