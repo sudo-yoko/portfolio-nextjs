@@ -4,21 +4,17 @@
 //
 
 /**
- * ログレベルの定数オブジェクト
+ * ログレベル
  */
 export const Level = {
   Info: 'info',
   Warn: 'warn',
   Error: 'error',
-} as const;
+} as const; // 定数オブジェクト
+export type Level = (typeof Level)[keyof typeof Level]; // 型
 
 /**
- * ログレベルの型
- */
-export type Level = (typeof Level)[keyof typeof Level];
-
-/**
- * 予備スロットのキーの定数オブジェクト
+ * 予備スロットのキー
  */
 export const ExtraKeys = {
   extra1: 'extra1',
@@ -27,14 +23,10 @@ export const ExtraKeys = {
   extra4: 'extra4',
   extra5: 'extra5',
 } as const;
-
-/**
- * 予備スロットのキーの型
- */
 export type ExtraKeys = (typeof ExtraKeys)[keyof typeof ExtraKeys];
 
 /**
- * 予備スロットの定数オブジェクト
+ * 予備スロット
  */
 export type Extras = {
   [ExtraKeys.extra1]?: string;
