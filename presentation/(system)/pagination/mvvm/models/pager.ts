@@ -27,7 +27,9 @@ export function createPager<T, Q>(
   const limit = perPage;
   let { offset } = pageToOffset(perPage, initPage);
 
-  // データ取得関数を使ってページデータを取得する関数を作成する
+  /**
+   * データ取得関数を使ってページデータを取得する関数
+   */
   const fetchData = async (): Promise<PagerResult<T>> => {
     //
     // 実効オフセットに補正（下限値）
@@ -70,8 +72,10 @@ export function createPager<T, Q>(
     return { total, offset, items, hasNext, hasPrev, currentPage, totalPages };
   };
 
-  // ページャ関数を作成する。
-  // 検索条件や表示件数などは関数の中にエンクロージングされる
+  /**
+   * ページャ関数
+   * 検索条件や表示件数などは関数の中にエンクロージングされる
+   */
   const pager: Pager<T> = {
     current() {
       return fetchData();
