@@ -11,18 +11,18 @@ import { Violations } from '@/presentation/(system)/_/validators/validator';
  * - RouteError       - Route Handlers でエラーが発生したことを示すカスタムエラー
  * - ValidationError  - BFF
  */
-export type ErrType = 'ActionError' | 'AuthError' | 'RouteError' | 'ValidationError' | 'BoundaryError';
+type ErrType = 'ActionError' | 'AuthError' | 'RouteError' | 'ValidationError' | 'BoundaryError';
 
 /**
  * Errorインスタンスに追加するプロパティ
  */
-export const ERR_TYPE = Symbol.for('err.type'); // シリアライズで消えるので注意
+const ERR_TYPE = Symbol.for('err.type'); // シリアライズで消えるので注意
 
 /**
  * カスタムエラーの型。
  * ErrorインスタンスにERR_TYPEプロパティを追加したもの
  */
-export type CustomError<T extends ErrType> = Error & { [ERR_TYPE]: T };
+type CustomError<T extends ErrType> = Error & { [ERR_TYPE]: T };
 
 /**
  * カスタムエラーを生成する
